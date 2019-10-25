@@ -7319,11 +7319,10 @@ a.close.disabled
 .modal-dialog
 {
     position: relative;
-
     width: auto;
     margin: .5rem;
-
     pointer-events: none;
+    overflow-y: initial !important
 }
 .modal.fade .modal-dialog
 {
@@ -7459,29 +7458,24 @@ a.close.disabled
 .modal-title
 {
     line-height: 1.7; 
-
     margin-bottom: 0;
 }
 
 .modal-body
 {
     position: relative;
-
     padding: 1.5rem; 
-
     flex: 1 1 auto;
+    height: 768px;
+    overflow-y: auto;
 }
-
 .modal-footer
 {
     display: flex;
-
     padding: 1.5rem;
-
     border-top: 1px solid #eff2f7;
     border-bottom-right-radius: .25rem;
     border-bottom-left-radius: .25rem; 
-
     align-items: center;
     justify-content: flex-end;
 }

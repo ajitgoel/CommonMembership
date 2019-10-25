@@ -1,98 +1,40 @@
-<template>  
-  <div class="modal fade" id="TermsAndConditionsModal" tabindex="-1" role="dialog" 
-  aria-labelledby="TermsAndConditionsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="TermsAndConditionsModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<template>   
+  <div class="main-content">
+    <section class="slice slice-lg bg-gradient-dark" data-offset-top="#header-main">
+        <div class="bg-absolute-cover bg-size--contain d-flex align-items-center">
+          <figure class="w-100 d-none d-lg-block">
+            <img alt="Image placeholder" src="/img/svg/backgrounds/bg-circles-1.svg" class="svg-inject">
+          </figure>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+      </section> 
+      <section class="slice" id="sct-article">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <div class="card">
+                <div class="card-body p-5">
+                  <TermsAndConditionsText/>
+                </div>
+                <CardFooter title="Did you find this terms and conditions helpful?"/>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
-import { Meteor } from 'meteor/meteor'
-import { Notes } from '../api/collections'
+import { Meteor } from 'meteor/meteor';
+import { Notes } from '../api/collections';
+import TermsAndConditionsText from './TermsAndConditionsText.vue';
+import CardFooter from './CardFooter.vue';
 
 export default {
-  /*data () {
-    return {
-      newNote: '',
-      search: '',
-      sort: true,
-    }
+  components:{
+    "TermsAndConditionsText":TermsAndConditionsText,
+    "CardFooter": CardFooter,
   },
-
-  meteor: {
-    $subscribe: {
-      'notes' () {
-        return [this.search]
-      },
-    },
-    notes () {
-      return Notes.find({}, {
-        sort: { created: this.sort ? -1 : 1 },
-      })
-    },
-  },
-
-  computed: {
-    firstNote () {
-      return this.notes.length && this.notes[0]
-    },
-  },
-
-  watch: {
-    '$subReady.notes' (value) {
-      console.log('notes sub ready', value)
-    },
-
-    notes (value) {
-      console.log('length', value.length)
-    },
-  },
-
-  methods: {
-    async addNote () {
-      if (this.newNote) {
-        try {
-          await Meteor.callPromise('notes.add', {
-            text: this.newNote,
-          })
-          this.newNote = ''
-        } catch (e) {
-          console.error(e)
-        }
-      }
-    },
-
-    async removeNote (note) {
-      try {
-        await Meteor.callPromise('notes.remove', {
-          _id: note._id,
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    },
-
-    handleVisibility (visible) {
-      if (visible && this.$subReady.notes) {
-        this.limit += 5
-      }
-    },
-  },*/
 }
 </script>
 

@@ -6,6 +6,7 @@ import Register from './ui/Register.vue';
 import Login from './ui/Login.vue';
 import ResetPassword from './ui/ResetPassword.vue';
 import PrivacyPolicy from './ui/PrivacyPolicy.vue';
+import PrivacyShieldNotice from './ui/PrivacyShieldNotice.vue';
 import TermsAndConditions from './ui/TermsAndConditions.vue';
 
 export default [
@@ -14,6 +15,7 @@ export default [
   { path: '/login', name: 'login', component: Login },
   { path: '/resetpassword', name: 'resetpassword', component: ResetPassword },
   { path: '/privacypolicy', name: 'privacypolicy', component: PrivacyPolicy },
+  { path: '/privacyshieldnotice', name: 'privacyshieldnotice', component: PrivacyShieldNotice },
   { path: '/termsandconditions', name: 'termsandconditions', component: TermsAndConditions },  
   { path: '*', name: 'not-found', component: NotFound },
 ]

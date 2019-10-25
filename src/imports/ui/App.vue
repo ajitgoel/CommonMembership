@@ -5,18 +5,21 @@
     <main>
       <router-view />
     </main>
+    <AppFooter></AppFooter>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import AppHeader from './Header.vue';
+import AppHeader from './AppHeader.vue';
 import Omnisearch from './Omnisearch.vue';
+import AppFooter from './AppFooter.vue';
 
 export default {
   components: {
     AppHeader: AppHeader,
     Omnisearch: Omnisearch,
+    AppFooter: AppFooter,
   },
 
   computed: {

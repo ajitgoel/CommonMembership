@@ -1,0 +1,155 @@
+<template>
+    <footer id="footer-main">
+    <div class="footer footer-dark bg-gradient-primary">
+      <div class="container">
+        <div class="row pt-md">
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <a href="../../index.html">
+              <img src="/img/brand/white.png" alt="Footer logo" style="height: 70px;">
+            </a>
+            <p>Purpose is a unique and beautiful collection of UI elements that are all flexible and modular. A complete and customizable solution to building the website of your dreams.</p>
+          </div>
+          <div class="col-lg-2 col-6 col-sm-4 ml-lg-auto mb-5 mb-lg-0">
+            <h6 class="heading mb-3">Account</h6>
+            <ul class="list-unstyled">
+              <li><a href="../../pages/account-profile.html">Profile</a></li>
+              <li><a href="../../pages/account-settings.html">Settings</a></li>
+              <li><a href="../../pages/account-billing.html">Billing</a></li>
+              <li><a href="../../pages/account-notifications.html">Notifications</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-6 col-sm-4 mb-5 mb-lg-0">
+            <h6 class="heading mb-3">About</h6>
+            <ul class="list-unstyled text-small">
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-sm-4 mb-5 mb-lg-0">
+            <h6 class="heading mb-3">Company</h6>
+            <ul class="list-unstyled">
+              <li>
+                <router-link v-bind:to="{ name: 'termsandconditions' }">Terms</router-link>
+              </li>
+              <li>
+                <router-link v-bind:to="{ name: 'privacypolicy' }">Privacy</router-link>
+              </li>
+              <li><a href="#">Support</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row align-items-center justify-content-md-between py-4 mt-4 delimiter-top">
+          <div class="col-md-6">
+            <div class="copyright text-sm font-weight-bold text-center text-md-left">
+              &copy; 2018-2019 <a href="https://webpixels.io" class="font-weight-bold" target="_blank">Webpixels</a>. All rights reserved.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
+              <li class="nav-item">
+                <a class="nav-link" href="https://dribbble.com/webpixels" target="_blank">
+                  <i class="fab fa-dribbble"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.instagram.com/webpixelsofficial" target="_blank">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://github.com/webpixels" target="_blank">
+                  <i class="fab fa-github"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.facebook.com/webpixels" target="_blank">
+                  <i class="fab fa-facebook"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+import { Meteor } from 'meteor/meteor'
+import { Notes } from '../api/collections'
+
+export default {
+  /*data () {
+    return {
+      newNote: '',
+      search: '',
+      sort: true,
+    }
+  },
+
+  meteor: {
+    $subscribe: {
+      'notes' () {
+        return [this.search]
+      },
+    },
+    notes () {
+      return Notes.find({}, {
+        sort: { created: this.sort ? -1 : 1 },
+      })
+    },
+  },
+
+  computed: {
+    firstNote () {
+      return this.notes.length && this.notes[0]
+    },
+  },
+
+  watch: {
+    '$subReady.notes' (value) {
+      console.log('notes sub ready', value)
+    },
+
+    notes (value) {
+      console.log('length', value.length)
+    },
+  },
+
+  methods: {
+    async addNote () {
+      if (this.newNote) {
+        try {
+          await Meteor.callPromise('notes.add', {
+            text: this.newNote,
+          })
+          this.newNote = ''
+        } catch (e) {
+          console.error(e)
+        }
+      }
+    },
+
+    async removeNote (note) {
+      try {
+        await Meteor.callPromise('notes.remove', {
+          _id: note._id,
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
+    handleVisibility (visible) {
+      if (visible && this.$subReady.notes) {
+        this.limit += 5
+      }
+    },
+  },*/
+}
+</script>
+
+<style lang="less" scoped>
+
+</style>

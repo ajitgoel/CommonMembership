@@ -1,40 +1,34 @@
 <template>
-<div class="main-content">
-  <section class="slice slice-lg bg-gradient-dark" data-offset-top="#header-main">
-      <div class="bg-absolute-cover bg-size--contain d-flex align-items-center">
-        <figure class="w-100 d-none d-lg-block">
-          <img alt="Image placeholder" src="/img/svg/backgrounds/bg-circles-1.svg" class="svg-inject">
-        </figure>
-      </div>
-    </section> 
-    <section class="slice" id="sct-article">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-9">
-            <div class="card">
-              <div class="card-body p-5">
-                <PrivacyPolicyText/>
-              </div>
-              <CardFooter title="Did you find this privacy policy helpful?"/>
-            </div>
-          </div>
+  <div class="modal fade docs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="PrivacyPolicyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title h6" id="PrivacyPolicyModalLabel">Privacy Policy</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">  
+          <PrivacyPolicyText/>					
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Download PDF</button>
         </div>
       </div>
-    </section>
+    </div>
   </div>
-  
 </template>
 
 <script>
 import { Meteor } from 'meteor/meteor';
 import { Notes } from '../api/collections';
 import PrivacyPolicyText from './PrivacyPolicyText.vue';
-import CardFooter from './CardFooter.vue';
 
 export default {
   components:{
-    "PrivacyPolicyText": PrivacyPolicyText,
-    "CardFooter": CardFooter,
+    "PrivacyPolicyText": PrivacyPolicyText
   },
   /*data () {
     return {
