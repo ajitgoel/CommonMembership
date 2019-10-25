@@ -22,7 +22,9 @@
             <h6 class="heading mb-3">About</h6>
             <ul class="list-unstyled text-small">
               <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
+              <li>
+                <router-link v-bind:to="{ name: 'contact' }">Contact</router-link>
+              </li>
               <li><a href="#">Careers</a></li>
             </ul>
           </div>

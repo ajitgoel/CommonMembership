@@ -8,6 +8,7 @@ import ResetPassword from './ui/ResetPassword.vue';
 import PrivacyPolicy from './ui/PrivacyPolicy.vue';
 import PrivacyShieldNotice from './ui/PrivacyShieldNotice.vue';
 import TermsAndConditions from './ui/TermsAndConditions.vue';
+import Contact from './ui/Contact.vue';
 
 export default [
   { path: '/', name: 'home', component: Home },
@@ -17,5 +18,6 @@ export default [
   { path: '/privacypolicy', name: 'privacypolicy', component: PrivacyPolicy },
   { path: '/privacyshieldnotice', name: 'privacyshieldnotice', component: PrivacyShieldNotice },
   { path: '/termsandconditions', name: 'termsandconditions', component: TermsAndConditions },  
+  { path: '/contact', name: 'contact', component: Contact },  
   { path: '*', name: 'not-found', component: NotFound },
 ]

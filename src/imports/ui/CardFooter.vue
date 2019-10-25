@@ -9,7 +9,7 @@
         </button>
       </div>
       <div>
-        <a href="#" class="btn btn-sm btn-primary">Contact Support</a>
+        <router-link v-bind:to="{ name: 'contact' }" class="btn btn-sm btn-primary">Contact Support</router-link>
       </div>
     </form>
   </div>  
