@@ -115,29 +115,15 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Name</label>
-                    <input class="form-control" type="text" placeholder="Name" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                    <input class="form-control" type="text" v-model="name" placeholder="Name" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
                   </div>
                 </div>                
               </div>
               <div class="row align-items-center">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="form-control-label">Email</label>
-                    <input class="form-control" type="email" placeholder="email@example.com">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="form-control-label">Phone</label>
-                    <input class="form-control" type="text" placeholder="+40-745-234-567">
-                  </div>
-                </div>
-              </div>
-              <div class="row align-items-center">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label class="form-control-label">Subject</label>
-                    <input class="form-control" type="text" placeholder="Custom project">
+                    <label class="form-control-label">Email</label>
+                    <input class="form-control" type="email" v-model="fromAddress" placeholder="email@example.com">
                   </div>
                 </div>
               </div>
@@ -145,14 +131,15 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Message</label>
-                    <textarea class="form-control" data-toggle="autosize" placeholder="Tell us a few words ..." rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 96.9922px;"></textarea>
+                    <textarea class="form-control" data-toggle="autosize" v-model="emailText" placeholder="Tell us a few words ..." rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 96.9922px;"></textarea>
                   </div>
                 </div>
               </div>
               <div class="text-center mt-4">
-                <button type="button" class="btn btn-dark rounded-pill">Send your message</button>
+                <button type="button" class="btn btn-dark rounded-pill" v-on:click="SendEmail(name, fromAddress, emailText)">Send your message</button>
                 <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>
               </div>
+              <Toast ref="Toast" v-bind:showToast="showToast" v-bind:toastMessage="toastMessage"/>
             </form>
           </div>
         </div>
@@ -162,89 +149,37 @@
 </template>
 
 <script>
-import { Meteor } from 'meteor/meteor';
-import { Notes } from '../api/collections';
-import TermsAndConditionsModal from './TermsAndConditionsModal.vue';
-import PrivacyPolicyModal from './PrivacyPolicyModal.vue';
+import { Email } from '../api/email.js';
+import Toast from './Toast.vue';
 
 export default {
   components:{
-    "TermsAndConditionsModal":TermsAndConditionsModal,
-    "PrivacyPolicyModal": PrivacyPolicyModal
+    "Toast": Toast
   },
   data () {
     return {
+      name:'', 
+      fromAddress:'', 
+      emailText:'', 
+      showToast: false,
+      toastMessage: '',
     }
   },
   methods: {
-    showPrivacyPolicyModal() {
-       let element = this.$refs.PrivacyPolicyModal.$el;
-      $(element).modal('show');
-    },
-    showTermsAndConditionsModal() {
-      let element = this.$refs.TermsAndConditionsModal.$el;
-      $(element).modal('show');
+    SendEmail(name, fromAddress, emailText) {
+      var nameWithEmailText="Email message from: "+ name + "\nEmail message: " + emailText;
+      var subject="Email from contact us page in common membership website";
+      Meteor.call('email.send', fromAddress, subject, nameWithEmailText); 
+      this.name='';
+      this.fromAddress='';
+      this.emailText='';   
+
+      this.showToast=true;
+      this.toastMessage= "Your email was send successfully. We'll get back to you in 24-48 h.";
+      let element = this.$refs.Toast.$el;
+      $(element).toast('show');
     }
   }
-  /*meteor: {
-    $subscribe: {
-      'notes' () {
-        return [this.search]
-      },
-    },
-    notes () {
-      return Notes.find({}, {
-        sort: { created: this.sort ? -1 : 1 },
-      })
-    },
-  },
-
-  computed: {
-    firstNote () {
-      return this.notes.length && this.notes[0]
-    },
-  },
-
-  watch: {
-    '$subReady.notes' (value) {
-      console.log('notes sub ready', value)
-    },
-
-    notes (value) {
-      console.log('length', value.length)
-    },
-  },
-
-  methods: {
-    async addNote () {
-      if (this.newNote) {
-        try {
-          await Meteor.callPromise('notes.add', {
-            text: this.newNote,
-          })
-          this.newNote = ''
-        } catch (e) {
-          console.error(e)
-        }
-      }
-    },
-
-    async removeNote (note) {
-      try {
-        await Meteor.callPromise('notes.remove', {
-          _id: note._id,
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    },
-
-    handleVisibility (visible) {
-      if (visible && this.$subReady.notes) {
-        this.limit += 5
-      }
-    },
-  },*/
 }
 </script>
 

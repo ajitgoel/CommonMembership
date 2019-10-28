@@ -13,6 +13,12 @@ import { injectSupply } from 'vue-supply'
 import App from './ui/App.vue'
 import routes from './routes'
 import storeOptions from './store'
+//import Vuetify from "vuetify";
+//import "vuetify/dist/vuetify.min.css";
+//import "vuetify/dist/vuetify.min.js";
+
+//Vue.config.productionTip = false;
+//Vue.use(Vuetify);
 
 function createApp (context) {
   const router = new VueRouter({
@@ -30,9 +36,7 @@ function createApp (context) {
 
   // Apollo
   const apolloClient = createApolloClient(context.ssr)
-  const apolloProvider = new VueApollo({
-    defaultClient: apolloClient,
-  })
+  const apolloProvider = new VueApollo({defaultClient: apolloClient,})
 
   return {
     app: new Vue({

@@ -9,7 +9,7 @@ Clone the project and navigate into its directory. Then install the npm dependen
 meteor npm i
 ```
 
-To start the app, use the usual `meteor` command.
+To start the app, use the usual `meteor --settings settings.json` command.
 
 ---
 

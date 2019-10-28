@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     showPrivacyPolicyModal() {
-       let element = this.$refs.PrivacyPolicyModal.$el;
+      let element = this.$refs.PrivacyPolicyModal.$el;
       $(element).modal('show');
     },
     showTermsAndConditionsModal() {
@@ -103,65 +103,6 @@ export default {
       $(element).modal('show');
     }
   }
-  /*meteor: {
-    $subscribe: {
-      'notes' () {
-        return [this.search]
-      },
-    },
-    notes () {
-      return Notes.find({}, {
-        sort: { created: this.sort ? -1 : 1 },
-      })
-    },
-  },
-
-  computed: {
-    firstNote () {
-      return this.notes.length && this.notes[0]
-    },
-  },
-
-  watch: {
-    '$subReady.notes' (value) {
-      console.log('notes sub ready', value)
-    },
-
-    notes (value) {
-      console.log('length', value.length)
-    },
-  },
-
-  methods: {
-    async addNote () {
-      if (this.newNote) {
-        try {
-          await Meteor.callPromise('notes.add', {
-            text: this.newNote,
-          })
-          this.newNote = ''
-        } catch (e) {
-          console.error(e)
-        }
-      }
-    },
-
-    async removeNote (note) {
-      try {
-        await Meteor.callPromise('notes.remove', {
-          _id: note._id,
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    },
-
-    handleVisibility (visible) {
-      if (visible && this.$subReady.notes) {
-        this.limit += 5
-      }
-    },
-  },*/
 }
 </script>
 
