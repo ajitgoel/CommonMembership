@@ -149,9 +149,9 @@
               </div>
               <div class="text-center mt-4">
                 <button type="button" class="btn btn-dark rounded-pill" v-on:click="SendEmail()">Send your message</button>                
+                <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>
                 <div v-if="submitted" class="valid-feedback">
-                    <span v-if="!$v.user.name.$error && !$v.user.email.$error && !$v.user.message.$error">"Your email was send successfully. We'll get back to you in 24-48 h."</span>
-                    <span v-else class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>
+                    <span v-if="!$v.user.name.$error && !$v.user.email.$error && !$v.user.message.$error">Your email was send successfully. We'll get back to you in 24-48 h.</span>                    
                 </div>
               </div>              
             </form>
@@ -197,10 +197,21 @@ export default {
       
       var nameWithEmailText="Email message from: "+ this.user.name + "\nEmail message: " + this.user.message;
       var subject="Email from contact us page in common membership website";
-      Meteor.call('email.send', this.user.email, subject, nameWithEmailText); 
-      this.user.name='';
-      this.user.email='';
-      this.user.message=''; 
+      Meteor.call('email.send', this.user.email, subject, nameWithEmailText, 
+      (error, result) => {
+        if(error) 
+        { 
+          throw new Meteor.Error( error.message );
+        } 
+        else if( result ) 
+        {
+          this.user.name='';
+          this.user.email='';
+          this.user.message=''; 
+          this.$v.$reset();
+        }
+      }
+      );       
     }
   }
 }

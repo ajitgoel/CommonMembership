@@ -9,7 +9,7 @@ Meteor.methods(
     if (Meteor.isServer) 
     {     
       const { Email } = require('../server/email.js');
-      Email.send(fromAddress, subject, emailText);
+      return Email.send(fromAddress, subject, emailText);
     }
   },  
 })
