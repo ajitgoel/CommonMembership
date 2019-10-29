@@ -33,3 +33,6 @@ import * as filters from './filters'
 for (const key in filters) {
   Vue.filter(key, filters[key])
 }
+
+import Vuelidate from 'vuelidate';
+Vue.use(Vuelidate);

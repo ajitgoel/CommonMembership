@@ -21,22 +21,19 @@ import storeOptions from './store'
 //Vue.use(Vuetify);
 
 function createApp (context) {
-  const router = new VueRouter({
-    mode: 'history',
-    routes,
-  })
+  const router = new VueRouter({mode: 'history', routes,});
 
-  const supplyCache = {}
-  const suppliedStoreOptions = injectSupply(storeOptions, supplyCache)
-  const store = new Vuex.Store(suppliedStoreOptions)
+  const supplyCache = {};
+  const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
+  const store = new Vuex.Store(suppliedStoreOptions);
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
-  sync(store, router)
+  sync(store, router);
 
   // Apollo
-  const apolloClient = createApolloClient(context.ssr)
-  const apolloProvider = new VueApollo({defaultClient: apolloClient,})
+  const apolloClient = createApolloClient(context.ssr);
+  const apolloProvider = new VueApollo({defaultClient: apolloClient,});
 
   return {
     app: new Vue({

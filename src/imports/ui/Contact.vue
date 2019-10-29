@@ -115,7 +115,9 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Name</label>
-                    <input class="form-control" type="text" v-model="name" placeholder="Name" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                    <input class="form-control" type="text" placeholder="Name" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" 
+                    v-model="user.name" id="name" name="name" :class="{ 'is-invalid': submitted && $v.user.name.$error }" >
+                    <div v-if="submitted && !$v.user.name.required" class="invalid-feedback">Name is required</div>
                   </div>
                 </div>                
               </div>
@@ -123,7 +125,12 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Email</label>
-                    <input class="form-control" type="email" v-model="fromAddress" placeholder="email@example.com">
+                    <input class="form-control" type="email" placeholder="email@example.com" 
+                    v-model="user.email" id="email" name="email" :class="{ 'is-invalid': submitted && $v.user.email.$error }" >
+                     <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
+                        <span v-if="!$v.user.email.required">Email is required</span>
+                        <span v-if="!$v.user.email.email">Email is invalid</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -131,15 +138,22 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Message</label>
-                    <textarea class="form-control" data-toggle="autosize" v-model="emailText" placeholder="Tell us a few words ..." rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 96.9922px;"></textarea>
+                    <textarea class="form-control" data-toggle="autosize" placeholder="Tell us a few words ..." rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 96.9922px;" 
+                    v-model="user.message" id="message" name="message" :class="{ 'is-invalid': submitted && $v.user.message.$error }" ></textarea>
+                    <div v-if="submitted && $v.user.message.$error" class="invalid-feedback">
+                        <span v-if="!$v.user.message.required">Message is required</span>
+                        <span v-if="!$v.user.message.minLength">Message must be at least 6 characters</span>
+                    </div>	
                   </div>
                 </div>
               </div>
               <div class="text-center mt-4">
-                <button type="button" class="btn btn-dark rounded-pill" v-on:click="SendEmail(name, fromAddress, emailText)">Send your message</button>
-                <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>
-              </div>
-              <Toast ref="Toast" v-bind:showToast="showToast" v-bind:toastMessage="toastMessage"/>
+                <button type="button" class="btn btn-dark rounded-pill" v-on:click="SendEmail()">Send your message</button>                
+                <div v-if="submitted" class="valid-feedback">
+                    <span v-if="!$v.user.name.$error && !$v.user.email.$error && !$v.user.message.$error">"Your email was send successfully. We'll get back to you in 24-48 h."</span>
+                    <span v-else class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>
+                </div>
+              </div>              
             </form>
           </div>
         </div>
@@ -150,34 +164,43 @@
 
 <script>
 import { Email } from '../api/email.js';
-import Toast from './Toast.vue';
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 
 export default {
+  name: "Contact",
   components:{
-    "Toast": Toast
   },
-  data () {
-    return {
-      name:'', 
-      fromAddress:'', 
-      emailText:'', 
-      showToast: false,
-      toastMessage: '',
-    }
+  data() {
+      return {
+          user: {
+              name: "",
+              email: "",
+              message: ""
+          },
+          submitted: false
+      };
+  },
+  validations: {
+      user: {
+          name: { required },
+          email: { required, email },
+          message: { required, minLength: minLength(6) }
+      }
   },
   methods: {
-    SendEmail(name, fromAddress, emailText) {
-      var nameWithEmailText="Email message from: "+ name + "\nEmail message: " + emailText;
+    SendEmail() {
+      this.submitted = true;
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+          return;
+      }
+      
+      var nameWithEmailText="Email message from: "+ this.user.name + "\nEmail message: " + this.user.message;
       var subject="Email from contact us page in common membership website";
-      Meteor.call('email.send', fromAddress, subject, nameWithEmailText); 
-      this.name='';
-      this.fromAddress='';
-      this.emailText='';   
-
-      this.showToast=true;
-      this.toastMessage= "Your email was send successfully. We'll get back to you in 24-48 h.";
-      let element = this.$refs.Toast.$el;
-      $(element).toast('show');
+      Meteor.call('email.send', this.user.email, subject, nameWithEmailText); 
+      this.user.name='';
+      this.user.email='';
+      this.user.message=''; 
     }
   }
 }
