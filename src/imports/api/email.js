@@ -4,12 +4,12 @@ if (Meteor.isServer)
 }
 Meteor.methods(
 {
-  'email.send'(fromAddress, subject, emailText) 
+  emailSend(fromAddress, subject, emailText) 
   {
-    if (Meteor.isServer) 
-    {     
-      const { Email } = require('../server/email.js');
-      return Email.send(fromAddress, subject, emailText);
-    }
+    const { Email } = require('../server/email.js');
+    var syncFunc = Meteor.wrapAsync(Email.send, Email); 
+    var sendEmailReturn=syncFunc(fromAddress, subject, emailText);      
+    return sendEmailReturn;
+    //return Email.send(fromAddress, subject, emailText);
   },  
 })

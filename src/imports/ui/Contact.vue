@@ -150,8 +150,11 @@
               <div class="text-center mt-4">
                 <button type="button" class="btn btn-dark rounded-pill" v-on:click="SendEmail()">Send your message</button>                
                 <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>
-                <div v-if="submitted" class="valid-feedback">
-                    <span v-if="!$v.user.name.$error && !$v.user.email.$error && !$v.user.message.$error">Your email was send successfully. We'll get back to you in 24-48 h.</span>                    
+                <div v-if="this.successMessage!=''" class="valid-feedback">
+                    <span>{{this.successMessage}}</span>                    
+                </div>
+                <div v-if="this.failureMessage!=''" class="valid-feedback">
+                    <span>{{this.failureMessage}}</span>                    
                 </div>
               </div>              
             </form>
@@ -177,7 +180,9 @@ export default {
               email: "",
               message: ""
           },
-          submitted: false
+          submitted: false,
+          successMessage:'',
+          failureMessage:''
       };
   },
   validations: {
@@ -187,33 +192,42 @@ export default {
           message: { required, minLength: minLength(6) }
       }
   },
-  methods: {
-    SendEmail() {
+  methods: 
+  {
+    SendEmail() 
+    {
       this.submitted = true;
+      this.failureMessage='';
+      this.successMessage='';
+
       this.$v.$touch();
-      if (this.$v.$invalid) {
+      if (this.$v.$invalid) 
+      {
           return;
       }
-      
+
       var nameWithEmailText="Email message from: "+ this.user.name + "\nEmail message: " + this.user.message;
       var subject="Email from contact us page in common membership website";
-      Meteor.call('email.send', this.user.email, subject, nameWithEmailText, 
-      (error, result) => {
+      Meteor.call('emailSend', this.user.email, subject, nameWithEmailText, 
+      (error, result) => 
+      {
         if(error) 
-        { 
-          throw new Meteor.Error( error.message );
+        {           
+          this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
+          return;
         } 
-        else if( result ) 
+      
+        if( result ) 
         {
           this.user.name='';
           this.user.email='';
           this.user.message=''; 
+          this.successMessage='Your email was send successfully.';
           this.$v.$reset();
         }
-      }
-      );       
+      });
     }
-  }
+  },
 }
 </script>
 
