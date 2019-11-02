@@ -30,3 +30,4 @@ akryum:vue-pug
 accounts-password@1.5.1
 underscore@1.0.10
 check
+clinical:winston-browser-logging

@@ -150,7 +150,7 @@
               <div class="text-center mt-4">
                 <button type="button" class="btn btn-dark rounded-pill" v-on:click="SendEmail()">Send your message</button>                
                 <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>
-                <div v-if="this.successMessage!=''" class="valid-feedback">
+                <div class="valid-feedback">
                     <span>{{this.successMessage}}</span>                    
                 </div>
                 <div v-if="this.failureMessage!=''" class="valid-feedback">
@@ -194,7 +194,7 @@ export default {
   },
   methods: 
   {
-    SendEmail() 
+    async SendEmail() 
     {
       this.submitted = true;
       this.failureMessage='';
@@ -208,24 +208,21 @@ export default {
 
       var nameWithEmailText="Email message from: "+ this.user.name + "\nEmail message: " + this.user.message;
       var subject="Email from contact us page in common membership website";
-      Meteor.call('emailSend', this.user.email, subject, nameWithEmailText, 
-      (error, result) => 
+      try
       {
-        if(error) 
-        {           
-          this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
-          return;
-        } 
-      
-        if( result ) 
-        {
-          this.user.name='';
-          this.user.email='';
-          this.user.message=''; 
-          this.successMessage='Your email was send successfully.';
-          this.$v.$reset();
-        }
-      });
+        await Meteor.callPromise('emailSend', this.user.email, subject, nameWithEmailText);
+        console.log('after email has been send');
+        this.user.name='';
+        this.user.email='';
+        this.user.message=''; 
+        this.$v.$reset();
+        this.successMessage='Your email was send successfully.';
+      }
+      catch(e)
+      {
+        this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
+        return;
+      }
     }
   },
 }

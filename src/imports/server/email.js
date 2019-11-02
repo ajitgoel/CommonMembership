@@ -10,11 +10,11 @@ export const Email =
       check(emailText, String);
       
       AWS.config.update({      
-        accessKeyId: Meteor.settings.AccessKeyID, 
-        secretAccessKey: Meteor.settings.SecretAccessKey, 
-        region: Meteor.settings.AmazonSES_Region
+        accessKeyId: Meteor.settings.private.AmazonSES.AccessKeyID, 
+        secretAccessKey: Meteor.settings.private.AmazonSES.SecretAccessKey, 
+        region: Meteor.settings.private.AmazonSES.Region
       });
-      var params = {Destination: {CcAddresses: [],ToAddresses: [Meteor.settings.SourceEmailId,]},
+      var params = {Destination: {CcAddresses: [],ToAddresses: [Meteor.settings.private.SourceEmailId,]},
       Message: 
       {
           Body: 
@@ -31,7 +31,7 @@ export const Email =
 
       sendPromise.then(function(data) 
       {
-          return data;
+        return data;
       }).
       catch(function(err) 
       {
