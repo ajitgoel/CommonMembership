@@ -1,10 +1,10 @@
 import './imports/api/methods';
-//import 'vuetify/dist/vuetify.min.css';
 
 if (Meteor.isClient) 
 {
   import './imports/client';
   //import './imports/client/logging';  
+  import 'vuetify/dist/vuetify.min.css';
 } 
 else if (Meteor.isServer) 
 {
