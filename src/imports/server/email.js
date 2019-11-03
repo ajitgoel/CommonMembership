@@ -1,6 +1,6 @@
 import { check } from 'meteor/check';
 const AWS = require('aws-sdk');
-        
+
 export const Email = 
 {
   send(fromAddress, subject, emailText) 
@@ -8,7 +8,8 @@ export const Email =
       check(fromAddress, String);
       check(subject, String);
       check(emailText, String);
-      
+      var logging = require('./logging.js');
+
       AWS.config.update({      
         accessKeyId: Meteor.settings.private.AmazonSES.AccessKeyID, 
         secretAccessKey: Meteor.settings.private.AmazonSES.SecretAccessKey, 
@@ -31,10 +32,12 @@ export const Email =
 
       sendPromise.then(function(data) 
       {
+        logging.winston.log('info', 'Email send from: '+ fromAddress + '. Response from Amazon SES: ' +  JSON.stringify(data));
         return data;
       }).
       catch(function(err) 
       {
+        logging.winston.log('info', 'Error sending email from: '+ fromAddress + '. Error from Amazon SES: ' +  JSON.stringify(err));
         throw new Meteor.Error('Error sending email', err);
       });
   }
