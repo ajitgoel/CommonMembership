@@ -1,24 +1,18 @@
-import 'isomorphic-fetch'
+import 'isomorphic-fetch';
 
-import './plugins'
-import './supply'
+import './plugins';
+import './supply';
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Vuex from 'vuex'
-import { sync } from 'vuex-router-sync'
-import VueApollo from 'vue-apollo'
-import { createApolloClient } from './api/apollo'
-import { injectSupply } from 'vue-supply'
-import App from './ui/App.vue'
-import routes from './routes'
-import storeOptions from './store'
-//import Vuetify from "vuetify";
-//import "vuetify/dist/vuetify.min.css";
-//import "vuetify/dist/vuetify.min.js";
-
-//Vue.config.productionTip = false;
-//Vue.use(Vuetify);
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Vuex from 'vuex';
+import { sync } from 'vuex-router-sync';
+import VueApollo from 'vue-apollo';
+import { createApolloClient } from './api/apollo';
+import { injectSupply } from 'vue-supply';
+import App from './ui/App.vue';
+import routes from './routes';
+import storeOptions from './store';
 
 function createApp (context) {
   const router = new VueRouter({mode: 'history', routes,});

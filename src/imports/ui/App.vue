@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <AppHeader></AppHeader>
-    <Omnisearch></Omnisearch>
+    <!--<Omnisearch></Omnisearch>-->
     <main>
       <router-view />
     </main>
@@ -12,13 +12,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import AppHeader from './AppHeader.vue';
-import Omnisearch from './Omnisearch.vue';
+//import Omnisearch from './Omnisearch.vue';
 import AppFooter from './AppFooter.vue';
 
 export default {
   components: {
     AppHeader: AppHeader,
-    Omnisearch: Omnisearch,
+    //Omnisearch: Omnisearch,
     AppFooter: AppFooter,
   },
 
