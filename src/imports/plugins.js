@@ -36,3 +36,7 @@ for (const key in filters) {
 
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
+
+import Vuetify from 'vuetify';
+//import 'vuetify/dist/vuetify.min.css';
+Vue.use(Vuetify);

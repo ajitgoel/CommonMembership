@@ -1,4 +1,5 @@
-import './imports/api/methods'
+import './imports/api/methods';
+//import 'vuetify/dist/vuetify.min.css';
 
 if (Meteor.isClient) 
 {

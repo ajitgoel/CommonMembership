@@ -1,23 +1,5 @@
-# (WIP) vue-meteor-demo
-A comprehensive demo project, using Meteor &amp; Vue.
+Install applicaton: meteor npm i
+Start app: npm run start
 
-This is a work in progress. Contribute by opening Issues and submitting PRs!
-
-Clone the project and navigate into its directory. Then install the npm dependencies:
-
-```
-meteor npm i
-```
-
-To start the app, use the usual `meteor --settings settings.json` command.
-
----
-
-WIP
-
-```
-meteor create --bare <some_folder>
-cd <some_folder>
-meteor remove blaze-templates reactive-var
-meteor add static-html akryum:vue-component akryum:vue-ssr
-```
+Loggly url: https://ajitgoel.loggly.com/search
+Vuetify 1.5.20: https://v15.vuetifyjs.com/en/getting-started/quick-start
