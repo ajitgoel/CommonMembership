@@ -27,7 +27,7 @@ akryum:vue-stylus
 akryum:vue-sass
 akryum:vue-coffee
 akryum:vue-pug
-accounts-password@1.5.1
+accounts-password
 underscore@1.0.10
 check
 clinical:winston-browser-logging

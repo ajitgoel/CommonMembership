@@ -168,10 +168,12 @@
 <script>
 import { Email } from '../api/email.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import GlobalComponents from './globalComponents.js';
 
 export default {
   name: "Contact",
   components:{
+     ...GlobalComponents
   },
   data() {
       return {
@@ -211,7 +213,6 @@ export default {
       try
       {
         await Meteor.callPromise('emailSend', this.user.email, subject, nameWithEmailText);
-        console.log('after email has been send');
         this.user.name='';
         this.user.email='';
         this.user.message=''; 
@@ -220,6 +221,8 @@ export default {
       }
       catch(e)
       {
+        //ToDo: log error to the loggly
+        //ToDO: send email to the administrator.
         this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
         return;
       }

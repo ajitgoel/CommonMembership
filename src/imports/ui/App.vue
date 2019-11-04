@@ -11,15 +11,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AppHeader from './AppHeader.vue';
-//import Omnisearch from './Omnisearch.vue';
-import AppFooter from './AppFooter.vue';
+import GlobalComponents from './globalComponents.js';
 
 export default {
   components: {
-    AppHeader: AppHeader,
-    //Omnisearch: Omnisearch,
-    AppFooter: AppFooter,
+     ...GlobalComponents
   },
 
   computed: {
