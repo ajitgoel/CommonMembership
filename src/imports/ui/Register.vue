@@ -101,8 +101,9 @@
 </template>
 
 <script>
-import { Email } from '../api/email.js';
+import '../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+
 export default {
   name: "Register",
   components:{
@@ -124,7 +125,7 @@ export default {
   {
     user: 
     {
-      domain: { required },
+      //domain: { required },
       email: { required, email },
 	    password:  { required, minLength: minLength(6) },
       confirmPassword:  { required, sameAsPassword: sameAs('password') },
@@ -132,7 +133,7 @@ export default {
   },
   methods: 
   {    
-    async RegisterUser() 
+    RegisterUser() 
     {
       this.submitted = true;
       this.failureMessage='';
@@ -146,13 +147,18 @@ export default {
 
       try
       {
-        Accounts.createUser({email: this.user.email, password: this.user.password});
-        //ToDo: redirect to dashboard
+        //ToDo: 1. check domain has not been registered before.
+        //2. check user has not been registered in domain before. 
+        //3. save domain when user is being registered
+        //4. validate terms and conditions, privacy policy checkboxes are checked
+        this.user.domain='clearcrimson';        
+        Meteor.call('createUserForDomain', this.user.domain, this.user.email, this.user.password);
+        //ToDo: 5. send email to user about new account creation.
+        //ToDo: 6. redirect to dashboard
       }
       catch(e)
       {
         //ToDo: log error to the loggly
-        //ToDO: send email to the administrator.
         this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
         return;
       }

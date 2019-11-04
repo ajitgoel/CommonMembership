@@ -166,30 +166,30 @@
 </template>
 
 <script>
-import { Email } from '../api/email.js';
+import '../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 export default {
   name: "Contact",
   components:{
   },
   data() {
-      return {
-          user: {
-              name: "",
-              email: "",
-              message: ""
-          },
-          submitted: false,
-          successMessage:'',
-          failureMessage:''
-      };
+    return {
+      user: {
+        name: "",
+        email: "",
+        message: ""
+      },
+      submitted: false,
+      successMessage:'',
+      failureMessage:''
+    };
   },
   validations: {
-      user: {
-          name: { required },
-          email: { required, email },
-          message: { required, minLength: minLength(6) }
-      }
+    user: {
+      name: { required },
+      email: { required, email },
+      message: { required, minLength: minLength(6) }
+    }
   },
   methods: 
   {
@@ -219,7 +219,6 @@ export default {
       catch(e)
       {
         //ToDo: log error to the loggly
-        //ToDO: send email to the administrator.
         this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
         return;
       }
