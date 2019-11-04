@@ -26,15 +26,9 @@
 </template>
 
 <script>
-import { Meteor } from 'meteor/meteor';
-import { Notes } from '../api/collections';
-import PrivacyShieldNoticeText from './PrivacyShieldNoticeText.vue';
-import CardFooter from './CardFooter.vue';
-
 export default {
+  name: "PrivacyShieldNotice",
   components:{
-    "PrivacyShieldNoticeText": PrivacyShieldNoticeText,
-    "CardFooter": CardFooter,
   },
 }
 </script>

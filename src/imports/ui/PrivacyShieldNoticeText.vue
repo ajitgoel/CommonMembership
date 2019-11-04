@@ -73,7 +73,11 @@
 </template>
 
 <script>
-
+export default {
+  name: "PrivacyShieldNoticeText",
+  components:{
+  },
+}
 </script>
 
 <style lang="less" scoped>

@@ -73,13 +73,15 @@
                   <div class="my-4">
                   <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="check-terms">
-                    <label class="custom-control-label" for="check-terms">I agree to the <a href="#" v-on:click="showTermsAndConditionsModal">terms and conditions</a>
+                    <label class="custom-control-label" for="check-terms">I agree to the 
+                      <a href="#" v-on:click="showTermsAndConditionsModal">terms and conditions</a>
                     </label>
                     <TermsAndConditionsModal ref="TermsAndConditionsModal"/>
                   </div>
                   <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="check-privacy">
-                    <label class="custom-control-label" for="check-privacy">I agree to the <a href="#" v-on:click="showPrivacyPolicyModal">privacy policy</a>
+                    <label class="custom-control-label" for="check-privacy">I agree to the 
+                      <a href="#" v-on:click="showPrivacyPolicyModal">privacy policy</a>
                     </label>
                     <PrivacyPolicyModal ref="PrivacyPolicyModal"/>
                   </div>
@@ -101,12 +103,9 @@
 <script>
 import { Email } from '../api/email.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
-import GlobalComponents from './globalComponents.js';
-
 export default {
   name: "Register",
   components:{
-     ...GlobalComponents
   },
   data() {
     return {

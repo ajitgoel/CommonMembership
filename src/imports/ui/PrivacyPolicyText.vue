@@ -148,7 +148,11 @@
 </template>
 
 <script>
-
+export default {
+  name: "PrivacyPolicyText",
+  components:{
+  },
+}
 </script>
 
 <style lang="less" scoped>

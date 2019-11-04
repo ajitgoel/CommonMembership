@@ -168,12 +168,9 @@
 <script>
 import { Email } from '../api/email.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
-import GlobalComponents from './globalComponents.js';
-
 export default {
   name: "Contact",
   components:{
-     ...GlobalComponents
   },
   data() {
       return {

@@ -63,8 +63,12 @@
 
 <script>
 export default {
+  name: "TopNavBar",
+  components:{
+  },
 }
 </script>
+
 
 <style lang="less" scoped>
 

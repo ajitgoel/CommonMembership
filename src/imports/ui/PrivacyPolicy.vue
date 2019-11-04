@@ -26,15 +26,9 @@
 </template>
 
 <script>
-import { Meteor } from 'meteor/meteor';
-import { Notes } from '../api/collections';
-import PrivacyPolicyText from './PrivacyPolicyText.vue';
-import CardFooter from './CardFooter.vue';
-
 export default {
+  name: "PrivacyPolicy",
   components:{
-    "PrivacyPolicyText": PrivacyPolicyText,
-    "CardFooter": CardFooter,
   },
 }
 </script>

@@ -25,15 +25,9 @@
 </template>
 
 <script>
-import { Meteor } from 'meteor/meteor';
-import { Notes } from '../api/collections';
-import TermsAndConditionsText from './TermsAndConditionsText.vue';
-import CardFooter from './CardFooter.vue';
-
 export default {
+  name: "TermsandConditions",
   components:{
-    "TermsAndConditionsText":TermsAndConditionsText,
-    "CardFooter": CardFooter,
   },
 }
 </script>

@@ -591,8 +591,8 @@
 
 <script>
 export default {
-  components: {
-    
+  name: "MainNavBar",
+  components:{
   },
 }
 </script>

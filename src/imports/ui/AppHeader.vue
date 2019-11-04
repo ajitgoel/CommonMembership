@@ -6,13 +6,8 @@
 </template>
 
 <script>
-import TopNavBar from './TopNavBar.vue';
-import MainNavBar from './MainNavBar.vue';
-
 export default {
   components: {
-    TopNavBar: TopNavBar,
-    MainNavBar:MainNavBar
   },
 }
 </script>

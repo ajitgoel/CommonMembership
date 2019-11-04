@@ -11,13 +11,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import GlobalComponents from './globalComponents.js';
-
 export default {
   components: {
-     ...GlobalComponents
   },
-
   computed: {
     ...mapGetters('layout', ['showCart',]),
   },

@@ -10,7 +10,6 @@ Vue.use(Vuex)
 import VueMeteorTracker from 'vue-meteor-tracker'
 Vue.use(VueMeteorTracker)
 Vue.config.meteor.freeze = true
-console.log('tracker installed')
 
 import VueGoogleMaps from 'vue-googlemaps'
 Vue.use(VueGoogleMaps, {
@@ -38,5 +37,4 @@ import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
 import Vuetify from 'vuetify';
-//import 'vuetify/dist/vuetify.min.css';
 Vue.use(Vuetify);
