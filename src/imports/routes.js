@@ -12,6 +12,9 @@ import Contact from './ui/Contact.vue';
 
 export default [
   { path: '/', name: 'home', component: Home },
+  //ToDo: Change Dashboard to actual dashboard screen.
+  { path: '/', name: 'dashboard', component: Home },
+  
   { path: '/register', name: 'register', component: Register },
   { path: '/login', name: 'login', component: Login },
   { path: '/resetpassword', name: 'resetpassword', component: ResetPassword },

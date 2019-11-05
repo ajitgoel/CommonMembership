@@ -15,6 +15,49 @@ import routes from './routes';
 import storeOptions from './store';
 
 function createApp (context) {
+
+  import AppHeader from './ui/AppHeader.vue';
+  import AppFooter from './ui/AppFooter.vue';
+  import Contact from './ui/Contact.vue';
+  import CardFooter from './ui/CardFooter.vue';
+  import Home from './ui/Home.vue'
+  import Login from './ui/Login.vue';
+  import MainNavBar from './ui/MainNavBar.vue';
+  import NotFound from './ui/NotFound.vue'
+  import Omnisearch from './ui/Omnisearch.vue';
+  import PrivacyPolicy from './ui/PrivacyPolicy.vue';
+  import PrivacyShieldNotice from './ui/PrivacyShieldNotice.vue';
+  import PrivacyPolicyModal from './ui/PrivacyPolicyModal.vue';
+  import PrivacyPolicyText from './ui/PrivacyPolicyText.vue';
+  import PrivacyShieldNoticeText from './ui/PrivacyShieldNoticeText.vue';
+  import Register from './ui/Register.vue';
+  import ResetPassword from './ui/ResetPassword.vue';
+  import TermsAndConditions from './ui/TermsAndConditions.vue';
+  import TermsAndConditionsModal from './ui/TermsAndConditionsModal.vue';
+  import TermsAndConditionsText from './ui/TermsAndConditionsText.vue';
+  import TopNavBar from './ui/TopNavBar.vue';
+
+  Vue.component('AppHeader', AppHeader);
+  Vue.component('AppFooter', AppFooter);
+  Vue.component('Contact', Contact);
+  Vue.component('CardFooter', CardFooter);
+  Vue.component('Home', Home);
+  Vue.component('Login', Login);
+  Vue.component('MainNavBar', MainNavBar);
+  Vue.component('NotFound', NotFound);
+  Vue.component('Omnisearch', Omnisearch);
+  Vue.component('PrivacyPolicy', PrivacyPolicy);
+  Vue.component('PrivacyShieldNotice', PrivacyShieldNotice);
+  Vue.component('PrivacyPolicyModal', PrivacyPolicyModal);
+  Vue.component('PrivacyPolicyText', PrivacyPolicyText);
+  Vue.component('PrivacyShieldNoticeText', PrivacyShieldNoticeText);
+  Vue.component('Register', Register);
+  Vue.component('ResetPassword', ResetPassword);
+  Vue.component('TermsAndConditions', TermsAndConditions);
+  Vue.component('TermsAndConditionsModal', TermsAndConditionsModal);
+  Vue.component('TermsAndConditionsText', TermsAndConditionsText);
+  Vue.component('TopNavBar', TopNavBar);
+  
   const router = new VueRouter({mode: 'history', routes,});
 
   const supplyCache = {};
@@ -28,31 +71,6 @@ function createApp (context) {
   // Apollo
   const apolloClient = createApolloClient(context.ssr);
   const apolloProvider = new VueApollo({defaultClient: apolloClient,});
-
-  import AppHeader from './ui/AppHeader.vue';
-  import Omnisearch from './ui/Omnisearch.vue';
-  import AppFooter from './ui/AppFooter.vue';
-  import TermsAndConditionsModal from './ui/TermsAndConditionsModal.vue';
-  import TermsAndConditionsText from './ui/TermsAndConditionsText.vue';
-  import PrivacyPolicyModal from './ui/PrivacyPolicyModal.vue';
-  import PrivacyPolicyText from './ui/PrivacyPolicyText.vue';
-  import TopNavBar from './ui/TopNavBar.vue';
-  import MainNavBar from './ui/MainNavBar.vue';
-  import CardFooter from './ui/CardFooter.vue';
-  import PrivacyShieldNoticeText from './ui/PrivacyShieldNoticeText.vue';
-
-  Vue.component('AppHeader', AppHeader);
-  Vue.component('AppHeader', AppHeader);
-  Vue.component('Omnisearch', Omnisearch);
-  Vue.component('AppFooter', AppFooter);
-  Vue.component('TermsAndConditionsModal', TermsAndConditionsModal);
-  Vue.component('TermsAndConditionsText', TermsAndConditionsText);
-  Vue.component('PrivacyPolicyModal', PrivacyPolicyModal);  
-  Vue.component('PrivacyPolicyText', PrivacyPolicyText);
-  Vue.component('TopNavBar', TopNavBar);
-  Vue.component('MainNavBar', MainNavBar);
-  Vue.component('CardFooter', CardFooter);
-  Vue.component('PrivacyShieldNoticeText', PrivacyShieldNoticeText);
 
   return {
     app: new Vue({

@@ -88,19 +88,19 @@
                 </div>
 
                 <div class="my-4">
-                  <div class="custom-control custom-checkbox mb-3" 
+                  <div class="custom-control custom-checkbox" 
                     v-bind:class="{ 'is-invalid': submitted && $v.user.termsAndConditions.$error }">
                     <input type="checkbox" class="custom-control-input" id="termsAndConditions" 
                     v-on:change="$v.user.termsAndConditions.$touch()" v-model="user.termsAndConditions">
                     <label class="custom-control-label" for="termsAndConditions">I agree to the 
                       <a href="#" v-on:click="showTermsAndConditionsModal">terms and conditions</a>
-                    </label>
-                    <div v-if="submitted && $v.user.termsAndConditions.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.termsAndConditions.checked">Agreement to terms and conditions is required</span>
-                    </div>
+                    </label>                   
                     <TermsAndConditionsModal ref="TermsAndConditionsModal"/>
                   </div>
-                  
+                  <div v-if="submitted && $v.user.termsAndConditions.$error" class="custom-control custom-checkbox invalid-feedback">
+                    <span v-if="!$v.user.termsAndConditions.checked">Agreement to terms and conditions is required</span>
+                  </div>
+                
                   <div class="custom-control custom-checkbox" 
                     v-bind:class="{ 'is-invalid': submitted && $v.user.termsAndConditions.$error }">
                     <input type="checkbox" class="custom-control-input" id="privacyPolicy"
@@ -109,12 +109,11 @@
                       <a href="#" v-on:click="showPrivacyPolicyModal">privacy policy</a>
                     </label>
                     
-                    <div v-if="submitted && $v.user.privacyPolicy.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.privacyPolicy.checked">Agreement to privacy policy is required</span>
-                    </div>
-
                     <PrivacyPolicyModal ref="PrivacyPolicyModal"/>
                   </div>
+                  <div v-if="submitted && $v.user.privacyPolicy.$error" class="custom-control custom-checkbox invalid-feedback">
+                    <span v-if="!$v.user.privacyPolicy.checked">Agreement to privacy policy is required</span>
+                  </div>                    
                 </div>
 
                 <div class="mt-4">
@@ -197,10 +196,9 @@ export default {
         //1. check domain has not been registered before.
         //2. check user has not been registered in domain before. 
         //3. save domain when user is being registered
-        //4. validate terms and conditions, privacy policy checkboxes are checked
         Meteor.call('createUserForDomain', this.user.domain, this.user.email, this.user.password);
         //ToDo: 5. send email to user about new account creation.
-        //ToDo: 6. redirect to dashboard
+        this.$router.push('dashboard');
       }
       catch(e)
       {
