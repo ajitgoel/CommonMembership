@@ -36,3 +36,6 @@ hwillson:stub-collections
 dburles:factory
 meteortesting:mocha
 dburles:mongo-collection-instances
+mizzao:autocomplete
+mizzao:user-status
+alanning:roles

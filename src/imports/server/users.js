@@ -4,9 +4,10 @@ import { Accounts } from 'meteor/accounts-base';
 //export const Users = new Mongo.Collection('users');
 export const Users = Mongo.Collection.get('users');
 
+
 export const UserService = 
 {
-  CreateUserIfItDoesNotExist(domain, email, password) 
+  /*CreateUserIfItDoesNotExist(domain, email, password) 
   {
     var logging = require('./logging.js');
     var emailService = require('./email.js');
@@ -49,6 +50,35 @@ export const UserService =
     //var subject='Your account at http://localhost:3000/' + domain;
     //var emailText='Your account has been created at http://localhost:3000/' + domain;
     //emailService.send(email, subject, emailText);
+    return {userId:userId}; 
+  }*/
+
+  CreateUserIfItDoesNotExist(domain, email, password) 
+  {
+    var logging = require('./logging.js');
+    var emailService = require('./email.js');
+
+    check(domain, String);
+    check(email, String);
+    check(password, String);
+    
+    domain=domain.toString().toLowerCase();
+    email=email.toString().toLowerCase();      
+
+    //TODO: add security check
+    
+    //TODO: check if domain has already been registered before. 
+    
+    var userId= Accounts.createUser({username: email, email: email, password: password});
+    logging.winston.log('info', `User created with userid ${userId} for email ${email} and domain ${domain}`);
+
+    var domainOwner_RoleName='domainOwner';
+    Roles.createRole(domainOwner_RoleName, {unlessExists: true});
+
+    Roles.addUsersToRoles(userId, [domainOwner_RoleName], domain);
+    logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
+
+    Accounts.sendEnrollmentEmail(userId, email);
     return {userId:userId}; 
   }
 }

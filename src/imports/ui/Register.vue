@@ -209,24 +209,21 @@ export default {
         console.log(result);
           if(error) 
           {           
-            if(error && error.error==='Domain is already is use')
+            if(error.error && error.error==='Domain is already is use')
             {
               this.user.domainAlreadyExists=true;
               return;  
             }
-            this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
+          this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
             return;
-          } 
-          if(result && result.userId && result.domainId) 
+        } 
+          if(result && result.userId) 
           {
-            this.$router.push('dashboard');                  
+          this.$router.push('dashboard');                  
             return;
           }
-          else
-          {           
-            this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
-            return;
-          }
+          this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
+          return;
         }
         );
     },

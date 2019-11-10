@@ -29,5 +29,8 @@ db.firstLevelArrayDemo.find({StudentTechnicalSkills:{$in:["MongoDB"]}}).pretty()
    "StudentTechnicalSkills" : ["C","Java","C++"]
 }
 
+https://cleverbeagle.com/pup/v1/the-basics/mongodb-collections#the-documents-collection
+https://github.com/Meteor-Community-Packages/meteor-roles
+
 Tips:
 If you are running tests, run the "setx TEST-WATCH 1" before you run your tests. 
