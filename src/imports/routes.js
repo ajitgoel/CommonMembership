@@ -12,7 +12,7 @@ import Contact from './ui/Contact.vue';
 
 export default [
   { path: '/', name: 'home', component: Home },
-  //ToDo: Change Dashboard to actual dashboard screen.
+  //TODO: Change Dashboard to actual dashboard screen.
   { path: '/', name: 'dashboard', component: Home },
   
   { path: '/register', name: 'register', component: Register },

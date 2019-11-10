@@ -168,6 +168,8 @@
 <script>
 import '../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import { Meteor } from 'meteor/meteor';
+
 export default {
   name: "Contact",
   components:{
@@ -218,7 +220,6 @@ export default {
       }
       catch(e)
       {
-        //ToDo: log error to the loggly
         this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
         return;
       }

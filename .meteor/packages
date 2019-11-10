@@ -31,3 +31,7 @@ accounts-password
 underscore@1.0.10
 check
 clinical:winston-browser-logging
+xolvio:cleaner
+hwillson:stub-collections
+dburles:factory
+meteortesting:mocha

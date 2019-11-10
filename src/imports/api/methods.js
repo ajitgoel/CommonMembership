@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { Notes } from './collections'
 
+DomainExistsAlready=-1;
+
 Meteor.methods(
 {
   ['notes.add'] (args) 
@@ -32,9 +34,8 @@ Meteor.methods(
   {
     if(Meteor.isServer)
     {
-      const { Domain } = require('../server/domain.js');
-      Domain.CreateUser(domain, email, password);
-      console.log('finish2');
+      const { UserCollection } = require('../server/users.js');
+      return UserCollection.CreateUserIfItDoesNotExist(domain, email, password);
     }
   }, 
   emailSend(fromAddress, subject, emailText) 

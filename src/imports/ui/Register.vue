@@ -27,11 +27,16 @@
                     </div>
                     <input class="form-control" placeholder="www.DomainName.com" 
                     v-model="user.domain" id="domain" name="domain" 
-                    :class="{ 'is-invalid': submitted && $v.user.domain.$error }">                      
+                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainAlreadyExists) }">                      
                     <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
                       <span v-if="!$v.user.domain.required">Domain is required</span>
                     </div>
-                  </div>
+
+                    <div v-if="submitted && this.user.domainAlreadyExists" class="invalid-feedback">
+                      <span>This domain is already in use. Please select another one.</span>   
+                    </div>
+                  </div>                 
+
                 </div>
 
                 <div class="form-group">
@@ -121,6 +126,11 @@
                     Create my account
                   </button>
                 </div>
+
+                <div v-if="this.failureMessage!=''">
+                  <span>{{this.failureMessage}}</span>                    
+                </div>
+                
             </form>
             <div class="mt-4 text-center"><small>Already have an account?</small>
                 <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link>
@@ -136,6 +146,7 @@
 <script>
 import '../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import { Meteor } from 'meteor/meteor';
 
 export default {
   name: "Register",
@@ -145,6 +156,7 @@ export default {
     return {
       user: {
         domain: "",
+        domainAlreadyExists: false,
         email: "",
         password: "",
         confirmPassword: "",
@@ -152,7 +164,6 @@ export default {
         privacyPolicy:false,
       },
       submitted: false,
-      successMessage:'',
       failureMessage:''
     };
   },
@@ -166,12 +177,10 @@ export default {
       confirmPassword:  { required, sameAsPassword: sameAs('password') },
       termsAndConditions: {checked(val)
       {
-        console.log(val);
         return val;
       }},
       privacyPolicy: {checked(val)
       {
-        console.log(val);
         return val;
       }},
     },
@@ -182,30 +191,44 @@ export default {
     {
       this.submitted = true;
       this.failureMessage='';
-      this.successMessage='';
-
+      this.user.domainAlreadyExists=false;
+        
       this.$v.$touch();
       if (this.$v.$invalid) 
       {
           return;
       }
 
-      try
-      {
-        //ToDo: 
-        //1. check domain has not been registered before.
-        //2. check user has not been registered in domain before. 
-        //3. save domain when user is being registered
-        Meteor.call('createUserForDomain', this.user.domain, this.user.email, this.user.password);
-        //ToDo: 5. send email to user about new account creation.
-        this.$router.push('dashboard');
-      }
-      catch(e)
-      {
-        //ToDo: log error to the loggly
-        this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
-        return;
-      }
+      //TODO: 
+      //2. check user has not been registered in domain before. 
+      //3. save domain when user is being registered
+      Meteor.call('createUserForDomain', this.user.domain, this.user.email, this.user.password, 
+        (error, result) => 
+        {
+          console.log(error);
+        console.log(result);
+          if(error) 
+          {           
+            if(error.reason && error.reason.error==='Domain is already is use')
+            {
+              this.user.domainAlreadyExists=true;
+              return;  
+            }
+            this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
+            return;
+          } 
+          if(result && result.userId && result.domainId) 
+          {
+            this.$router.push('dashboard');                  
+            return;
+          }
+          else
+          {           
+            this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
+            return;
+          }
+        }
+        );
     },
     showPrivacyPolicyModal() {
       let element = this.$refs.PrivacyPolicyModal.$el;
