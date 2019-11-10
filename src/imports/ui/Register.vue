@@ -209,7 +209,7 @@ export default {
         console.log(result);
           if(error) 
           {           
-            if(error.reason && error.reason.error==='Domain is already is use')
+            if(error && error.error==='Domain is already is use')
             {
               this.user.domainAlreadyExists=true;
               return;  

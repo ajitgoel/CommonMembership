@@ -1,6 +1,6 @@
-import { Meteor } from 'meteor/meteor'
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
-import { Notes } from './collections'
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Notes } from './collections';
 
 DomainExistsAlready=-1;
 
@@ -34,16 +34,16 @@ Meteor.methods(
   {
     if(Meteor.isServer)
     {
-      const { UserCollection } = require('../server/users.js');
-      return UserCollection.CreateUserIfItDoesNotExist(domain, email, password);
+      const { UserService } = require('../server/users.js');
+      return UserService.CreateUserIfItDoesNotExist(domain, email, password);
     }
   }, 
   emailSend(fromAddress, subject, emailText) 
   {
     if(Meteor.isServer)
     {
-      const { Email } = require('../server/email.js');
-      Email.send(fromAddress, subject, emailText);  
+      const { EmailService } = require('../server/email.js');
+      EmailService.send(fromAddress, subject, emailText);  
     }
   },
 })

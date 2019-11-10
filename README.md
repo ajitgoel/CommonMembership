@@ -7,6 +7,27 @@ Atmostphere package manager: https://atmospherejs.com/meteor/accounts-password
 Vuelidate validation package: https://vuelidate.netlify.com/#getting-started
 Testing with meteor: https://guide.meteor.com/testing.html
 working with Collections: https://docs.meteor.com/api/collections.html
+MongoDB queries: https://www.tutorialspoint.com/mongodb/mongodb_query_document.htm
+
+Equality	        db.mycol.find({"by":"tutorials point"})
+Less Than	        db.mycol.find({"likes":{$lt:50}})
+Less Than Equals	db.mycol.find({"likes":{$lte:50}})
+Greater Than	    db.mycol.find({"likes":{$gt:50}})
+Greater Than Equals	db.mycol.find({"likes":{$gte:50}})
+Not Equals          db.mycol.find({"likes":{$ne:50}})
+
+AND in MongoDB      db.mycol.find({$and: [{key1: value1}, {key2:value2}]})
+OR in MongoDB      db.mycol.find({$or: [{key1: value1}, {key2:value2}]})   
+
+db.firstLevelArrayDemo.find({StudentTechnicalSkills:{$in:["MongoDB"]}}).pretty();
+{
+   "StudentName" : "Chris",
+   "StudentTechnicalSkills" : ["MongoDB","MySQL","SQL Server"]
+}
+{
+   "StudentName" : "Robert",
+   "StudentTechnicalSkills" : ["C","Java","C++"]
+}
 
 Tips:
 If you are running tests, run the "setx TEST-WATCH 1" before you run your tests. 

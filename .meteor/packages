@@ -35,3 +35,4 @@ xolvio:cleaner
 hwillson:stub-collections
 dburles:factory
 meteortesting:mocha
+dburles:mongo-collection-instances
