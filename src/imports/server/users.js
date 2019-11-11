@@ -1,3 +1,4 @@
+'use strict';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base';
@@ -29,27 +30,13 @@ export const UserService =
       throw new Meteor.Error('Domain is already is use');
     }
 
-    /*var doesDomainExistForOtherUsers=
-      Users.findOne({"roles": {$elemMatch:{_id: domainOwner_RoleName, scope: domain} } }, {_id:1})
-    if(doesDomainExistForOtherUsers)
-    {
-      logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
-      throw new Meteor.Error('Domain is already is use');
-    }*/
-
     var user=Accounts.findUserByEmail(email);
-    console.log(user);
-
+    
     //#region user exists
     if(user)
     {
-      var domainOwnerRoleForUser = lodash.filter(user.roles, x => x.scope === domain && x._id === domainOwner_RoleName);
-      /*var domainOwnerRoleForUser=user.roles.find(function(element) 
-      {
-        return element.scope == domain && element._id === domainOwner_RoleName;
-      });*/
-      console.log(domainOwnerRoleForUser);
-
+      var domainOwnerRoleForUser = user.roles.filter(x => x.scope === domain && x._id === domainOwner_RoleName);
+      
       //#region if "user already exists for the domain", return error message back to ui about domain and user. 
       if(domainOwnerRoleForUser)
       {

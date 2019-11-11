@@ -27,13 +27,13 @@
                     </div>
                     <input class="form-control" placeholder="www.DomainName.com" 
                     v-model="user.domain" id="domain" name="domain" 
-                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.userExistsforDomain) }">                      
+                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainExists) }">                      
                     <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
                       <span v-if="!$v.user.domain.required">Domain is required</span>
                     </div>
 
-                    <div v-if="submitted && this.user.userExistsforDomain" class="invalid-feedback">
-                      <span>A user already exists for this domain. Please select another one or Login to continue.</span>   
+                    <div v-if="submitted && this.user.domainExists" class="invalid-feedback">
+                      <span>This domain already exists. Please select another one to continue.</span>   
                     </div>
                   </div>                 
 
@@ -46,12 +46,18 @@
                       <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
                     <input type="email" class="form-control" placeholder="name@example.com" 
-                    v-model="user.email" id="email" name="email" :class="{ 'is-invalid': submitted && $v.user.email.$error }"                                
+                    v-model="user.email" id="email" name="email" 
+                    :class="{ 'is-invalid': submitted && ($v.user.email.$error || this.user.userExistsforDomain) }"                                
                     style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">                      
                     <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
                       <span v-if="!$v.user.email.required">Email is required</span>
                       <span v-if="!$v.user.email.email">Email is invalid</span>
                     </div>
+
+                    <div v-if="submitted && this.user.userExistsforDomain" class="invalid-feedback">
+                      <span>A user already exists for this domain. Please select another one or Login to continue.</span>   
+                    </div>
+
                   </div>
                 </div>
                 <div class="form-group mb-4">
@@ -156,6 +162,7 @@ export default {
     return {
       user: {
         domain: "",
+        domainExists:false,
         userExistsforDomain: false,
         email: "",
         password: "",
@@ -192,7 +199,8 @@ export default {
       this.submitted = true;
       this.failureMessage='';
       this.user.userExistsforDomain=false;
-        
+      this.user.domainExists=false;
+
       this.$v.$touch();
       if (this.$v.$invalid) 
       {
@@ -205,7 +213,13 @@ export default {
           console.log(error);
         console.log(result);
           if(error) 
-          {           
+          {     
+            if(error.error && error.error==='Domain is already is use')
+            {
+              this.user.domainExists=true;
+              return;  
+            }
+
             if(error.error && error.error==='User already exists for the domain')
             {
               this.user.userExistsforDomain=true;

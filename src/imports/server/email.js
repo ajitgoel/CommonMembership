@@ -1,3 +1,4 @@
+'use strict';
 import { check } from 'meteor/check';
 const AWS = require('aws-sdk');
 

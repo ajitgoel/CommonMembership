@@ -1,3 +1,4 @@
+'use strict';
 import {Loggly} from 'winston-loggly-bulk';
 import winston from 'winston';
 
