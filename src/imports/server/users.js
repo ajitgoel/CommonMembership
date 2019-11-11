@@ -4,60 +4,14 @@ import { Accounts } from 'meteor/accounts-base';
 //export const Users = new Mongo.Collection('users');
 export const Users = Mongo.Collection.get('users');
 
-
 export const UserService = 
 {
-  /*CreateUserIfItDoesNotExist(domain, email, password) 
-  {
-    var logging = require('./logging.js');
-    var emailService = require('./email.js');
-
-    check(domain, String);
-    check(email, String);
-    check(password, String);
-    
-    domain=domain.toString().toLowerCase();
-    email=email.toString().toLowerCase();      
-
-    //TODO: add security check
-    
-    //TODO: check if domain has already been registered before. 
-    var domainsCount = Users.find({"profile.domain": domain}).count();
-    if(domainsCount > 0)
-    {
-      logging.winston.log('info', 'Domain is already is use, Domain: '+domain+' Email: '+email);
-      throw new Meteor.Error('Domain is already is use');
-    }
-
-    //TODO: check if user has already registered in the domain before. 
-    var emailCountForDomain = Users.find({"profile.domain": domain}, {"profile.email": email}).count();
-    if(emailCountForDomain > 0)
-    {
-      logging.winston.log('info','User is already registered in the domain, Domain: '+domain+ ' Email: '+email);
-      throw new Meteor.Error('User is already registered in the domain');
-    }
-
-    var usernameToUpdate=domain + ':'+ email;
-    var emailToUpdate=domain + ':'+ email;
-
-    var userId= Accounts.createUser({username: usernameToUpdate, email: emailToUpdate, password: password,
-      profile:{domain: domain, email: email}});
-    logging.winston.log('info', 'User created with userid ' + userId + ', for email: '+ email + 'domain: ' + domain);
-
-    //TODO: send email to user about new account creation.
-    Accounts.sendEnrollmentEmail(userId, email);
-
-    //var subject='Your account at http://localhost:3000/' + domain;
-    //var emailText='Your account has been created at http://localhost:3000/' + domain;
-    //emailService.send(email, subject, emailText);
-    return {userId:userId}; 
-  }*/
-
   CreateUserIfItDoesNotExist(domain, email, password) 
   {
     var logging = require('./logging.js');
     var emailService = require('./email.js');
-
+    var domainOwner_RoleName='domainOwner';
+      
     check(domain, String);
     check(email, String);
     check(password, String);
@@ -67,18 +21,70 @@ export const UserService =
 
     //TODO: add security check
     
-    //TODO: check if domain has already been registered before. 
-    
-    var userId= Accounts.createUser({username: email, email: email, password: password});
-    logging.winston.log('info', `User created with userid ${userId} for email ${email} and domain ${domain}`);
+    var doesDomainExistForOtherUsers=
+      Users.findOne({"roles": {$elemMatch:{_id: domainOwner_RoleName, scope: domain} } }, {_id:1})
+    if(doesDomainExistForOtherUsers)
+    {
+      logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
+      throw new Meteor.Error('Domain is already is use');
+    }
 
-    var domainOwner_RoleName='domainOwner';
-    Roles.createRole(domainOwner_RoleName, {unlessExists: true});
+    /*var doesDomainExistForOtherUsers=
+      Users.findOne({"roles": {$elemMatch:{_id: domainOwner_RoleName, scope: domain} } }, {_id:1})
+    if(doesDomainExistForOtherUsers)
+    {
+      logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
+      throw new Meteor.Error('Domain is already is use');
+    }*/
 
-    Roles.addUsersToRoles(userId, [domainOwner_RoleName], domain);
-    logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
+    var user=Accounts.findUserByEmail(email);
+    console.log(user);
 
-    Accounts.sendEnrollmentEmail(userId, email);
-    return {userId:userId}; 
+    //#region user exists
+    if(user)
+    {
+      var domainOwnerRoleForUser = lodash.filter(user.roles, x => x.scope === domain && x._id === domainOwner_RoleName);
+      /*var domainOwnerRoleForUser=user.roles.find(function(element) 
+      {
+        return element.scope == domain && element._id === domainOwner_RoleName;
+      });*/
+      console.log(domainOwnerRoleForUser);
+
+      //#region if "user already exists for the domain", return error message back to ui about domain and user. 
+      if(domainOwnerRoleForUser)
+      {
+        logging.winston.log('info', `User already exists for the domain, Domain: ${domain} Email: ${email}`);
+        throw new Meteor.Error('User already exists for the domain');
+      }
+      //#endregion
+      //#region if "user exists but not for the domain", add domain role to user.
+      else
+      {
+        Roles.createRole(domainOwner_RoleName, {unlessExists: true});
+        Roles.addUsersToRoles(user._id, [domainOwner_RoleName], domain);          
+        logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
+        //TODO: create a proper email template and email sending provider. 
+        Accounts.sendEnrollmentEmail(userId, email);
+        return {userId:userId}; 
+      }
+      //#endregion
+    }
+    //#endregion
+
+    //#region if user does not exist, then create user and add domain role to user. 
+    else
+    {
+      var userId= Accounts.createUser({username: email, email: email, password: password});
+      logging.winston.log('info', `User created with userid ${userId} for email ${email} and domain ${domain}`);
+
+      Roles.createRole(domainOwner_RoleName, {unlessExists: true});
+      Roles.addUsersToRoles(userId, [domainOwner_RoleName], domain);
+      logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
+
+      //TODO: create a proper email template and email sending provider. 
+      Accounts.sendEnrollmentEmail(userId, email);
+      return {userId:userId}; 
+    }
+    //#endregion
   }
 }

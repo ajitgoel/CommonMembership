@@ -27,13 +27,13 @@
                     </div>
                     <input class="form-control" placeholder="www.DomainName.com" 
                     v-model="user.domain" id="domain" name="domain" 
-                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainAlreadyExists) }">                      
+                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.userExistsforDomain) }">                      
                     <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
                       <span v-if="!$v.user.domain.required">Domain is required</span>
                     </div>
 
-                    <div v-if="submitted && this.user.domainAlreadyExists" class="invalid-feedback">
-                      <span>This domain is already in use. Please select another one.</span>   
+                    <div v-if="submitted && this.user.userExistsforDomain" class="invalid-feedback">
+                      <span>A user already exists for this domain. Please select another one or Login to continue.</span>   
                     </div>
                   </div>                 
 
@@ -156,7 +156,7 @@ export default {
     return {
       user: {
         domain: "",
-        domainAlreadyExists: false,
+        userExistsforDomain: false,
         email: "",
         password: "",
         confirmPassword: "",
@@ -191,7 +191,7 @@ export default {
     {
       this.submitted = true;
       this.failureMessage='';
-      this.user.domainAlreadyExists=false;
+      this.user.userExistsforDomain=false;
         
       this.$v.$touch();
       if (this.$v.$invalid) 
@@ -199,9 +199,6 @@ export default {
           return;
       }
 
-      //TODO: 
-      //2. check user has not been registered in domain before. 
-      //3. save domain when user is being registered
       Meteor.call('createUserForDomain', this.user.domain, this.user.email, this.user.password, 
         (error, result) => 
         {
@@ -209,9 +206,9 @@ export default {
         console.log(result);
           if(error) 
           {           
-            if(error.error && error.error==='Domain is already is use')
+            if(error.error && error.error==='User already exists for the domain')
             {
-              this.user.domainAlreadyExists=true;
+              this.user.userExistsforDomain=true;
               return;  
             }
           this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
