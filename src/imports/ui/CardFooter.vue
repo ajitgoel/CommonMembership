@@ -3,9 +3,9 @@
     <h5 class="mb-4">{{title}}</h5>
     <form class="d-flex justify-content-between">
       <div>
-        <button class="btn btn-sm btn-dark" type="submit"><i class="far fa-thumbs-up"></i>
+        <button class="btn btn-sm btn-dark" type="submit"><i class="fas fa-thumbs-up"></i>
         </button>
-        <button class="btn btn-sm btn-dark" type="submit"><i class="far fa-thumbs-down"></i>
+        <button class="btn btn-sm btn-dark" type="submit"><i class="fas fa-thumbs-down"></i>
         </button>
       </div>
       <div>

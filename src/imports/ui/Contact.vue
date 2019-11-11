@@ -17,7 +17,7 @@
                 <h1>Have a project in mind?</h1>
                 <p class="lead mt-4">We put all the experience and know-how in this product so we can offer you the best product we have ever built.</p>
                 <a href="#sct_contact_form" class="btn btn-soft-info rounded-pill btn-icon hover-translate-y-n3 mt-4 scroll-me">
-                  <span class="btn-inner--icon"><i class="far fa-pencil-alt"></i></span>
+                  <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                   <span class="btn-inner--text">Write a message</span>
                 </a>
               </div>
@@ -37,7 +37,7 @@
               <div class="px-5 pb-5">
                 <div class="py-5">
                   <div class="icon text-warning">
-                    <i class="far fa-shapes"></i>
+                    <i class="fas fa-shapes"></i>
                   </div>
                 </div>
                 <h5 class="">Sales department</h5>
@@ -53,7 +53,7 @@
               <div class="px-5 pb-5">
                 <div class="py-5">
                   <div class="icon text-success">
-                    <i class="far fa-users-cog"></i>
+                    <i class="fas fa-users-cog"></i>
                   </div>
                 </div>
                 <h5 class="">Technical support</h5>
@@ -69,7 +69,7 @@
               <div class="px-5 pb-5">
                 <div class="py-5">
                   <div class="icon text-danger">
-                    <i class="far fa-pencil-ruler"></i>
+                    <i class="fas fa-pencil-ruler"></i>
                   </div>
                 </div>
                 <h5 class="">Custom projects</h5>

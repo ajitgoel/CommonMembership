@@ -24,9 +24,10 @@
                   <label class="form-control-label">Email address</label>
                   <div class="input-group input-group-merge">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-user"></i></span>
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
-                    <input type="email" class="form-control" id="input-email" placeholder="name@example.com" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                    <input type="email" class="form-control" id="input-email" placeholder="name@example.com" autocomplete="off" 
+                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
                   </div>
                 </div>
                 <div class="form-group mb-4">
@@ -40,18 +41,38 @@
                   </div>
                   <div class="input-group input-group-merge">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-key"></i></span>
+                      <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
                     <input type="password" class="form-control" id="input-password" placeholder="Password" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
                     <div class="input-group-append">
                       <span class="input-group-text">
-                        <i class="far fa-eye"></i>
+                        <i class="fas fa-eye"></i>
                       </span>
                     </div>
                   </div>
                 </div>
+
+                <div class="form-group mb-4">
+                  <label class="form-control-label">Domain</label>
+                  <div class="input-group input-group-merge">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="www.DomainName.com" 
+                    v-model="user.domain" id="domain" name="domain" >
+                    <!--:class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainExists) }">                      
+                    <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
+                      <span v-if="!$v.user.domain.required">Domain is required</span>
+                    </div>
+
+                    <div v-if="submitted && this.user.domainExists" class="invalid-feedback">
+                      <span>This domain already exists. Please select another one to continue.</span>   
+                    </div>-->
+                  </div>
+                </div>
+
                 <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary">Sign in</button></div>
+                  <button type="button" class="btn btn-block btn-primary" v-on:click="LoginUserForDomain()">Sign in</button></div>
               </form>
               <div class="mt-4 text-center"><small>Not registered?</small>
                 <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Create account</router-link>
@@ -65,9 +86,102 @@
 </template>
 
 <script>
+import '../api/methods.js';
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import { Meteor } from 'meteor/meteor';
+
 export default {
   name: "Login",
   components:{
+  },
+  data() {
+    return {
+      user: {
+        domain: "",
+        domainExists:false,
+        userExistsforDomain: false,
+        email: "",
+        password: "",
+        confirmPassword: "",
+        termsAndConditions:false,
+        privacyPolicy:false,
+      },
+      submitted: false,
+      failureMessage:''
+    };
+  },
+  validations: 
+  {
+    /*user: 
+    {
+      domain: { required },
+      email: { required, email },
+	    password:  { required, minLength: minLength(6) },
+      confirmPassword:  { required, sameAsPassword: sameAs('password') },
+      termsAndConditions: {checked(val)
+      {
+        return val;
+      }},
+      privacyPolicy: {checked(val)
+      {
+        return val;
+      }},
+    },*/
+  },
+  methods: 
+  {    
+    LoginUserForDomain() 
+    {
+      this.submitted = true;
+      this.failureMessage='';
+      this.user.userExistsforDomain=false;
+      this.user.domainExists=false;
+
+      this.$v.$touch();
+      if (this.$v.$invalid) 
+      {
+          return;
+      }
+
+      Meteor.call('LoginUserForDomain', this.user.domain, this.user.email, this.user.password, 
+        (error, result) => 
+        {
+          console.log(error);
+        console.log(result);
+          if(error) 
+          {     
+            if(error.error && error.error==='Domain is already is use')
+            {
+              this.user.domainExists=true;
+              return;  
+            }
+
+            if(error.error && error.error==='User already exists for the domain')
+            {
+              this.user.userExistsforDomain=true;
+              return;  
+            }
+          this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
+            return;
+        } 
+          if(result && result.userId) 
+          {
+          this.$router.push('dashboard');                  
+            return;
+          }
+          this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
+          return;
+        }
+        );
+    },
+    showPrivacyPolicyModal() {
+      let element = this.$refs.PrivacyPolicyModal.$el;
+      $(element).modal('show');
+    },
+    showTermsAndConditionsModal() {
+      let element = this.$refs.TermsAndConditionsModal.$el;
+      $(element).modal('show');
+    }
   },
 }
 </script>
@@ -75,3 +189,4 @@ export default {
 <style lang="less" scoped>
 
 </style>
+

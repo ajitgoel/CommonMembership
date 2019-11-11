@@ -20,26 +20,6 @@
               <form role="form">
 
                 <div class="form-group">
-                  <label class="form-control-label">Domain</label>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="www.DomainName.com" 
-                    v-model="user.domain" id="domain" name="domain" 
-                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainExists) }">                      
-                    <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.domain.required">Domain is required</span>
-                    </div>
-
-                    <div v-if="submitted && this.user.domainExists" class="invalid-feedback">
-                      <span>This domain already exists. Please select another one to continue.</span>   
-                    </div>
-                  </div>                 
-
-                </div>
-
-                <div class="form-group">
                   <label class="form-control-label">Email address</label>
                   <div class="input-group input-group-merge">
                     <div class="input-group-prepend">
@@ -100,6 +80,26 @@
                   </div>                    
                 </div>
 
+                <div class="form-group">
+                  <label class="form-control-label">Domain</label>
+                  <div class="input-group input-group-merge">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="www.DomainName.com" 
+                    v-model="user.domain" id="domain" name="domain" 
+                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainExists) }">                      
+                    <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
+                      <span v-if="!$v.user.domain.required">Domain is required</span>
+                    </div>
+
+                    <div v-if="submitted && this.user.domainExists" class="invalid-feedback">
+                      <span>This domain already exists. Please select another one to continue.</span>   
+                    </div>
+                  </div>                 
+
+                </div>
+                                
                 <div class="my-4">
                   <div class="custom-control custom-checkbox" 
                     v-bind:class="{ 'is-invalid': submitted && $v.user.termsAndConditions.$error }">

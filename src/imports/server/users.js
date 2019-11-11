@@ -73,5 +73,28 @@ export const UserService =
       return {userId:userId}; 
     }
     //#endregion
+  },
+
+  LoginUserForDomain(domain, email, password) 
+  {
+    var logging = require('./logging.js');
+    var emailService = require('./email.js');
+    var domainOwner_RoleName='domainOwner';
+      
+    check(domain, String);
+    check(email, String);
+    check(password, String);
+    
+    if (! this.userId) 
+    {
+      throw new Meteor.Error('Unauthorized');
+    }
+
+    domain=domain.toString().toLowerCase();
+    email=email.toString().toLowerCase();      
+
+    //TODO: add security check
+    
+    Meteor.loginWithPassword(email, password);
   }
 }

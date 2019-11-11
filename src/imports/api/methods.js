@@ -38,6 +38,14 @@ Meteor.methods(
       return UserService.CreateUserIfItDoesNotExist(domain, email, password);
     }
   }, 
+  loginUserForDomain(domain, email, password) 
+  {
+    if(Meteor.isServer)
+    {
+      const { UserService } = require('../server/users.js');
+      return UserService.LoginUserForDomain(domain, email, password);
+    }
+  }, 
   emailSend(fromAddress, subject, emailText) 
   {
     if(Meteor.isServer)
