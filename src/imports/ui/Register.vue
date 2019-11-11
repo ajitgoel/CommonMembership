@@ -55,7 +55,9 @@
                     </div>
 
                     <div v-if="submitted && this.user.userExistsforDomain" class="invalid-feedback">
-                      <span>A user already exists for this domain. Please select another one or Login to continue.</span>   
+                      <span>A user already exists for this domain. Please select another one or 
+                        <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link> to continue.
+                      </span>   
                     </div>
 
                   </div>
