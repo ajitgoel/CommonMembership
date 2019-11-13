@@ -26,8 +26,20 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
-                    <input type="email" class="form-control" id="input-email" placeholder="name@example.com" autocomplete="off" 
+                    <input type="email" class="form-control" placeholder="name@example.com" 
+                    autocomplete="off" v-model="user.email" id="email" name="email" 
+                    :class="{ 'is-invalid': submitted && ($v.user.email.$error || this.user.emailpasswordInvalid) }"
                     style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                    <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
+                      <span v-if="!$v.user.email.required">Email is required</span>
+                      <span v-if="!$v.user.email.email">Email is invalid</span>
+                    </div>
+
+                    <div v-if="submitted && this.user.emailpasswordInvalid" class="invalid-feedback">
+                      <span>The email or password that you entered is invalid. Please try again or 
+                        <router-link v-bind:to="{ name: 'resetpassword' }" class="small font-weight-bold">Change password</router-link> to continue.
+                      </span>   
+                    </div>
                   </div>
                 </div>
                 <div class="form-group mb-4">
@@ -36,18 +48,25 @@
                       <label class="form-control-label">Password</label>
                     </div>
                     <div class="mb-2">
-                      <router-link v-bind:to="{ name: 'resetpassword' }" class="small text-muted text-underline--dashed border-primary">Lost password?</router-link>
+                      <router-link v-bind:to="{ name: 'resetpassword' }" 
+                      class="small text-muted text-underline--dashed border-primary">Change password?</router-link>
                     </div>
                   </div>
                   <div class="input-group input-group-merge">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" class="form-control" id="input-password" placeholder="Password" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                    <input type="password" class="form-control" placeholder="Password" autocomplete="off" 
+                    v-model="user.password" id="password" name="password" :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
+                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="fas fa-eye"></i>
                       </span>
+                    </div>
+                    <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
+                      <span v-if="!$v.user.password.required">Password is required</span>
+                      <span v-if="!$v.user.password.minLength">Password must be at least 6 characters</span>
                     </div>
                   </div>
                 </div>
@@ -60,14 +79,6 @@
                     </div>
                     <input class="form-control" placeholder="www.DomainName.com" 
                     v-model="user.domain" id="domain" name="domain" >
-                    <!--:class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainExists) }">                      
-                    <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.domain.required">Domain is required</span>
-                    </div>
-
-                    <div v-if="submitted && this.user.domainExists" class="invalid-feedback">
-                      <span>This domain already exists. Please select another one to continue.</span>   
-                    </div>-->
                   </div>
                 </div>
 
@@ -97,14 +108,11 @@ export default {
   data() {
     return {
       user: {
-        domain: "",
-        domainExists:false,
+        emailpasswordInvalid:false,
         userExistsforDomain: false,
         email: "",
         password: "",
-        confirmPassword: "",
-        termsAndConditions:false,
-        privacyPolicy:false,
+        domain: "",        
       },
       submitted: false,
       failureMessage:''
@@ -112,21 +120,12 @@ export default {
   },
   validations: 
   {
-    /*user: 
+    user: 
     {
-      domain: { required },
       email: { required, email },
-	    password:  { required, minLength: minLength(6) },
-      confirmPassword:  { required, sameAsPassword: sameAs('password') },
-      termsAndConditions: {checked(val)
-      {
-        return val;
-      }},
-      privacyPolicy: {checked(val)
-      {
-        return val;
-      }},
-    },*/
+      password:  { required, minLength: minLength(6) },
+      //domain: { required },      
+    },
   },
   methods: 
   {    
@@ -135,38 +134,41 @@ export default {
       this.submitted = true;
       this.failureMessage='';
       this.user.userExistsforDomain=false;
-      this.user.domainExists=false;
+      this.user.emailpasswordInvalid=false;
 
       this.$v.$touch();
       if (this.$v.$invalid) 
       {
           return;
       }
+      console.log(this.user.email);
+      console.log(this.user.password);
+      console.log(this.user.domain);
 
-      Meteor.call('LoginUserForDomain', this.user.domain, this.user.email, this.user.password, 
+      Meteor.call('loginUserForDomain', this.user.email, this.user.password, this.user.domain, 
         (error, result) => 
         {
           console.log(error);
-        console.log(result);
+          console.log(result);
           if(error) 
           {     
-            if(error.error && error.error==='Domain is already is use')
+            if(error.error && error.error==='email-password-invalid')
             {
-              this.user.domainExists=true;
+              this.user.emailpasswordInvalid=true;
               return;  
             }
 
-            if(error.error && error.error==='User already exists for the domain')
+            if(error.error && error.error==='multi-domain-user')
             {
               this.user.userExistsforDomain=true;
               return;  
             }
-          this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
+            this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
             return;
-        } 
+          } 
           if(result && result.userId) 
           {
-          this.$router.push('dashboard');                  
+            this.$router.push('dashboard');                  
             return;
           }
           this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';

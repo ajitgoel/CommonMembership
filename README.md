@@ -31,6 +31,10 @@ db.firstLevelArrayDemo.find({StudentTechnicalSkills:{$in:["MongoDB"]}}).pretty()
 
 https://cleverbeagle.com/pup/v1/the-basics/mongodb-collections#the-documents-collection
 https://github.com/Meteor-Community-Packages/meteor-roles
+Running meteor at scale: https://www.freecodecamp.org/news/scaling-meteor-a-year-on-26ee37588e4b/
 
 Tips:
 If you are running tests, run the "setx TEST-WATCH 1" before you run your tests. 
+
+VueJs:
+Vue Router: https://router.vuejs.org/guide/essentials/named-routes.html

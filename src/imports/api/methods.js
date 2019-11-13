@@ -30,28 +30,28 @@ Meteor.methods(
 
     Notes.remove(_id)
   },
-  createUserForDomain(domain, email, password) 
+  createUserForDomain(email, password, domain) 
   {
     if(Meteor.isServer)
     {
-      const { UserService } = require('../server/users.js');
-      return UserService.CreateUserIfItDoesNotExist(domain, email, password);
+      const { userService } = require('../server/users.js');
+      return userService.createUserIfItDoesNotExist(email, password, domain);
     }
   }, 
-  loginUserForDomain(domain, email, password) 
+  loginUserForDomain(email, password, domain) 
   {
     if(Meteor.isServer)
     {
-      const { UserService } = require('../server/users.js');
-      return UserService.LoginUserForDomain(domain, email, password);
+      const { userService } = require('../server/users.js');
+      return userService.loginUserForDomain(email, password, domain);
     }
   }, 
   emailSend(fromAddress, subject, emailText) 
   {
     if(Meteor.isServer)
     {
-      const { EmailService } = require('../server/email.js');
-      EmailService.send(fromAddress, subject, emailText);  
+      const { emailService } = require('../server/email.js');
+      emailService.send(fromAddress, subject, emailText);  
     }
   },
 })

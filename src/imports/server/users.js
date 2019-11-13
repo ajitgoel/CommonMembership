@@ -5,9 +5,9 @@ import { Accounts } from 'meteor/accounts-base';
 //export const Users = new Mongo.Collection('users');
 export const Users = Mongo.Collection.get('users');
 
-export const UserService = 
+export const userService = 
 {
-  CreateUserIfItDoesNotExist(domain, email, password) 
+  createUserIfItDoesNotExist(email, password,domain) 
   {
     var logging = require('./logging.js');
     var emailService = require('./email.js');
@@ -20,14 +20,12 @@ export const UserService =
     domain=domain.toString().toLowerCase();
     email=email.toString().toLowerCase();      
 
-    //TODO: add security check
-    
     var doesDomainExistForOtherUsers=
       Users.findOne({"roles": {$elemMatch:{_id: domainOwner_RoleName, scope: domain} } }, {_id:1})
     if(doesDomainExistForOtherUsers)
     {
       logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
-      throw new Meteor.Error('Domain is already is use');
+      throw new Meteor.Error('domain-already-in-use');
     }
 
     var user=Accounts.findUserByEmail(email);
@@ -41,7 +39,7 @@ export const UserService =
       if(domainOwnerRoleForUser)
       {
         logging.winston.log('info', `User already exists for the domain, Domain: ${domain} Email: ${email}`);
-        throw new Meteor.Error('User already exists for the domain');
+        throw new Meteor.Error('user-exists-for-domain');
       }
       //#endregion
       //#region if "user exists but not for the domain", add domain role to user.
@@ -75,26 +73,46 @@ export const UserService =
     //#endregion
   },
 
-  LoginUserForDomain(domain, email, password) 
+  loginUserForDomain(email, password, domain) 
   {
+    //if domain is blank then use check if more than 1 domain exists. 
+      //if yes, then return all the domains for user. 
+      //if no, then login using email, password. 
+    //if domain is passed then check domain is valid for email.
+      //if yes then login user using his email id. 
+
     var logging = require('./logging.js');
-    var emailService = require('./email.js');
-    var domainOwner_RoleName='domainOwner';
+    //var emailService = require('./email.js');
+    //var domainOwner_RoleName='domainOwner';
       
     check(domain, String);
     check(email, String);
     check(password, String);
     
-    if (! this.userId) 
-    {
-      throw new Meteor.Error('Unauthorized');
-    }
-
     domain=domain.toString().toLowerCase();
     email=email.toString().toLowerCase();      
 
-    //TODO: add security check
+    var user=Accounts.findUserByEmail(email);    
     
+    if(user==null)
+    {
+      throw new Meteor.Error('email-password-invalid');
+    }
+    
+    //#region user exists
+    var _checkPasswordReturn=Accounts._checkPassword(user, password);    
+    if(_checkPasswordReturn == null || _checkPasswordReturn.error)
+    {
+      throw new Meteor.Error('email-password-invalid');    
+    }
+    var domainsForUser = user.roles.filter(x => x.scope === domain);
+    if(domainsForUser && domainsForUser.length >1)
+    {
+      logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
+      throw new Meteor.Error('multi-domain-user', 'Multiple domains defined for user', {domains: domainsForUser});
+    }      
     Meteor.loginWithPassword(email, password);
+    return;
+    //#endregion    
   }
 }

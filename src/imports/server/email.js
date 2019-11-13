@@ -2,7 +2,7 @@
 import { check } from 'meteor/check';
 const AWS = require('aws-sdk');
 
-export const EmailService = 
+export const emailService = 
 {
   send(fromAddress, subject, emailText) 
   {
