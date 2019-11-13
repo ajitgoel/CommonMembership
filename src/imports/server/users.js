@@ -72,18 +72,14 @@ export const userService =
     }
     //#endregion
   },
-
+  //if domain is blank then use check if more than 1 domain exists. 
+    //if yes, then return all the domains for user. 
+    //if no, then login using email, password. 
+  //if domain is passed then check domain is valid for email.
+    //if yes then login user using his email id.   
   loginUserForDomain(email, password, domain) 
   {
-    //if domain is blank then use check if more than 1 domain exists. 
-      //if yes, then return all the domains for user. 
-      //if no, then login using email, password. 
-    //if domain is passed then check domain is valid for email.
-      //if yes then login user using his email id. 
-
     var logging = require('./logging.js');
-    //var emailService = require('./email.js');
-    //var domainOwner_RoleName='domainOwner';
       
     check(domain, String);
     check(email, String);
@@ -105,11 +101,31 @@ export const userService =
     {
       throw new Meteor.Error('email-password-invalid');    
     }
-    var domainsForUser = user.roles.filter(x => x.scope === domain);
-    if(domainsForUser && domainsForUser.length >1)
+
+    //#region user trying to login with email, password
+    if(domain==='')
     {
-      logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
-      throw new Meteor.Error('multi-domain-user', 'Multiple domains defined for user', {domains: domainsForUser});
+      var domainsForUser = user.roles;
+      if(domainsForUser && domainsForUser.length >1)
+      {
+        logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
+        var domains = {domains: user.roles};
+        return domains;
+      }  
+      else
+      {
+        Meteor.loginWithPassword(email, password);
+        return;    
+      }
+    }
+    //#endregion
+
+    //#region user trying to login with email, password, domain
+    var domainsForUser = user.roles.filter(x => x.scope === domain);
+    if(domainsForUser==null)
+    {
+      logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
+      throw new Meteor.Error('unauthorized');
     }      
     Meteor.loginWithPassword(email, password);
     return;
