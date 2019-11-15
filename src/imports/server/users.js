@@ -81,7 +81,7 @@ export const userService =
   {
     var logging = require('./logging.js');
       
-    check(domain, String);
+    //check(domain, String);
     check(email, String);
     check(password, String);
     
@@ -109,14 +109,13 @@ export const userService =
       if(domainsForUser && domainsForUser.length >1)
       {
         logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
-        var domains = {domains: user.roles};
-        return domains;
+        let domainsResult = user.roles.map(function(role)
+        {
+          return {domain : role.scope}
+        });
+        return {domains: domainsResult};
       }  
-      else
-      {
-        Meteor.loginWithPassword(email, password);
-        return;    
-      }
+      return true;    
     }
     //#endregion
 
@@ -126,9 +125,8 @@ export const userService =
     {
       logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
       throw new Meteor.Error('unauthorized');
-    }      
-    Meteor.loginWithPassword(email, password);
-    return;
+    }    
+    return  true;
     //#endregion    
   }
 }
