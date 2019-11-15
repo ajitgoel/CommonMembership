@@ -57,7 +57,8 @@
                       <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
                     <input type="password" class="form-control" placeholder="Password" autocomplete="off" 
-                    v-model="user.password" id="password" name="password" :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
+                    v-model="user.password" id="password" name="password" 
+                    :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
                     style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
                     <div class="input-group-append">
                       <span class="input-group-text">
@@ -71,20 +72,35 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-4">
+                <div class="form-group mb-4" v-if="this.user.userExistsForManyDomains">
                   <label class="form-control-label">Domain</label>
-                  <div class="input-group input-group-merge">
+                  <!--<div class="input-group input-group-merge">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
                     <input class="form-control" placeholder="www.DomainName.com" 
                     v-model="user.domain" id="domain" name="domain" >
+                  </div>-->
+
+                  <div class="input-group input-group-merge">
+                    <select class="custom-select">
+                      <option selected>Select domain</option>
+                      <option v-for="domain in domains" v-bind:value="domain.value" v-bind:key="domain.value">
+                        {{domain.text}}
+                      </option>
+                    </select>
                   </div>
+
                 </div>
 
                 <div class="mt-4">
                   <button type="button" class="btn btn-block btn-primary" v-on:click="LoginUserForDomain()">Sign in</button></div>
               </form>
+
+              <div v-if="this.failureMessage!=''">
+                  <span>{{this.failureMessage}}</span>                    
+              </div>
+
               <div class="mt-4 text-center"><small>Not registered?</small>
                 <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Create account</router-link>
               </div>
@@ -100,6 +116,7 @@
 import '../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
 export default {
   name: "Login",
@@ -109,13 +126,15 @@ export default {
     return {
       user: {
         emailpasswordInvalid:false,
-        userExistsforDomain: false,
+        userExistsForManyDomains: false,
         email: "",
         password: "",
-        domain: "",        
+        domain: ""
+                
       },
       submitted: false,
-      failureMessage:''
+      failureMessage:'',
+      domains:[]
     };
   },
   validations: 
@@ -133,7 +152,7 @@ export default {
     {
       this.submitted = true;
       this.failureMessage='';
-      this.user.userExistsforDomain=false;
+      this.user.userExistsForManyDomains=false;
       this.user.emailpasswordInvalid=false;
 
       this.$v.$touch();
@@ -157,33 +176,32 @@ export default {
               this.user.emailpasswordInvalid=true;
               return;  
             }
-
-            if(error.error && error.error==='multi-domain-user')
-            {
-              this.user.userExistsforDomain=true;
-              return;  
-            }
-            this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
+            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
             return;
           } 
-          if(result && result.userId) 
+          if(result) 
           {
-            this.$router.push('dashboard');                  
-            return;
+            if(typeof result === "boolean" && result === true)
+            {                 
+              Meteor.loginWithPassword(email, password);
+              Session.set('domain', 'clearcrimson');
+              //TODO: redirect to the users logged in domain dashboard .
+              this.$router.push('dashboard');                  
+              return;
+            }
+            if(typeof result === "object")
+            {                 
+              this.user.userExistsForManyDomains=true;
+              //TODO: add result to domain dropdown, add validation to domain dropdown.
+              this.domains=[...result.domains];
+              console.log(result.domains);
+              console.log(this.domains);
+              return;
+            }
           }
-          this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
-          return;
         }
         );
     },
-    showPrivacyPolicyModal() {
-      let element = this.$refs.PrivacyPolicyModal.$el;
-      $(element).modal('show');
-    },
-    showTermsAndConditionsModal() {
-      let element = this.$refs.TermsAndConditionsModal.$el;
-      $(element).modal('show');
-    }
   },
 }
 </script>

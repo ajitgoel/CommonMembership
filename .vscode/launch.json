@@ -13,7 +13,7 @@
             "type": "node",
             "request": "launch",
             "name": "Meteor: Node",
-            "runtimeExecutable": "npm",
+            "runtimeExecutable": "npm.cmd",
             "runtimeArgs": ["run", "debug"],
             "outputCapture": "std",
             "port": 9229,
