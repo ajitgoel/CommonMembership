@@ -38,3 +38,4 @@ If you are running tests, run the "setx TEST-WATCH 1" before you run your tests.
 
 VueJs:
 Vue Router: https://router.vuejs.org/guide/essentials/named-routes.html
+https://vuelidate.js.org/
