@@ -212,9 +212,7 @@ export default {
       Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, 
         (error, result) => 
         {
-        //console.log(error);
-          //console.log(result);
-          if(error) 
+        if(error) 
           {     
             if(error.error && error.error==='domain-already-in-use')
             {

@@ -74,23 +74,19 @@
 
                 <div class="form-group mb-4" v-if="this.user.userExistsForManyDomains">
                   <label class="form-control-label">Domain</label>
-                  <!--<div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="www.DomainName.com" 
-                    v-model="user.domain" id="domain" name="domain" >
-                  </div>-->
 
                   <div class="input-group input-group-merge">
-                    <select class="custom-select">
+                    <select class="custom-select" :class="{ 'is-invalid':submitted && this.user.domainIsRequired }"> 
                       <option selected>Select domain</option>
-                      <option v-for="domain in domains" v-bind:value="domain.value" v-bind:key="domain.value">
-                        {{domain.text}}
+                      <option v-for="counter in domains" v-bind:value="counter.domain" v-bind:key="counter.domain">
+                        {{counter.domain}}
                       </option>
                     </select>
                   </div>
 
+                  <div v-if="submitted && this.user.domainIsRequired" class="invalid-feedback">
+                    <span>Domain is required</span>
+                  </div>
                 </div>
 
                 <div class="mt-4">
@@ -127,6 +123,7 @@ export default {
       user: {
         emailpasswordInvalid:false,
         userExistsForManyDomains: false,
+        domainIsRequired:false,
         email: "",
         password: "",
         domain: ""
@@ -154,21 +151,17 @@ export default {
       this.failureMessage='';
       this.user.userExistsForManyDomains=false;
       this.user.emailpasswordInvalid=false;
+      this.user.domainIsRequired=false;
 
-      this.$v.$touch();
+      this.$v.$touch();//it will validate all fields
       if (this.$v.$invalid) 
       {
           return;
       }
-      console.log(this.user.email);
-      console.log(this.user.password);
-      console.log(this.user.domain);
 
       Meteor.call('loginUserForDomain', this.user.email, this.user.password, this.user.domain, 
         (error, result) => 
         {
-          console.log(error);
-          console.log(result);
           if(error) 
           {     
             if(error.error && error.error==='email-password-invalid')
@@ -192,10 +185,9 @@ export default {
             if(typeof result === "object")
             {                 
               this.user.userExistsForManyDomains=true;
+              this.user.domainIsRequired=true;
               //TODO: add result to domain dropdown, add validation to domain dropdown.
-              this.domains=[...result.domains];
-              console.log(result.domains);
-              console.log(this.domains);
+              this.domains=JSON.parse(JSON.stringify(result.domains));
               return;
             }
           }
