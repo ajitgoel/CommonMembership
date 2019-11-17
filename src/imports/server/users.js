@@ -22,6 +22,10 @@ export const userService =
 
     var doesDomainExistForOtherUsers=
       Users.findOne({"roles": {$elemMatch:{_id: domainOwner_RoleName, scope: domain} } }, {_id:1})
+    //TODO: migrate to alanning:roles version 3. 
+    //TODO: remove all packages that are not being used. 
+    //TODO: Add server side validations. 
+
     if(doesDomainExistForOtherUsers)
     {
       logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);

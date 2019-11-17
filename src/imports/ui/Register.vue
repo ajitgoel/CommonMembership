@@ -186,10 +186,12 @@ export default {
       confirmPassword:  { required, sameAsPassword: sameAs('password') },
       termsAndConditions: {checked(val)
       {
+        console.log(val);
         return val;
       }},
       privacyPolicy: {checked(val)
       {
+        console.log(val);
         return val;
       }},
     },

@@ -72,25 +72,29 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-4" v-if="this.user.userExistsForManyDomains">
+                <div class="form-group mb-4" v-if="this.user.domains.length>0">
                   <label class="form-control-label">Domain</label>
 
                   <div class="input-group input-group-merge">
-                    <select class="custom-select" :class="{ 'is-invalid':submitted && this.user.domainIsRequired }"> 
+                    <select class="custom-select" id="domain" name="domain" v-model="user.domain" 
+                    v-on:change="$v.user.domain.$touch()" :class="{'is-invalid':submitted && $v.user.domain.$error }"> 
                       <option selected>Select domain</option>
-                      <option v-for="counter in domains" v-bind:value="counter.domain" v-bind:key="counter.domain">
+                      <option v-for="counter in user.domains" v-bind:value="counter.domain" v-bind:key="counter.domain">
                         {{counter.domain}}
                       </option>
                     </select>
                   </div>
 
-                  <div v-if="submitted && this.user.domainIsRequired" class="invalid-feedback">
-                    <span>Domain is required</span>
+                  <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.domain.domainSelected">Please select a valid domain</span>
                   </div>
                 </div>
 
                 <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary" v-on:click="LoginUserForDomain()">Sign in</button></div>
+                  <button type="button" class="btn btn-block btn-primary" v-on:click="LoginUserForDomain()">
+                    Sign in
+                  </button>
+                </div>
               </form>
 
               <div v-if="this.failureMessage!=''">
@@ -122,16 +126,13 @@ export default {
     return {
       user: {
         emailpasswordInvalid:false,
-        userExistsForManyDomains: false,
-        domainIsRequired:false,
         email: "",
         password: "",
-        domain: ""
-                
+        domain: "",
+        domains:[]                
       },
       submitted: false,
       failureMessage:'',
-      domains:[]
     };
   },
   validations: 
@@ -140,8 +141,15 @@ export default {
     {
       email: { required, email },
       password:  { required, minLength: minLength(6) },
-      //domain: { required },      
-    },
+      domain: {domainSelected(val)
+      {
+        if (this.user.domains && this.user.domains.length>0 && val && val === 'Select domain') 
+        {
+          return false;
+        }
+        return true;
+      }},    
+    },    
   },
   methods: 
   {    
@@ -149,16 +157,13 @@ export default {
     {
       this.submitted = true;
       this.failureMessage='';
-      this.user.userExistsForManyDomains=false;
       this.user.emailpasswordInvalid=false;
-      this.user.domainIsRequired=false;
 
       this.$v.$touch();//it will validate all fields
       if (this.$v.$invalid) 
       {
           return;
       }
-
       Meteor.call('loginUserForDomain', this.user.email, this.user.password, this.user.domain, 
         (error, result) => 
         {
@@ -184,10 +189,7 @@ export default {
             }
             if(typeof result === "object")
             {                 
-              this.user.userExistsForManyDomains=true;
-              this.user.domainIsRequired=true;
-              //TODO: add result to domain dropdown, add validation to domain dropdown.
-              this.domains=JSON.parse(JSON.stringify(result.domains));
+              this.user.domains=JSON.parse(JSON.stringify(result.domains));
               return;
             }
           }
