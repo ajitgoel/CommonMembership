@@ -11,9 +11,9 @@
         },
         {
             "type": "node",
-            "request": "launch",
+            "request": "attach",
             "name": "Meteor: Node",
-            "runtimeExecutable": "npm.cmd",
+            "runtimeExecutable": "npm",
             "runtimeArgs": ["run", "debug"],
             "outputCapture": "std",
             "port": 9229,

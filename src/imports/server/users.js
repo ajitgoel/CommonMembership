@@ -132,5 +132,21 @@ export const userService =
     }    
     return  true;
     //#endregion    
+  },
+
+  resetUserPassword(email) 
+  {
+    var logging = require('./logging.js');      
+    check(email, String);    
+    email=email.toString().toLowerCase();      
+    var user=Accounts.findUserByEmail(email);    
+    if(user==null)
+    {
+      logging.winston.log('info', `Invalid email: ${email}`);
+      throw new Meteor.Error('email-invalid');
+    }    
+    //TODO: create a proper email template and email sending provider. 
+    Accounts.sendResetPasswordEmail(user._id, email);   
+    return true;
   }
 }

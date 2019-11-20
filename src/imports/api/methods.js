@@ -46,6 +46,16 @@ Meteor.methods(
       return userService.loginUserForDomain(email, password, domain);
     }
   }, 
+
+  resetUserPassword(email) 
+  {
+    if(Meteor.isServer)
+    {
+      const { userService } = require('../server/users.js');
+      return userService.resetUserPassword(email);
+    }
+  }, 
+
   emailSend(fromAddress, subject, emailText) 
   {
     if(Meteor.isServer)

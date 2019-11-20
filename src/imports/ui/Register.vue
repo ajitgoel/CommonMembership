@@ -134,11 +134,14 @@
                     Create my account
                   </button>
                 </div>
-
-                <div v-if="this.failureMessage!=''">
-                  <span>{{this.failureMessage}}</span>                    
-                </div>
                 
+                <br/>
+
+                <div class="alert alert-modern alert-warning" v-if="this.failureMessage!=''">    
+                  <span class="badge badge-danger badge-pill">Error</span>
+                  <span class="alert-content">{{this.failureMessage}}</span>
+                </div>
+
             </form>
             <div class="mt-4 text-center"><small>Already have an account?</small>
                 <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link>

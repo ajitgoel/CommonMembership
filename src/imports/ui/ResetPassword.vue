@@ -25,14 +25,39 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
-                    <input type="email" class="form-control" id="input-email" placeholder="name@example.com">
+                    <input type="email" class="form-control" placeholder="name@example.com" 
+                    autocomplete="off" v-model="user.email" id="email" name="email" 
+                    :class="{ 'is-invalid': submitted && ($v.user.email.$error || this.user.emailInvalid) }"
+                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                    <div v-if="submitted && ($v.user.email.$error || this.user.emailInvalid)" class="invalid-feedback">
+                      <span v-if="!$v.user.email.required">Email is required</span>
+                      <span v-if="!$v.user.email.email">Email is invalid</span>
+                      <span v-if="this.user.emailInvalid">Email is invalid</span>
+                    </div>
                   </div>
                 </div>
                 <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary">Reset password</button></div>
-              </form>
+                  <button type="button" class="btn btn-block btn-primary" v-on:click="ResetPassword()">
+                    Reset password
+                  </button>
+                </div>
+              </form>              
+
+              <br/>
+
+              <div class="alert alert-modern alert-warning" v-if="this.failureMessage!=''">    
+                <span class="badge badge-danger badge-pill">Error</span>
+                <span class="alert-content">{{this.failureMessage}}</span>
+              </div>
+
+
+              <div class="alert alert-modern alert-success"  v-if="this.successMessage!=''">    
+                <span class="badge badge-success badge-pill">Success</span>
+                <span class="alert-content">{{this.successMessage}}</span>
+              </div>
+
               <div class="mt-4 text-center"><small>Not registered?</small>
-                <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Create account</router-link>
+                <router-link v-bind:to="{ name:'register'}" class="small font-weight-bold">Create account</router-link>
               </div>
             </div>
           </div>
@@ -43,12 +68,74 @@
 </template>
 
 <script>
+import '../api/methods.js';
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
+
 export default {
   name: "ResetPassword",
   components:{
   },
+  data() {
+    return {
+      user: {
+        emailInvalid:false,
+        email: "",      
+      },
+      submitted: false,
+      failureMessage:'',
+      successMessage:''
+    };
+  },
+  validations: 
+  {
+    user: 
+    {
+      email: { required, email },      
+    },    
+  },
+  methods: 
+  {    
+    ResetPassword() 
+    {
+      this.submitted = true;
+      this.failureMessage='';
+      this.successMessage='';
+      this.user.emailInvalid=false;
+
+      this.$v.$touch();//it will validate all fields
+      if (this.$v.$invalid) 
+      {
+          return;
+      }
+      Meteor.call('resetUserPassword', this.user.email, (error, result) => 
+        {
+          if(error) 
+          {     
+            if(error.error && error.error==='email-invalid')
+            {
+              this.user.emailInvalid=true;
+              return;  
+            }
+            this.failureMessage='There was an error resetting your account. Our administrators have been notified of the issue and we will have a look.';
+            return;
+          } 
+          if(result) 
+          {
+            if(typeof result === "boolean" && result === true)
+            {                 
+              this.successMessage='Please check your email for instructions on how to reset your password';                  
+              return;
+            }
+          }
+        }
+        );
+    },
+  },
 }
 </script>
+
 <style lang="less" scoped>
 
 </style>
