@@ -25,7 +25,10 @@ export const userService =
     //TODO: migrate to alanning:roles version 3. 
     //TODO: remove all packages that are not being used. 
     //TODO: Add server side validations. 
-
+    //TODO: Write unit tests for server side code. 
+    //TODO: Add Google SignIn Option. 
+    //TODO: Host application in Google Cloud VM. 
+    
     if(doesDomainExistForOtherUsers)
     {
       logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
@@ -54,7 +57,7 @@ export const userService =
         logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
         //TODO: create a proper email template and email sending provider. 
         Accounts.sendEnrollmentEmail(userId, email);
-        return {userId:userId}; 
+        return {userId:userId, domain:domain}; 
       }
       //#endregion
     }
@@ -72,7 +75,7 @@ export const userService =
 
       //TODO: create a proper email template and email sending provider. 
       Accounts.sendEnrollmentEmail(userId, email);
-      return {userId:userId}; 
+      return {userId:userId, domain:domain}; 
     }
     //#endregion
   },
@@ -119,7 +122,7 @@ export const userService =
         });
         return {domains: domainsResult};
       }  
-      return true;    
+      return {userId:user._id, domain:domainsForUser[0].scope};    
     }
     //#endregion
 
@@ -130,7 +133,7 @@ export const userService =
       logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
       throw new Meteor.Error('unauthorized');
     }    
-    return  true;
+    return {userId:user._id, domain:domainsForUser[0].scope}; 
     //#endregion    
   },
 

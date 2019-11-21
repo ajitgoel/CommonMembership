@@ -13,11 +13,8 @@
             "type": "node",
             "request": "attach",
             "name": "Meteor: Node",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": ["run", "debug"],
-            "outputCapture": "std",
+            "restart": true,
             "port": 9229,
-            "timeout": 30000
         }
     ],
     "compounds": [

@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run --settings settings.json",
-    "debug": "meteor run meteor --settings settings.json --inspect-brk=9229",
+    "debug": "meteor run --settings settings.json --inspect",
     "test": "meteor test --once --driver-package meteortesting:mocha --port 3050",
     "test-app": "cross-env TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha --port 3051",
     "visualize": "meteor --production --extra-packages bundle-visualizer"

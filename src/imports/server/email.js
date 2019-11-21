@@ -16,7 +16,7 @@ export const emailService =
         secretAccessKey: Meteor.settings.private.AmazonSES.SecretAccessKey, 
         region: Meteor.settings.private.AmazonSES.Region
       });
-      var params = {Destination: {CcAddresses: [],ToAddresses: [Meteor.settings.private.SourceEmailId,]},
+      var params = {Destination: {CcAddresses: [],ToAddresses: [Meteor.settings.private.ToEmailId,]},
       Message: 
       {
           Body: 
@@ -26,7 +26,7 @@ export const emailService =
           },
           Subject: {Charset: 'UTF-8',Data: subject}
           },
-          Source: fromAddress,//required
+          Source: Meteor.settings.private.SourceEmailId,//required
           ReplyToAddresses: [fromAddress,],
       };
       var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();

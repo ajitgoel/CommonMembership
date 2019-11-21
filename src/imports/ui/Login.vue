@@ -179,15 +179,13 @@ export default {
           } 
           if(result) 
           {
-            if(typeof result === "boolean" && result === true)
+            if(result.userId && result.domain) 
             {                 
               Meteor.loginWithPassword(email, password);
-              Session.set('domain', 'clearcrimson');
-              //TODO: redirect to the users logged in domain dashboard .
-              this.$router.push('dashboard');                  
+              this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
               return;
             }
-            if(typeof result === "object")
+            if(result.domains)
             {                 
               this.user.domains=JSON.parse(JSON.stringify(result.domains));
               return;
