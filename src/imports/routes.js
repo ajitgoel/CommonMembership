@@ -18,12 +18,16 @@ import Contact from './ui/Contact.vue';
 
 export default [
   { path: '/', name: 'home', component: Home },
-  { path: '/dashboard/:domain', name: 'dashboard', component: Dashboard },
-  { path: '/dashboard/account-profile/:domain', name: 'account-profile', component: AccountProfile },  
-  { path: '/dashboard/settings/:domain', name: 'settings', component: Settings },  
-  { path: '/dashboard/account-billing/:domain', name: 'account-billing', component: AccountBilling },  
-  { path: '/dashboard/account-notifications/:domain', name: 'account-notifications', component: AccountNotifications },  
-  
+  { path: '/dashboard/:domain', component: Dashboard,
+    children: 
+    [
+      { path: '', name: 'dashboard', component: AccountProfile , props: true},
+      { path: 'account-profile', name: 'account-profile', component: AccountProfile, props: true },
+      { path: 'settings', name: 'settings', component: Settings , props: true},
+      { path: 'account-billing', name: 'account-billing', component: AccountBilling , props: true},
+      { path: 'account-notifications', name: 'account-notifications', component: AccountNotifications , props: true}
+    ]
+  },
   { path: '/register', name: 'register', component: Register },
   { path: '/login', name: 'login', component: Login },
   { path: '/resetpassword', name: 'resetpassword', component: ResetPassword },

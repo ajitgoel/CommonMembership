@@ -105,7 +105,7 @@
       <div class="container">
         <div class="row row-grid">
           <div class="col-lg-9 order-lg-2">
-            <Settings/>
+            <router-view></router-view>
           </div>
           <div class="col-lg-3 order-lg-1">
             <SettingsMenu/>
