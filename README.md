@@ -39,3 +39,12 @@ If you are running tests, run the "setx TEST-WATCH 1" before you run your tests.
 VueJs:
 Vue Router: https://router.vuejs.org/guide/essentials/named-routes.html
 https://vuelidate.js.org/
+creating a component and using in a screen example: 
+CardFooter.vue component is used in PrivacyPolicy.vue
+
+**Tasks**
+
+~~The world is flat.~~
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
