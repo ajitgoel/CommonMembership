@@ -16,26 +16,29 @@ import storeOptions from './store';
 
 function createApp (context) {
 
-  import AppHeader from './ui/AppHeader.vue';
-  import AppFooter from './ui/AppFooter.vue';
+  import AppHeader from './ui/components/AppHeader.vue';
+  import AppFooter from './ui/components/AppFooter.vue';
+  import CardFooter from './ui/components/CardFooter.vue';
+  import MainNavBar from './ui/components/MainNavBar.vue';
+  import Omnisearch from './ui/components/Omnisearch.vue';
+  import PrivacyPolicyModal from './ui/components/PrivacyPolicyModal.vue';
+  import PrivacyPolicyText from './ui/components/PrivacyPolicyText.vue';
+  import PrivacyShieldNoticeText from './ui/components/PrivacyShieldNoticeText.vue';
+  import SettingsMenu from './ui/components/SettingsMenu.vue';
+  import TermsAndConditionsModal from './ui/components/TermsAndConditionsModal.vue';
+  import TermsAndConditionsText from './ui/components/TermsAndConditionsText.vue';
+  import TopNavBar from './ui/components/TopNavBar.vue';
+  
   import Contact from './ui/Contact.vue';
-  import CardFooter from './ui/CardFooter.vue';
   import Home from './ui/Home.vue'
-  import Login from './ui/Login.vue';
-  import MainNavBar from './ui/MainNavBar.vue';
+  import Login from './ui/Login.vue';  
   import NotFound from './ui/NotFound.vue'
-  import Omnisearch from './ui/Omnisearch.vue';
   import PrivacyPolicy from './ui/PrivacyPolicy.vue';
   import PrivacyShieldNotice from './ui/PrivacyShieldNotice.vue';
-  import PrivacyPolicyModal from './ui/PrivacyPolicyModal.vue';
-  import PrivacyPolicyText from './ui/PrivacyPolicyText.vue';
-  import PrivacyShieldNoticeText from './ui/PrivacyShieldNoticeText.vue';
   import Register from './ui/Register.vue';
   import ResetPassword from './ui/ResetPassword.vue';
-  import TermsAndConditions from './ui/TermsAndConditions.vue';
-  import TermsAndConditionsModal from './ui/TermsAndConditionsModal.vue';
-  import TermsAndConditionsText from './ui/TermsAndConditionsText.vue';
-  import TopNavBar from './ui/TopNavBar.vue';
+  import Settings from './ui/Settings.vue';
+  import TermsAndConditions from './ui/TermsAndConditions.vue';  
 
   Vue.component('AppHeader', AppHeader);
   Vue.component('AppFooter', AppFooter);
@@ -53,6 +56,8 @@ function createApp (context) {
   Vue.component('PrivacyShieldNoticeText', PrivacyShieldNoticeText);
   Vue.component('Register', Register);
   Vue.component('ResetPassword', ResetPassword);
+  Vue.component('Settings', Settings);
+  Vue.component('SettingsMenu', SettingsMenu);
   Vue.component('TermsAndConditions', TermsAndConditions);
   Vue.component('TermsAndConditionsModal', TermsAndConditionsModal);
   Vue.component('TermsAndConditionsText', TermsAndConditionsText);
