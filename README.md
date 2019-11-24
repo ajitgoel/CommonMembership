@@ -2,7 +2,12 @@ Install applicaton: meteor npm i
 Start app: npm run start
 
 Loggly url: https://ajitgoel.loggly.com/search
-Vuetify 1.5.20: https://v15.vuetifyjs.com/en/getting-started/quick-start
+Vuetify: 
+   https://vuetifyjs.com/en/components/data-tables
+   https://vuetifyjs.com/en/components/forms
+   https://vuetifyjs.com/en/components/footer
+   https://vuetifyjs.com/en/components/treeview
+
 Atmostphere package manager: https://atmospherejs.com/meteor/accounts-password
 Vuelidate validation package: https://vuelidate.netlify.com/#getting-started
 Testing with meteor: https://guide.meteor.com/testing.html

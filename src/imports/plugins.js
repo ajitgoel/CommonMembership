@@ -45,3 +45,5 @@ Vue.use(Vuelidate);
 
 import Vuetify from 'vuetify';
 Vue.use(Vuetify);
+const opts = {};
+export default new Vuetify(opts);
