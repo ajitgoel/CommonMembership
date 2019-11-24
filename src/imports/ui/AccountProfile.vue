@@ -1,133 +1,166 @@
 <template>
-  <div>
+  <div class="col-lg-9 order-lg-2">
+    <!-- Change avatar -->
+    <!--<div class="card bg-gradient-warning hover-shadow-lg">
+      <div class="card-body py-3">
+        <div class="row row-grid align-items-center">
+          <div class="col-lg-8">
+            <div class="media align-items-center">
+              <a href="#" class="avatar avatar-lg rounded-circle mr-3">
+                <img alt="Image placeholder" src="/img/theme/light/team-1-800x800.jpg">
+              </a>
+              <div class="media-body">
+                <h5 class="text-white mb-0">Heather Wright</h5>
+                <div>
+                  <form>
+                    <input type="file" name="file-1[]" id="file-1" class="custom-input-file custom-input-file-link" data-multiple-caption="{count} files selected" multiple="">
+                    <label for="file-1">
+                      <span class="text-white">Change avatar</span>
+                    </label>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto flex-fill mt-4 mt-sm-0 text-sm-right d-none d-lg-block">
+            <a href="#" class="btn btn-sm btn-white rounded-pill btn-icon shadow">
+              <span class="btn-inner--icon"><i class="fas fa-fire"></i></span>
+              <span class="btn-inner--text">Upgrade to Pro</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <!-- General information form -->
+    <div class="actions-toolbar py-2 mb-4">
+      <h5 class="mb-1">General information</h5>
+      <p class="text-sm text-muted mb-0">You can help us, by filling your data, create you a much better experience using our website.</p>
+    </div>
     <form>
-      <div class="actions-toolbar py-2 mb-4">
-        <h5 class="mb-1">Change password</h5>
-        <p class="text-sm text-muted mb-0">You can help us, by filling your data, create you a much better experience using our website.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">First name</label>
+            <input class="form-control" type="text" placeholder="Enter your first name" v-focus >
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Last name</label>
+            <input class="form-control" type="text" placeholder="Also your last name">
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Birthday</label>
+            <input type="text" class="form-control flatpickr-input" data-toggle="date" placeholder="Select your birth date">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group focused">
+            <label class="form-control-label">Gender</label>
+            <select class="form-control select2-hidden-accessible" data-toggle="select" data-select2-id="1" tabindex="-1" aria-hidden="true">
+              <option value="1" data-select2-id="3">Female</option>
+              <option value="2">Male</option>
+              <option value="2">Rather not say</option>
+            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 397.5px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-498l-container"><span class="select2-selection__rendered" id="select2-498l-container" role="textbox" aria-readonly="true" title="Female">Female</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-control-label">Old password</label>
-            <input class="form-control" type="password" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+            <label class="form-control-label">Email</label>
+            <input class="form-control" type="email" placeholder="name@exmaple.com">
+            <small class="form-text text-muted mt-2">This is the main email address that we'll send notifications to. <a href="account-notifications.html">Manage you notifications</a> in order to receive only the thing that matter to you most.</small>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="form-control-label">New password</label>
-            <input class="form-control" type="password" 
-            style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="form-control-label">Confirm password</label>
-            <input class="form-control" type="password" 
-            style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+            <label class="form-control-label">Phone</label>
+            <input class="form-control" type="text" placeholder="+40-777 245 549">
           </div>
         </div>
       </div>
-      <div class="mt-4">
-        <button type="button" class="btn btn-sm btn-primary">Update password</button>
-        <a href="recover.html" class="btn btn-sm btn-secondary">I forgot my password</a>
+      <!-- Address -->
+      <div class="pt-5 mt-5 delimiter-top">
+        <div class="actions-toolbar py-2 mb-4">
+          <h5 class="mb-1">Address details</h5>
+          <p class="text-sm text-muted mb-0">Fill in your address info for upcoming orders or payments.</p>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="form-control-label">Address</label>
+              <input class="form-control" type="text" placeholder="Enter your home address">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label">City</label>
+              <input class="form-control" type="text" placeholder="City">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group focused">
+              <label class="form-control-label">Country</label>
+              <select class="form-control select2-hidden-accessible" data-toggle="select" title="Country" data-live-search="true" data-live-search-placeholder="Country" data-select2-id="4" tabindex="-1" aria-hidden="true">
+                <option data-select2-id="6">Romania</option>
+                <option>United Stated</option>
+                <option>France</option>
+                <option>Greece</option>
+                <option>Italy</option>
+                <option>Norway</option>
+              </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 397.5px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" title="Country" tabindex="0" aria-labelledby="select2-cwnn-container"><span class="select2-selection__rendered" id="select2-cwnn-container" role="textbox" aria-readonly="true" title="Romania">Romania</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Skills -->
+      <div class="pt-5 mt-5 delimiter-top">
+        <div class="actions-toolbar py-2 mb-4">
+          <h5 class="mb-1">Skills</h5>
+          <p class="text-sm text-muted mb-0">Show off you skills using our tags input control.</p>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group focused">
+              <label class="sr-only">Skills</label>
+              <div class="bootstrap-tagsinput"><span class="tag badge badge-primary">HTML<span data-role="remove"></span></span> <span class="tag badge badge-primary"> CSS3<span data-role="remove"></span></span> <span class="tag badge badge-primary"> Bootstrap<span data-role="remove"></span></span> <span class="tag badge badge-primary"> Photoshop<span data-role="remove"></span></span> <span class="tag badge badge-primary"> VueJS<span data-role="remove"></span></span> <input type="text" placeholder="Type here..."></div><input type="text" class="form-control" value="HTML, CSS3, Bootstrap, Photoshop, VueJS" data-toggle="tags" placeholder="Type here..." style="display: none;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Description -->
+      <div class="pt-5 mt-5 delimiter-top">
+        <div class="actions-toolbar py-2 mb-4">
+          <h5 class="mb-1">About me</h5>
+          <p class="text-sm text-muted mb-0">Use this field to let others know you better.</p>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <div class="form-group">
+                <label class="form-control-label">Bio</label>
+                <textarea class="form-control" placeholder="Tell us a few words about yourself" rows="3"></textarea>
+                <small class="form-text text-muted mt-2">You can @mention other users and organizations to link to them.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Save changes buttons -->
+      <div class="pt-5 mt-5 delimiter-top text-center">
+        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
+        <button type="button" class="btn btn-link text-muted">Cancel</button>
       </div>
     </form>
-    <div class="mt-5 pt-5 delimiter-top">
-      <div class="actions-toolbar py-2 mb-4">
-        <h5 class="mb-1">Change username</h5>
-        <p class="text-sm text-muted mb-0">You can help us, by filling your data, create you a much better experience using our website.</p>
-      </div>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-change-username">Change username</button>
-      <!-- Modal -->
-      <div class="modal fade" id="modal-change-username" tabindex="-1" role="dialog" aria-labelledby="modal-change-username" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <form>
-            <div class="modal-content">
-              <div class="modal-header">
-                <div class="modal-title d-flex align-items-center" id="modal-title-change-username">
-                  <div>
-                    <div class="icon icon-sm icon-shape icon-info rounded-circle shadow mr-3">
-                      <i class="fas fa-user"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <h6 class="mb-0">Change username</h6>
-                  </div>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-control-label">Old username</label>
-                      <input class="form-control" type="text">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="form-control-label">New username</label>
-                      <input class="form-control" type="text">
-                    </div>
-                  </div>
-                </div>
-                <div class="px-5 pt-4 mt-4 delimiter-top text-center">
-                  <p class="text-muted text-sm">You will receive an email where you will be asked to confirm this action in order to be completed.</p>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Change my username</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="mt-5 pt-5 delimiter-top">
-      <div class="actions-toolbar py-2 mb-4">
-        <h5 class="mb-1">Delete account</h5>
-        <p class="text-sm text-muted mb-0">Deleting your account is ireversible and can affect past activites.</p>
-      </div>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-account">Delete account</button>
-      <!-- Modal -->
-      <div class="modal modal-danger fade" id="modal-delete-account" tabindex="-1" role="dialog" aria-labelledby="modal-delete-account" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <form class="form-danger">
-            <div class="modal-content">
-              <div class="modal-body">
-                <div class="text-center">
-                  <i class="fas fa-exclamation-circle fa-3x opacity-8"></i>
-                  <h5 class="text-white mt-4">Should we stop now?</h5>
-                  <p class="text-sm text-sm">All your data will be erased. You will no longer be billed, and your username will be available to anyone.</p>
-                </div>
-                <div class="form-group">
-                  <label class="form-control-label text-white">You email or username</label>
-                  <input class="form-control" type="text" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
-                </div>
-                <div class="form-group">
-                  <label class="form-control-label text-white">To verify, type <span class="font-italic">delete my account</span> below</label>
-                  <input class="form-control" type="text" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
-                </div>
-                <div class="form-group">
-                  <label class="form-control-label text-white">Your password</label>
-                  <input class="form-control" type="password" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
-                </div>
-                <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-sm btn-white text-danger">Delete my account</button>
-                  <button type="button" class="btn btn-block btn-sm btn-link text-light mt-4" data-dismiss="modal">Not this time</button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
