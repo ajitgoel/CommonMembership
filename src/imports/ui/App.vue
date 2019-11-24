@@ -1,12 +1,15 @@
 <template>
-  <div id="app">
-    <AppHeader></AppHeader>
-    <!--<Omnisearch></Omnisearch>-->
-    <main>
-      <router-view />
-    </main>
-    <AppFooter></AppFooter>
-  </div>
+  <!--<div id="app">
+    <AppHeader/>
+    <router-view />
+    <AppFooter/>
+  </div>-->
+
+  <v-app id="app">
+    <AppHeader/>
+    <router-view />
+    <AppFooter/>
+  </v-app>
 </template>
 
 <script>
