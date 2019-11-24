@@ -177,19 +177,16 @@ export default {
             this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
             return;
           } 
-          if(result) 
-          {
-            if(result.userId && result.domain) 
-            {                 
-              Meteor.loginWithPassword(email, password);
-              this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-              return;
-            }
-            if(result.domains)
-            {                 
-              this.user.domains=JSON.parse(JSON.stringify(result.domains));
-              return;
-            }
+          if(result && result.userId && result.domain) 
+          {                 
+            Meteor.loginWithPassword(email, password);
+            this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
+            return;
+          }
+          if(result && result.domains)
+          {                 
+            this.user.domains=JSON.parse(JSON.stringify(result.domains));
+            return;
           }
         }
         );
