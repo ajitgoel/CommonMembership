@@ -108,7 +108,7 @@
             <router-view></router-view>
           </div>
           <div class="col-lg-3 order-lg-1">
-            <SettingsMenu/>
+            <DashboardMenu/>
           </div>
         </div>
       </div>

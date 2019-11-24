@@ -24,7 +24,7 @@ function createApp (context) {
   import PrivacyPolicyModal from './ui/components/PrivacyPolicyModal.vue';
   import PrivacyPolicyText from './ui/components/PrivacyPolicyText.vue';
   import PrivacyShieldNoticeText from './ui/components/PrivacyShieldNoticeText.vue';
-  import SettingsMenu from './ui/components/SettingsMenu.vue';
+  import DashboardMenu from './ui/components/DashboardMenu.vue';
   import TermsAndConditionsModal from './ui/components/TermsAndConditionsModal.vue';
   import TermsAndConditionsText from './ui/components/TermsAndConditionsText.vue';
   import TopNavBar from './ui/components/TopNavBar.vue';
@@ -39,6 +39,7 @@ function createApp (context) {
   import ResetPassword from './ui/ResetPassword.vue';
   import Settings from './ui/Settings.vue';
   import TermsAndConditions from './ui/TermsAndConditions.vue';  
+  import Users from './ui/Users.vue';
 
   Vue.component('AppHeader', AppHeader);
   Vue.component('AppFooter', AppFooter);
@@ -57,11 +58,12 @@ function createApp (context) {
   Vue.component('Register', Register);
   Vue.component('ResetPassword', ResetPassword);
   Vue.component('Settings', Settings);
-  Vue.component('SettingsMenu', SettingsMenu);
+  Vue.component('DashboardMenu', DashboardMenu);
   Vue.component('TermsAndConditions', TermsAndConditions);
   Vue.component('TermsAndConditionsModal', TermsAndConditionsModal);
   Vue.component('TermsAndConditionsText', TermsAndConditionsText);
   Vue.component('TopNavBar', TopNavBar);
+  Vue.component('Users', Users);
   
   const router = new VueRouter({mode: 'history', routes,});
 
