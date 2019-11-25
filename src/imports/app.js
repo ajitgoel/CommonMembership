@@ -25,7 +25,7 @@ function createApp (context) {
   import PrivacyPolicyModal from './ui/components/PrivacyPolicyModal.vue';
   import PrivacyPolicyText from './ui/components/PrivacyPolicyText.vue';
   import PrivacyShieldNoticeText from './ui/components/PrivacyShieldNoticeText.vue';
-  import DashboardMenu from './ui/components/DashboardMenu.vue';
+  import DashboardSidebar from './ui/components/DashboardSidebar.vue';
   import TermsAndConditionsModal from './ui/components/TermsAndConditionsModal.vue';
   import TermsAndConditionsText from './ui/components/TermsAndConditionsText.vue';
   import TopNavBar from './ui/components/TopNavBar.vue';
@@ -41,6 +41,9 @@ function createApp (context) {
   import Settings from './ui/Settings.vue';
   import TermsAndConditions from './ui/TermsAndConditions.vue';  
   import Users from './ui/Users.vue';
+  import AddUser from './ui/AddUser.vue';
+  import ImportUsers from './ui/ImportUsers.vue';
+  import ExportUsers from './ui/ExportUsers.vue';
 
   Vue.component('AppHeader', AppHeader);
   Vue.component('AppFooter', AppFooter);
@@ -59,13 +62,16 @@ function createApp (context) {
   Vue.component('Register', Register);
   Vue.component('ResetPassword', ResetPassword);
   Vue.component('Settings', Settings);
-  Vue.component('DashboardMenu', DashboardMenu);
+  Vue.component('DashboardSidebar', DashboardSidebar);
   Vue.component('TermsAndConditions', TermsAndConditions);
   Vue.component('TermsAndConditionsModal', TermsAndConditionsModal);
   Vue.component('TermsAndConditionsText', TermsAndConditionsText);
   Vue.component('TopNavBar', TopNavBar);
   Vue.component('Users', Users);
-  
+  Vue.component('AddUser',AddUser);
+  Vue.component('ImportUsers',ImportUsers);
+  Vue.component('ExportUsers',ExportUsers);
+
   const router = new VueRouter({mode: 'history', routes,});
 
   const supplyCache = {};

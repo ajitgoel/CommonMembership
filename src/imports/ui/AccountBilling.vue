@@ -288,7 +288,8 @@
                 <div class="form-group">
                   <label class="form-control-label">Card number</label>
                   <div class="input-group input-group-merge">
-                    <input type="text" class="form-control" data-mask="0000 0000 0000 0000" placeholder="4789 5697 0541 7546" autocomplete="off" maxlength="19" v-focus >
+                    <input type="text" class="form-control" data-mask="0000 0000 0000 0000" placeholder="4789 5697 0541 7546" 
+                    autocomplete="off" maxlength="19">
                     <div class="input-group-append">
                       <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
                     </div>

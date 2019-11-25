@@ -1,4 +1,4 @@
-<template>
+<!--<template>
     <div>
       <div class="card-header py-3">
           <span class="h6">Settings</span>
@@ -152,3 +152,87 @@ export default {
 <style lang="less" scoped>
 
 </style>
+-->
+<template>
+  <v-card class="mx-auto" max-width="500">
+    <v-sheet class="pa-4 primary lighten-2">
+      <v-text-field v-model="search" label="Search settings" dark flat solo-inverted hide-details clearable 
+      clear-icon="mdi-close-circle-outline"></v-text-field>
+    </v-sheet>
+    <v-card-text>
+      <v-treeview :items="items" :search="search" :filter="filter" open-all>
+        <template slot="label" slot-scope="props">
+          <router-link v-bind:to="{name:props.item.to, params:{domain:$route.params.domain}}">
+            {{props.item.name}}
+          </router-link>
+        </template>
+      </v-treeview>
+    </v-card-text>
+  </v-card>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      items: [
+        {
+          id: 1,
+          name: 'Users',
+          to: 'users',
+          children: [
+            {
+              id: 2,
+              name: 'All users',   
+              to: 'users',           
+            },
+            {
+              id: 3,
+              name: 'Add user',   
+              to: 'add-user',           
+            },
+            {
+              id: 4,
+              name: 'Import users',   
+              to: 'import-users',           
+            },
+            {
+              id: 5,
+              name: 'Export users',   
+              to: 'export-users',           
+            },
+          ],
+        },
+        {
+          id: 6,
+          name: 'Profile',
+          to: 'account-profile',
+        },        
+        {
+          id: 7,
+          name: 'Settings',
+          to:'settings',
+        },        
+        {
+          id: 8,
+          name: 'Billing',
+          to: 'account-billing',
+        },        
+        {
+          id: 9,
+          name: 'Notifications',
+          to: 'account-notifications',
+        },
+      ],
+      //open: [1, 2],
+      search: null,
+      caseSensitive: false,
+    }),
+    computed: {
+      filter () {
+        return this.caseSensitive
+          ? (item, search, textKey) => item[textKey].indexOf(search) > -1
+          : undefined
+      },
+    },
+  }
+</script>
