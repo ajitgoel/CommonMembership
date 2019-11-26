@@ -46,4 +46,15 @@ Vue.use(Vuelidate);
 import Vuetify from 'vuetify';
 Vue.use(Vuetify);
 const opts = {};
-export default new Vuetify(opts);
+export default new Vuetify({
+  theme: {
+    themes: {
+      light: {
+        primary: '#6e00ff',
+        secondary: '#eff2f7',
+        accent: '#8c9eff',
+        error: '#b71c1c',
+      },
+    },
+  },
+})
