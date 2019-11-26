@@ -3,6 +3,7 @@
 
 **Loggly url:** https://ajitgoel.loggly.com/search
 **Vuetify: **
+https://vuetifyjs.com/en/components/api-explorer
    https://vuetifyjs.com/en/components/data-tables
    https://vuetifyjs.com/en/components/forms
    https://vuetifyjs.com/en/components/footer
