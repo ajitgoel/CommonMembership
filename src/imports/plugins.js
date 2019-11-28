@@ -43,6 +43,9 @@ for (const key in filters) {
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
+//import BootstrapVue from 'bootstrap-vue';
+//Vue.use(BootstrapVue);
+
 import Vuetify from 'vuetify';
 Vue.use(Vuetify);
 const opts = {};
