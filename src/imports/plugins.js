@@ -42,3 +42,22 @@ for (const key in filters) {
 
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
+
+//import BootstrapVue from 'bootstrap-vue';
+//Vue.use(BootstrapVue);
+
+import Vuetify from 'vuetify';
+Vue.use(Vuetify);
+const opts = {};
+export default new Vuetify({
+  theme: {
+    themes: {
+      light: {
+        primary: '#6e00ff',
+        secondary: '#eff2f7',
+        accent: '#8c9eff',
+        error: '#b71c1c',
+      },
+    },
+  },
+})

@@ -3,7 +3,10 @@ import './imports/api/methods';
 if (Meteor.isClient) 
 {
   import './imports/client';
-  //import './imports/client/logging';  
+  //import 'bootstrap/dist/css/bootstrap.css';
+  //import 'bootstrap-vue/dist/bootstrap-vue.css';
+  //import '@riophae/vue-treeselect/dist/vue-treeselect.css';  
+  //import 'vuetify/dist/vuetify.css';
 } 
 else if (Meteor.isServer) 
 {
