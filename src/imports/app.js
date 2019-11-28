@@ -1,6 +1,7 @@
 import 'isomorphic-fetch';
 
 import './plugins';
+import vuetify from './plugins'; 
 import './supply';
 
 import Vue from 'vue';
@@ -89,6 +90,7 @@ function createApp (context) {
     app: new Vue({
       el: '#app',
       router,
+      vuetify, 
       store,
       apolloProvider,
       supplyCache,
