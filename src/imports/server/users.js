@@ -151,5 +151,38 @@ export const userService =
     //TODO: create a proper email template and email sending provider. 
     Accounts.sendResetPasswordEmail(user._id, email);   
     return true;
+  },
+
+  getUsersForDomain(domain) 
+  {
+    var logging = require('./logging.js');      
+    check(domain, String);    
+    domain=domain.toString().toLowerCase();      
+    //TODO: add check to make sure that the logged in user is correct else throw error. 
+    /*var user=Accounts.findUserByEmail(email);    
+    if(user==null)
+    {
+      logging.winston.log('info', `Invalid email: ${email}`);
+      throw new Meteor.Error('email-invalid');
+    } */  
+    //let users=Users.find({"domain":domain});
+    let usersResult = { 
+      "users":[
+        {"_id":"1", "name":"1 1", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"2", "name":"2 2", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"3", "name":"3 3", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"4", "name":"4 4", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"5", "name":"5 5", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"6", "name":"6 6", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"7", "name":"7 7", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"8", "name":"8 8", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"9", "name":"9 9", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"10", "name":"10 10", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"11", "name":"11 11", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+        {"_id":"12", "name":"12 12", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
+      ]
+    };
+
+    return usersResult;
   }
 }

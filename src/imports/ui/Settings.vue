@@ -32,7 +32,11 @@
       </div>
       <div class="mt-4">
         <button type="button" class="btn btn-sm btn-primary">Update password</button>
-        <a href="recover.html" class="btn btn-sm btn-secondary">I forgot my password</a>
+        <router-link v-bind:to="{ name: 'resetpassword'}" 
+        class="btn btn-sm btn-secondary">
+            I forgot my password
+        </router-link>
+
       </div>
     </form>
     <div class="mt-5 pt-5 delimiter-top">
@@ -92,7 +96,7 @@
     <div class="mt-5 pt-5 delimiter-top">
       <div class="actions-toolbar py-2 mb-4">
         <h5 class="mb-1">Delete account</h5>
-        <p class="text-sm text-muted mb-0">Deleting your account is ireversible and can affect past activites.</p>
+        <p class="text-sm text-muted mb-0">Deleting your account is irreversible and can affect past activites.</p>
       </div>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-account">Delete account</button>

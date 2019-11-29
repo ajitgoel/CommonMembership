@@ -1,170 +1,270 @@
 <!--<template>
-  <div class="main-content">
-    
-    <section class="slice slice-lg bg-gradient-dark" data-offset-top="#header-main">
-      <div class="bg-absolute-cover bg-size--contain d-flex align-items-center">
-        <figure class="w-100 d-none d-lg-block">
-          <img alt="Image placeholder" src="/img/svg/backgrounds/bg-circles-1.svg" class="svg-inject">
-        </figure>
-      </div>
-    </section>
-
-    <div class="container h-100vh d-flex align-items-center">
-      <div class="col">
-        <div class="row justify-content-center">
-          <div class="col-md-6 col-lg-5 col-xl-4">
-            <div>
-              <div class="mb-5 text-center">
-                <h6 class="h3">Login</h6>
-                <p class="text-muted mb-0">Sign in to your account to continue.</p>
-              </div>
-              <span class="clearfix"></span>
-              <form role="form">
-                <div class="form-group">
-                  <label class="form-control-label">Email address</label>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input type="email" class="form-control" placeholder="name@example.com" 
-                    autocomplete="off" v-focus v-model="user.email" id="email" name="email" 
-                    :class="{ 'is-invalid': submitted && ($v.user.email.$error || this.user.emailpasswordInvalid) }"
-                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                    <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.email.required">Email is required</span>
-                      <span v-if="!$v.user.email.email">Email is invalid</span>
-                    </div>
-
-                    <div v-if="submitted && this.user.emailpasswordInvalid" class="invalid-feedback">
-                      <span>The email or password that you entered is invalid. Please try again or 
-                        <router-link v-bind:to="{ name: 'resetpassword' }" class="small font-weight-bold">Change password</router-link> to continue.
-                      </span>   
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group mb-4">
-                  <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                      <label class="form-control-label">Password</label>
-                    </div>
-                    <div class="mb-2">
-                      <router-link v-bind:to="{ name: 'resetpassword' }" 
-                      class="small text-muted text-underline--dashed border-primary">Change password?</router-link>
-                    </div>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="Password" autocomplete="off" 
-                    v-model="user.password" id="password" name="password" 
-                    :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
-                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                        <i class="fas fa-eye"></i>
-                      </span>
-                    </div>
-                    <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.password.required">Password is required</span>
-                      <span v-if="!$v.user.password.minLength">Password must be at least 6 characters</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group mb-4" v-if="this.user.domains.length>0">
-                  <label class="form-control-label">Domain</label>
-
-                  <div class="input-group input-group-merge">
-                    <select class="custom-select" id="domain" name="domain" v-model="user.domain" 
-                    v-on:change="$v.user.domain.$touch()" :class="{'is-invalid':submitted && $v.user.domain.$error }"> 
-                      <option selected>Select domain</option>
-                      <option v-for="counter in user.domains" v-bind:value="counter.domain" v-bind:key="counter.domain">
-                        {{counter.domain}}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
-                    <span v-if="!$v.user.domain.domainSelected">Please select a valid domain</span>
-                  </div>
-                </div>
-
-                <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary" v-on:click="LoginUserForDomain()">
-                    Sign in
+  <div class="table-responsive">
+    <table class="table table-cards align-items-center">
+        <thead>
+            <tr>
+              <th scope="col">Username</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Ticket Orders</th>
+              <th scope="col">Membership Level</th>
+            </tr>
+        </thead>
+        <tbody>            
+          <tr>
+              <th scope="row">
+                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
+                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
+                      <span class="btn-inner--text">Invoice</span>
                   </button>
-                </div>
-              </form>
+              </th>
+              <td class="order">
+                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
+                  <span class="d-block text-sm text-muted">ABC 00023</span>
+              </td>
+              <td>
+                  <span class="client">Apple Inc</span>
+              </td>
+              <td>
+                  <span class="value text-sm mb-0">$1.274,89</span>
+              </td>
+              <td>
+                  <span class="taxes text-sm mb-0">$1.115,45</span>
+              </td>
+              <td>
+                  <div class="d-flex align-items-center justify-content-end">
+                      
+                      <button type="button" class="btn btn-sm btn-soft-warning btn-icon rounded-pill">
+                          <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                          <span class="btn-inner--text">Pay now</span>
+                      </button>
+                      
+                      <div class="actions ml-3">
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
+                              <i class="fas fa-pencil-alt"></i>
+                          </a>
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
+                              <i class="fas fa-archive"></i>
+                          </a>
+                          <div class="dropdown">
+                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
+                                  <i class="fas fa-ellipsis-v"></i>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <a href="#!" class="dropdown-item">
+                                      Action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Another action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Something else here
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-              <div v-if="this.failureMessage!=''">
-                  <span>{{this.failureMessage}}</span>                    
-              </div>
+              </td>
+          </tr>
+          
+          <tr class="table-divider"></tr>           
+          
+          <tr>
+              <th scope="row">
+                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
+                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
+                      <span class="btn-inner--text">Invoice</span>
+                  </button>
+              </th>
+              <td class="order">
+                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
+                  <span class="d-block text-sm text-muted">ABC 00023</span>
+              </td>
+              <td>
+                  <span class="client">Apple Inc</span>
+              </td>
+              <td>
+                  <span class="value text-sm mb-0">$1.274,89</span>
+              </td>
+              <td>
+                  <span class="taxes text-sm mb-0">$1.115,45</span>
+              </td>
+              <td>
+                  <div class="d-flex align-items-center justify-content-end">
+                      
+                      <button type="button" class="btn btn-sm btn-soft-success btn-icon rounded-pill">
+                          <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
+                          <span class="btn-inner--text">Paid: 10/09/2018</span>
+                      </button>
+                      <div class="actions ml-3">
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
+                              <i class="fas fa-pencil-alt"></i>
+                          </a>
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
+                              <i class="fas fa-archive"></i>
+                          </a>
+                          <div class="dropdown">
+                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
+                                  <i class="fas fa-ellipsis-v"></i>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <a href="#!" class="dropdown-item">
+                                      Action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Another action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Something else here
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
-              <div class="mt-4 text-center"><small>Not registered?</small>
-                <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Create account</router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              </td>
+          </tr>
+          
+          <tr class="table-divider"></tr>            
+          
+          <tr>
+              <th scope="row">
+                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
+                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
+                      <span class="btn-inner--text">Invoice</span>
+                  </button>
+              </th>
+              <td class="order">
+                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
+                  <span class="d-block text-sm text-muted">ABC 00023</span>
+              </td>
+              <td>
+                  <span class="client">Apple Inc</span>
+              </td>
+              <td>
+                  <span class="value text-sm mb-0">$1.274,89</span>
+              </td>
+              <td>
+                  <span class="taxes text-sm mb-0">$1.115,45</span>
+              </td>
+              <td>
+                  <div class="d-flex align-items-center justify-content-end">
+                      
+                      <button type="button" class="btn btn-sm btn-soft-success btn-icon rounded-pill">
+                          <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
+                          <span class="btn-inner--text">Paid: 10/09/2018</span>
+                      </button>
+                      <div class="actions ml-3">
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
+                              <i class="fas fa-pencil-alt"></i>
+                          </a>
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
+                              <i class="fas fa-archive"></i>
+                          </a>
+                          <div class="dropdown">
+                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
+                                  <i class="fas fa-ellipsis-v"></i>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <a href="#!" class="dropdown-item">
+                                      Action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Another action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Something else here
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              </td>
+          </tr>
+          
+          <tr class="table-divider"></tr>            
+          
+          <tr>
+              <th scope="row">
+                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
+                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
+                      <span class="btn-inner--text">Invoice</span>
+                  </button>
+              </th>
+              <td class="order">
+                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
+                  <span class="d-block text-sm text-muted">ABC 00023</span>
+              </td>
+              <td>
+                  <span class="client">Apple Inc</span>
+              </td>
+              <td>
+                  <span class="value text-sm mb-0">$1.274,89</span>
+              </td>
+              <td>
+                  <span class="taxes text-sm mb-0">$1.115,45</span>
+              </td>
+              <td>
+                  <div class="d-flex align-items-center justify-content-end">
+                      
+                      <button type="button" class="btn btn-sm btn-soft-success btn-icon rounded-pill">
+                          <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
+                          <span class="btn-inner--text">Paid: 10/09/2018</span>
+                      </button>
+                      <div class="actions ml-3">
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
+                              <i class="fas fa-pencil-alt"></i>
+                          </a>
+                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
+                              <i class="fas fa-archive"></i>
+                          </a>
+                          <div class="dropdown">
+                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
+                                  <i class="fas fa-ellipsis-v"></i>
+                              </a>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <a href="#!" class="dropdown-item">
+                                      Action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Another action
+                                  </a>
+                                  <a href="#!" class="dropdown-item">
+                                      Something else here
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              </td>
+          </tr>           
+            
+        </tbody>
+    </table>
   </div>
 </template>
 
 <script>
 import '../api/methods.js';
-import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session';
 
 export default {
-  name: "Login",
+  name: "AllUsers",
   components:{
   },
   data() {
     return {
-      user: {
-        emailpasswordInvalid:false,
-        email: "",
-        password: "",
-        domain: "",
-        domains:[]                
-      },
-      submitted: false,
-      failureMessage:'',
+      users:[]    
     };
-  },
-  validations: 
-  {
-    user: 
-    {
-      email: { required, email },
-      password:  { required, minLength: minLength(6) },
-      domain: {domainSelected(val)
-      {
-        if (this.user.domains && this.user.domains.length>0 && val && val === 'Select domain') 
-        {
-          return false;
-        }
-        return true;
-      }},    
-    },    
   },
   methods: 
   { 
-    LoginUserForDomain() 
+    created() 
     {
-      this.submitted = true;
-      this.failureMessage='';
-      this.user.emailpasswordInvalid=false;
-
-      this.$v.$touch();//it will validate all fields
-      if (this.$v.$invalid) 
-      {
-          return;
-      }
-      Meteor.call('loginUserForDomain', this.user.email, this.user.password, this.user.domain, 
+      Meteor.call('getUsersForDomain', 'clearcrimson', 
         (error, result) => 
         {
           if(error) 
@@ -174,7 +274,7 @@ export default {
               this.user.emailpasswordInvalid=true;
               return;  
             }
-            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+            this.failureMessage='There was an error retreiving results. Our administrators have been notified of the issue and we will have a look.';
             return;
           } 
           if(result) 
@@ -185,9 +285,9 @@ export default {
               this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
               return;
             }
-            if(result.domains)
+            if(result.users)
             {                 
-              this.user.domains=JSON.parse(JSON.stringify(result.domains));
+              this.users=JSON.parse(JSON.stringify(result.users));
               return;
             }
           }
@@ -197,137 +297,216 @@ export default {
   },
 }
 </script>
-
-<style lang="less" scoped>
-
-</style>
-
 -->
+
 <template>
-  <v-card>
-    <v-card-title>
-      Nutrition
-      <v-spacer></v-spacer>
-      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
-    </v-card-title>
-    <v-data-table :headers="headers" :items="desserts" :search="search">
-      <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
+  <b-container fluid>
+    <b-row>
+      <!--<b-col lg="6" class="my-1">
+        <b-form-group
+          label="Sort"
+          label-cols-sm="3"
+          label-align-sm="right"
+          label-size="sm"
+          label-for="sortBySelect"
+          class="mb-0"
+        >
+          <b-input-group size="sm">
+            <b-form-select v-model="sortBy" id="sortBySelect" :options="sortOptions" class="w-75">
+              <template v-slot:first>
+                <option value="">-- none --</option>
+              </template>
+            </b-form-select>
+            <b-form-select v-model="sortDesc" size="sm" :disabled="!sortBy" class="w-25">
+              <option :value="false">Asc</option>
+              <option :value="true">Desc</option>
+            </b-form-select>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col lg="6" class="my-1">
+        <b-form-group
+          label="Initial sort"
+          label-cols-sm="3"
+          label-align-sm="right"
+          label-size="sm"
+          label-for="initialSortSelect"
+          class="mb-0"
+        >
+          <b-form-select
+            v-model="sortDirection"
+            id="initialSortSelect"
+            size="sm"
+            :options="['asc', 'desc', 'last']"
+          ></b-form-select>
+        </b-form-group>
+      </b-col>
+      -->
+      <b-col lg="6" class="my-1">
+        <b-form-group label="Filter" label-cols-sm="3" label-align-sm="right" label-size="sm" label-for="filterInput"
+          class="mb-0">
+          <b-input-group size="sm">
+            <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
+            <b-input-group-append>
+              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+      <!--
+      <b-col lg="6" class="my-1">
+        <b-form-group
+          label="Filter On"
+          label-cols-sm="3"
+          label-align-sm="right"
+          label-size="sm"
+          description="Leave all unchecked to filter on all data"
+          class="mb-0">
+          <b-form-checkbox-group v-model="filterOn" class="mt-1">
+            <b-form-checkbox value="name">Name</b-form-checkbox>
+            <b-form-checkbox value="age">Age</b-form-checkbox>
+            <b-form-checkbox value="isActive">Active</b-form-checkbox>
+          </b-form-checkbox-group>
+        </b-form-group>
+      </b-col>
+
+      <b-col sm="5" md="6" class="my-1">
+        <b-form-group label="Per page" label-cols-sm="6" label-cols-md="4" label-cols-lg="3"
+          label-align-sm="right" label-size="sm" label-for="perPageSelect" class="mb-0">
+          <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
+        </b-form-group>
+      </b-col>
+-->
+      <b-col sm="7" md="6" class="my-1">
+        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" size="sm" class="my-0"></b-pagination>
+      </b-col>
+    </b-row>
+
+    <b-table show-empty small stacked="md" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage"
+      :filter="filter" :filterIncludedFields="filterOn" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" 
+      :sort-direction="sortDirection" @filtered="onFiltered">
+      <template v-slot:cell(name)="row">
+        {{ row.value.first }} {{ row.value.last }}
       </template>
-      <template v-slot:no-results>
-        <v-alert :value="true" color="error" icon="warning">
-          Your search for "{{ search }}" found no results.
-        </v-alert>
+
+      <!--<template v-slot:cell(actions)="row">
+        <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
+          Info modal
+        </b-button>
+        <b-button size="sm" @click="row.toggleDetails">
+          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        </b-button>
+      </template>-->
+
+      <template v-slot:row-details="row">
+        <b-card>
+          <ul>
+            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
+          </ul>
+        </b-card>
       </template>
-    </v-data-table>
-  </v-card>
+    </b-table>
+
+    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
+      <pre>{{ infoModal.content }}</pre>
+    </b-modal>
+  </b-container>
 </template>
+
 <script>
   export default {
-    data () {
+    data() {
       return {
-        search: '',
-        headers: [
+        items: [
+          { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
+          { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
           {
-            text: 'Dessert (100g serving)',
-            align: 'left',
-            sortable: false,
-            value: 'name'
+            isActive: false,
+            age: 9,
+            name: { first: 'Mini', last: 'Navarro' },
+            _rowVariant: 'success'
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' }
+          { isActive: false, age: 89, name: { first: 'Geneva', last: 'Wilson' } },
+          { isActive: true, age: 38, name: { first: 'Jami', last: 'Carney' } },
+          { isActive: false, age: 27, name: { first: 'Essie', last: 'Dunlap' } },
+          { isActive: true, age: 40, name: { first: 'Thor', last: 'Macdonald' } },
+          {
+            isActive: true,
+            age: 87,
+            name: { first: 'Larsen', last: 'Shaw' },
+            _cellVariants: { age: 'danger', isActive: 'warning' }
+          },
+          { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
+          { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
+          { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
+          { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
         ],
-        desserts: [
+        fields: [
+          { key: 'name', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
+          { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
           {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%'
+            key: 'isActive',
+            label: 'is Active',
+            formatter: (value, key, item) => {
+              return value ? 'Yes' : 'No'
+            },
+            sortable: true,
+            sortByFormatted: true,
+            filterByFormatted: true
           },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%'
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%'
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%'
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%'
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%'
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%'
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%'
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%'
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%'
-          }
-        ]
+          { key: 'actions', label: 'Actions' }
+        ],
+        totalRows: 1,
+        currentPage: 1,
+        perPage: 10,
+        pageOptions: [5, 10, 15],
+        sortBy: '',
+        sortDesc: false,
+        sortDirection: 'asc',
+        filter: null,
+        filterOn: [],
+        infoModal: {
+          id: 'info-modal',
+          title: '',
+          content: ''
+        }
+      }
+    },
+    computed: {
+      sortOptions() {
+        // Create an options list from our fields
+        return this.fields
+          .filter(f => f.sortable)
+          .map(f => {
+            return { text: f.label, value: f.key }
+          })
+      }
+    },
+    mounted() {
+      // Set the initial number of items
+      this.totalRows = this.items.length
+    },
+    methods: {
+      info(item, index, button) {
+        this.infoModal.title = `Row index: ${index}`
+        this.infoModal.content = JSON.stringify(item, null, 2)
+        this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+      },
+      resetInfoModal() {
+        this.infoModal.title = ''
+        this.infoModal.content = ''
+      },
+      onFiltered(filteredItems) {
+        // Trigger pagination to update the number of buttons/pages due to filtering
+        this.totalRows = filteredItems.length
+        this.currentPage = 1
       }
     }
   }
 </script>
+
+<style lang="less" scoped>
+</style>
+<!--<style scoped src="~bootstrap/dist/css/bootstrap.css"></style>
+<style scoped src="~bootstrap-vue/dist/bootstrap-vue.css"></style>-->
