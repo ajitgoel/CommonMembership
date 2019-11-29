@@ -64,4 +64,12 @@ Meteor.methods(
       emailService.send(fromAddress, subject, emailText);  
     }
   },
+  getUsersForDomain(domain) 
+  {
+    if(Meteor.isServer)
+    {
+      const { userService } = require('../server/users.js');
+      userService.getUsersForDomain(domain);  
+    }
+  },
 })

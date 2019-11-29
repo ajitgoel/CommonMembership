@@ -61,11 +61,12 @@
         <div class="col-md-6">
           <div class="form-group focused">
             <label class="form-control-label">Gender</label>
-            <select class="form-control select2-hidden-accessible" data-toggle="select" data-select2-id="1" tabindex="-1" aria-hidden="true">
+            <select class="form-control select2-hidden-accessible" data-toggle="select" data-select2-id="1" tabindex="-1" 
+            aria-hidden="true">
               <option value="1" data-select2-id="3">Female</option>
               <option value="2">Male</option>
               <option value="2">Rather not say</option>
-            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 397.5px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-498l-container"><span class="select2-selection__rendered" id="select2-498l-container" role="textbox" aria-readonly="true" title="Female">Female</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            </select>
           </div>
         </div>
       </div>
@@ -117,8 +118,8 @@
                 <option>Greece</option>
                 <option>Italy</option>
                 <option>Norway</option>
-              </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 397.5px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" title="Country" tabindex="0" aria-labelledby="select2-cwnn-container"><span class="select2-selection__rendered" id="select2-cwnn-container" role="textbox" aria-readonly="true" title="Romania">Romania</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-            </div>
+              </select>
+              </div>
           </div>
         </div>
       </div>
