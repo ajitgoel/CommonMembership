@@ -1,383 +1,16 @@
-<!--<template>
-  <div class="table-responsive">
-    <table class="table table-cards align-items-center">
-        <thead>
-            <tr>
-              <th scope="col">Username</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Ticket Orders</th>
-              <th scope="col">Membership Level</th>
-            </tr>
-        </thead>
-        <tbody>            
-          <tr>
-              <th scope="row">
-                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
-                      <span class="btn-inner--text">Invoice</span>
-                  </button>
-              </th>
-              <td class="order">
-                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
-                  <span class="d-block text-sm text-muted">ABC 00023</span>
-              </td>
-              <td>
-                  <span class="client">Apple Inc</span>
-              </td>
-              <td>
-                  <span class="value text-sm mb-0">$1.274,89</span>
-              </td>
-              <td>
-                  <span class="taxes text-sm mb-0">$1.115,45</span>
-              </td>
-              <td>
-                  <div class="d-flex align-items-center justify-content-end">
-                      
-                      <button type="button" class="btn btn-sm btn-soft-warning btn-icon rounded-pill">
-                          <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                          <span class="btn-inner--text">Pay now</span>
-                      </button>
-                      
-                      <div class="actions ml-3">
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
-                              <i class="fas fa-pencil-alt"></i>
-                          </a>
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
-                              <i class="fas fa-archive"></i>
-                          </a>
-                          <div class="dropdown">
-                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
-                                  <i class="fas fa-ellipsis-v"></i>
-                              </a>
-                              <div class="dropdown-menu dropdown-menu-right">
-                                  <a href="#!" class="dropdown-item">
-                                      Action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Another action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Something else here
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-              </td>
-          </tr>
-          
-          <tr class="table-divider"></tr>           
-          
-          <tr>
-              <th scope="row">
-                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
-                      <span class="btn-inner--text">Invoice</span>
-                  </button>
-              </th>
-              <td class="order">
-                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
-                  <span class="d-block text-sm text-muted">ABC 00023</span>
-              </td>
-              <td>
-                  <span class="client">Apple Inc</span>
-              </td>
-              <td>
-                  <span class="value text-sm mb-0">$1.274,89</span>
-              </td>
-              <td>
-                  <span class="taxes text-sm mb-0">$1.115,45</span>
-              </td>
-              <td>
-                  <div class="d-flex align-items-center justify-content-end">
-                      
-                      <button type="button" class="btn btn-sm btn-soft-success btn-icon rounded-pill">
-                          <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
-                          <span class="btn-inner--text">Paid: 10/09/2018</span>
-                      </button>
-                      <div class="actions ml-3">
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
-                              <i class="fas fa-pencil-alt"></i>
-                          </a>
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
-                              <i class="fas fa-archive"></i>
-                          </a>
-                          <div class="dropdown">
-                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
-                                  <i class="fas fa-ellipsis-v"></i>
-                              </a>
-                              <div class="dropdown-menu dropdown-menu-right">
-                                  <a href="#!" class="dropdown-item">
-                                      Action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Another action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Something else here
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-              </td>
-          </tr>
-          
-          <tr class="table-divider"></tr>            
-          
-          <tr>
-              <th scope="row">
-                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
-                      <span class="btn-inner--text">Invoice</span>
-                  </button>
-              </th>
-              <td class="order">
-                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
-                  <span class="d-block text-sm text-muted">ABC 00023</span>
-              </td>
-              <td>
-                  <span class="client">Apple Inc</span>
-              </td>
-              <td>
-                  <span class="value text-sm mb-0">$1.274,89</span>
-              </td>
-              <td>
-                  <span class="taxes text-sm mb-0">$1.115,45</span>
-              </td>
-              <td>
-                  <div class="d-flex align-items-center justify-content-end">
-                      
-                      <button type="button" class="btn btn-sm btn-soft-success btn-icon rounded-pill">
-                          <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
-                          <span class="btn-inner--text">Paid: 10/09/2018</span>
-                      </button>
-                      <div class="actions ml-3">
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
-                              <i class="fas fa-pencil-alt"></i>
-                          </a>
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
-                              <i class="fas fa-archive"></i>
-                          </a>
-                          <div class="dropdown">
-                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
-                                  <i class="fas fa-ellipsis-v"></i>
-                              </a>
-                              <div class="dropdown-menu dropdown-menu-right">
-                                  <a href="#!" class="dropdown-item">
-                                      Action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Another action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Something else here
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-              </td>
-          </tr>
-          
-          <tr class="table-divider"></tr>            
-          
-          <tr>
-              <th scope="row">
-                  <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                      <span class="btn-inner--icon"><i class="fas fa-download"></i></span>
-                      <span class="btn-inner--text">Invoice</span>
-                  </button>
-              </th>
-              <td class="order">
-                  <span class="h6 text-sm font-weight-bold mb-0">10/09/2018</span>
-                  <span class="d-block text-sm text-muted">ABC 00023</span>
-              </td>
-              <td>
-                  <span class="client">Apple Inc</span>
-              </td>
-              <td>
-                  <span class="value text-sm mb-0">$1.274,89</span>
-              </td>
-              <td>
-                  <span class="taxes text-sm mb-0">$1.115,45</span>
-              </td>
-              <td>
-                  <div class="d-flex align-items-center justify-content-end">
-                      
-                      <button type="button" class="btn btn-sm btn-soft-success btn-icon rounded-pill">
-                          <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
-                          <span class="btn-inner--text">Paid: 10/09/2018</span>
-                      </button>
-                      <div class="actions ml-3">
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Edit">
-                              <i class="fas fa-pencil-alt"></i>
-                          </a>
-                          <a href="#" class="action-item mr-2" data-toggle="tooltip" title="Archive">
-                              <i class="fas fa-archive"></i>
-                          </a>
-                          <div class="dropdown">
-                              <a href="#" class="action-item" role="button" data-toggle="dropdown" aria-haspopup="true" data-expanded="false">
-                                  <i class="fas fa-ellipsis-v"></i>
-                              </a>
-                              <div class="dropdown-menu dropdown-menu-right">
-                                  <a href="#!" class="dropdown-item">
-                                      Action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Another action
-                                  </a>
-                                  <a href="#!" class="dropdown-item">
-                                      Something else here
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-              </td>
-          </tr>           
-            
-        </tbody>
-    </table>
-  </div>
-</template>
-
-<script>
-import '../api/methods.js';
-import { Meteor } from 'meteor/meteor';
-
-export default {
-  name: "AllUsers",
-  components:{
-  },
-  data() {
-    return {
-      users:[]    
-    };
-  },
-  methods: 
-  { 
-    created() 
-    {
-      Meteor.call('getUsersForDomain', 'clearcrimson', 
-        (error, result) => 
-        {
-          if(error) 
-          {     
-            if(error.error && error.error==='email-password-invalid')
-            {
-              this.user.emailpasswordInvalid=true;
-              return;  
-            }
-            this.failureMessage='There was an error retreiving results. Our administrators have been notified of the issue and we will have a look.';
-            return;
-          } 
-          if(result) 
-          {
-            if(result.userId && result.domain) 
-            {                 
-              Meteor.loginWithPassword(email, password);
-              this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-              return;
-            }
-            if(result.users)
-            {                 
-              this.users=JSON.parse(JSON.stringify(result.users));
-              return;
-            }
-          }
-        }
-        );
-    },
-  },
-}
-</script>
--->
-
 <template>
   <b-container fluid>
     <b-row>
-      <!--<b-col lg="6" class="my-1">
-        <b-form-group
-          label="Sort"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          label-for="sortBySelect"
-          class="mb-0"
-        >
-          <b-input-group size="sm">
-            <b-form-select v-model="sortBy" id="sortBySelect" :options="sortOptions" class="w-75">
-              <template v-slot:first>
-                <option value="">-- none --</option>
-              </template>
-            </b-form-select>
-            <b-form-select v-model="sortDesc" size="sm" :disabled="!sortBy" class="w-25">
-              <option :value="false">Asc</option>
-              <option :value="true">Desc</option>
-            </b-form-select>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
-
-      <b-col lg="6" class="my-1">
-        <b-form-group
-          label="Initial sort"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          label-for="initialSortSelect"
-          class="mb-0"
-        >
-          <b-form-select
-            v-model="sortDirection"
-            id="initialSortSelect"
-            size="sm"
-            :options="['asc', 'desc', 'last']"
-          ></b-form-select>
-        </b-form-group>
-      </b-col>
-      -->
+      
       <b-col lg="6" class="my-1">
         <b-form-group label="Filter" label-cols-sm="3" label-align-sm="right" label-size="sm" label-for="filterInput"
           class="mb-0">
           <b-input-group size="sm">
-            <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
-            <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-            </b-input-group-append>
+            <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>            
           </b-input-group>
         </b-form-group>
       </b-col>
-      <!--
-      <b-col lg="6" class="my-1">
-        <b-form-group
-          label="Filter On"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          description="Leave all unchecked to filter on all data"
-          class="mb-0">
-          <b-form-checkbox-group v-model="filterOn" class="mt-1">
-            <b-form-checkbox value="name">Name</b-form-checkbox>
-            <b-form-checkbox value="age">Age</b-form-checkbox>
-            <b-form-checkbox value="isActive">Active</b-form-checkbox>
-          </b-form-checkbox-group>
-        </b-form-group>
-      </b-col>
 
-      <b-col sm="5" md="6" class="my-1">
-        <b-form-group label="Per page" label-cols-sm="6" label-cols-md="4" label-cols-lg="3"
-          label-align-sm="right" label-size="sm" label-for="perPageSelect" class="mb-0">
-          <b-form-select v-model="perPage" id="perPageSelect" size="sm" :options="pageOptions"></b-form-select>
-        </b-form-group>
-      </b-col>
--->
       <b-col sm="7" md="6" class="my-1">
         <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" size="sm" class="my-0"></b-pagination>
       </b-col>
@@ -389,15 +22,6 @@ export default {
       <template v-slot:cell(name)="row">
         {{ row.value.first }} {{ row.value.last }}
       </template>
-
-      <!--<template v-slot:cell(actions)="row">
-        <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
-          Info modal
-        </b-button>
-        <b-button size="sm" @click="row.toggleDetails">
-          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-        </b-button>
-      </template>-->
 
       <template v-slot:row-details="row">
         <b-card>
@@ -415,98 +39,96 @@ export default {
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        items: [
-          { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
-          { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
-          {
-            isActive: false,
-            age: 9,
-            name: { first: 'Mini', last: 'Navarro' },
-            _rowVariant: 'success'
-          },
-          { isActive: false, age: 89, name: { first: 'Geneva', last: 'Wilson' } },
-          { isActive: true, age: 38, name: { first: 'Jami', last: 'Carney' } },
-          { isActive: false, age: 27, name: { first: 'Essie', last: 'Dunlap' } },
-          { isActive: true, age: 40, name: { first: 'Thor', last: 'Macdonald' } },
-          {
-            isActive: true,
-            age: 87,
-            name: { first: 'Larsen', last: 'Shaw' },
-            _cellVariants: { age: 'danger', isActive: 'warning' }
-          },
-          { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
-          { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
-          { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
-          { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
-        ],
-        fields: [
-          { key: 'name', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
-          { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
-          {
-            key: 'isActive',
-            label: 'is Active',
-            formatter: (value, key, item) => {
-              return value ? 'Yes' : 'No'
-            },
-            sortable: true,
-            sortByFormatted: true,
-            filterByFormatted: true
-          },
-          { key: 'actions', label: 'Actions' }
-        ],
-        totalRows: 1,
-        currentPage: 1,
-        perPage: 10,
-        pageOptions: [5, 10, 15],
-        sortBy: '',
-        sortDesc: false,
-        sortDirection: 'asc',
-        filter: null,
-        filterOn: [],
-        infoModal: {
-          id: 'info-modal',
-          title: '',
-          content: ''
-        }
-      }
-    },
-    computed: {
-      sortOptions() {
-        // Create an options list from our fields
-        return this.fields
-          .filter(f => f.sortable)
-          .map(f => {
-            return { text: f.label, value: f.key }
-          })
-      }
-    },
-    mounted() {
-      // Set the initial number of items
-      this.totalRows = this.items.length
-    },
-    methods: {
-      info(item, index, button) {
-        this.infoModal.title = `Row index: ${index}`
-        this.infoModal.content = JSON.stringify(item, null, 2)
-        this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-      },
-      resetInfoModal() {
-        this.infoModal.title = ''
-        this.infoModal.content = ''
-      },
-      onFiltered(filteredItems) {
-        // Trigger pagination to update the number of buttons/pages due to filtering
-        this.totalRows = filteredItems.length
-        this.currentPage = 1
+import '../api/methods.js';
+import { Meteor } from 'meteor/meteor';
+
+export default {
+  data() {
+    return {
+      items:[],
+      fields: [
+        { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
+        { key: 'email', label: 'Email', sortable: true, sortDirection: 'desc' },
+        { key: 'username', label: 'User Name', sortable: true},
+        { key: 'ticketOrders', label: 'Ticket orders', sortable: true, class: 'text-center' },
+        { key: 'membershipLevel', label: 'Membership Level', sortable: true},
+        { key: 'actions', label: 'Actions' }
+      ],
+      totalRows: 1,
+      currentPage: 1,
+      perPage: 10,
+      sortBy: '',
+      sortDesc: false,
+      sortDirection: 'asc',
+      filter: null,
+      filterOn: [],
+      infoModal: {
+        id: 'info-modal',
+        title: '',
+        content: ''
       }
     }
+  },
+  computed: {
+    sortOptions() {
+      // Create an options list from our fields
+      return this.fields
+        .filter(f => f.sortable)
+        .map(f => {
+          return { text: f.label, value: f.key }
+        })
+    }
+  },
+  mounted() 
+  {
+    Meteor.call('getUsersForDomain', 'clearcrimson', (error, result) => 
+      {
+        if(error) 
+        {     
+          /*if(error.error && error.error==='email-password-invalid')
+          {
+            this.user.emailpasswordInvalid=true;
+            return;  
+          }*/
+          this.failureMessage='There was an error retreiving results. Our administrators have been notified of the issue and we will have a look.';
+          return;
+        } 
+        if(result) 
+        {
+          /*if(result.userId && result.domain) 
+          {                 
+            Meteor.loginWithPassword(email, password);
+            this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
+            return;
+          }*/          
+          if(result.users)
+          {                 
+            this.items=JSON.parse(JSON.stringify(result.users));
+            this.totalRows = this.items.length
+            return;
+          }
+        }
+      }
+      );
+  },
+  methods: {
+    info(item, index, button) {
+      this.infoModal.title = `Row index: ${index}`
+      this.infoModal.content = JSON.stringify(item, null, 2)
+      this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+    },
+    resetInfoModal() {
+      this.infoModal.title = ''
+      this.infoModal.content = ''
+    },
+    onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length
+      this.currentPage = 1
+    }
   }
+}
 </script>
 
 <style lang="less" scoped>
 </style>
-<!--<style scoped src="~bootstrap/dist/css/bootstrap.css"></style>
-<style scoped src="~bootstrap-vue/dist/bootstrap-vue.css"></style>-->

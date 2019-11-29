@@ -47,7 +47,8 @@
                 <i class="fas fa-angle-right"></i>
             </div>
         </router-link>
-        <hr class="divider divider-icon" />
+        
+        <div class="divider divider-icon"></div>   
 
         <router-link v-bind:to="{ name: 'account-profile', params: {domain:$route.params.domain} }" 
         class="list-group-item list-group-item-action d-flex justify-content-between">

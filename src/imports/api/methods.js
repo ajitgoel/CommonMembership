@@ -69,7 +69,7 @@ Meteor.methods(
     if(Meteor.isServer)
     {
       const { userService } = require('../server/users.js');
-      userService.getUsersForDomain(domain);  
+      return userService.getUsersForDomain(domain);  
     }
   },
 })

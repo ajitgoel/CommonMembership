@@ -167,20 +167,20 @@ export const userService =
     } */  
     //let users=Users.find({"domain":domain});
     let usersResult = { 
-      "users":[
-        {"_id":"1", "name":"1 1", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"2", "name":"2 2", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"3", "name":"3 3", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"4", "name":"4 4", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"5", "name":"5 5", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"6", "name":"6 6", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"7", "name":"7 7", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"8", "name":"8 8", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"9", "name":"9 9", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"10", "name":"10 10", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"11", "name":"11 11", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-        {"_id":"12", "name":"12 12", "username":"John", "email":"Doe", "ticketOrders":"2", "membershipLevel":"Basic",},
-      ]
+      'users': [
+        { _id:1, username:'John1', name: { first: 'Dickerson', last: 'Macdonald' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", },
+        { _id:2, username:'John2', name: { first: 'Larsen', last: 'Shaw' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { _id:11, username:'John11', name: { first: 'Mini', last: 'Navarro' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", _rowVariant: 'success'},
+        { _id:3, username:'John3',isActive: false, name: { first: 'Geneva', last: 'Wilson' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { _id:4, username:'John4',isActive: true, name: { first: 'Jami', last: 'Carney' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { _id:5, username:'John5',isActive: false, name: { first: 'Essie', last: 'Dunlap' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { _id:6, username:'John6',isActive: true, name: { first: 'Thor', last: 'Macdonald' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { isActive: true, name: { first: 'Larsen', last: 'Shaw' },  email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", _cellVariants: { age: 'danger', isActive:'warning'}},
+        { _id:7, username:'John7',isActive: false, name: { first: 'Mitzi', last: 'Navarro' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { _id:8, username:'John8',isActive: false,  name: { first: 'Genevieve', last: 'Wilson' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { _id:9, username:'John9',isActive: true,  name: { first: 'John', last: 'Carney' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
+        { _id:10, username:'John10',isActive: false, name: { first: 'Dick', last: 'Dunlap' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  }
+      ],
     };
 
     return usersResult;
