@@ -573,12 +573,13 @@
               </div>
             </div>
           </li>
-          <li class="nav-item d-lg-none d-xl-block" v-if="(this.$root.currentUser==null)">
+          <li class="nav-item d-lg-none d-xl-block" v-if="(this.currentUserId==null)">
             <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
           </li>
           <li class="nav-item d-lg-none d-xl-block" v-else>
-            <router-link class="nav-link" v-bind:to="{ name: 'register' }">Log out</router-link>
+            <a class="nav-link" href='' v-on:click="Logout()">Log out</a>
           </li>
+
           <li class="nav-item mr-0">
             <a href="https://themes.getbootstrap.com/product/purpose-website-ui-kit/" target="_blank" class="nav-link d-lg-none">Purchase now</a>
             <a href="https://themes.getbootstrap.com/product/purpose-website-ui-kit/" target="_blank" class="btn btn-sm btn-white btn-icon rounded-pill d-none d-lg-inline-flex" data-toggle="tooltip" data-placement="left" title="Go to Bootstrap Themes">
@@ -593,16 +594,47 @@
 </template>
 
 <script>
+import EventBus from '../EventBus.js';
+import { Meteor } from 'meteor/meteor';
 
 export default 
 {  
   name: "MainNavBar",
   components:{
   },
+  data() {
+    return {
+      currentUserId:null,
+    };
+  },
   mounted() 
   {
-    console.log(this.$parent.currentUserId);
-  }
+    EventBus.$on('CurrentUserId', (payload) =>
+    {
+      this.currentUserId = payload;
+    });    
+  },
+  methods: 
+  { 
+    Logout() 
+    {
+      Meteor.logout((error)=>
+      {
+        if(error)
+        {
+          this.failureMessage='There was an error logging you off. Our administrators have been notified of the issue and we will have a look.';
+          return;
+        } 
+        else 
+        {          
+          this.currentUserId=null;
+          EventBus.$emit('CurrentUserId', this.currentUserId);              
+          this.$router.push({ name: 'home'});                   
+          return;
+        }
+      });
+    },
+  },
 }
 </script>
 

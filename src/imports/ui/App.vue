@@ -6,14 +6,14 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 export default {
   components: {
   },
   computed: {
     ...mapGetters('layout', ['showCart',]),
   },
-  meteor: 
+  /*meteor: 
   {
     $lazy: true,
     $subscribe: 
@@ -36,7 +36,7 @@ export default {
     {
       return Meteor.userId();
     }
-  },
+  },*/
 }
 </script>
 

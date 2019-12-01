@@ -85,7 +85,7 @@ export default
   },
   mounted() 
   {
-    Meteor.call('getUsersForDomain', 'clearcrimson', function(error, result)
+    Meteor.call('getUsersForDomain', 'clearcrimson', (error, result)=>
     {
       if(error) 
       {     
@@ -112,7 +112,7 @@ export default
           return;
         }
       }
-    }.bind(this));
+    });
   },
   methods: {
     info(item, index, button) {
