@@ -28,7 +28,8 @@ function createApp (context) {
   import TermsAndConditionsModal from './ui/components/TermsAndConditionsModal.vue';
   import TermsAndConditionsText from './ui/components/TermsAndConditionsText.vue';
   import TopNavBar from './ui/components/TopNavBar.vue';
-  
+  import Toast from './ui/components/Toast.vue';
+
   import Contact from './ui/Contact.vue';
   import Home from './ui/Home.vue'
   import Login from './ui/Login.vue';  
@@ -66,6 +67,7 @@ function createApp (context) {
   Vue.component('TermsAndConditionsModal', TermsAndConditionsModal);
   Vue.component('TermsAndConditionsText', TermsAndConditionsText);
   Vue.component('TopNavBar', TopNavBar);
+  Vue.component('Toast', Toast);
   Vue.component('Users', Users);
   Vue.component('AddUser',AddUser);
   Vue.component('ImportUsers',ImportUsers);

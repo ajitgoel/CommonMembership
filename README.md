@@ -61,7 +61,7 @@ c. when importing files,
 - [x] ~~Configure BootstrapVue with application~~
 - [ ] migrate to alanning:roles version 3.
 - [ ] remove all packages that are not being used.
-- [ ] Add server side validations.
+- [ ] Add server side validations using Collection2 and SimpleSchema.
 - [ ] Write unit tests for server side code.
 - [ ] Add Google SignIn Option.
 - [ ] Host application in Google Cloud VM.
@@ -70,9 +70,11 @@ c. when importing files,
 	- [ ] LHS dashboard menu should be searchable
 - [ ] Screens
 	- [x] Navigation Bar
-		- [x] Register link should be changed to logout when the user has logged in.
+		- [x] ~~Register link should be changed to logout when the user has logged in.~~
 		- [ ] Afer the user has logged in, the logout link should not changed to register, when the browser is refreshed.
-		- [x] Logout functionality.
+		- [x] ~~Logout functionality.~~
+		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast.~~
+		- [ ] When user clicks log out, an toast alert is shown, the system still changes the logout link to register. This is an issue with mounted event and EventBus.On event. This should not happen.
 	- [ ] User management
 		- [ ] Add user
 			- [ ] Add custom fields
@@ -80,5 +82,4 @@ c. when importing files,
 		- [ ] Import users using CSV file
 		- [ ] Export users to CSV file
 	- [ ] Login screen
-		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
-		- [ ] 
+		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains. 
