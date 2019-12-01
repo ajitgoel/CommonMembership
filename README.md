@@ -11,6 +11,9 @@ https://vuetifyjs.com/en/components/api-explorer
 
 **Atmostphere package manager:** https://atmospherejs.com/meteor/accounts-password
 **Vuelidate validation package:** https://vuelidate.netlify.com/#getting-started
+**vue-meteor-tracker:** https://github.com/meteor-vue/vue-meteor-tracker
+**Communication between Vue components in Meteor: ** https://medium.com/@gustaw.daniel/communication-between-vue-components-in-meteor-29006be3dae9
+
 **Testing with meteor:** https://guide.meteor.com/testing.html
 **working with Collections:** https://docs.meteor.com/api/collections.html
 **MongoDB queries:** https://www.tutorialspoint.com/mongodb/mongodb_query_document.htm
@@ -55,6 +58,7 @@ c. when importing files,
 **Tasks**
 
 - [x] ~~Configure Vuetify 2.0 with application~~
+- [x] ~~Configure BootstrapVue with application~~
 - [ ] migrate to alanning:roles version 3.
 - [ ] remove all packages that are not being used.
 - [ ] Add server side validations.
@@ -63,10 +67,16 @@ c. when importing files,
 - [ ] Host application in Google Cloud VM.
 - [ ] create a proper email template and email sending provider.
 - [x] ~~Configure LHS dashboard menu with links to various screens~~
-	- [x] ~~LHS dashboard menu should be searchable~~
-- [ ] User management
-	- [ ] Add user
-		- [ ] Add custom fields
-	- [ ] Allusers\Search users
-	- [ ] Import users using CSV file
-	- [ ] Export users to CSV file
+	- [ ] LHS dashboard menu should be searchable
+- [ ] Screens
+	- [ ] Navigation Bar
+		- [ ] Register link should be changed to logout when the user has logged in.
+	- [ ] User management
+		- [ ] Add user
+			- [ ] Add custom fields
+		- [ ] Allusers\Search users
+		- [ ] Import users using CSV file
+		- [ ] Export users to CSV file
+	- [ ] Login screen
+		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
+		- [ ] 

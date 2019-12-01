@@ -118,7 +118,8 @@ import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 
-export default {
+export default 
+{
   name: "Login",
   components:{
   },
@@ -169,6 +170,11 @@ export default {
         {
           if(error) 
           {     
+            if(error.error && error.error==='not-authorized')
+            {
+              this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+              return;  
+            }
             if(error.error && error.error==='email-password-invalid')
             {
               this.user.emailpasswordInvalid=true;
@@ -179,9 +185,19 @@ export default {
           } 
           if(result && result.userId && result.domain) 
           {                 
-            Meteor.loginWithPassword(email, password);
-            this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-            return;
+            Meteor.loginWithPassword(email, password, function(error)
+            {
+              if(error)
+              {
+                this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+                return;
+              } 
+              else 
+              {
+                this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
+                return;
+              }
+            });
           }
           if(result && result.domains)
           {                 

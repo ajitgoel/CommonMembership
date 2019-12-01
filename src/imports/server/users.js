@@ -1,6 +1,6 @@
 'use strict';
 import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor'
+import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 //export const Users = new Mongo.Collection('users');
 export const Users = Mongo.Collection.get('users');
@@ -131,7 +131,7 @@ export const userService =
     if(domainsForUser==null)
     {
       logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
-      throw new Meteor.Error('unauthorized');
+      throw new Meteor.Error('not-authorized');
     }    
     return {userId:user._id, domain:domainsForUser[0].scope}; 
     //#endregion    
@@ -158,7 +158,15 @@ export const userService =
     var logging = require('./logging.js');      
     check(domain, String);    
     domain=domain.toString().toLowerCase();      
-    //TODO: add check to make sure that the logged in user is correct else throw error. 
+    console.log(this.userId);
+    console.log(Meteor.userId());
+    console.log(Meteor.user());
+    
+    if (! this.userId) 
+    {
+      throw new Meteor.Error('not-authorized');
+    }
+
     /*var user=Accounts.findUserByEmail(email);    
     if(user==null)
     {

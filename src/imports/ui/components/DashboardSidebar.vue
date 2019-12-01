@@ -30,7 +30,7 @@
           class="list-group-item list-group-item-action d-flex justify-content-between">
             <div>
                 <i class="fas fa-user-circle mr-2"></i>
-                <span>Import ssers</span>
+                <span>Import users</span>
             </div>
             <div>
                 <i class="fas fa-angle-right"></i>

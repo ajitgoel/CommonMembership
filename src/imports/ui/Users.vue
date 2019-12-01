@@ -42,7 +42,11 @@
 import '../api/methods.js';
 import { Meteor } from 'meteor/meteor';
 
-export default {
+export default 
+{  
+  components: 
+  {
+  },
   data() {
     return {
       items:[],
@@ -52,7 +56,7 @@ export default {
         { key: 'username', label: 'User Name', sortable: true},
         { key: 'ticketOrders', label: 'Ticket orders', sortable: true, class: 'text-center' },
         { key: 'membershipLevel', label: 'Membership Level', sortable: true},
-        { key: 'actions', label: 'Actions' }
+        { key: 'actions', label: '' }
       ],
       totalRows: 1,
       currentPage: 1,
@@ -85,11 +89,11 @@ export default {
       {
         if(error) 
         {     
-          /*if(error.error && error.error==='email-password-invalid')
+          if(error.error && error.error==='not-authorized')
           {
-            this.user.emailpasswordInvalid=true;
+            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
             return;  
-          }*/
+          }            
           this.failureMessage='There was an error retreiving results. Our administrators have been notified of the issue and we will have a look.';
           return;
         } 
@@ -126,7 +130,7 @@ export default {
       this.totalRows = filteredItems.length
       this.currentPage = 1
     }
-  }
+  },
 }
 </script>
 

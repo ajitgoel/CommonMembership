@@ -9,7 +9,7 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
-    "@babel/runtime": "^7.6.3",
+    "@babel/runtime": "^7.7.4",
     "@riophae/vue-treeselect": "^0.4.0",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
@@ -28,7 +28,7 @@
     "intersection-observer": "^0.6.0",
     "isomorphic-fetch": "^2.2.1",
     "marker-clusterer-plus": "^2.1.4",
-    "meteor-node-stubs": "^0.4.1",
+    "meteor-node-stubs": "^1.0.0",
     "moment": "^2.24.0",
     "pug": "^2.0.4",
     "quasar": "^1.4.5",

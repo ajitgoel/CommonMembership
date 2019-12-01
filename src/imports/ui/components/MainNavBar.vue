@@ -573,8 +573,11 @@
               </div>
             </div>
           </li>
-          <li class="nav-item d-lg-none d-xl-block">
+          <li class="nav-item d-lg-none d-xl-block" v-if="(this.$root.currentUser==null)">
             <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
+          </li>
+          <li class="nav-item d-lg-none d-xl-block" v-else>
+            <router-link class="nav-link" v-bind:to="{ name: 'register' }">Log out</router-link>
           </li>
           <li class="nav-item mr-0">
             <a href="https://themes.getbootstrap.com/product/purpose-website-ui-kit/" target="_blank" class="nav-link d-lg-none">Purchase now</a>
@@ -590,10 +593,16 @@
 </template>
 
 <script>
-export default {
+
+export default 
+{  
   name: "MainNavBar",
   components:{
   },
+  mounted() 
+  {
+    console.log(this.$parent.currentUserId);
+  }
 }
 </script>
 
