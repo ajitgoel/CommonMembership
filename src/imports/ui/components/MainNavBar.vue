@@ -577,7 +577,7 @@
             <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
           </li>
           <li class="nav-item d-lg-none d-xl-block" v-else>
-            <a class="nav-link" href='' v-on:click="Logout()">Log out</a>
+            <a class="nav-link" href='' v-on:click="return Logout()">Log out</a>
           </li>
 
           <li class="nav-item mr-0">
@@ -589,8 +589,10 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div>          
+    <Toast ref="toast" v-bind:toastMessage='this.failureMessage' header='Error'/>
   </nav>
+  
 </template>
 
 <script>
@@ -605,6 +607,7 @@ export default
   data() {
     return {
       currentUserId:null,
+      failureMessage:''
     };
   },
   mounted() 
@@ -623,14 +626,15 @@ export default
         if(error)
         {
           this.failureMessage='There was an error logging you off. Our administrators have been notified of the issue and we will have a look.';
-          return;
+          let element = this.$refs.toast.$el;
+          $(element).toast('show');
+          return false;
         } 
         else 
         {          
           this.currentUserId=null;
           EventBus.$emit('CurrentUserId', this.currentUserId);              
           this.$router.push({ name: 'home'});                   
-          return;
         }
       });
     },
