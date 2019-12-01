@@ -214,34 +214,32 @@ export default {
           return;
       }
 
-      Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, 
-        (error, result) => 
-        {
-          if(error) 
-          {     
-            if(error.error && error.error==='domain-already-in-use')
-            {
-              this.user.domainExists=true;
-              return;  
-            }
-
-            if(error.error && error.error==='user-exists-for-domain')
-            {
-              this.user.userExistsforDomain=true;
-              return;  
-            }
-            this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
-            return;
-          } 
-          if(result && result.userId && result.domain ) 
+      Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, function(error, result)
+      {
+      if(error) 
+        {     
+          if(error.error && error.error==='domain-already-in-use')
           {
-            this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                  
-            return;
+            this.user.domainExists=true;
+            return;  
           }
-          this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
+
+          if(error.error && error.error==='user-exists-for-domain')
+          {
+            this.user.userExistsforDomain=true;
+            return;  
+        }
+          this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
+        return;
+        } 
+        if(result && result.userId && result.domain ) 
+      {
+          this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                  
           return;
         }
-        );
+        this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
+        return;
+      }.bind(this));
     },
     showPrivacyPolicyModal() 
     {

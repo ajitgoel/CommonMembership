@@ -85,35 +85,34 @@ export default
   },
   mounted() 
   {
-    Meteor.call('getUsersForDomain', 'clearcrimson', (error, result) => 
-      {
-        if(error) 
-        {     
-          if(error.error && error.error==='not-authorized')
-          {
-            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-            return;  
-          }            
-          this.failureMessage='There was an error retreiving results. Our administrators have been notified of the issue and we will have a look.';
-          return;
-        } 
-        if(result) 
+    Meteor.call('getUsersForDomain', 'clearcrimson', function(error, result)
+    {
+      if(error) 
+      {     
+        if(error.error && error.error==='not-authorized')
         {
-          /*if(result.userId && result.domain) 
-          {                 
-            Meteor.loginWithPassword(email, password);
-            this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-            return;
-          }*/          
-          if(result.users)
-          {                 
-            this.items=JSON.parse(JSON.stringify(result.users));
-            this.totalRows = this.items.length
-            return;
-          }
+          this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+          return;  
+        }            
+        this.failureMessage='There was an error retreiving results. Our administrators have been notified of the issue and we will have a look.';
+        return;
+      } 
+      if(result) 
+      {
+        /*if(result.userId && result.domain) 
+        {                 
+          Meteor.loginWithPassword(email, password);
+          this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
+          return;
+        }*/          
+        if(result.users)
+        {                 
+          this.items=JSON.parse(JSON.stringify(result.users));
+          this.totalRows = this.items.length
+          return;
         }
       }
-      );
+    }.bind(this));
   },
   methods: {
     info(item, index, button) {

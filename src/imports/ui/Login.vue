@@ -165,47 +165,50 @@ export default
       {
           return;
       }
-      Meteor.call('loginUserForDomain', this.user.email, this.user.password, this.user.domain, 
-        (error, result) => 
-        {
-          if(error) 
-          {     
-            if(error.error && error.error==='not-authorized')
+      let email=this.user.email.toLowerCase().trim();
+      console.log(email);
+      Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, function(error, result)
+      {
+        if(error) 
+        {     
+          if(error.error && error.error==='not-authorized')
+          {
+            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+            return;  
+          }
+          if(error.error && error.error==='email-password-invalid')
+          {
+            this.user.emailpasswordInvalid=true;
+            return;  
+          }
+          this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+          return;
+        } 
+        if(result && result.userId && result.domain) 
+        {                 
+          Meteor.loginWithPassword(email, this.user.password, function(error)
+          {
+            console.log('loginwithpassword');
+            console.log(error);
+            if(error)
             {
               this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-              return;  
-            }
-            if(error.error && error.error==='email-password-invalid')
+              return;
+            } 
+            else 
             {
-              this.user.emailpasswordInvalid=true;
-              return;  
+              this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
+              return;
             }
-            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-            return;
-          } 
-          if(result && result.userId && result.domain) 
-          {                 
-            Meteor.loginWithPassword(email, password, function(error)
-            {
-              if(error)
-              {
-                this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-                return;
-              } 
-              else 
-              {
-                this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-                return;
-              }
-            });
-          }
-          if(result && result.domains)
-          {                 
-            this.user.domains=JSON.parse(JSON.stringify(result.domains));
-            return;
-          }
+          }.bind(this));
         }
-        );
+
+        if(result && result.domains)
+        {                 
+          this.user.domains=JSON.parse(JSON.stringify(result.domains));
+          return;
+        }
+      }.bind(this));
     },
   },
 }
