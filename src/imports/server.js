@@ -1,10 +1,10 @@
-import './api/publications'
+import './api/publications';
 
-import Vue from 'vue'
-import ApolloSSR from 'vue-apollo/ssr'
-import { VueSSR } from 'meteor/akryum:vue-ssr'
-import CreateApp from './app'
-import App from './ui/App.vue'
+import Vue from 'vue';
+import ApolloSSR from 'vue-apollo/ssr';
+import { VueSSR } from 'meteor/akryum:vue-ssr';
+import CreateApp from './app';
+import App from './ui/App.vue';
 
 const isDev = process.env.NODE_ENV !== 'production'
 
