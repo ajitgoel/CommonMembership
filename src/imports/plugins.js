@@ -17,6 +17,7 @@ Vue.use(Vuex);
 import VueMeteorTracker from 'vue-meteor-tracker';
 Vue.use(VueMeteorTracker);
 Vue.config.meteor.freeze = true;
+Vue.config.strict = true;
 
 import VueGoogleMaps from 'vue-googlemaps';
 Vue.use(VueGoogleMaps, {

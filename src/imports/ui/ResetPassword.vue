@@ -111,28 +111,27 @@ export default {
       {
           return;
       }
-      Meteor.call('resetUserPassword', this.user.email, (error, result) => 
-        {
-          if(error) 
-          {     
-            if(error.error && error.error==='email-invalid')
-            {
-              this.user.emailInvalid=true;
-              return;  
-            }
-            this.failureMessage='There was an error resetting your account. Our administrators have been notified of the issue and we will have a look.';
-            return;
-          } 
-          if(result) 
+      Meteor.call('resetUserPassword', this.user.email, function(error, result)
+      {
+        if(error) 
+        {     
+          if(error.error && error.error==='email-invalid')
           {
-            if(typeof result === "boolean" && result === true)
-            {                 
-              this.successMessage='Please check your email for instructions on how to reset your password';                  
-              return;
-            }
+            this.user.emailInvalid=true;
+            return;  
+          }
+          this.failureMessage='There was an error resetting your account. Our administrators have been notified of the issue and we will have a look.';
+          return;
+        } 
+        if(result) 
+        {
+          if(typeof result === "boolean" && result === true)
+          {                 
+            this.successMessage='Please check your email for instructions on how to reset your password';                  
+            return;
           }
         }
-        );
+      }.bind(this));
     },
   },
 }

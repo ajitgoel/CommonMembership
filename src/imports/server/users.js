@@ -68,7 +68,6 @@ export const userService =
     {
       var userId= Accounts.createUser({username: email, email: email, password: password});
       logging.winston.log('info', `User created with userid ${userId} for email ${email} and domain ${domain}`);
-
       Roles.createRole(domainOwner_RoleName, {unlessExists: true});
       Roles.addUsersToRoles(userId, [domainOwner_RoleName], domain);
       logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);

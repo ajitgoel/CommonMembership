@@ -153,47 +153,7 @@ export default {
   },
   methods: 
   { 
-    LoginUserForDomain() 
-    {
-      this.submitted = true;
-      this.failureMessage='';
-      this.user.emailpasswordInvalid=false;
 
-      this.$v.$touch();//it will validate all fields
-      if (this.$v.$invalid) 
-      {
-          return;
-      }
-      Meteor.call('loginUserForDomain', this.user.email, this.user.password, this.user.domain, 
-        (error, result) => 
-        {
-          if(error) 
-          {     
-            if(error.error && error.error==='email-password-invalid')
-            {
-              this.user.emailpasswordInvalid=true;
-              return;  
-            }
-            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-            return;
-          } 
-          if(result) 
-          {
-            if(result.userId && result.domain) 
-            {                 
-              Meteor.loginWithPassword(email, password);
-              this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-              return;
-            }
-            if(result.domains)
-            {                 
-              this.user.domains=JSON.parse(JSON.stringify(result.domains));
-              return;
-            }
-          }
-        }
-        );
-    },
   },
 }
 </script>
