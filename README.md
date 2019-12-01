@@ -69,8 +69,10 @@ c. when importing files,
 - [x] ~~Configure LHS dashboard menu with links to various screens~~
 	- [ ] LHS dashboard menu should be searchable
 - [ ] Screens
-	- [ ] Navigation Bar
-		- [ ] Register link should be changed to logout when the user has logged in.
+	- [x] Navigation Bar
+		- [x] Register link should be changed to logout when the user has logged in.
+		- [ ] Afer the user has logged in, the logout link should not changed to register, when the browser is refreshed.
+		- [x] Logout functionality.
 	- [ ] User management
 		- [ ] Add user
 			- [ ] Add custom fields

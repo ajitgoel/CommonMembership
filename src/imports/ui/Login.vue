@@ -116,7 +116,7 @@
 import '../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session';
+import EventBus from './EventBus.js';
 
 export default 
 {
@@ -167,7 +167,7 @@ export default
       }
       let email=this.user.email.toLowerCase().trim();
       console.log(email);
-      Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, function(error, result)
+      Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, (error, result)=>
       {
         if(error) 
         {     
@@ -186,7 +186,7 @@ export default
         } 
         if(result && result.userId && result.domain) 
         {                 
-          Meteor.loginWithPassword(email, this.user.password, function(error)
+          Meteor.loginWithPassword(email, this.user.password, (error)=>
           {
             console.log('loginwithpassword');
             console.log(error);
@@ -197,10 +197,11 @@ export default
             } 
             else 
             {
+              EventBus.$emit('CurrentUserId', result.userId);
               this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
               return;
             }
-          }.bind(this));
+          });
         }
 
         if(result && result.domains)
@@ -208,7 +209,7 @@ export default
           this.user.domains=JSON.parse(JSON.stringify(result.domains));
           return;
         }
-      }.bind(this));
+      });
     },
   },
 }

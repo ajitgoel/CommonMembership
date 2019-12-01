@@ -111,7 +111,7 @@ export default {
       {
           return;
       }
-      Meteor.call('resetUserPassword', this.user.email, function(error, result)
+      Meteor.call('resetUserPassword', this.user.email, (error, result)=>
       {
         if(error) 
         {     
@@ -131,7 +131,7 @@ export default {
             return;
           }
         }
-      }.bind(this));
+      });
     },
   },
 }
