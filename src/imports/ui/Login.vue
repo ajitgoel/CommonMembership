@@ -116,7 +116,6 @@
 import '../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import EventBus from './EventBus.js';
 
 export default 
 {
@@ -197,7 +196,6 @@ export default
             } 
             else 
             {
-              EventBus.$emit('CurrentUserId', result.userId);
               this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
               return;
             }

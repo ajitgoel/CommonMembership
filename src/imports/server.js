@@ -1,26 +1,23 @@
-import './api/publications';
-
 import Vue from 'vue';
 import ApolloSSR from 'vue-apollo/ssr';
 import { VueSSR } from 'meteor/akryum:vue-ssr';
 import CreateApp from './app';
 import App from './ui/App.vue';
 
+import { Mongo } from 'meteor/mongo';
+import { Meteor } from 'meteor/meteor';
+
 const isDev = process.env.NODE_ENV !== 'production'
-
-/*
-// Simple createApp
-VueSSR.createApp = function (context) {
-  const { app, router, store } = CreateApp()
-  
-  // set router's location
-  router.push(context.url)
-  
-  return app
-}
-*/
-
 Vue.use(ApolloSSR)
+
+Meteor.startup(() => 
+{
+  Meteor.publish('currentUserId', function () 
+  {
+    console.log(`Meteor publish currentUserId called with ${this.userId()}`);
+    return this.userId();
+  });
+});
 
 // This will be called each time the app is rendered
 VueSSR.createApp = function (context) {

@@ -1,14 +1,4 @@
-**Install applicaton: **meteor npm i
-**Start app:** npm run start
-
 **Loggly url:** https://ajitgoel.loggly.com/search
-**Vuetify: **
-https://vuetifyjs.com/en/components/api-explorer
-   https://vuetifyjs.com/en/components/data-tables
-   https://vuetifyjs.com/en/components/forms
-   https://vuetifyjs.com/en/components/footer
-   https://vuetifyjs.com/en/components/treeview
-
 **Atmostphere package manager:** https://atmospherejs.com/meteor/accounts-password
 **Vuelidate validation package:** https://vuelidate.netlify.com/#getting-started
 **vue-meteor-tracker:** https://github.com/meteor-vue/vue-meteor-tracker
@@ -42,18 +32,29 @@ https://cleverbeagle.com/pup/v1/the-basics/mongodb-collections#the-documents-col
 https://github.com/Meteor-Community-Packages/meteor-roles
 **Running meteor at scale:** https://www.freecodecamp.org/news/scaling-meteor-a-year-on-26ee37588e4b/
 
-**Tips:**
-If you are running tests, run the "setx TEST-WATCH 1" before you run your tests. 
-
 **VueJs:**
 **Vue Router:** https://router.vuejs.org/guide/essentials/named-routes.html
 https://vuelidate.js.org/
 
-a. **creating a component and using in a screen example: ** CardFooter.vue component is used in PrivacyPolicy.vue
-b. For page load work, use **created()** event(if you are not accessing DOM) or **mounted()** event in Vuejs component 
-c. when importing files, 
+**General Tips**
+- [ ] when importing files,
    ./ refers to same folder
    ../ refers to go up one level
+- [ ] If you are running tests, run the "setx TEST-WATCH 1" before you run your tests. 
+- [ ] **Install applicaton: **meteor npm i
+- [ ] **Start app:** npm run start
+
+**Meteorjs Tips**
+- [ ] On the client and server side use Meteor.userId(), except the publish functions, where you should use this.userId(). using Meteor.user() on server queries the database and is not recommended.
+
+**Javascript Tips**
+- [ ] **check variable is null or undefined: **
+a. if (variable === undefined || variable === null) 
+b. if (variable==null) 
+
+**Vuejs Tips**
+- [ ] **creating a component and using in a screen example: ** CardFooter.vue component is used in PrivacyPolicy.vue
+- [ ] For page load work, use **created()** event(if you are not accessing DOM) or **mounted()** event in Vuejs component
 
 **Tasks**
 

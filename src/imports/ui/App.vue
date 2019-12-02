@@ -7,13 +7,14 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+
 export default {
   components: {
   },
   computed: {
     ...mapGetters('layout', ['showCart',]),
   },
-  /*meteor: 
+  meteor: 
   {
     $lazy: true,
     $subscribe: 
@@ -28,15 +29,15 @@ export default {
       },      
     },
     // now define the reactive properties directly in the meteor object, not inside the subscribe object    
-    'currentUser': function() 
+    currentUser: function() 
     {
       return Meteor.user();
     },
-    'currentUserId': function() 
+    currentUserId: function() 
     {
       return Meteor.userId();
     }
-  },*/
+  },
 }
 </script>
 
