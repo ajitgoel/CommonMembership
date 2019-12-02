@@ -573,7 +573,7 @@
               </div>
             </div>
           </li>
-          <li class="nav-item d-lg-none d-xl-block" v-if="(this.currentUserId==null)">
+          <li class="nav-item d-lg-none d-xl-block" v-if="(this.$root.currentUserId==null)">
             <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
           </li>
           <li class="nav-item d-lg-none d-xl-block" v-else>
@@ -596,7 +596,6 @@
 </template>
 
 <script>
-import EventBus from '../EventBus.js';
 import { Meteor } from 'meteor/meteor';
 
 export default 
@@ -606,16 +605,8 @@ export default
   },
   data() {
     return {
-      currentUserId:null,
       failureMessage:''
     };
-  },
-  mounted() 
-  {
-    EventBus.$on('CurrentUserId', (payload) =>
-    {
-      this.currentUserId = payload;
-    });    
   },
   methods: 
   { 
@@ -632,8 +623,6 @@ export default
         } 
         else 
         {          
-          this.currentUserId=null;
-          EventBus.$emit('CurrentUserId', this.currentUserId);              
           this.$router.push({ name: 'home'});                   
         }
       });
