@@ -166,6 +166,8 @@ export default
       }
       let email=this.user.email.toLowerCase().trim();
       console.log(email);
+      const router = this.$router; 
+      
       Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, (error, result)=>
       {
         if(error) 
@@ -196,7 +198,8 @@ export default
             } 
             else 
             {
-              this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
+              console.log(`currentUserId: ${this.$root.currentUserId}`);
+              router.push({ name: 'dashboard', params: { domain: result.domain }});                   
               return;
             }
           });

@@ -612,6 +612,7 @@ export default
   { 
     Logout() 
     {
+      const router = this.$router; 
       Meteor.logout((error)=>
       {
         if(error)
@@ -623,7 +624,8 @@ export default
         } 
         else 
         {          
-          this.$router.push({ name: 'home'});                   
+          console.log('before redirect to home page');
+          router.push({ name: 'home'});                   
         }
       });
     },

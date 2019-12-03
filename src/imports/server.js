@@ -10,17 +10,16 @@ import { Meteor } from 'meteor/meteor';
 const isDev = process.env.NODE_ENV !== 'production'
 Vue.use(ApolloSSR)
 
-Meteor.startup(() => 
+Meteor.publish('currentUserId', function () 
 {
-  Meteor.publish('currentUserId', function () 
-  {
-    console.log(`Meteor publish currentUserId called with ${this.userId()}`);
-    return this.userId();
-  });
+  console.log(`Meteor publish currentUserId called with ${this.userId}`);
+  return this.userId;
 });
 
 // This will be called each time the app is rendered
-VueSSR.createApp = function (context) {
+VueSSR.createApp = function (context) 
+{
+  console.log(`in createApp`);
   const s = isDev && Date.now()
 
   return new Promise((resolve, reject) => {
