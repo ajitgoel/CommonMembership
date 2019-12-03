@@ -1,11 +1,10 @@
-import 'intersection-observer'
-import 'vue-googlemaps/dist/vue-googlemaps.css'
+import 'intersection-observer';
+import 'vue-googlemaps/dist/vue-googlemaps.css';
 
-import { Meteor } from 'meteor/meteor'
-import CreateApp from './app'
+import { Meteor } from 'meteor/meteor';
+import CreateApp from './app';
 
-Meteor.startup(() => {
-  CreateApp({
-    ssr: false,
-  })
-})
+Meteor.startup(() => 
+{
+  CreateApp({ssr: false,});
+});

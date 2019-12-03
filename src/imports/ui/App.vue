@@ -7,6 +7,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import { Meteor } from 'meteor/meteor';
 
 export default {
   components: {
@@ -16,24 +17,7 @@ export default {
   },
   meteor: 
   {
-    $lazy: true,
-    $subscribe: 
-    {
-      'currentUserId': function() 
-      {
-        // You need to get the data from the server, unless you are using autopublish, which you shouldn't be!
-        // passing Meteor.userId() to the subscription makes the subscription change when a user logs in/out
-        // (but DONT TRUST THIS within the server publication, always use this.userId instead)
-        // Subscription parameters need to be returned in an array
-        return [Meteor.userId()];
-      },      
-    },
-    // now define the reactive properties directly in the meteor object, not inside the subscribe object    
-    currentUser: function() 
-    {
-      return Meteor.user();
-    },
-    currentUserId: function() 
+    currentUserId()
     {
       return Meteor.userId();
     }
