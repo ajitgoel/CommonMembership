@@ -1,14 +1,9 @@
 import Vue from 'vue';
-import ApolloSSR from 'vue-apollo/ssr';
 import { VueSSR } from 'meteor/akryum:vue-ssr';
 import CreateApp from './app';
-import App from './ui/App.vue';
-
-import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 
 const isDev = process.env.NODE_ENV !== 'production'
-Vue.use(ApolloSSR)
 
 Meteor.publish('currentUserId', function () 
 {
@@ -23,7 +18,7 @@ VueSSR.createApp = function (context)
   const s = isDev && Date.now()
 
   return new Promise((resolve, reject) => {
-    const { app, router, store, apolloProvider } = CreateApp({
+    const { app, router, store } = CreateApp({
       ssr: true,
     })
 
@@ -63,8 +58,6 @@ VueSSR.createApp = function (context)
           // the initial data fetching on the client.
 
           context.js += `window.__INITIAL_STATE__=${JSON.stringify(store.state)};`
-          context.js += ApolloSSR.exportStates(apolloProvider)
-
         }
         resolve(app)
       }).catch(reject)

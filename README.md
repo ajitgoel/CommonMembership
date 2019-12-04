@@ -48,6 +48,7 @@ https://vuelidate.js.org/
 - [ ] On the client and server side use Meteor.userId(). Using Meteor.user() on server queries the database and is not recommended.
 - [ ] On the server, within a publish function, calling either Meteor.userId() or Meteor.user() will cause an error. Instead, use this.userId or Meteor.users.findOne(this.userId), respectively.
 - [ ] On the client, Meteor.userId() and Meteor.user() will not throw errors and this.userId will not work. Calls to Meteor.user() are essentially equivalent to Meteor.users.findOne(Meteor.userId()), but since this corresponds to a mini-mongo DB query, performance probably won't be a concern. However, for security reasons the object returned by Meteor.user() may be incomplete (especially if the autopublish package is not installed).
+- [ ] meteor list --tree lists the various meteor packages and thier interdependencies. 
 
 **Javascript Tips**
 - [x] **check variable is null or undefined: **
@@ -76,7 +77,7 @@ b. if (variable==null)
 	- [x] Navigation Bar
 		- [x] ~~Register link should be changed to logout when the user has logged in.~~
 		- [x] Afer the user has logged in, the link should be changed to logout. 
-		- [ ] Afer the user clicks logout the link should be changed to register and he should be directed to the home page. 
+		- [ ] Afer the user clicks logout the link should be changed to register and he should be directed to the home page-Remove VueSSR 
 		- [x] ~~Logout functionality.~~
 		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast.~~
 	- [ ] User management
