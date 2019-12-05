@@ -32,7 +32,7 @@
                     <div v-if="submitted && ($v.user.email.$error || this.user.emailInvalid)" class="invalid-feedback">
                       <span v-if="!$v.user.email.required">Email is required</span>
                       <span v-if="!$v.user.email.email">Email is invalid</span>
-                      <span v-if="this.user.emailInvalid">Could not find your account. Enter a different email or                         
+                      <span v-if="this.user.emailInvalid">We could not find your account. Enter a different email or click
                         <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Register</router-link> to continue.
                       </span>
                     </div>

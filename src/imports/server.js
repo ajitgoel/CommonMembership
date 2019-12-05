@@ -1,20 +1,26 @@
-import Vue from 'vue';
 import { VueSSR } from 'meteor/akryum:vue-ssr';
 import CreateApp from './app';
 import { Meteor } from 'meteor/meteor';
+import './accountEmailTemplates';
 
 const isDev = process.env.NODE_ENV !== 'production'
 
 Meteor.publish('currentUserId', function () 
 {
-  console.log(`Meteor publish currentUserId called with ${this.userId}`);
+  console.warn(`Meteor publish currentUserId called with ${this.userId}`);
   return this.userId;
+});
+
+Meteor.startup(() => 
+{
+  process.env.MAIL_URL = 
+    `${Meteor.settings.private.Mailgun.Protocol}://${Meteor.settings.private.Mailgun.Username}:${Meteor.settings.private.Mailgun.Password}@${Meteor.settings.private.Mailgun.SMTP_Hostname}:${Meteor.settings.private.Mailgun.Port}`;
 });
 
 // This will be called each time the app is rendered
 VueSSR.createApp = function (context) 
 {
-  console.log(`in createApp`);
+  console.warn(`in createApp`);
   const s = isDev && Date.now()
 
   return new Promise((resolve, reject) => {
