@@ -64,6 +64,7 @@ b. if (variable==null)
 
 - [x] ~~Configure Vuetify 2.0 with application~~
 - [x] ~~Configure BootstrapVue with application~~
+- [x] ~~Configure (and use) mailgun email provider to send emails.~~
 - [ ] migrate to alanning:roles version 3.
 - [ ] remove all packages that are not being used.
 - [ ] Add server side validations using Collection2 and SimpleSchema.
@@ -86,5 +87,10 @@ b. if (variable==null)
 		- [ ] Allusers\Search users
 		- [ ] Import users using CSV file
 		- [ ] Export users to CSV file
-	- [ ] Login screen
-		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains. 
+	- [ ] Login user screen
+		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
+	- [ ] Register user screen
+		- [ ] use enrollment email template when sending emails.
+		- [ ] when user clicks on confirmation email link, it should confirm the user's email.
+	- [ ] Reset Password
+		- [ ] ==Change reset password template. ==
