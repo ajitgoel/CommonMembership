@@ -13,8 +13,8 @@
           <div class="col-md-8 col-lg-6">
             <div>
               <div class="mb-5 text-center">
-                  <h6 class="h3">Create account</h6>
-                  <p class="text-muted mb-0">Made with love by developers for developers.</p>
+                  <h6 class="h3">Change password</h6>
+                  <p class="text-muted mb-0">Made with love by developers for everyone.</p>
               </div>
               <span class="clearfix"></span>
               <form role="form">
@@ -100,7 +100,7 @@ export default
         confirmPassword: "",
       },
       submitted: false,
-      failureMessage:''
+      failureMessage:'',      
     };
   },
   validations: 
@@ -117,14 +117,14 @@ export default
     {
       this.submitted = true;
       this.failureMessage='';
-      
+      this.successMessage='';
+
       this.$v.$touch();
       if (this.$v.$invalid) 
       {
           return;
       }
-      let token=this.$route.param.token;
-      console.warn(`token: ${token}`);
+      let token=this.$route.params.token;
       Accounts.resetPassword(token, this.user.password, (error)=>
       {
         if(error) 
@@ -133,6 +133,8 @@ export default
           return;
         }        
       });
+      
+      this.$router.push({ name: 'login'});                  
     },
   },
 }

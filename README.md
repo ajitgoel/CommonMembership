@@ -92,6 +92,10 @@ b. if (variable==null)
 	- [ ] Register user screen
 		- [ ] use enrollment email template when sending emails.
 		- [ ] when user clicks on confirmation email link, it should confirm the user's email.
+	- [ ] Verify Email
+		- [ ] when user clicks on verify email link, it should verify email, login user and navigate user to dashboard screen.
+		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
 	- [x] ~~Reset Password~~
 		- [x] ~~Change reset password template~~
-		- [ ] when user clicks on reset password email link, it should navigate user to change password screen and allow user to reset the user's password.
+		- [x] ~~when user clicks on reset password email link, it should navigate user to change password screen and allow user to reset the user's password.~~
+		- [ ] reset password email link=>change password screen=> reset the user's password=> show message on login screen.

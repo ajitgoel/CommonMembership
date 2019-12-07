@@ -165,19 +165,18 @@ export default
           return;
       }
       let email=this.user.email.toLowerCase().trim();
-      console.log(email);
       const router = this.$router; 
       
-      Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, (error, result)=>
+      Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, (error1, result)=>
       {
-        if(error) 
+        if(error1) 
         {     
-          if(error.error && error.error==='not-authorized')
+          if(error1.error && error1.error==='not-authorized')
           {
             this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
             return;  
           }
-          if(error.error && error.error==='email-password-invalid')
+          if(error1.error && error1.error==='email-password-invalid')
           {
             this.user.emailpasswordInvalid=true;
             return;  
@@ -187,18 +186,15 @@ export default
         } 
         if(result && result.userId && result.domain) 
         {                 
-          Meteor.loginWithPassword(email, this.user.password, (error)=>
+          Meteor.loginWithPassword(email, this.user.password, (error2)=>
           {
-            console.log('loginwithpassword');
-            console.log(error);
-            if(error)
+            if(error2)
             {
               this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
               return;
             } 
             else 
             {
-              console.log(`currentUserId: ${this.$root.currentUserId}`);
               router.push({ name: 'dashboard', params: { domain: result.domain }});                   
               return;
             }

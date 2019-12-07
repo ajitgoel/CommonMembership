@@ -1,0 +1,28 @@
+Use this link to verify your email. 
+
+{{ProductName}} ( {{WebsiteURL}} )
+
+************
+Hi {{name}},
+************
+
+You recently registered your email for your {{ProductName}} account. Use the link below to verify your email. 
+
+Verify your email ( {{ action_url }} )
+
+If you did not register your account, please contact support ( {{ support_url }} ).
+
+Thanks,
+The {{ProductName}} Team
+
+If you’re having trouble with the button above, copy and paste the URL below into your web browser.
+
+{{action_url}}
+
+© 2019 {{ProductName}}. All rights reserved.
+
+{{CompanyName}}
+
+{{CompanyNameAddress1}}
+
+{{CompanyNameAddress2}}
