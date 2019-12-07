@@ -92,5 +92,6 @@ b. if (variable==null)
 	- [ ] Register user screen
 		- [ ] use enrollment email template when sending emails.
 		- [ ] when user clicks on confirmation email link, it should confirm the user's email.
-	- [ ] Reset Password
-		- [ ] ==Change reset password template. ==
+	- [x] ~~Reset Password~~
+		- [x] ~~Change reset password template~~
+		- [ ] when user clicks on reset password email link, it should navigate user to change password screen and allow user to reset the user's password.
