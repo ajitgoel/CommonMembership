@@ -127,6 +127,8 @@ export default {
         {
           if(typeof result === "boolean" && result === true)
           {                 
+            this.user.email='';
+            this.$v.$reset();
             this.successMessage='Please check your email for instructions on how to reset your password';                  
             return;
           }

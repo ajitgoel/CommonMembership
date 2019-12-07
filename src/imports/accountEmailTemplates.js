@@ -16,15 +16,21 @@ Accounts.emailTemplates.enrollAccount.text = (user, url) => {
 //#endregion
 
 //#region ResetPassword
-/*Accounts.emailTemplates.resetPassword.from = () => 
-{
-  return 'AwesomeSite Password Reset <no-reply@example.com>';
-};*/
 Accounts.emailTemplates.resetPassword.html = function (user, url) 
 {
+  let newUrl = url.replace("#/reset-password", "changepassword");
   SSR.compileTemplate('forgotPassword', `<pre> ${Assets.getText('emailTemplates/password-reset/content.txt')} </pre>`);
-  return SSR.render("forgotPassword", { name: user.username, action_url: url, operating_system:'Windows 10',
-    browser_name:'Google Chrome', support_url:Meteor.settings.private.SupportUrl});
+  return SSR.render("forgotPassword", 
+  { 
+    name: user.username, 
+    action_url: newUrl, 
+    support_url:Meteor.settings.private.SupportUrl,
+    ProductName:Meteor.settings.private.ProductName,
+    WebsiteURL:Meteor.settings.private.WebsiteURL,
+    CompanyName:Meteor.settings.private.CompanyName,
+    CompanyNameAddress1:Meteor.settings.private.CompanyNameAddress1,
+    CompanyNameAddress2:Meteor.settings.private.CompanyNameAddress2,
+  });
 };
 //#endregion
 
