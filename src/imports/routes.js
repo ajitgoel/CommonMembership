@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { Accounts } from 'meteor/accounts-base';
 
 import NotFound from './ui/NotFound.vue';
 import Home from './ui/Home.vue';
@@ -42,6 +43,24 @@ export default [
   { path: '/login', name: 'login', component: Login },
   { path: '/resetpassword', name: 'resetpassword', component: ResetPassword },
   { path: '/changepassword/:token', name: 'changepassword', component: ChangePassword },
+  { path: '/verifyemail/:token', name: 'verifyemail', 
+    beforeEnter: (to, from, next) => 
+    {
+      Accounts.verifyEmail(to.params.token, (error) =>
+      {
+        if (error) 
+        {
+          //ToDo: show error with error.reason
+          console.warn('show error with error.reason');
+        } 
+        else 
+        {          
+          //ToDo: Check no of domains for user, if there are more than one domain then navigate to screen where the user can select domain.
+          router.push({ name: 'dashboard', params: { domain: 'clearcrimson' }});                   
+        }
+      });
+    } 
+  },
   { path: '/privacypolicy', name: 'privacypolicy', component: PrivacyPolicy },
   { path: '/privacyshieldnotice', name: 'privacyshieldnotice', component: PrivacyShieldNotice },
   { path: '/termsandconditions', name: 'termsandconditions', component: TermsAndConditions },  
