@@ -39,7 +39,7 @@
                   </div>
                 </div>
                 <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary" v-on:click="ResetPassword()">
+                  <button type="button" class="btn btn-block btn-primary" v-bind:disabled="this.disableButton" v-on:click="ResetPassword()">
                     Reset password
                   </button>
                 </div>
@@ -86,6 +86,7 @@ export default {
         email: "",      
       },
       submitted: false,
+      disableButton:false,      
       failureMessage:'',
       successMessage:''
     };
@@ -100,7 +101,8 @@ export default {
   methods: 
   {    
     ResetPassword() 
-    {
+    {    
+      this.disableButton=false;
       this.submitted = true;
       this.failureMessage='';
       this.successMessage='';
@@ -110,9 +112,12 @@ export default {
       if (this.$v.$invalid) 
       {
           return;
-      }
+      }     
+
+      this.disableButton=true;
       Meteor.call('resetUserPassword', this.user.email, (error, result)=>
       {
+        this.disableButton=false;
         if(error) 
         {     
           if(error.error && error.error==='email-invalid')

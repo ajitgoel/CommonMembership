@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary" v-on:click="LoginUserForDomain()">
+                  <button type="button" class="btn btn-block btn-primary" v-bind:disabled="this.disableButton" v-on:click="LoginUserForDomain()">
                     Sign in
                   </button>
                 </div>
@@ -132,6 +132,7 @@ export default
         domains:[]                
       },
       submitted: false,
+      disableButton:false,      
       failureMessage:'',
     };
   },
@@ -155,6 +156,7 @@ export default
   { 
     LoginUserForDomain() 
     {
+      this.disableButton=false;
       this.submitted = true;
       this.failureMessage='';
       this.user.emailpasswordInvalid=false;
@@ -165,10 +167,12 @@ export default
           return;
       }
       let email=this.user.email.toLowerCase().trim();
-      const router = this.$router; 
-      
+      const router = this.$router;
+
+      this.disableButton=true;      
       Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, (error1, result)=>
       {
+        this.disableButton=false;
         if(error1) 
         {     
           if(error1.error && error1.error==='not-authorized')
@@ -186,8 +190,10 @@ export default
         } 
         if(result && result.userId && result.domain) 
         {                 
+          this.disableButton=true;
           Meteor.loginWithPassword(email, this.user.password, (error2)=>
           {
+            this.disableButton=false;
             if(error2)
             {
               this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';

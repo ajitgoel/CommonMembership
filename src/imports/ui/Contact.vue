@@ -147,7 +147,7 @@
                 </div>
               </div>
               <div class="text-center mt-4">
-                <button type="button" class="btn btn-dark rounded-pill" v-on:click="SendEmail()">Send your message</button>                
+                <button type="button" class="btn btn-dark rounded-pill" v-bind:disabled="this.disableButton" v-on:click="SendEmail()">Send your message</button>                
                 <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.                   
                   <div v-if="this.successMessage!=''">
                       <span>{{this.successMessage}}</span>                    
@@ -182,6 +182,7 @@ export default {
         message: ""
       },
       submitted: false,
+      disableButton:false,   
       successMessage:'',
       failureMessage:''
     };
@@ -197,6 +198,7 @@ export default {
   {
     async SendEmail() 
     {
+      this.disableButton=false;
       this.submitted = true;
       this.failureMessage='';
       this.successMessage='';
@@ -211,7 +213,9 @@ export default {
       var subject="Email from contact us page in common membership website";
       try
       {
+        this.disableButton=true;
         await Meteor.callPromise('emailSend', this.user.email, subject, nameWithEmailText);
+        this.disableButton=false;
         this.user.name='';
         this.user.email='';
         this.user.message=''; 

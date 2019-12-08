@@ -58,7 +58,8 @@
                 </div>
                                 
                 <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary" v-on:click="ChangePassword()">
+                  <button type="button" class="btn btn-block btn-primary" v-bind:disabled="this.disableButton" 
+                  v-on:click="ChangePassword()">
                     Change Password
                   </button>
                 </div>
@@ -100,6 +101,7 @@ export default
         confirmPassword: "",
       },
       submitted: false,
+      disableButton:false,    
       failureMessage:'',      
     };
   },
@@ -115,6 +117,7 @@ export default
   {  
     ChangePassword() 
     {
+      this.disableButton=false;
       this.submitted = true;
       this.failureMessage='';
       this.successMessage='';
@@ -125,8 +128,11 @@ export default
           return;
       }
       let token=this.$route.params.token;
+
+      this.disableButton=true;
       Accounts.resetPassword(token, this.user.password, (error)=>
       {
+        this.disableButton=false;
         if(error) 
         {     
           this.failureMessage='There was an error resetting your password. Our administrators have been notified of the issue and we will have a look.';
