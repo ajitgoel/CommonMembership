@@ -101,8 +101,9 @@ b. if (variable==null)
 	- [ ] 4. Reset Password
 		- [x] disable button when submitting form.
 		- [x] ~~Change reset password template~~
-		- [x] ~~when user clicks on reset password email link, it should navigate user to change password screen and allow user to reset the user's password.~~
+		- [x] ~~when user clicks on reset password email link, it should navigate user to "change password" screen and allow user to reset the user's password.~~
 		- [ ] reset password email link=>change password screen=> reset the user's password=> show message on login screen.
+		- [ ] Check token expiration.
 	- [x] 5. Change Password
 		- [x] disable button when submitting form.
 	- [x] 6. Contact us

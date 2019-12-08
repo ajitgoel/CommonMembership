@@ -97,6 +97,11 @@
                 </div>
               </form>
 
+               <div class="alert alert-modern alert-success"  v-if="this.successMessage!=''">    
+                <span class="badge badge-success badge-pill">Success</span>
+                <span class="alert-content">{{this.successMessage}}</span>
+              </div>
+
               <div v-if="this.failureMessage!=''">
                   <span>{{this.failureMessage}}</span>                    
               </div>
@@ -134,6 +139,7 @@ export default
       submitted: false,
       disableButton:false,      
       failureMessage:'',
+      successMessage:'',
     };
   },
   validations: 
@@ -151,6 +157,14 @@ export default
         return true;
       }},    
     },    
+  },
+  created () 
+  {
+    this.$eventHub.$once('navigation-message', this.successMessage);
+  },
+  beforeDestroy() 
+  {
+    this.$eventHub.$off('navigation-message');
   },
   methods: 
   { 

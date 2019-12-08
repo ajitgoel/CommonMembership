@@ -38,6 +38,8 @@ for (const key in filters) {
   Vue.filter(key, filters[key])
 }
 
+Vue.prototype.$eventHub = new Vue();
+
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
