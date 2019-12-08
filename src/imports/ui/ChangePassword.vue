@@ -139,7 +139,7 @@ export default
           return;
         }        
       });
-      
+      this.$eventHub.$emit('navigation-message', 'Your password has been changed successfully. Please login to continue.');
       this.$router.push({ name: 'login'});                  
     },
   },
