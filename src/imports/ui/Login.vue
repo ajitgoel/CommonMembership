@@ -97,9 +97,9 @@
                 </div>
               </form>
 
-               <div class="alert alert-modern alert-success"  v-if="this.successMessage!=''">    
+               <div class="alert alert-modern alert-success"  v-if="this.$root.NavigationMessage!=''">    
                 <span class="badge badge-success badge-pill">Success</span>
-                <span class="alert-content">{{this.successMessage}}</span>
+                <span class="alert-content">{{this.$root.NavigationMessage}}</span>
               </div>
 
               <div v-if="this.failureMessage!=''">
@@ -139,7 +139,7 @@ export default
       submitted: false,
       disableButton:false,      
       failureMessage:'',
-      successMessage:'',
+      //successMessage:'',
     };
   },
   validations: 
@@ -158,16 +158,8 @@ export default
       }},    
     },    
   },
-  created () 
-  {
-    this.$eventHub.$once('navigation-message', this.successMessage);
-  },
-  beforeDestroy() 
-  {
-    this.$eventHub.$off('navigation-message');
-  },
   methods: 
-  { 
+  {     
     LoginUserForDomain() 
     {
       this.disableButton=false;
