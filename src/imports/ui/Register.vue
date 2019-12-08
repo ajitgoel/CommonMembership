@@ -130,7 +130,8 @@
                 </div>
 
                 <div class="mt-4">
-                  <button type="button" class="btn btn-block btn-primary" v-on:click="RegisterUser()">
+                  <button type="button" v-bind:disabled="this.disableButton" class="btn btn-block btn-primary" 
+                    v-on:click="RegisterUser()">
                     Create my account
                   </button>
                 </div>
@@ -176,6 +177,7 @@ export default {
         privacyPolicy:false,
       },
       submitted: false,
+      disableButton:false,      
       failureMessage:''
     };
   },
@@ -189,12 +191,10 @@ export default {
       confirmPassword:  { required, sameAsPassword: sameAs('password') },
       termsAndConditions: {checked(val)
       {
-        console.log(val);
         return val;
       }},
       privacyPolicy: {checked(val)
       {
-        console.log(val);
         return val;
       }},
     },
@@ -203,6 +203,7 @@ export default {
   {  
     RegisterUser() 
     {
+      this.disableButton=false;
       this.submitted = true;
       this.failureMessage='';
       this.user.userExistsforDomain=false;
@@ -214,9 +215,11 @@ export default {
           return;
       }
 
+      this.disableButton=true;
       Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, (error, result)=>
       {
-      if(error) 
+      this.disableButton=false;
+        if(error) 
         {     
           if(error.error && error.error==='domain-already-in-use')
           {

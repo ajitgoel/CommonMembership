@@ -87,15 +87,23 @@ b. if (variable==null)
 		- [ ] Allusers\Search users
 		- [ ] Import users using CSV file
 		- [ ] Export users to CSV file
-	- [ ] Login user screen
-		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
-	- [ ] Register user screen
+	- [ ] 1. Register user screen
+		- [x] disable button when submitting form.
 		- [ ] use enrollment email template when sending emails.
 		- [ ] when user clicks on confirmation email link, it should confirm the user's email.
-	- [ ] Verify Email
+	- [ ] 2. Verify Email
 		- [ ] when user clicks on verify email link, it should verify email, login user and navigate user to dashboard screen.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
-	- [x] ~~Reset Password~~
+	- [ ] 3. Login user screen
+		- [x] disable button when submitting form.
+		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
+		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
+	- [ ] 4. Reset Password
+		- [x] disable button when submitting form.
 		- [x] ~~Change reset password template~~
 		- [x] ~~when user clicks on reset password email link, it should navigate user to change password screen and allow user to reset the user's password.~~
 		- [ ] reset password email link=>change password screen=> reset the user's password=> show message on login screen.
+	- [x] 5. Change Password
+		- [x] disable button when submitting form.
+	- [x] 6. Contact us
+		- [x] disable button when submitting form.
