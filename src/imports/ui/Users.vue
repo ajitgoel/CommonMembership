@@ -35,7 +35,10 @@
     <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
       <pre>{{ infoModal.content }}</pre>
     </b-modal>
+    <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
+    
   </b-container>
+
 </template>
 
 <script>
@@ -48,7 +51,8 @@ export default
   {
   },
   data() {
-    return {
+    return {    
+      failureMessage:'',
       items:[],
       fields: [
         { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },

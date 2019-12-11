@@ -46,17 +46,8 @@
               </form>              
 
               <br/>
-
-              <div class="alert alert-modern alert-warning" v-if="this.failureMessage!=''">    
-                <span class="badge badge-danger badge-pill">Error</span>
-                <span class="alert-content">{{this.failureMessage}}</span>
-              </div>
-
-
-              <div class="alert alert-modern alert-success"  v-if="this.successMessage!=''">    
-                <span class="badge badge-success badge-pill">Success</span>
-                <span class="alert-content">{{this.successMessage}}</span>
-              </div>
+              <SuccessAlert ref="successAlert" v-bind:message='this.successMessage'/>
+              <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
 
               <div class="mt-4 text-center"><small>Not registered?</small>
                 <router-link v-bind:to="{ name:'register'}" class="small font-weight-bold">Create account</router-link>

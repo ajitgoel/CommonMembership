@@ -77,34 +77,40 @@ b. if (variable==null)
 - [ ] Screens
 	- [x] Navigation Bar
 		- [x] ~~Register link should be changed to logout when the user has logged in.~~
-		- [x] Afer the user has logged in, the link should be changed to logout. 
+		- [x] ~~Afer the user has logged in, the link should be changed to logout. ~~
 		- [ ] Afer the user clicks logout the link should be changed to register and he should be directed to the home page-Remove VueSSR 
 		- [x] ~~Logout functionality.~~
 		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast.~~
-	- [ ] User management
-		- [ ] Add user
+	- [ ] a. User management
+		- [ ] 1. Add user
 			- [ ] Add custom fields
-		- [ ] Allusers\Search users
-		- [ ] Import users using CSV file
-		- [ ] Export users to CSV file
-	- [ ] 1. Register user screen
+		- [ ] 2. Allusers\Search users
+		- [ ] 3. Import users using CSV file
+		- [ ] 4. Export users to CSV file
+	- [ ] b. Register user screen
 		- [x] ~~disable button when submitting form.~~
-		- [ ] use enrollment email template when sending emails.
-		- [ ] when user clicks on confirmation email link, it should confirm the user's email.
-	- [ ] 2. Verify Email
-		- [ ] when user clicks on verify email link, it should verify email, login user and navigate user to dashboard screen.
+		- [x] ~~use verify email template when sending emails.~~
+		- [ ] When the user registers, he should be logged in. to do this, the server side code needs to be broken down into 2 parts and each part needs to be called from the client one after another.
+		- [x] ~~Show successmessage, failuremessage in common alert components~~
+	- [ ] c. Verify Email
+		- [ ] when user clicks on verify email link, it should verify token, login user and navigate user to dashboard screen.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
-	- [ ] 3. Login user screen
+	- [ ] d. Login user screen
 		- [x] ~~disable button when submitting form.~~
 		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
-	- [ ] 4. Reset Password
+		- [x] ~~Show successmessage, failuremessage in common alert components~~
+	- [ ] e. Reset Password
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~Change reset password template~~
 		- [x] ~~when user clicks on reset password email link, it should navigate user to "change password" screen and allow user to reset the user's password.~~
 		- [x] ~~reset password email link=>change password screen=> reset the user's password=> show message on login screen.~~
 		- [ ] Check token expiration.
-	- [x] 5. Change Password
+		- [x] ~~Show successmessage, failuremessage in common alert components~~
+	- [x] f. Change Password
 		- [x] ~~disable button when submitting form.~~
-	- [x] 6. Contact us
+		- [x] ~~set focus on password textbox when user first navigates to screen.~~
+		- [x] ~~Show successmessage, failuremessage in common alert components~~
+	- [x] g. Contact us
 		- [x] ~~disable button when submitting form.~~
+		- [x] ~~Show successmessage, failuremessage in common alert components~~
