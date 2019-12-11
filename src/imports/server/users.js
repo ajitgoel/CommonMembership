@@ -157,9 +157,9 @@ export const userService =
     var logging = require('./logging.js');      
     check(domain, String);    
     domain=domain.toString().toLowerCase();      
-    console.log(this.userId);
-    console.log(Meteor.userId());
-    console.log(Meteor.user());
+    console.log(`${this.userId}`);
+    console.log(`${Meteor.userId()}`);
+    console.log(`${Meteor.user()}`);
     
     if (! this.userId) 
     {
@@ -189,7 +189,7 @@ export const userService =
         { _id:10, username:'John10',isActive: false, name: { first: 'Dick', last: 'Dunlap' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  }
       ],
     };
-
+    console.log(`${usersResult}`);
     return usersResult;
   }
 }

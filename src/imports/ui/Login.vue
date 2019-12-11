@@ -95,16 +95,11 @@
                     Sign in
                   </button>
                 </div>
-              </form>
+              </form>            
 
-               <div class="alert alert-modern alert-success"  v-if="this.$root.NavigationMessage!=''">    
-                <span class="badge badge-success badge-pill">Success</span>
-                <span class="alert-content">{{this.$root.NavigationMessage}}</span>
-              </div>
-
-              <div v-if="this.failureMessage!=''">
-                  <span>{{this.failureMessage}}</span>                    
-              </div>
+              <br/>
+              <SuccessAlert ref="successAlert" v-bind:message='this.$root.NavigationMessage'/>
+              <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
 
               <div class="mt-4 text-center"><small>Not registered?</small>
                 <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Create account</router-link>

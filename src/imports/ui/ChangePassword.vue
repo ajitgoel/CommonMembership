@@ -59,19 +59,13 @@
                                 
                 <div class="mt-4">
                   <button type="button" class="btn btn-block btn-primary" v-bind:disabled="this.disableButton" 
-                  v-on:click="ChangePassword()">
-                    Change Password
-                  </button>
+                  v-on:click="ChangePassword()">Change Password</button>
                 </div>
-                
-                <br/>
-
-                <div class="alert alert-modern alert-warning" v-if="this.failureMessage!=''">    
-                  <span class="badge badge-danger badge-pill">Error</span>
-                  <span class="alert-content">{{this.failureMessage}}</span>
-                </div>
-
             </form>
+            
+            <br/>
+            <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
+
             <div class="mt-4 text-center"><small>Already have an account?</small>
                 <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link>
             </div>

@@ -26,6 +26,8 @@ function createApp () {
   import TermsAndConditionsText from './ui/components/TermsAndConditionsText.vue';
   import TopNavBar from './ui/components/TopNavBar.vue';
   import Toast from './ui/components/Toast.vue';
+  import SuccessAlert from './ui/components/SuccessAlert.vue';
+  import ErrorAlert from './ui/components/ErrorAlert.vue';
 
   import Contact from './ui/Contact.vue';
   import Home from './ui/Home.vue'
@@ -65,6 +67,9 @@ function createApp () {
   Vue.component('TermsAndConditionsText', TermsAndConditionsText);
   Vue.component('TopNavBar', TopNavBar);
   Vue.component('Toast', Toast);
+  Vue.component('SuccessAlert', SuccessAlert);
+  Vue.component('ErrorAlert', ErrorAlert);
+
   Vue.component('Users', Users);
   Vue.component('AddUser',AddUser);
   Vue.component('ImportUsers',ImportUsers);

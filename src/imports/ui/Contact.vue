@@ -148,16 +148,14 @@
               </div>
               <div class="text-center mt-4">
                 <button type="button" class="btn btn-dark rounded-pill" v-bind:disabled="this.disableButton" v-on:click="SendEmail()">Send your message</button>                
-                <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.                   
-                  <div v-if="this.successMessage!=''">
-                      <span>{{this.successMessage}}</span>                    
-                  </div>
-                  <div v-if="this.failureMessage!=''">
-                      <span>{{this.failureMessage}}</span>                    
-                  </div> 
-                </span>  
+                <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>  
               </div>
             </form>
+
+            <br/>
+            <SuccessAlert ref="successAlert" v-bind:message='this.successMessage'/>
+            <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
+            
           </div>
         </div>
       </div>
