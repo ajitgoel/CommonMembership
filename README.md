@@ -24,6 +24,7 @@ db.firstLevelArrayDemo.find({StudentTechnicalSkills:{$in:["MongoDB"]}}).pretty()
 **Links;**
 https://cleverbeagle.com/pup/v1/the-basics/mongodb-collections#the-documents-collection
 **Loggly url:** https://ajitgoel.loggly.com/search
+**Monti url(Application Performance Management):** https://app.montiapm.com/apps/uzHNSfFSABcizHjyj/dashboard/overview
 **Atmostphere package manager:** https://atmospherejs.com/meteor/accounts-password
 **Vuelidate validation package:** https://vuelidate.netlify.com/#getting-started
 **vue-meteor-tracker:** https://github.com/meteor-vue/vue-meteor-tracker
@@ -32,6 +33,7 @@ https://cleverbeagle.com/pup/v1/the-basics/mongodb-collections#the-documents-col
 **working with Collections:** https://docs.meteor.com/api/collections.html
 https://github.com/Meteor-Community-Packages/meteor-roles
 **Running meteor at scale:** https://www.freecodecamp.org/news/scaling-meteor-a-year-on-26ee37588e4b/
+**Meteor Roles Package:** https://github.com/Meteor-Community-Packages/meteor-roles/tree/v3
 
 **VueJs:** : **Vue Router:** : https://router.vuejs.org/guide/essentials/named-routes.html
 https://vuelidate.js.org/
@@ -65,7 +67,7 @@ b. if (variable==null)
 - [x] ~~Configure Vuetify 2.0 with application~~
 - [x] ~~Configure BootstrapVue with application~~
 - [x] ~~Configure (and use) mailgun email provider to send emails.~~
-- [ ] migrate to alanning:roles version 3.
+- [x] ~~migrate to alanning:roles version 3.~~
 - [ ] remove all packages that are not being used.
 - [ ] Add server side validations using Collection2 and SimpleSchema.
 - [ ] Write unit tests for server side code.
@@ -82,9 +84,11 @@ b. if (variable==null)
 		- [x] ~~Logout functionality.~~
 		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast.~~
 	- [ ] a. User management
-		- [ ] 1. Add user
+		- [ ] 2. Add user
 			- [ ] Add custom fields
-		- [ ] 2. Allusers\Search users
+		- [ ] 1. All users\Search users
+			- [ ] sort indicator does not show on grid column
+			- [ ] 
 		- [ ] 3. Import users using CSV file
 		- [ ] 4. Export users to CSV file
 	- [ ] b. Register user screen
