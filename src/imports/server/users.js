@@ -2,8 +2,9 @@
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-//export const Users = new Mongo.Collection('users');
-export const Users = Mongo.Collection.get('users');
+export const UsersCollection = new Mongo.Collection.get('users');
+//export const RolesCollection = new Mongo.Collection.get('roles');
+export const RolesAssigmentCollection = new Mongo.Collection.get('role-assignment');
 
 export const userService = 
 {
@@ -21,8 +22,7 @@ export const userService =
     email=email.toString().toLowerCase();      
 
     var doesDomainExistForOtherUsers=
-      Users.findOne({"roles": {$elemMatch:{_id: domainOwner_RoleName, scope: domain} } }, {_id:1})
-    //TODO: migrate to alanning:roles version 3. 
+      RolesAssigmentCollection.findOne({'role._id': domainOwner_RoleName, scope: domain}, {_id:1})
     //TODO: remove all packages that are not being used. 
     //TODO: Add server side validations. 
     //TODO: Write unit tests for server side code. 
@@ -157,11 +157,8 @@ export const userService =
     var logging = require('./logging.js');      
     check(domain, String);    
     domain=domain.toString().toLowerCase();      
-    console.log(`${this.userId}`);
-    console.log(`${Meteor.userId()}`);
-    console.log(`${Meteor.user()}`);
     
-    if (! this.userId) 
+    if (!Meteor.userId) 
     {
       throw new Meteor.Error('not-authorized');
     }

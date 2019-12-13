@@ -38,9 +38,10 @@ meteortesting:mocha
 dburles:mongo-collection-instances
 mizzao:autocomplete
 mizzao:user-status
-alanning:roles
 session@1.2.0
 typescript
 autoupdate
 email
 meteorhacks:ssr
+alanning:roles
+montiapm:agent

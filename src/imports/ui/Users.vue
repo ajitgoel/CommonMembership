@@ -12,7 +12,8 @@
       </b-col>
 
       <b-col sm="7" md="6" class="my-1">
-        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" size="sm" class="my-0"></b-pagination>
+        <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" align="fill" 
+        class="my-0"></b-pagination>
       </b-col>
     </b-row>
 
