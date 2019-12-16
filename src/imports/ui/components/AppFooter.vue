@@ -23,7 +23,7 @@
             <ul class="list-unstyled text-small">
               <li><a href="#">Services</a></li>
               <li>
-                <router-link v-bind:to="{ name: 'contact' }">Contact</router-link>
+                <router-link data-cy="contact" v-bind:to="{ name: 'contact' }">Contact</router-link>
               </li>
               <li><a href="#">Careers</a></li>
             </ul>

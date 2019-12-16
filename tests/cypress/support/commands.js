@@ -27,6 +27,18 @@ Cypress.Commands.add('loginUser', (email, password) =>
   cy.url().should("eq", "http://localhost:3000/dashboard/clearcrimson/");
 });
 
+Cypress.Commands.add('contactUs', (name, email, message) => 
+{
+  cy.visit(Cypress.config().baseUrl);    
+  cy.get("[data-cy=contact]").click();
+
+  cy.get("[data-cy=name]").type(name);
+  cy.get("[data-cy=email]").type(email);
+  cy.get("[data-cy=message]").type(message);
+  cy.get("[data-cy=sendemail]").click();
+  //cy.url().should("eq", "http://localhost:3000/dashboard/clearcrimson/");
+});
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
