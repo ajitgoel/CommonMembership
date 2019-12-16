@@ -4,6 +4,29 @@ Cypress.Commands.add("resetDatabase", () =>
   cy.exec('"C:\\Program Files\\MongoDB\\Server\\4.2\\bin\\mongo" mongodb://localhost:3001/meteor --eval "db.dropDatabase()"')
 );
 
+Cypress.Commands.add('registerUser', (email, password, domain) => 
+{
+  cy.contains("Register").click();
+  cy.get("[data-cy=email]").type(email);
+  cy.get("[data-cy=password]").type(password);
+  cy.get("[data-cy=confirmPassword]").type(password);
+  cy.get("[data-cy=domain]").type(domain);
+  cy.get("[data-cy=termsAndConditions]").check({force: true});  
+  cy.get("[data-cy=privacyPolicy]").check({force: true});
+  cy.get("[data-cy=registeruser]").click();
+  cy.url().should("eq", "http://localhost:3000/dashboard/clearcrimson/");
+});
+
+Cypress.Commands.add('loginUser', (email, password) => 
+{
+  cy.contains("Login").click();
+
+  cy.get("[data-cy=email]").type(email);
+  cy.get("[data-cy=password]").type(password);
+  cy.get("[data-cy=loginuser]").click();
+  cy.url().should("eq", "http://localhost:3000/dashboard/clearcrimson/");
+});
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
