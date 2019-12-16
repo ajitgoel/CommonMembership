@@ -62,6 +62,9 @@ b. if (variable==null)
 - [x] For page load work, use **created()** event(if you are not accessing DOM) or **mounted()** event in Vuejs component
 - [x] By injecting the router in the application, we get access to the router as ==this.$router== as well as the current route as ==this.$route== inside of any component.
 
+**Integration tests with Cypress**
+**node_modules\.bin\cypress open**
+
 **Tasks**
 
 - [x] ~~Configure Vuetify 2.0 with application~~

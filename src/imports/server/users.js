@@ -170,7 +170,8 @@ export const userService =
       throw new Meteor.Error('email-invalid');
     } */  
     //let users=Users.find({"domain":domain});
-    let usersResult = { 
+    let usersResult= UsersCollection.find({"by":"tutorials point"});
+    /*let usersResult = { 
       'users': [
         { _id:1, username:'John1', name: { first: 'Dickerson', last: 'Macdonald' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", },
         { _id:2, username:'John2', name: { first: 'Larsen', last: 'Shaw' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
@@ -185,7 +186,7 @@ export const userService =
         { _id:9, username:'John9',isActive: true,  name: { first: 'John', last: 'Carney' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
         { _id:10, username:'John10',isActive: false, name: { first: 'Dick', last: 'Dunlap' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  }
       ],
-    };
+    };*/
     console.log(`${usersResult}`);
     return usersResult;
   }
