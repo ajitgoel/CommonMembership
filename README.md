@@ -63,7 +63,9 @@ b. if (variable==null)
 - [x] By injecting the router in the application, we get access to the router as ==this.$router== as well as the current route as ==this.$route== inside of any component.
 
 **Integration tests with Cypress**
-**node_modules\.bin\cypress open**
+**npm run test**
+**Cypress API commands:** https://docs.cypress.io/api/cypress-api/custom-commands.html#Parent-Commands
+**Cypress Best Practices:** https://docs.cypress.io/guides/references/best-practices.html#Having-tests-rely-on-the-state-of-previous-tests
 
 **Tasks**
 
