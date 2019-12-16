@@ -1,3 +1,9 @@
+/// <reference types="Cypress" />
+
+Cypress.Commands.add("resetDatabase", () =>
+  cy.exec('"C:\\Program Files\\MongoDB\\Server\\4.2\\bin\\mongo" mongodb://localhost:3001/meteor --eval "db.dropDatabase()"')
+);
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
