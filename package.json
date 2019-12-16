@@ -2,10 +2,13 @@
   "name": "vue-meteor-demo",
   "private": true,
   "scripts": {
+    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json",
+    "cypress:open": "cypress open",
+    "test": "start-server-and-test start-server http://localhost:3000 cypress:open",
+
     "start": "meteor run --settings settings.json",
     "debug": "meteor run --settings settings.json --inspect",
     "@comment test": "meteor test --once --driver-package meteortesting:mocha --port 3050",
-    "test": "cypress open",
     "test-app": "cross-env TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha --port 3051",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
@@ -48,6 +51,7 @@
     "chai": "^4.2.0",
     "cypress": "^3.8.0",
     "sinon": "^7.5.0",
+    "start-server-and-test": "^1.10.6",
     "vue-template-compiler": "2.6.10"
   }
 }
