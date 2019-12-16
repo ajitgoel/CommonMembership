@@ -114,7 +114,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Name</label>
-                    <input class="form-control" v-focus type="text" placeholder="Name" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" 
+                    <input class="form-control" data-cy="name" v-focus type="text" placeholder="Name" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" 
                     v-model="user.name" id="name" name="name" :class="{ 'is-invalid': submitted && $v.user.name.$error }" >
                     <div v-if="submitted && !$v.user.name.required" class="invalid-feedback">Name is required</div>
                   </div>
@@ -124,7 +124,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Email</label>
-                    <input class="form-control" type="email" placeholder="email@example.com" 
+                    <input class="form-control" data-cy="email" type="email" placeholder="email@example.com" 
                     v-model="user.email" id="email" name="email" :class="{ 'is-invalid': submitted && $v.user.email.$error }" >
                      <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
                         <span v-if="!$v.user.email.required">Email is required</span>
@@ -137,7 +137,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label">Message</label>
-                    <textarea class="form-control" data-toggle="autosize" placeholder="Tell us a few words ..." rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 96.9922px;" 
+                    <textarea class="form-control" data-cy="message" data-toggle="autosize" placeholder="Tell us a few words ..." rows="3" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 96.9922px;" 
                     v-model="user.message" id="message" name="message" :class="{ 'is-invalid': submitted && $v.user.message.$error }" ></textarea>
                     <div v-if="submitted && $v.user.message.$error" class="invalid-feedback">
                         <span v-if="!$v.user.message.required">Message is required</span>
@@ -147,7 +147,8 @@
                 </div>
               </div>
               <div class="text-center mt-4">
-                <button type="button" class="btn btn-dark rounded-pill" v-bind:disabled="this.disableButton" v-on:click="SendEmail()">Send your message</button>                
+                <button type="button" data-cy="sendemail" class="btn btn-dark rounded-pill" v-bind:disabled="this.disableButton" 
+                v-on:click="SendEmail()">Send your message</button>                
                 <span class="d-block mt-4 text-sm">We'll get back to you in 24-48 h.</span>  
               </div>
             </form>

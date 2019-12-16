@@ -12,7 +12,7 @@ describe("login-user", () =>
   });
   beforeEach(() => 
   {
-    cy.visit("http://localhost:3000");
+    cy.visit(Cypress.config().baseUrl);
     cy.registerUser(email, pasword, domain);  
   });
   after(() => 
@@ -25,7 +25,7 @@ describe("login-user", () =>
   });
   it("should login the user", () => 
   {         
-    cy.visit("http://localhost:3000/login");
+    cy.visit('/login');
     cy.loginUser(email, pasword, domain);
   });
 });

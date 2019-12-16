@@ -123,3 +123,8 @@ b. if (variable==null)
 	- [x] g. Contact us
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
+	- [x] g. End to end integration testing using Cypress
+		- [ ] move all constant variables into a config file.
+		- [ ] use Cypress server, routes, wait to check if the system has navigated to a screen after a button is clicked.
+		- [ ] Add more checks to see that the correct error messages are showing up.
+**Wait for application to load:** https://docs.cypress.io/faq/questions/using-cypress-faq.html#How-do-I-wait-for-my-application-to-load
