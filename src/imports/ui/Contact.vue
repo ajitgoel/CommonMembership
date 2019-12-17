@@ -154,8 +154,8 @@
             </form>
 
             <br/>
-            <SuccessAlert ref="successAlert" v-bind:message='this.successMessage'/>
-            <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
+            <SuccessAlert ref="successAlert" data-cy="successalert" v-bind:message='this.successMessage'/>
+            <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
             
           </div>
         </div>

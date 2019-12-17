@@ -1,4 +1,6 @@
 'use strict';
+/// <reference types="Accounts" />
+/// <reference types="Roles" />
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
@@ -107,11 +109,21 @@ export const userService =
     {
       throw new Meteor.Error('email-password-invalid');    
     }
-
+    
     //#region user trying to login with email, password
     if(domain==='')
     {
-      var domainsForUser = user.roles;
+      let domainsForUser = Roles.getRolesForUser(_checkPasswordReturn.userId);
+      if(domainsForUser == null)
+      {
+        logging.winston.log('info', 'No domain assigned to user');
+        throw new Meteor.Error('no-domain-assigned-to-user');
+      }
+      if(domainsForUser && domainsForUser.length ===1)
+      {
+        return {userId:user._id, domain:domainsForUser[0].scope};    
+      }
+
       if(domainsForUser && domainsForUser.length >1)
       {
         logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
@@ -121,7 +133,7 @@ export const userService =
         });
         return {domains: domainsResult};
       }  
-      return {userId:user._id, domain:domainsForUser[0].scope};    
+      
     }
     //#endregion
 
