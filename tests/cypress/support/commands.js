@@ -36,7 +36,7 @@ Cypress.Commands.add('contactUs', (name, email, message) =>
   cy.get("[data-cy=email]").type(email);
   cy.get("[data-cy=message]").type(message);
   cy.get("[data-cy=sendemail]").click();
-  //cy.url().should("eq", "http://localhost:3000/dashboard/clearcrimson/");
+  cy.get("[data-cy=successalert]").should("have.text", "Success Your email was send successfully.");
 });
 
 // ***********************************************
