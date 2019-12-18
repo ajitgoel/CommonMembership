@@ -5,9 +5,9 @@
     "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json",
     "cypress:open": "cypress open",
     "test": "start-server-and-test start-server http://localhost:3000 cypress:open",
-
-    "start": "meteor run --settings settings.json",
-    "debug": "meteor run --settings settings.json --inspect",
+    "@comment start": "remove the inspect property below if you do not need to debug application",    
+    "start": "meteor run --settings settings.json --inspect",
+    "debug": "meteor run --settings settings.json --inspect-brk=19229",
     "@comment test": "meteor test --once --driver-package meteortesting:mocha --port 3050",
     "test-app": "cross-env TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha --port 3051",
     "visualize": "meteor --production --extra-packages bundle-visualizer"

@@ -11,10 +11,13 @@
         },
         {
             "type": "node",
-            "request": "attach",
+            "request": "launch",
             "name": "Meteor: Node",
-            "restart": true,
-            "port": 9229,
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "debug"],
+            "outputCapture": "std",
+            "port": 19229,
+            "timeout": 120000
         }
     ],
     "compounds": [
