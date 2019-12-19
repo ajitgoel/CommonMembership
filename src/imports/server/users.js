@@ -113,7 +113,7 @@ export const userService =
     //#region user trying to login with email, password
     if(domain==='')
     {
-      let domainsForUser = Roles.getRolesForUser(_checkPasswordReturn.userId);
+      let domainsForUser = Roles.getScopesForUser(_checkPasswordReturn.userId);
       if(domainsForUser == null)
       {
         logging.winston.log('info', 'No domain assigned to user');
@@ -121,7 +121,7 @@ export const userService =
       }
       if(domainsForUser && domainsForUser.length ===1)
       {
-        return {userId:user._id, domain:domainsForUser[0].scope};    
+        return {userId:user._id, domain:domainsForUser[0]};    
       }
 
       if(domainsForUser && domainsForUser.length >1)
@@ -129,7 +129,7 @@ export const userService =
         logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
         let domainsResult = user.roles.map(function(role)
         {
-          return {domain : role.scope}
+          return {domain : role}
         });
         return {domains: domainsResult};
       }  
