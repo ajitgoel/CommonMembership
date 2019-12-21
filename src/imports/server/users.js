@@ -1,12 +1,10 @@
 'use strict';
 /// <reference types="Accounts" />
-/// <reference types="Roles" />
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { Accounts } from 'meteor/accounts-base';
-export const UsersCollection = new Mongo.Collection.get('users');
-//export const RolesCollection = new Mongo.Collection.get('roles');
-export const RolesAssigmentCollection = new Mongo.Collection.get('role-assignment');
+import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/collections';
 
 export const userService = 
 {
@@ -87,9 +85,9 @@ export const userService =
     //if yes then login user using his email id.   
   loginUserForDomain(email, password, domain) 
   {
-    var logging = require('./logging.js');
-      
-    //check(domain, String);
+    var logging = require('./logging.js');      
+    const {userDomainsService} = require('./userDomainsService.js');
+
     check(email, String);
     check(password, String);
     
@@ -113,18 +111,19 @@ export const userService =
     //#region user trying to login with email, password
     if(domain==='')
     {
-      let domainsForUser = Roles.getScopesForUser(_checkPasswordReturn.userId);
-      if(domainsForUser == null)
+      let domainsForUserId = userDomainsService.getDomainsForUserId(_checkPasswordReturn.userId);
+      if(domainsForUserId.length === 0)
       {
-        logging.winston.log('info', 'No domain assigned to user');
-        throw new Meteor.Error('no-domain-assigned-to-user');
-      }
-      if(domainsForUser && domainsForUser.length ===1)
-      {
-        return {userId:user._id, domain:domainsForUser[0]};    
+        logging.winston.log('info', `User ${_checkPasswordReturn.userId} does not belong to domain ${domain}`);
+        throw new Meteor.Error('user-does-not-belong-to-domain');
       }
 
-      if(domainsForUser && domainsForUser.length >1)
+      if(domainsForUserId && domainsForUserId.length ===1)
+      {
+        return {userId:user._id, domain:domainsForUserId[0]};    
+      }
+
+      if(domainsForUserId && domainsForUserId.length >1)
       {
         logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
         let domainsResult = user.roles.map(function(role)
@@ -166,24 +165,34 @@ export const userService =
 
   getUsersForDomain(domain) 
   {
-    var logging = require('./logging.js');      
+    var logging = require('./logging.js');  
+    const {userDomainsService} = require('./userDomainsService.js');
     check(domain, String);    
     domain=domain.toString().toLowerCase();      
-    
-    if (!Meteor.userId) 
+
+    //check if user is authorized
+    //check if user is part of the domain
+    //find all userids for that domain, then return all users for those userids
+    if (!Meteor.userId()) 
     {
       throw new Meteor.Error('not-authorized');
     }
 
-    /*var user=Accounts.findUserByEmail(email);    
-    if(user==null)
+    let domainsForUserId = userDomainsService.getdomainsForUserId(Meteor.userId());
+    if(domainsForUserId.count() === 0 || domainsForUserId.findOne({"domain": domain}).count() === 0)
     {
-      logging.winston.log('info', `Invalid email: ${email}`);
-      throw new Meteor.Error('email-invalid');
-    } */  
-    //let users=Users.find({"domain":domain});
-    let usersResult= UsersCollection.find({"by":"tutorials point"});
-    /*let usersResult = { 
+      logging.winston.log('info', `User ${Meteor.userId()} does not belong to domain ${domain}`);
+      throw new Meteor.Error('user-does-not-belong-to-domain');
+    }
+
+    let userIdsForDomain = userDomainsService.getUserIdsForDomain(domain);
+    if(userIdsForDomain.length === 0)
+    {
+      logging.winston.log('info', 'No domain assigned to user');
+      throw new Meteor.Error('no-domain-assigned-to-user');
+    }
+    //let usersResult= UsersCollection.find({"by":"tutorials point"});
+    let usersResult = { 
       'users': [
         { _id:1, username:'John1', name: { first: 'Dickerson', last: 'Macdonald' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", },
         { _id:2, username:'John2', name: { first: 'Larsen', last: 'Shaw' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
@@ -198,7 +207,7 @@ export const userService =
         { _id:9, username:'John9',isActive: true,  name: { first: 'John', last: 'Carney' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
         { _id:10, username:'John10',isActive: false, name: { first: 'Dick', last: 'Dunlap' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  }
       ],
-    };*/
+    };
     console.log(`${usersResult}`);
     return usersResult;
   }
