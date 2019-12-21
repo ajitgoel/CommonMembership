@@ -1,15 +1,16 @@
+- - -
 
 **MongoDB queries:** https://www.tutorialspoint.com/mongodb/mongodb_query_document.htm
 
-Equality	        db.mycol.find({"by":"tutorials point"})
-Less Than	        db.mycol.find({"likes":{$lt:50}})
-Less Than Equals	db.mycol.find({"likes":{$lte:50}})
-Greater Than	    db.mycol.find({"likes":{$gt:50}})
-Greater Than Equals	db.mycol.find({"likes":{$gte:50}})
-Not Equals          db.mycol.find({"likes":{$ne:50}})
+**Equality**	        db.mycol.find({"by":"tutorials point"})
+**Less Than**	        db.mycol.find({"likes":{$lt:50}})
+**Less Than Equals**	db.mycol.find({"likes":{$lte:50}})
+**Greater Than**	    db.mycol.find({"likes":{$gt:50}})
+**Greater Than Equals**	db.mycol.find({"likes":{$gte:50}})
+**Not Equals**          db.mycol.find({"likes":{$ne:50}})
 
-AND in MongoDB      db.mycol.find({$and: [{key1: value1}, {key2:value2}]})
-OR in MongoDB      db.mycol.find({$or: [{key1: value1}, {key2:value2}]})   
+**AND in MongoDB **     db.mycol.find({$and: [{key1: value1}, {key2:value2}]})
+**OR in MongoDB**      db.mycol.find({$or: [{key1: value1}, {key2:value2}]})   
 
 db.firstLevelArrayDemo.find({StudentTechnicalSkills:{$in:["MongoDB"]}}).pretty();
 {
@@ -20,6 +21,28 @@ db.firstLevelArrayDemo.find({StudentTechnicalSkills:{$in:["MongoDB"]}}).pretty()
    "StudentName" : "Robert",
    "StudentTechnicalSkills" : ["C","Java","C++"]
 }
+
+**Query an Array:**
+// all documents where the field tags value is an array with exactly two elements, "red" and "blank", in the specified order:
+db.inventory.find( { tags: ["red", "blank"] } )
+
+//find an array that contains both elements, without regard to order or other elements in the array:
+db.inventory.find( { tags: { $all: ["red", "blank"] } } )
+
+**Query an Array for an Element**
+db.inventory.find( { tags: "red" } )
+
+**Project Fields to Return from Query**
+//Return All Fields in Matching Documents
+db.inventory.find( { status: "A" } )
+//Return the Specified Fields and the _id Field Only
+db.inventory.find( { status: "A" }, { item: 1, status: 1 } )
+//Suppress _id Field
+db.inventory.find( { status: "A" }, { item: 1, status: 1, _id: 0 } )
+
+**MongoDB return True if document exists**
+db.mycollection.find({'UserIDS': { "$in": newID}}).count()
+- - -
 
 **Links;**
 https://cleverbeagle.com/pup/v1/the-basics/mongodb-collections#the-documents-collection
@@ -106,6 +129,7 @@ b. if (variable==null)
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
 	- [ ] d. Login user screen
 		- [x] ~~disable button when submitting form.~~
+		- [x] ~~login screen not working with roles package version 3~~
 		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
 		- [x] ~~Show successmessage, failuremessage in common alert components~~

@@ -2,7 +2,7 @@
   "name": "vue-meteor-demo",
   "private": true,
   "scripts": {
-    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json",
+    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json --inspect",
     "cypress:open": "cypress open",
     "test": "start-server-and-test start-server http://localhost:3000 cypress:open",
     "@comment start": "remove the inspect property below if you do not need to debug application",    
