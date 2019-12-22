@@ -2,14 +2,15 @@
   "name": "vue-meteor-demo",
   "private": true,
   "scripts": {
-    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json --inspect",
+    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json",
+    "@comment start-server": "cross-env MONGO_URL='mongodb://127.0.0.1:27017/commonmembership_test' meteor run --settings settings.json  --port 3052",
     "cypress:open": "cypress open",
     "test": "start-server-and-test start-server http://localhost:3000 cypress:open",
-    "@comment start": "remove the inspect property below if you do not need to debug application",    
-    "start": "meteor run --settings settings.json",
+    "@comment start": "remove the inspect property below if you do not need to debug application",
+    "start": "cross-env MONGO_URL='mongodb://127.0.0.1:27017/commonmembership_dev' meteor run --settings settings.json",
     "debugnodejs": "meteor run --settings settings.json --inspect",
     "debug": "meteor run --settings settings.json --inspect-brk=19229",
-    "@comment test": "meteor test --once --driver-package meteortesting:mocha --port 3050",
+    "unittest": "cross-env TEST_WATCH=1 MONGO_URL='mongodb://127.0.0.1:27017/commonmembership_test' meteor test --settings settings-test.json --once --driver-package meteortesting:mocha",
     "test-app": "cross-env TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha --port 3051",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
@@ -46,13 +47,21 @@
     "winston-loggly-bulk": "^3.0.1"
   },
   "devDependencies": {
+    "@types/meteor": "^1.4.37",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.21",
+    "@types/underscore": "^1.9.4",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "chai": "^4.2.0",
     "cypress": "^3.8.0",
+    "meteor-typings": "^1.4.1",
     "sinon": "^7.5.0",
     "start-server-and-test": "^1.10.6",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4",
     "vue-template-compiler": "2.6.10"
   }
 }

@@ -25,5 +25,6 @@ describe("contact-us", () =>
   it("should send message to site admin", () => 
   {         
     cy.contactUs(name, email, message);
+    cy.get("[data-cy=successalert]").should("have.text", "Success Your email was send successfully.");
   });
 });

@@ -4,7 +4,6 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/collections';
-
 export const userDomainsService = 
 {
   getUserIdsForDomain(domain) 
@@ -22,5 +21,15 @@ export const userDomainsService =
     let domains= UserDomainCollection.find({"userid":userid}, {domain:1, _id:0});
     let result = domains.map(x => { return x.domain});
     return result;
+  },
+
+  addDomainForUserId(userid, domain) 
+  {
+    check(userid, String);    
+    check(domain, String); 
+    UserDomainCollection.update(
+      {_id:userid},
+      {$set :{domain :domain}},
+      {upsert: true});
   }
 }

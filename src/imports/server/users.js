@@ -12,6 +12,8 @@ export const userService =
   {
     var logging = require('./logging.js');
     var emailService = require('./email.js');
+    const {userDomainsService} = require('./userDomainsService.js');
+    const {domainsService} = require('./domainsService.js');
     var domainOwner_RoleName='domainOwner';
       
     check(domain, String);
@@ -21,15 +23,14 @@ export const userService =
     domain=domain.toString().toLowerCase();
     email=email.toString().toLowerCase();      
 
-    var doesDomainExistForOtherUsers=
-      RolesAssigmentCollection.findOne({'role._id': domainOwner_RoleName, scope: domain}, {_id:1})
+    var domainExistForOtherUsers= domainsService.doesDomainExistForOtherUsers(domain);
     //TODO: remove all packages that are not being used. 
     //TODO: Add server side validations. 
     //TODO: Write unit tests for server side code. 
     //TODO: Add Google SignIn Option. 
     //TODO: Host application in Google Cloud VM. 
     
-    if(doesDomainExistForOtherUsers)
+    if(domainExistForOtherUsers)
     {
       logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
       throw new Meteor.Error('domain-already-in-use');
@@ -37,7 +38,7 @@ export const userService =
 
     var user=Accounts.findUserByEmail(email);
     
-    //#region user exists
+    //#region if user exists, add domain to the list of his domains
     if(user)
     {
       var domainOwnerRoleForUser = user.roles.filter(x => x.scope === domain && x._id === domainOwner_RoleName);
@@ -63,13 +64,13 @@ export const userService =
     }
     //#endregion
 
-    //#region if user does not exist, then create user and add domain role to user. 
+    //#region if user does not exist, then create user, add domain role to user, send enrollment email. 
     else
     {
       var userId= Accounts.createUser({username: email, email: email, password: password});
       logging.winston.log('info', `User created with userid ${userId} for email ${email} and domain ${domain}`);
-      Roles.createRole(domainOwner_RoleName, {unlessExists: true});
-      Roles.addUsersToRoles(userId, [domainOwner_RoleName], domain);
+      
+      userDomainsService.addDomainForUserId(userId, domain);
       logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
 
       //TODO: create a proper email template and email sending provider. 
