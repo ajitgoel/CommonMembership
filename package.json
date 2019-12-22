@@ -8,7 +8,7 @@
     "cypress:headless": "cypress run --headless --browser chrome",
     "test:gui": "start-server-and-test start-server http://localhost:3000 cypress:gui",
     "test:headless": "start-server-and-test start-server http://localhost:3000 cypress:headless",
-    "@comment start": "remove the inspect property below if you do not need to debug application",
+    "@comment start": "add the --inspect property below if you need to debug application",
     "start": "cross-env MONGO_URL='mongodb://127.0.0.1:27017/commonmembership_dev' meteor run --settings settings.json",
     "debugnodejs": "meteor run --settings settings.json --inspect",
     "debug": "meteor run --settings settings.json --inspect-brk=19229",

@@ -7,7 +7,7 @@ import StubCollections from 'meteor/hwillson:stub-collections';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 
 import { domainsService } from './domainsService.js';
-import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/collections';
+import { UserCollection,UserDomainCollection,DomainCollection } from '../api/collections';
 import { sinon } from 'meteor/practicalmeteor:sinon';
 
 describe('DomainsService', () => 

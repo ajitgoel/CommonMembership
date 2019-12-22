@@ -1,7 +1,7 @@
 'use strict';
 import { check } from 'meteor/check';
 import { Mongo } from 'meteor/mongo';
-import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/collections';
+import { UserCollection,UserDomainCollection,DomainCollection } from '../api/collections';
 
 export const domainsService = 
 {

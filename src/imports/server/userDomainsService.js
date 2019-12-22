@@ -3,7 +3,7 @@
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/collections';
+import { UserCollection,UserDomainCollection,DomainCollection, UserDetailCollection } from '../api/collections';
 export const userDomainsService = 
 {
   getUserIdsForDomain(domain) 
