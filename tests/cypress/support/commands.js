@@ -14,7 +14,6 @@ Cypress.Commands.add('registerUser', (email, password, domain) =>
   cy.get("[data-cy=termsAndConditions]").check({force: true});  
   cy.get("[data-cy=privacyPolicy]").check({force: true});
   cy.get("[data-cy=registeruser]").click();
-  cy.url().should("eq", "http://localhost:3000/dashboard/clearcrimson/");
 });
 
 Cypress.Commands.add('loginUser', (email, password) => 

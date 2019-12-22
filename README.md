@@ -57,6 +57,7 @@ https://cleverbeagle.com/pup/v1/the-basics/mongodb-collections#the-documents-col
 https://github.com/Meteor-Community-Packages/meteor-roles
 **Running meteor at scale:** https://www.freecodecamp.org/news/scaling-meteor-a-year-on-26ee37588e4b/
 **Meteor Roles Package:** https://github.com/Meteor-Community-Packages/meteor-roles/tree/v3
+**Faker.js:** https://github.com/marak/Faker.js/
 
 **VueJs:** : **Vue Router:** : https://router.vuejs.org/guide/essentials/named-routes.html
 https://vuelidate.js.org/
