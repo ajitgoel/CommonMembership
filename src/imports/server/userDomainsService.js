@@ -27,9 +27,6 @@ export const userDomainsService =
   {
     check(userid, String);    
     check(domain, String); 
-    UserDomainCollection.update(
-      {_id:userid},
-      {$set :{domain :domain}},
-      {upsert: true});
+    UserDomainCollection.insert({userid: userid, domain :domain});
   }
 }

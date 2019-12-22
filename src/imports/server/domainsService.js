@@ -15,9 +15,6 @@ export const domainsService =
   addDomain(domain) 
   {
     check(domain, String);    
-    DomainCollection.update(
-      {},
-      {$set :{domain :domain}},
-      {upsert: true});
+    DomainCollection.insert({domain :domain});
   }
 }
