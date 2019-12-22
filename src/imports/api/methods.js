@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-//import { Notes } from './collections';
 
 DomainExistsAlready=-1;
 
@@ -10,7 +9,7 @@ Meteor.methods(
   {
     if(Meteor.isServer)
     {
-      const { userService } = require('../server/users.js');
+      const { userService } = require('../server/usersService.js');
       return userService.createUserIfItDoesNotExist(email, password, domain);
     }
   }, 
@@ -18,7 +17,7 @@ Meteor.methods(
   {
     if(Meteor.isServer)
     {
-      const { userService } = require('../server/users.js');
+      const { userService } = require('../server/usersService.js');
       return userService.loginUserForDomain(email, password, domain);
     }
   }, 
@@ -27,7 +26,7 @@ Meteor.methods(
   {
     if(Meteor.isServer)
     {
-      const { userService } = require('../server/users.js');
+      const { userService } = require('../server/usersService.js');
       return userService.resetUserPassword(email);
     }
   }, 
@@ -40,12 +39,12 @@ Meteor.methods(
       emailService.send(fromAddress, subject, emailText);  
     }
   },
-  getUsersForDomain(domain) 
+  getUsersdetailService(domain) 
   {
     if(Meteor.isServer)
     {
-      const { userService } = require('../server/users.js');
-      return userService.getUsersForDomain(domain);  
+      const { usersdetailService } = require('../server/usersdetailService.js');
+      return usersdetailService.getUsersDetailForDomain(domain);  
     }
   },
 })

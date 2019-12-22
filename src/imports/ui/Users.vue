@@ -90,7 +90,7 @@ export default
   },
   mounted() 
   {
-    Meteor.call('getUsersForDomain', 'clearcrimson', (error, result)=>
+    Meteor.call('getUsersdetailService', 'clearcrimson', (error, result)=>
     {
       if(error) 
       {     
@@ -104,18 +104,9 @@ export default
       } 
       if(result) 
       {
-        /*if(result.userId && result.domain) 
-        {                 
-          Meteor.loginWithPassword(email, password);
-          this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-          return;
-        }*/          
-        if(result.users)
-        {                 
-          this.items=JSON.parse(JSON.stringify(result.users));
-          this.totalRows = this.items.length
-          return;
-        }
+        this.items=result.users;
+        this.totalRows = this.items.length
+        return;
       }
     });
   },

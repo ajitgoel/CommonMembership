@@ -3,6 +3,7 @@
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { UserCollection,UserDomainCollection,DomainCollection, UserDetailCollection } from '../api/collections';
 
 export const userService = 
 {
@@ -162,53 +163,4 @@ export const userService =
     Accounts.sendResetPasswordEmail(user._id, email);   
     return true;
   },
-
-  getUsersForDomain(domain) 
-  {
-    var logging = require('./logging.js');  
-    const {userDomainsService} = require('./userDomainsService.js');
-    check(domain, String);    
-    domain=domain.toString().toLowerCase();      
-
-    //check if user is authorized
-    //check if user is part of the domain
-    //find all userids for that domain, then return all users for those userids
-    if (!Meteor.userId()) 
-    {
-      throw new Meteor.Error('not-authorized');
-    }
-
-    let domainsForUserId = userDomainsService.getdomainsForUserId(Meteor.userId());
-    if(domainsForUserId.count() === 0 || domainsForUserId.findOne({"domain": domain}).count() === 0)
-    {
-      logging.winston.log('info', `User ${Meteor.userId()} does not belong to domain ${domain}`);
-      throw new Meteor.Error('user-does-not-belong-to-domain');
-    }
-
-    let userIdsForDomain = userDomainsService.getUserIdsForDomain(domain);
-    if(userIdsForDomain.length === 0)
-    {
-      logging.winston.log('info', 'No domain assigned to user');
-      throw new Meteor.Error('no-domain-assigned-to-user');
-    }
-    //let usersResult= UsersCollection.find({"by":"tutorials point"});
-    let usersResult = { 
-      'users': [
-        { _id:1, username:'John1', name: { first: 'Dickerson', last: 'Macdonald' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", },
-        { _id:2, username:'John2', name: { first: 'Larsen', last: 'Shaw' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { _id:11, username:'John11', name: { first: 'Mini', last: 'Navarro' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", _rowVariant: 'success'},
-        { _id:3, username:'John3',isActive: false, name: { first: 'Geneva', last: 'Wilson' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { _id:4, username:'John4',isActive: true, name: { first: 'Jami', last: 'Carney' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { _id:5, username:'John5',isActive: false, name: { first: 'Essie', last: 'Dunlap' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { _id:6, username:'John6',isActive: true, name: { first: 'Thor', last: 'Macdonald' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { isActive: true, name: { first: 'Larsen', last: 'Shaw' },  email:'a@b.com', ticketOrders:2, membershipLevel:"Basic", _cellVariants: { age: 'danger', isActive:'warning'}},
-        { _id:7, username:'John7',isActive: false, name: { first: 'Mitzi', last: 'Navarro' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { _id:8, username:'John8',isActive: false,  name: { first: 'Genevieve', last: 'Wilson' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { _id:9, username:'John9',isActive: true,  name: { first: 'John', last: 'Carney' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  },
-        { _id:10, username:'John10',isActive: false, name: { first: 'Dick', last: 'Dunlap' }, email:'a@b.com', ticketOrders:2, membershipLevel:"Basic",  }
-      ],
-    };
-    console.log(`${usersResult}`);
-    return usersResult;
-  }
 }

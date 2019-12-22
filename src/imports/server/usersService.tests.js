@@ -6,8 +6,8 @@ import { Factory } from 'meteor/dburles:factory';
 import StubCollections from 'meteor/hwillson:stub-collections';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 
-import { userService } from './users.js';
-import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/collections';
+import { userService } from './usersService.js';
+import { UserCollection,UserDomainCollection,DomainCollection } from '../api/collections';
 import { sinon } from 'meteor/practicalmeteor:sinon';
 
 describe('UsersService', () => 
