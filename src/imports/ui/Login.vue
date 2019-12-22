@@ -35,7 +35,7 @@
                       <span v-if="!$v.user.email.email">Email is invalid</span>
                     </div>
 
-                    <div v-if="submitted && this.user.emailpasswordInvalid" class="invalid-feedback">
+                    <div v-if="submitted && this.user.emailpasswordInvalid" data-cy="emailpasswordinvalid" class="invalid-feedback">
                       <span>The email or password that you entered is invalid. Please try again or 
                         <router-link v-bind:to="{ name: 'resetpassword' }" class="small font-weight-bold">Change password</router-link> to continue.
                       </span>   
@@ -99,8 +99,8 @@
               </form>            
 
               <br/>
-              <SuccessAlert ref="successAlert" v-bind:message='this.$root.NavigationMessage'/>
-              <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
+              <SuccessAlert ref="successAlert" data-cy="successalert" v-bind:message='this.$root.NavigationMessage'/>
+              <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
 
               <div class="mt-4 text-center"><small>Not registered?</small>
                 <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Create account</router-link>

@@ -141,7 +141,7 @@
             </form>
 
             <br/>
-            <ErrorAlert ref="errorAlert" v-bind:message='this.failureMessage'/>
+            <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
 
             <div class="mt-4 text-center"><small>Already have an account?</small>
                 <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link>

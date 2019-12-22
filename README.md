@@ -41,7 +41,7 @@ db.inventory.find( { status: "A" }, { item: 1, status: 1 } )
 db.inventory.find( { status: "A" }, { item: 1, status: 1, _id: 0 } )
 
 **MongoDB return True if document exists**
-db.mycollection.find({'UserIDS': { "$in": newID}}).count()
+db.mycollection.find({'UserIDS':newID}).count()>0?true:false;
 - - -
 
 **Links;**
@@ -64,7 +64,7 @@ https://vuelidate.js.org/
 **General Tips**
 - [ ] when importing files,
    ./ refers to same folder
-   ../ refers to go up one level
+   ../ refers to go up one level, where .. refers to parent directory.
 - [ ] If you are running tests, run the "setx TEST-WATCH 1" before you run your tests. 
 - [ ] **Install applicaton: **meteor npm i
 - [ ] **Start app:** npm run start

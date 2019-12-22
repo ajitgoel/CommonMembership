@@ -5,11 +5,19 @@ import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/co
 
 export const domainsService = 
 {
-  doesDomainExist(domain) 
+  doesDomainExistForOtherUsers(domain) 
   {
     check(domain, String);    
     domain=domain.toString().toLowerCase(); 
-    let domainExist= DomainCollection.find({"domain":domain}, {_id: 1}).limit(1).count()>0?true:false; 
+    let domainExist= DomainCollection.find({"domain":domain}, {_id: 1}).count()>0?true:false; 
     return domainExist;
+  },
+  addDomain(domain) 
+  {
+    check(domain, String);    
+    DomainCollection.update(
+      {},
+      {$set :{domain :domain}},
+      {upsert: true});
   }
 }
