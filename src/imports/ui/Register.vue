@@ -217,7 +217,7 @@ export default {
       this.disableButton=true;
       Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, (error, result)=>
       {
-      this.disableButton=false;
+        this.disableButton=false;
         if(error) 
         {     
           if(error.error && error.error==='domain-already-in-use')
@@ -230,7 +230,7 @@ export default {
           {
             this.user.userExistsforDomain=true;
             return;  
-        }
+          }
           this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
         return;
         } 

@@ -25,10 +25,10 @@ describe("login-user", () =>
   it("should login the user", () => 
   {             
     cy.registerUser(email, password, domain); 
-    cy.url().should("eq", `${Cypress.config().baseUrl}/dashboard/${domain.toLowerCase()}/`);
+    cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain.toLowerCase()}/`);
     cy.visit('/login');
     cy.loginUser(email, password, domain);
-    cy.url().should("eq", `${Cypress.config().baseUrl}/dashboard/${domain.toLowerCase()}/`);
+    cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain.toLowerCase()}/`);
   });
 
   it("should not login invalid user", () => 
