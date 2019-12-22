@@ -2,9 +2,12 @@
 
 describe("register-user", () => 
 {
-  let email='ajitgoel@gmail.com';
-  let pasword='awesome-password';
-  let domain='ClearCrimson';
+  let email1='ajitgoel@gmail.com';
+  let password1='awesome-password';
+  let domain1='ClearCrimson';
+
+  let email2='meethagoel@gmail.com';
+  let password2='awesome-password1';
 
   before(() => 
   {
@@ -21,7 +24,13 @@ describe("register-user", () =>
 
   it("should create and login the new user", () => 
   {
-    cy.registerUser(email, pasword, domain);
+    cy.registerUser(email1, password1, domain1);
+    cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain1.toLowerCase()}/`);
+    
+    cy.visit('/register');    
+    cy.registerUser(email2, password2, domain1);
+    cy.get("[data-cy=domainexists]").should("have.text", 'This domain already exists. Please select another one to continue.');
+
 
     /*cy.window().then(win => 
     {

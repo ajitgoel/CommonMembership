@@ -93,7 +93,7 @@
                       <span v-if="!$v.user.domain.required">Domain is required</span>
                     </div>
 
-                    <div v-if="submitted && this.user.domainExists" class="invalid-feedback">
+                    <div v-if="submitted && this.user.domainExists" data-cy="domainexists" class="invalid-feedback">
                       <span>This domain already exists. Please select another one to continue.</span>   
                     </div>
                   </div>                 

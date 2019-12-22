@@ -8,6 +8,9 @@ import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/co
 
 export const userService = 
 {
+  //if domain has been registered before, then return error
+  //if domain has not been registered before then check that return error if the email, domain combination has been registered before. 
+  // 
   createUserIfItDoesNotExist(email, password,domain) 
   {
     var logging = require('./logging.js');
@@ -24,12 +27,6 @@ export const userService =
     email=email.toString().toLowerCase();      
 
     var domainExistForOtherUsers= domainsService.doesDomainExistForOtherUsers(domain);
-    //TODO: remove all packages that are not being used. 
-    //TODO: Add server side validations. 
-    //TODO: Write unit tests for server side code. 
-    //TODO: Add Google SignIn Option. 
-    //TODO: Host application in Google Cloud VM. 
-    
     if(domainExistForOtherUsers)
     {
       logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
@@ -37,47 +34,55 @@ export const userService =
     }
 
     var user=Accounts.findUserByEmail(email);
-    
-    //#region if user exists, add domain to the list of his domains
-    if(user)
-    {
-      var domainOwnerRoleForUser = user.roles.filter(x => x.scope === domain && x._id === domainOwner_RoleName);
-      
-      //#region if "user already exists for the domain", return error message back to ui about domain and user. 
-      if(domainOwnerRoleForUser)
-      {
-        logging.winston.log('info', `User already exists for the domain, Domain: ${domain} Email: ${email}`);
-        throw new Meteor.Error('user-exists-for-domain');
-      }
-      //#endregion
-      //#region if "user exists but not for the domain", add domain role to user.
-      else
-      {
-        Roles.createRole(domainOwner_RoleName, {unlessExists: true});
-        Roles.addUsersToRoles(user._id, [domainOwner_RoleName], domain);          
-        logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
-        //TODO: create a proper email template and email sending provider. 
-        Accounts.sendEnrollmentEmail(userId, email);
-        return {userId:userId, domain:domain}; 
-      }
-      //#endregion
-    }
-    //#endregion
-
     //#region if user does not exist, then create user, add domain role to user, send enrollment email. 
-    else
+    if(user == null)
     {
       var userId= Accounts.createUser({username: email, email: email, password: password});
       logging.winston.log('info', `User created with userid ${userId} for email ${email} and domain ${domain}`);
       
       userDomainsService.addDomainForUserId(userId, domain);
-      logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
+      logging.winston.log('info', `Added domain ${domain} to email ${email}`);
+      
+      domainsService.addDomain(domain);
+      logging.winston.log('info', `Added domain ${domain} to email ${email}`);
 
       //TODO: create a proper email template and email sending provider. 
       Accounts.sendEnrollmentEmail(userId, email);
       return {userId:userId, domain:domain}; 
     }
     //#endregion
+
+    var domainsForUserId= userDomainsService.getDomainsForUserId(user._id);
+    if(domainsForUserId.length>0 && domainsForUserId.includes(domain))
+    {
+      logging.winston.log('info', `Email: ${email} already registered for Domain: ${domain}`);
+      throw new Meteor.Error('user-already-registered-for-domain');
+    }
+    
+    //#region if user exists but he is not registered to domain, then add domain to the list of his domains
+    var domainOwnerRoleForUser = user.roles.filter(x => x.scope === domain && x._id === domainOwner_RoleName);
+    
+    //#region if "user already exists for the domain", return error message back to ui about domain and user. 
+    if(domainOwnerRoleForUser)
+    {
+      logging.winston.log('info', `User already exists for the domain, Domain: ${domain} Email: ${email}`);
+      throw new Meteor.Error('user-exists-for-domain');
+    }
+    //#endregion
+    //#region if "user exists but not for the domain", add domain role to user.
+    else
+    {
+      Roles.createRole(domainOwner_RoleName, {unlessExists: true});
+      Roles.addUsersToRoles(user._id, [domainOwner_RoleName], domain);          
+      logging.winston.log('info', `Added domain ${domain} to userid ${userId}`);
+      //TODO: create a proper email template and email sending provider. 
+      Accounts.sendEnrollmentEmail(userId, email);
+      return {userId:userId, domain:domain}; 
+    }
+    //#endregion
+    //#endregion
+
+    
   },
   //if domain is blank then use check if more than 1 domain exists. 
     //if yes, then return all the domains for user. 
