@@ -2,6 +2,7 @@
 
 Cypress.Commands.add("resetDatabase", () =>
   cy.exec('"C:\\Program Files\\MongoDB\\Server\\4.2\\bin\\mongo" mongodb://localhost:3001/meteor --eval "db.dropDatabase()"')
+  //cy.exec(`mongo mongodb://localhost:3001/meteor ${filePath}`)
 );
 
 Cypress.Commands.add('registerUser', (email, password, domain) => 
@@ -23,6 +24,12 @@ Cypress.Commands.add('loginUser', (email, password) =>
   cy.get("[data-cy=email]").type(email);
   cy.get("[data-cy=password]").type(password);
   cy.get("[data-cy=loginuser]").click();
+});
+
+Cypress.Commands.add('resetpassword', (email) => 
+{
+  cy.get("[data-cy=email]").type(email);
+  cy.get("[data-cy=resetpassword]").click();
 });
 
 Cypress.Commands.add('contactUs', (name, email, message) => 
