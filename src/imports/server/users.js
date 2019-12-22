@@ -2,9 +2,7 @@
 /// <reference types="Accounts" />
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
 import { Accounts } from 'meteor/accounts-base';
-import { UsersCollection,UserDomainCollection,DomainCollection } from '../api/collections';
 
 export const userService = 
 {
@@ -107,14 +105,14 @@ export const userService =
     {
       throw new Meteor.Error('email-password-invalid');    
     }
-    
+    let userId= _checkPasswordReturn.userId;
     //#region user trying to login with email, password
     if(domain==='')
     {
-      let domainsForUserId = userDomainsService.getDomainsForUserId(_checkPasswordReturn.userId);
+      let domainsForUserId = userDomainsService.getDomainsForUserId(userId);
       if(domainsForUserId.length === 0)
       {
-        logging.winston.log('info', `User ${_checkPasswordReturn.userId} does not belong to domain ${domain}`);
+        logging.winston.log('info', `Email: ${email}, User ${userId} does not belong to domain ${domain}`);
         throw new Meteor.Error('user-does-not-belong-to-domain');
       }
 
@@ -125,25 +123,27 @@ export const userService =
 
       if(domainsForUserId && domainsForUserId.length >1)
       {
-        logging.winston.log('info', `Multiple domains defined for user, Domain: ${domain} Email: ${email}`);
-        let domainsResult = user.roles.map(function(role)
-        {
-          return {domain : role}
-        });
+        logging.winston.log('info', `Multiple domains defined for user ${userId}, Domain: ${domain} Email: ${email}`);
+        let domainsResult = userDomainsService.getDomainsForUserId(userId);
         return {domains: domainsResult};
-      }  
-      
+      }        
     }
     //#endregion
 
     //#region user trying to login with email, password, domain
-    var domainsForUser = user.roles.filter(x => x.scope === domain);
-    if(domainsForUser==null)
+    var domainsForUser = userDomainsService.getDomainsForUserId(userId);
+    if(domainsForUser.length===0)
     {
       logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
       throw new Meteor.Error('not-authorized');
     }    
-    return {userId:user._id, domain:domainsForUser[0].scope}; 
+    let doesdomainBelongToUser=domainsForUser.includes(domain);
+    if(doesdomainBelongToUser === false)
+    {
+      logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
+      throw new Meteor.Error('not-authorized');
+    }
+    return {userId:user._id, domain:domain}; 
     //#endregion    
   },
 

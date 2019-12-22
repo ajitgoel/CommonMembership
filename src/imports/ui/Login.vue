@@ -79,8 +79,8 @@
                     <select class="custom-select" data-cy="domain" id="domain" name="domain" v-model="user.domain" 
                     v-on:change="$v.user.domain.$touch()" :class="{'is-invalid':submitted && $v.user.domain.$error }"> 
                       <option selected>Select domain</option>
-                      <option v-for="counter in user.domains" v-bind:value="counter.domain" v-bind:key="counter.domain">
-                        {{counter.domain}}
+                      <option v-for="counter in user.domains" v-bind:value="counter" v-bind:key="counter">
+                        {{counter}}
                       </option>
                     </select>
                   </div>
@@ -211,7 +211,7 @@ export default
 
         if(result && result.domains)
         {                 
-          this.user.domains=JSON.parse(JSON.stringify(result.domains));
+          this.user.domains=result.domains;
           return;
         }
       });
