@@ -19,7 +19,7 @@
 
     <b-table show-empty small stacked="md" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage"
       :filter="filter" :filterIncludedFields="filterOn" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" 
-      :sort-direction="sortDirection" @filtered="onFiltered">
+      :sort-direction="sortDirection" @filtered="onFiltered" sort-icon-left>
       <template v-slot:cell(name)="row">
         {{ row.value.first }} {{ row.value.last }}
       </template>
@@ -99,12 +99,12 @@ export default
           this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
           return;  
         }            
-        this.failureMessage='There was an error retreiving results. Our administrators have been notified of the issue and we will have a look.';
+        this.failureMessage='There was an error retrieving results. Our administrators have been notified of the issue and we will have a look.';
         return;
       } 
       if(result) 
       {
-        this.items=result.users;
+        this.items=result;
         this.totalRows = this.items.length
         return;
       }
