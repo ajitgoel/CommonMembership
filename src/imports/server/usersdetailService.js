@@ -37,17 +37,16 @@ export const usersdetailService =
       throw new Meteor.Error('no-domain-assigned-to-user');
     }
     let usersDetail= UserDetailCollection.find({"domain":domain}, {_id:1, username:1, 'name.first': 1, 'name.last': 1, email:1, ticketOrders:1, membershipLevel:1});
-    let result = usersDetail.forEach(function(x) {
-                  return {
-                    _id:x._id, 
-                    username:x.username, 
-                    name: x.name, 
-                    email:x.email, 
-                    ticketOrders:x.ticketOrders, 
-                    membershipLevel:x.membershipLevel
-                  };
-                });
-
+    let result = usersDetail.map(x=> {
+      return {
+        _id:x._id, 
+        username:x.username, 
+        name: x.name, 
+        email:x.email, 
+        ticketOrders:x.ticketOrders, 
+        membershipLevel:x.membershipLevel
+      };
+    });
     return result;
   }
 }

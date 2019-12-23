@@ -117,8 +117,13 @@ b. if (variable==null)
 			- [ ] Add custom fields
 		- [ ] 1. All users\Search users
 			- [ ] sort indicator does not show on grid column
-			- [ ] 
+			- [ ] show tickets with detail link using "row details support": https://bootstrap-vue.js.org/docs/components/table
+			- [ ] allow bulk operations
+			- [ ] add checkbox to the left of each row. 
+			- [ ] Add edit, delete links below each row. 
+			- [ ] clicking on email should navigate user to user edit screen. 
 		- [ ] 3. Import users using CSV file
+			- [ ] use https://github.com/VeliovGroup/Meteor-Files to upload files and add users into system. 
 		- [ ] 4. Export users to CSV file
 	- [ ] b. Register user screen
 		- [x] ~~disable button when submitting form.~~
