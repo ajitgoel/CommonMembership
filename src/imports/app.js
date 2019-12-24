@@ -8,41 +8,41 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import { sync } from 'vuex-router-sync';
 import { injectSupply } from 'vue-supply';
-import App from './ui/App.vue';
+import App from './client/ui/App.vue';
 import routes from './routes';
 import storeOptions from './store';
 
 function createApp () {
-  import AppHeader from './ui/components/AppHeader.vue';
-  import AppFooter from './ui/components/AppFooter.vue';
-  import CardFooter from './ui/components/CardFooter.vue';
-  import MainNavBar from './ui/components/MainNavBar.vue';
-  import Omnisearch from './ui/components/Omnisearch.vue';
-  import PrivacyPolicyModal from './ui/components/PrivacyPolicyModal.vue';
-  import PrivacyPolicyText from './ui/components/PrivacyPolicyText.vue';
-  import PrivacyShieldNoticeText from './ui/components/PrivacyShieldNoticeText.vue';
-  import DashboardSidebar from './ui/components/DashboardSidebar.vue';
-  import TermsAndConditionsModal from './ui/components/TermsAndConditionsModal.vue';
-  import TermsAndConditionsText from './ui/components/TermsAndConditionsText.vue';
-  import TopNavBar from './ui/components/TopNavBar.vue';
-  import Toast from './ui/components/Toast.vue';
-  import SuccessAlert from './ui/components/SuccessAlert.vue';
-  import ErrorAlert from './ui/components/ErrorAlert.vue';
+  import AppHeader from './client/ui/components/AppHeader.vue';
+  import AppFooter from './client/ui/components/AppFooter.vue';
+  import CardFooter from './client/ui/components/CardFooter.vue';
+  import MainNavBar from './client/ui/components/MainNavBar.vue';
+  import Omnisearch from './client/ui/components/Omnisearch.vue';
+  import PrivacyPolicyModal from './client/ui/components/PrivacyPolicyModal.vue';
+  import PrivacyPolicyText from './client/ui/components/PrivacyPolicyText.vue';
+  import PrivacyShieldNoticeText from './client/ui/components/PrivacyShieldNoticeText.vue';
+  import DashboardSidebar from './client/ui/components/DashboardSidebar.vue';
+  import TermsAndConditionsModal from './client/ui/components/TermsAndConditionsModal.vue';
+  import TermsAndConditionsText from './client/ui/components/TermsAndConditionsText.vue';
+  import TopNavBar from './client/ui/components/TopNavBar.vue';
+  import Toast from './client/ui/components/Toast.vue';
+  import SuccessAlert from './client/ui/components/SuccessAlert.vue';
+  import ErrorAlert from './client/ui/components/ErrorAlert.vue';
 
-  import Contact from './ui/Contact.vue';
-  import Home from './ui/Home.vue'
-  import Login from './ui/Login.vue';  
-  import NotFound from './ui/NotFound.vue'
-  import PrivacyPolicy from './ui/PrivacyPolicy.vue';
-  import PrivacyShieldNotice from './ui/PrivacyShieldNotice.vue';
-  import Register from './ui/Register.vue';
-  import ResetPassword from './ui/ResetPassword.vue';
-  import Settings from './ui/Settings.vue';
-  import TermsAndConditions from './ui/TermsAndConditions.vue';  
-  import Users from './ui/Users.vue';
-  import AddUser from './ui/AddUser.vue';
-  import ImportUsers from './ui/ImportUsers.vue';
-  import ExportUsers from './ui/ExportUsers.vue';
+  import Contact from './client/ui/Contact.vue';
+  import Home from './client/ui/Home.vue'
+  import Login from './client/ui/Login.vue';  
+  import NotFound from './client/ui/NotFound.vue'
+  import PrivacyPolicy from './client/ui/PrivacyPolicy.vue';
+  import PrivacyShieldNotice from './client/ui/PrivacyShieldNotice.vue';
+  import Register from './client/ui/Register.vue';
+  import ResetPassword from './client/ui/ResetPassword.vue';
+  import Settings from './client/ui/Settings.vue';
+  import TermsAndConditions from './client/ui/TermsAndConditions.vue';  
+  import Users from './client/ui/Users.vue';
+  import AddUser from './client/ui/AddUser.vue';
+  import ImportUsers from './client/ui/ImportUsers.vue';
+  import ExportUsers from './client/ui/ExportUsers.vue';
 
   Vue.component('AppHeader', AppHeader);
   Vue.component('AppFooter', AppFooter);
