@@ -165,7 +165,7 @@
 </template>
 
 <script>
-import '../api/methods.js';
+import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
 

@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div class="main-content">
     
     <section class="slice slice-lg bg-gradient-dark" data-offset-top="#header-main">
@@ -26,7 +26,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
-                    <input type="email" data-cy="email" class="form-control" placeholder="name@example.com" 
+                    <input type="email" class="form-control" placeholder="name@example.com" 
                     autocomplete="off" v-focus v-model="user.email" id="email" name="email" 
                     :class="{ 'is-invalid': submitted && ($v.user.email.$error || this.user.emailpasswordInvalid) }"
                     style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
@@ -35,7 +35,7 @@
                       <span v-if="!$v.user.email.email">Email is invalid</span>
                     </div>
 
-                    <div v-if="submitted && this.user.emailpasswordInvalid" data-cy="emailpasswordinvalid" class="invalid-feedback">
+                    <div v-if="submitted && this.user.emailpasswordInvalid" class="invalid-feedback">
                       <span>The email or password that you entered is invalid. Please try again or 
                         <router-link v-bind:to="{ name: 'resetpassword' }" class="small font-weight-bold">Change password</router-link> to continue.
                       </span>   
@@ -56,7 +56,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" data-cy="password" class="form-control" placeholder="Password" autocomplete="off" 
+                    <input type="password" class="form-control" placeholder="Password" autocomplete="off" 
                     v-model="user.password" id="password" name="password" 
                     :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
                     style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
@@ -76,11 +76,11 @@
                   <label class="form-control-label">Domain</label>
 
                   <div class="input-group input-group-merge">
-                    <select class="custom-select" data-cy="domain" id="domain" name="domain" v-model="user.domain" 
+                    <select class="custom-select" id="domain" name="domain" v-model="user.domain" 
                     v-on:change="$v.user.domain.$touch()" :class="{'is-invalid':submitted && $v.user.domain.$error }"> 
                       <option selected>Select domain</option>
-                      <option v-for="counter in user.domains" v-bind:value="counter" v-bind:key="counter">
-                        {{counter}}
+                      <option v-for="counter in user.domains" v-bind:value="counter.domain" v-bind:key="counter.domain">
+                        {{counter.domain}}
                       </option>
                     </select>
                   </div>
@@ -91,16 +91,15 @@
                 </div>
 
                 <div class="mt-4">
-                  <button type="button" data-cy="loginuser" class="btn btn-block btn-primary" 
-                  v-bind:disabled="this.disableButton" v-on:click="LoginUserForDomain()">
+                  <button type="button" class="btn btn-block btn-primary" v-on:click="LoginUserForDomain()">
                     Sign in
                   </button>
                 </div>
-              </form>            
+              </form>
 
-              <br/>
-              <SuccessAlert ref="successAlert" data-cy="successalert" v-bind:message='this.$root.NavigationMessage'/>
-              <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
+              <div v-if="this.failureMessage!=''">
+                  <span>{{this.failureMessage}}</span>                    
+              </div>
 
               <div class="mt-4 text-center"><small>Not registered?</small>
                 <router-link v-bind:to="{ name: 'register' }" class="small font-weight-bold">Create account</router-link>
@@ -114,12 +113,12 @@
 </template>
 
 <script>
-import '../api/methods.js';
+import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
-export default 
-{
+export default {
   name: "Login",
   components:{
   },
@@ -133,9 +132,7 @@ export default
         domains:[]                
       },
       submitted: false,
-      disableButton:false,      
       failureMessage:'',
-      //successMessage:'',
     };
   },
   validations: 
@@ -155,67 +152,7 @@ export default
     },    
   },
   methods: 
-  {     
-    LoginUserForDomain() 
-    {
-      this.disableButton=false;
-      this.submitted = true;
-      this.failureMessage='';
-      this.user.emailpasswordInvalid=false;
-
-      this.$v.$touch();//it will validate all fields
-      if (this.$v.$invalid) 
-      {
-          return;
-      }
-      let email=this.user.email.toLowerCase().trim();
-      const router = this.$router;
-
-      this.disableButton=true;      
-      Meteor.call('loginUserForDomain', email, this.user.password, this.user.domain, (error1, result)=>
-      {
-        this.disableButton=false;
-        if(error1) 
-        {     
-          if(error1.error && error1.error==='not-authorized')
-          {
-            this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-            return;  
-          }
-          if(error1.error && error1.error==='email-password-invalid')
-          {
-            this.user.emailpasswordInvalid=true;
-            return;  
-          }
-          this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-          return;
-        } 
-        if(result && result.userId && result.domain) 
-        {                 
-          this.disableButton=true;
-          Meteor.loginWithPassword(email, this.user.password, (error2)=>
-          {
-            this.disableButton=false;
-            if(error2)
-            {
-              this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
-              return;
-            } 
-            else 
-            {
-              router.push({ name: 'dashboard', params: { domain: result.domain }});                   
-              return;
-            }
-          });
-        }
-
-        if(result && result.domains)
-        {                 
-          this.user.domains=result.domains;
-          return;
-        }
-      });
-    },
+  { 
   },
 }
 </script>
@@ -224,3 +161,142 @@ export default
 
 </style>
 
+-->
+<template>
+  <v-card>
+    <v-card-title>
+      Nutrition
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      :search="search"
+    >
+      <template v-slot:items="props">
+        <td>{{ props.item.name }}</td>
+        <td class="text-xs-right">{{ props.item.calories }}</td>
+        <td class="text-xs-right">{{ props.item.fat }}</td>
+        <td class="text-xs-right">{{ props.item.carbs }}</td>
+        <td class="text-xs-right">{{ props.item.protein }}</td>
+        <td class="text-xs-right">{{ props.item.iron }}</td>
+      </template>
+      <template v-slot:no-results>
+        <v-alert :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </template>
+    </v-data-table>
+  </v-card>
+</template>
+<script>
+  export default {
+    data () {
+      return {
+        search: '',
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            sortable: false,
+            value: 'name'
+          },
+          { text: 'Calories', value: 'calories' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' }
+        ],
+        desserts: [
+          {
+            name: 'Frozen Yogurt',
+            calories: 159,
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0,
+            iron: '1%'
+          },
+          {
+            name: 'Ice cream sandwich',
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+            iron: '1%'
+          },
+          {
+            name: 'Eclair',
+            calories: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+            iron: '7%'
+          },
+          {
+            name: 'Cupcake',
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+            iron: '8%'
+          },
+          {
+            name: 'Gingerbread',
+            calories: 356,
+            fat: 16.0,
+            carbs: 49,
+            protein: 3.9,
+            iron: '16%'
+          },
+          {
+            name: 'Jelly bean',
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0,
+            iron: '0%'
+          },
+          {
+            name: 'Lollipop',
+            calories: 392,
+            fat: 0.2,
+            carbs: 98,
+            protein: 0,
+            iron: '2%'
+          },
+          {
+            name: 'Honeycomb',
+            calories: 408,
+            fat: 3.2,
+            carbs: 87,
+            protein: 6.5,
+            iron: '45%'
+          },
+          {
+            name: 'Donut',
+            calories: 452,
+            fat: 25.0,
+            carbs: 51,
+            protein: 4.9,
+            iron: '22%'
+          },
+          {
+            name: 'KitKat',
+            calories: 518,
+            fat: 26.0,
+            carbs: 65,
+            protein: 7,
+            iron: '6%'
+          }
+        ]
+      }
+    }
+  }
+</script>

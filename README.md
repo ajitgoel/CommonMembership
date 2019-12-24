@@ -103,6 +103,8 @@ b. if (variable==null)
 - [ ] Add Google SignIn Option.
 - [ ] Host application in Google Cloud VM.
 - [ ] create a proper email template and email sending provider.
+- [x] ~~Remove vue-ssr package as it does not allow logoff to work~~
+- [x] ~~Move ui folder to client folder to make building application faster~~
 - [x] ~~Configure LHS dashboard menu with links to various screens~~
 	- [ ] LHS dashboard menu should be searchable
 - [ ] Screens
