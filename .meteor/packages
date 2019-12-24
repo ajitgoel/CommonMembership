@@ -19,7 +19,6 @@ static-html
 
 akryum:vue-component
 akryum:vue-less
-akryum:vue-ssr
 aldeed:simple-schema
 deanius:promise
 dynamic-import@0.5.1
