@@ -16,7 +16,7 @@
             <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
           </li>
           <li class="nav-item d-xl-block" v-else>
-            <a class="nav-link" href='' v-on:click="return Logout()">Log out</a>
+            <a class="nav-link" href='' v-on:click="Logout()">Log out</a>
           </li>
 
           <li class="nav-item mr-0">
@@ -52,21 +52,8 @@ export default
     Logout() 
     {
       const router = this.$router; 
-      Meteor.logout((error)=>
-      {
-        if(error)
-        {
-          this.failureMessage='There was an error logging you off. Our administrators have been notified of the issue and we will have a look.';
-          let element = this.$refs.toast.$el;
-          $(element).toast('show');
-          return false;
-        } 
-        else 
-        {          
-          console.log('before redirect to home page');
-          router.push({ name: 'home'});                   
-        }
-      });
+      Meteor.logout();
+      router.push({ name: 'home'});                   
     },
   },
 }
