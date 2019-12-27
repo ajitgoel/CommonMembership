@@ -90,16 +90,16 @@ export default
   },
   mounted() 
   {
-    Meteor.call('getUsersdetailService', 'clearcrimson', (error, result)=>
+    Meteor.call('getUsersDetailForDomain', 'clearcrimson', (error, result)=>
     {
       if(error) 
       {     
         if(error.error && error.error==='not-authorized')
         {
-          this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+          this.failureMessage='There was an error getting all users information. Our administrators have been notified of the issue and we will have a look.';
           return;  
         }            
-        this.failureMessage='There was an error retrieving results. Our administrators have been notified of the issue and we will have a look.';
+        this.failureMessage='There was an error getting all users information. Our administrators have been notified of the issue and we will have a look.';
         return;
       } 
       if(result) 

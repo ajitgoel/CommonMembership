@@ -48,5 +48,34 @@ export const usersdetailService =
       };
     });
     return result;
+  },
+  addUserForDomain(domain, email, firstname, lastname, password, sendUserNotification, role) 
+  {
+    var logging = require('./logging.js');  
+    const {userDomainsService} = require('./userDomainsService.js');
+    check(domain, String);    
+    domain=domain.toString().toLowerCase();      
+
+    //check if user is authorized
+    //check if user is part of the domain
+    //insert user for the domain.
+    let userid=Meteor.userId();
+    if (!userid) 
+    {
+      throw new Meteor.Error('not-authorized');
+    }
+
+    let domainsForUserId = userDomainsService.getDomainsForUserId(userid);
+    if(domainsForUserId.length=== 0 || !domainsForUserId.includes(domain))
+    {
+      logging.winston.log('info', `User ${userid} does not belong to domain ${domain}`);
+      throw new Meteor.Error('not-authorized');
+    }
+
+    let result= UserDetailCollection.insert(
+      { email: email, name:{firstname: firstname, lastname: lastname}, password: password, 
+      sendUserNotification: sendUserNotification, role: role});
+    console.log(`addUserForDomain: result: ${result}`);
+    return result;
   }
 }
