@@ -38,7 +38,7 @@ dburles:mongo-collection-instances
 mizzao:autocomplete
 mizzao:user-status
 session@1.2.0
-typescript@3.7.1
+typescript
 autoupdate@1.6.0
 email@1.2.3
 meteorhacks:ssr

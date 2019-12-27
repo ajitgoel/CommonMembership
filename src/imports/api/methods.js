@@ -39,12 +39,20 @@ Meteor.methods(
       emailService.send(fromAddress, subject, emailText);  
     }
   },
-  getUsersdetailService(domain) 
+  getUsersDetailForDomain(domain) 
   {
     if(Meteor.isServer)
     {
       const { usersdetailService } = require('../server/usersdetailService.js');
       return usersdetailService.getUsersDetailForDomain(domain);  
+    }
+  },
+  addUserForDomain(domain, email, firstname, lastname, password, sendUserNotification, role) 
+  {
+    if(Meteor.isServer)
+    {
+      const { usersdetailService } = require('../server/usersdetailService.js');
+      return usersdetailService.addUserForDomain(domain, email, firstname, lastname, password, sendUserNotification, role);  
     }
   },
 })

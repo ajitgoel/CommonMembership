@@ -131,6 +131,7 @@ b. if (variable==null)
 		- [x] ~~use verify email template when sending emails.~~
 		- [ ] When the user registers, he should be logged in. to do this, the server side code needs to be broken down into 2 parts and each part needs to be called from the client one after another.
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
+		- [ ] if there is a failure sending an email, then perhaps a different error message needs to be shown. 
 	- [ ] c. Verify Email
 		- [ ] when user clicks on verify email link, it should verify token, login user and navigate user to dashboard screen.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
@@ -140,6 +141,7 @@ b. if (variable==null)
 		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
+		- [x] ~~logout functionality does not work after the user has logged in.~~
 	- [ ] e. Reset Password
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~Change reset password template~~

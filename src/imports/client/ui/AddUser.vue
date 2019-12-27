@@ -1,148 +1,113 @@
 <template>
-  <div class="main-content">
-    <div class="container min-vh-100 d-flex align-items-center">
-      <div class="col py-5">
-        <div class="row justify-content-center">
-          <div class="col-md-9">
-            <div>
-              <div class="mb-5 text-center">
-                  <h6 class="h3">Add new user</h6>
+  <div class="col-lg-9 order-lg-2">
+    <div class="actions-toolbar py-2 mb-4">
+      <h5 class="mb-1">Add New User</h5>
+      <p class="text-sm text-muted mb-0">Create a brand new user and add them to this site.</p>
+    </div>
+    <form>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="form-group">
+            <label class="form-control-label">Email (required)</label>
+            <div class="input-group input-group-merge">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <span class="clearfix"></span>
-              <form role="form">
+              <input v-focus v-model="user.email" 
+              :class="{ 'is-invalid': submitted && $v.user.email.$error}"                                
+              type="email" data-cy="email" class="form-control" placeholder="name@example.com" 
+              autocomplete="off"  id="email" name="email" 
+              style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">                      
+              <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
+                <span v-if="!$v.user.email.required">Email is required</span>
+                <span v-if="!$v.user.email.email">Email is invalid</span>
+              </div>
 
-                <div class="form-group">
-                  <label class="form-control-label">Email address</label>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input type="email" data-cy="email" class="form-control" placeholder="name@example.com" autocomplete="off" 
-                    v-focus v-model="user.email" id="email" name="email" 
-                    :class="{ 'is-invalid': submitted && ($v.user.email.$error || this.user.userExistsforDomain) }"                                
-                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">                      
-                    <div v-if="submitted && $v.user.email.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.email.required">Email is required</span>
-                      <span v-if="!$v.user.email.email">Email is invalid</span>
-                    </div>
+              <!--<div v-if="submitted && this.user.userExistsforDomain" class="invalid-feedback">
+                <span>A user already exists for this domain. Please select another one or 
+                  <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link> to continue.
+                </span>   
+              </div>-->
 
-                    <div v-if="submitted && this.user.userExistsforDomain" class="invalid-feedback">
-                      <span>A user already exists for this domain. Please select another one or 
-                        <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link> to continue.
-                      </span>   
-                    </div>
-
-                  </div>
-                </div>
-                <div class="form-group mb-4">
-                  <label class="form-control-label">Password</label>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" data-cy="password" class="form-control" placeholder="********" 
-                    v-model="user.password" id="password" name="password" :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
-                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                    <div class="input-group-append">
-                      <span class="input-group-text">
-                          <i class="fas fa-eye"></i>
-                      </span>
-                    </div>
-                    <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.password.required">Password is required</span>
-                      <span v-if="!$v.user.password.minLength">Password must be at least 6 characters</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-control-label">Confirm password</label>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>                      
-                    <input type="password" data-cy="confirmPassword" class="form-control" placeholder="********"                         
-                    v-model="user.confirmPassword" id="confirmPassword" name="confirmPassword" 
-                    :class="{ 'is-invalid': submitted && $v.user.confirmPassword.$error }" 
-                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                    <div v-if="submitted && $v.user.confirmPassword.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.confirmPassword.required">Confirm Password is required</span>
-                      <span v-else-if="!$v.user.confirmPassword.sameAsPassword">Passwords must match</span>
-                    </div>
-                  </div>                    
-                </div>
-
-                <div class="form-group">
-                  <label class="form-control-label">Domain</label>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input class="form-control" data-cy="domain" placeholder="www.DomainName.com" 
-                    v-model="user.domain" id="domain" name="domain" 
-                    :class="{ 'is-invalid': submitted && ($v.user.domain.$error || this.user.domainExists) }">                      
-                    <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.domain.required">Domain is required</span>
-                    </div>
-
-                    <div v-if="submitted && this.user.domainExists" data-cy="domainexists" class="invalid-feedback">
-                      <span>This domain already exists. Please select another one to continue.</span>   
-                    </div>
-                  </div>                 
-
-                </div>
-                                
-                <div class="my-4">
-                  <div class="custom-control custom-checkbox" 
-                    v-bind:class="{ 'is-invalid': submitted && $v.user.termsAndConditions.$error }">
-                    <input type="checkbox" data-cy="termsAndConditions" class="custom-control-input" id="termsAndConditions" 
-                    v-on:change="$v.user.termsAndConditions.$touch()" v-model="user.termsAndConditions">
-                    <label class="custom-control-label" for="termsAndConditions">I agree to the 
-                      <a href="#" v-on:click="showTermsAndConditionsModal">terms and conditions</a>
-                    </label>                   
-                    <TermsAndConditionsModal ref="TermsAndConditionsModal"/>
-                  </div>
-                  <div v-if="submitted && $v.user.termsAndConditions.$error" class="custom-control custom-checkbox invalid-feedback">
-                    <span v-if="!$v.user.termsAndConditions.checked">Agreement to terms and conditions is required</span>
-                  </div>
-                
-                  <div class="custom-control custom-checkbox" 
-                    v-bind:class="{ 'is-invalid': submitted && $v.user.termsAndConditions.$error }">
-                    <input type="checkbox" data-cy="privacyPolicy" class="custom-control-input" id="privacyPolicy"
-                    v-on:change="$v.user.privacyPolicy.$touch()" v-model="user.privacyPolicy">
-                    <label class="custom-control-label" for="privacyPolicy">I agree to the 
-                      <a href="#" v-on:click="showPrivacyPolicyModal">privacy policy</a>
-                    </label>
-                    
-                    <PrivacyPolicyModal ref="PrivacyPolicyModal"/>
-                  </div>
-                  <div v-if="submitted && $v.user.privacyPolicy.$error" class="custom-control custom-checkbox invalid-feedback">
-                    <span v-if="!$v.user.privacyPolicy.checked">Agreement to privacy policy is required</span>
-                  </div>                    
-                </div>
-
-                <div class="mt-4">
-                  <button type="button" id="registeruser" data-cy="registeruser" v-bind:disabled="this.disableButton" class="btn btn-block btn-primary" 
-                    v-on:click="RegisterUser()">
-                    Create my account
-                  </button>
-                </div>
-                
-                <br/>
-
-            </form>
-
-            <br/>
-            <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
-
-            <div class="mt-4 text-center"><small>Already have an account?</small>
-                <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link>
-            </div>
             </div>
           </div>
         </div>
       </div>
-    </div>  
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">First name</label>
+            <input data-cy="firstname" v-model="user.firstname" class="form-control" type="text" placeholder="Enter your first name">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label">Last name</label>
+            <input data-cy="lastname" v-model="user.lastname" class="form-control" type="text" placeholder="Also your last name">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label">Password</label>
+            <button data-cy="showpassword" type="button" class="form-control btn btn-sm btn-secondary">Show Password</button>
+            <button data-cy="hidepassword" type="button" class="form-control btn btn-sm btn-secondary">Hide</button>
+            <button data-cy="showpasswordbutton" type="button" class="form-control btn btn-sm btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">            
+            <label class="form-control-label">Send User Notification</label>
+            <div class="custom-control custom-checkbox" 
+            v-bind:class="{ 'is-invalid': submitted && $v.user.sendUserNotification.$error }">
+              <input type="checkbox" data-cy="sendusernotification" class="custom-control-input" id="sendUserNotification" 
+              v-on:change="$v.user.sendUserNotification.$touch()" v-model="user.sendUserNotification">
+              <label class="custom-control-label" for="sendUserNotification">Send the new user an email about their account.</label>                   
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">            
+
+            <div class="col-md-6">
+              <div class="form-group focused">
+                <label class="form-control-label">Role</label>
+                <select data-cy="role"  v-model="user.role" class="form-control select2-hidden-accessible" data-toggle="select" 
+                data-select2-id="1" tabindex="-1" aria-hidden="true">
+                  <option value="seo_editor">SEO Editor</option>
+                  <option value="seo_manager">SEO Manager</option>
+                  <option selected="selected" value="subscriber">Subscriber</option>
+                  <option value="contributor">Contributor</option>
+                  <option value="author">Author</option>
+                  <option value="editor">Editor</option>
+                  <option value="administrator">Administrator</option>			
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-5 mt-5 delimiter-top text-left">
+        <button data-cy="addnewuser" v-bind:disabled="this.disableButton" v-on:click="AddNewUser()" id="addnewuser" type="button" 
+        class="btn btn-sm btn-primary">Add New User</button>
+      </div>
+
+    </form>
+    <br/>
+    <SuccessAlert ref="successAlert" data-cy="successalert" v-bind:message='this.$root.NavigationMessage'/>              
+    <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
+
   </div>
 </template>
 
@@ -152,53 +117,45 @@ import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
 
 export default {
-  name: "Register",
+  name: "AddUser",
   components:{
   },
   data() {
     return {
       user: {
-        domain: "",
-        domainExists:false,
-        userExistsforDomain: false,
         email: "",
+        firstname: "",
+        lastname: "",
         password: "",
-        confirmPassword: "",
-        termsAndConditions:false,
-        privacyPolicy:false,
+        sendUserNotification:false,
+        role: "",
       },
       submitted: false,
       disableButton:false,      
-      failureMessage:''
+      failureMessage:'',
+      successMessage:''
     };
   },
   validations: 
   {
     user: 
     {
-      domain: { required },
       email: { required, email },
-	    password:  { required, minLength: minLength(6) },
-      confirmPassword:  { required, sameAsPassword: sameAs('password') },
-      termsAndConditions: {checked(val)
+	    /*password:  { required, minLength: minLength(6) },
+      sendUserNotification: {checked(val)
       {
         return val;
-      }},
-      privacyPolicy: {checked(val)
-      {
-        return val;
-      }},
+      }},*/
     },
   },
   methods: 
   {  
-    RegisterUser() 
+    AddNewUser() 
     {
       this.disableButton=false;
       this.submitted = true;
       this.failureMessage='';
-      this.user.userExistsforDomain=false;
-      this.user.domainExists=false;
+      this.successMessage='';
 
       this.$v.$touch();
       if (this.$v.$invalid) 
@@ -207,44 +164,35 @@ export default {
       }
 
       this.disableButton=true;
-      Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, (error, result)=>
+      let domain='clearcrimson';
+
+      var generatePassword = require("generate-password");
+      var password = generatePassword.generate({
+          length: 10,
+          numbers: true,
+          symbols:true,
+          uppercase:true
+      });
+
+      console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${password} 
+      ${this.user.sendUserNotification} ${this.user.role}`);
+
+      Meteor.call('addUserForDomain', domain, this.user.email, this.user.firstname, this.user.lastname, password, 
+      this.user.sendUserNotification, this.user.role, (error, result)=>
       {
         this.disableButton=false;
         if(error) 
         {     
-          if(error.error && error.error==='domain-already-in-use')
-          {
-            this.user.domainExists=true;
-            return;  
-          }
-
-          if(error.error && error.error==='user-exists-for-domain')
-          {
-            this.user.userExistsforDomain=true;
-            return;  
-          }
-          this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
-        return;
+          this.failureMessage='There was an error adding a new user. Our administrators have been notified of the issue and we will have a look.';
+          return;
         } 
-        if(result && result.userId && result.domain ) 
-      {
-          this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                  
+        if(result) 
+        {
+          this.successMessage='User added successfully.';
           return;
         }
-        this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
-        return;
       });
     },
-    showPrivacyPolicyModal() 
-    {
-      let element = this.$refs.PrivacyPolicyModal.$el;
-      $(element).modal('show');
-    },
-    showTermsAndConditionsModal() 
-    {
-      let element = this.$refs.TermsAndConditionsModal.$el;
-      $(element).modal('show');
-    }
   },
 }
 </script>
