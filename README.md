@@ -122,7 +122,9 @@ b. if (variable==null)
 			- [ ] Add custom fields
 			- [ ] clicking on "Show password" should show password, show hide, cancel buttons. 
 			- [ ] hide button should hide password. 
-			- [ ] cancel button should change "hide password" to "show password"
+			- [ ] cancel button should change "hide password" to "show password".
+			- [ ] Encrypt password in database.
+			- [ ] Send email to users when user needs to be notified of account. 
 		- [ ] 1. All users\Search users
 			- [ ] sort indicator does not show on grid column
 			- [ ] show tickets with detail link using "row details support": https://bootstrap-vue.js.org/docs/components/table
@@ -130,6 +132,7 @@ b. if (variable==null)
 			- [ ] add checkbox to the left of each row. 
 			- [ ] Add edit, delete links below each row. 
 			- [ ] clicking on email should navigate user to user edit screen. 
+			- [ ] Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv file. 
 		- [ ] 3. Import users using CSV file
 			- [ ] use https://atmospherejs.com/edgee/slingshot
 		- [ ] 4. Export users to CSV file
@@ -145,7 +148,7 @@ b. if (variable==null)
 	- [ ] d. Login user screen
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~login screen not working with roles package version 3~~
-		- [ ] Domain dropdown should be selected and an error shown when the user's login has multiple domains.
+		- [x] ~~Domain dropdown should be selected and an error shown when the user's login has multiple domains.~~
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
 		- [x] ~~logout functionality does not work after the user has logged in.~~

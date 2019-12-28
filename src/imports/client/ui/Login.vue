@@ -85,7 +85,7 @@
                     </select>
                   </div>
 
-                  <div v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
+                  <div data-cy="domainnotselectederror" v-if="submitted && $v.user.domain.$error" class="invalid-feedback">
                     <span v-if="!$v.user.domain.domainSelected">Please select a valid domain</span>
                   </div>
                 </div>
@@ -212,6 +212,7 @@ export default
         if(result && result.domains)
         {                 
           this.user.domains=result.domains;
+          this.failureMessage='Please select a valid domain.'; 
           return;
         }
       });
