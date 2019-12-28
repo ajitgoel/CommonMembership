@@ -78,7 +78,7 @@
                   <div class="input-group input-group-merge">
                     <select class="custom-select" data-cy="domain" id="domain" name="domain" v-model="user.domain" 
                     v-on:change="$v.user.domain.$touch()" :class="{'is-invalid':submitted && $v.user.domain.$error }"> 
-                      <option selected>Select domain</option>
+                      <option selected>{{defaultDomain}}</option>
                       <option v-for="counter in user.domains" v-bind:value="counter" v-bind:key="counter">
                         {{counter}}
                       </option>
@@ -135,7 +135,7 @@ export default
       submitted: false,
       disableButton:false,      
       failureMessage:'',
-      //successMessage:'',
+      defaultDomain:'Select domain',
     };
   },
   validations: 
@@ -146,7 +146,7 @@ export default
       password:  { required, minLength: minLength(6) },
       domain: {domainSelected(val)
       {
-        if (this.user.domains && this.user.domains.length>0 && val && val === 'Select domain') 
+        if (this.user.domains && this.user.domains.length>0 && val && val === this.defaultDomain) 
         {
           return false;
         }
@@ -212,7 +212,7 @@ export default
         if(result && result.domains)
         {                 
           this.user.domains=result.domains;
-          this.failureMessage='Please select a valid domain.'; 
+          this.user.domain=this.defaultDomain;
           return;
         }
       });

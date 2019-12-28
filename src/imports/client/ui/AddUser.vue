@@ -74,10 +74,9 @@
         <div class="col-md-12">
           <div class="form-group">            
             <label class="form-control-label">Send User Notification</label>
-            <div class="custom-control custom-checkbox" 
-            v-bind:class="{ 'is-invalid': submitted && $v.user.sendUserNotification.$error }">
+            <div class="custom-control custom-checkbox">
               <input type="checkbox" data-cy="sendusernotification" class="custom-control-input" id="sendUserNotification" 
-              v-on:change="$v.user.sendUserNotification.$touch()" v-model="user.sendUserNotification">
+              v-model="user.sendUserNotification">
               <label class="custom-control-label" for="sendUserNotification">Send the new user an email about their account.</label>                   
             </div>
           </div>
@@ -135,7 +134,8 @@ export default {
         email: "",
         firstname: "",
         lastname: "",
-        password: "",hiddenpassword:'',
+        password: "",
+        hiddenpassword:'',
         sendUserNotification:false,
         role: "",
       },
@@ -190,7 +190,7 @@ export default {
       ${this.user.sendUserNotification} ${this.user.role}`);
 
       Meteor.call('addUserForDomain', domain, this.user.email, this.user.firstname, this.user.lastname, this.user.password, 
-      this.user.sendUserNotification, this.user.role, (error, result)=>
+        this.user.sendUserNotification, this.user.role, (error, result)=>
       {
         this.disableButton=false;
         if(error) 
@@ -200,7 +200,14 @@ export default {
         } 
         if(result) 
         {
-          this.successMessage='User added successfully.';
+          this.successMessage='User was added successfully.';
+          this.user.email='';
+          this.user.firstname='';
+          this.user.lastname=''; 
+          this.user.password='';
+          this.user.sendUserNotification=false;
+          this.user.role='';
+
           return;
         }
       });

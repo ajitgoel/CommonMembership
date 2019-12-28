@@ -100,6 +100,7 @@ b. if (variable==null)
 - [x] ~~Configure BootstrapVue with application~~
 - [x] ~~Configure (and use) mailgun email provider to send emails.~~
 - [x] ~~migrate to alanning:roles version 3.~~
+- [ ] ==User should be logged off if he has not used the application for predefined amount of time. ==
 - [ ] remove all packages that are not being used.
 - [ ] Add server side validations using Collection2 and SimpleSchema.
 - [ ] Write unit tests for server side code.
