@@ -159,6 +159,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
+import { MeteorErrors } from '../../api/constants';
 
 export default {
   name: "Register",
@@ -221,13 +222,13 @@ export default {
         this.disableButton=false;
         if(error) 
         {     
-          if(error.error && error.error==='domain-already-in-use')
+          if(error.error && error.error===MeteorErrors.DomainAlreadyInUse)
           {
             this.user.domainExists=true;
             return;  
           }
 
-          if(error.error && error.error==='user-exists-for-domain')
+          if(error.error && error.error===MeteorErrors.UserExistsforDomain)
           {
             this.user.userExistsforDomain=true;
             return;  

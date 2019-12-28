@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { UserCollection,UserDomainCollection,DomainCollection, UserDetailCollection } from '../api/collections';
+import { MeteorErrors } from '../api/constants';
 
 export const usersdetailService = 
 {
@@ -20,21 +21,21 @@ export const usersdetailService =
     let userid=Meteor.userId();
     if (!userid) 
     {
-      throw new Meteor.Error('not-authorized');
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
     }
 
     let domainsForUserId = userDomainsService.getDomainsForUserId(userid);
     if(domainsForUserId.length=== 0 || !domainsForUserId.includes(domain))
     {
       logging.winston.log('info', `User ${userid} does not belong to domain ${domain}`);
-      throw new Meteor.Error('not-authorized');
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
     }
 
     let userIdsForDomain = userDomainsService.getUserIdsForDomain(domain);
     if(userIdsForDomain.length === 0)
     {
       logging.winston.log('info', 'No domain assigned to user');
-      throw new Meteor.Error('no-domain-assigned-to-user');
+      throw new Meteor.Error(MeteorErrors.NoDomainAssignedToUser);
     }
     let usersDetail= UserDetailCollection.find({"domain":domain}, {_id:1, username:1, 'name.first': 1, 'name.last': 1, email:1, ticketOrders:1, membershipLevel:1});
     let result = usersDetail.map(x=> {
@@ -62,14 +63,14 @@ export const usersdetailService =
     let userid=Meteor.userId();
     if (!userid) 
     {
-      throw new Meteor.Error('not-authorized');
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
     }
 
     let domainsForUserId = userDomainsService.getDomainsForUserId(userid);
     if(domainsForUserId.length=== 0 || !domainsForUserId.includes(domain))
     {
       logging.winston.log('info', `User ${userid} does not belong to domain ${domain}`);
-      throw new Meteor.Error('not-authorized');
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
     }
 
     let result= UserDetailCollection.insert(

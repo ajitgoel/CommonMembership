@@ -65,6 +65,7 @@ import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
+import { MeteorErrors } from '../../api/constants';
 
 export default {
   name: "ResetPassword",
@@ -111,7 +112,7 @@ export default {
         this.disableButton=false;
         if(error) 
         {     
-          if(error.error && error.error==='email-invalid')
+          if(error.error && error.error===MeteorErrors.EmailPasswordInvalid)
           {
             this.user.emailInvalid=true;
             return;  

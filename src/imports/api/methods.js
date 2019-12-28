@@ -1,7 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 
-DomainExistsAlready=-1;
-
 Meteor.methods(
 {
   createUserForDomain(email, password, domain) 
