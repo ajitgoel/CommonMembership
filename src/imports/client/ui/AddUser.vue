@@ -53,10 +53,19 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <label class="form-control-label">Password</label>
-            <button data-cy="showpassword" type="button" class="form-control btn btn-sm btn-secondary">Show Password</button>
-            <button data-cy="hidepassword" type="button" class="form-control btn btn-sm btn-secondary">Hide</button>
-            <button data-cy="showpasswordbutton" type="button" class="form-control btn btn-sm btn-secondary">Cancel</button>
+            <label class="form-control-label">Password</label><br/>
+            <input data-cy="password" v-if="showPassword" v-model="user.password" class="form-control" type="text">
+            <button data-cy="showpassword" v-if="!showPassword" v-on:click="ToggleShowPassword()" type="button" 
+            class="btn btn-sm btn-secondary">Show Password</button>
+            <!--<button data-cy="hidepassword" v-if="showPassword" v-on:click="HidePassword()" type="button" 
+            class="btn btn-sm btn-secondary">
+              <span class="btn-inner--icon">
+                <i v-bind:class="showPassword?'fas fa-eye': 'fas fa-eye-slash'"></i>
+              </span>
+              Hide
+            </button>-->
+            <button data-cy="showpasswordbutton" v-if="showPassword" v-on:click="ToggleShowPassword()" type="button" 
+            class="btn btn-sm btn-secondary">Cancel</button>
           </div>
         </div>
       </div>
@@ -82,7 +91,7 @@
             <div class="col-md-6">
               <div class="form-group focused">
                 <label class="form-control-label">Role</label>
-                <select data-cy="role"  v-model="user.role" class="form-control select2-hidden-accessible" data-toggle="select" 
+                <select data-cy="role" v-model="user.role" class="form-control select2-hidden-accessible" data-toggle="select" 
                 data-select2-id="1" tabindex="-1" aria-hidden="true">
                   <option value="seo_editor">SEO Editor</option>
                   <option value="seo_manager">SEO Manager</option>
@@ -98,14 +107,14 @@
         </div>
       </div>
 
-      <div class="pt-5 mt-5 delimiter-top text-left">
-        <button data-cy="addnewuser" v-bind:disabled="this.disableButton" v-on:click="AddNewUser()" id="addnewuser" type="button" 
-        class="btn btn-sm btn-primary">Add New User</button>
+      <div class="pt-2 mt-2 delimiter-top text-left">
+        <button data-cy="addnewuser" v-bind:disabled="this.disableButton" v-on:click="AddNewUser()" id="addnewuser" 
+        type="button" class="btn btn-sm btn-primary">Add New User</button>
       </div>
 
     </form>
     <br/>
-    <SuccessAlert ref="successAlert" data-cy="successalert" v-bind:message='this.$root.NavigationMessage'/>              
+    <SuccessAlert ref="successAlert" data-cy="successalert" v-bind:message='this.successMessage'/>              
     <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
 
   </div>
@@ -126,14 +135,15 @@ export default {
         email: "",
         firstname: "",
         lastname: "",
-        password: "",
+        password: "",hiddenpassword:'',
         sendUserNotification:false,
         role: "",
       },
       submitted: false,
       disableButton:false,      
       failureMessage:'',
-      successMessage:''
+      successMessage:'',
+      showPassword:false
     };
   },
   validations: 
@@ -141,15 +151,25 @@ export default {
     user: 
     {
       email: { required, email },
-	    /*password:  { required, minLength: minLength(6) },
-      sendUserNotification: {checked(val)
-      {
-        return val;
-      }},*/
     },
+  },
+  mounted() 
+  {
+    var generatePassword = require("generate-password");
+    this.user.password = generatePassword.generate({length: 24, numbers: true, symbols:true, uppercase:true});      
   },
   methods: 
   {  
+    ToggleShowPassword()
+    {
+      this.showPassword=!this.showPassword;
+    },
+    /*HidePassword()
+    {
+      let passwordlength=this.user.password.length;
+      this.user.hiddenpassword='*'.repeat(passwordlength);
+      console.log(this.user.hiddenpassword);
+    },*/
     AddNewUser() 
     {
       this.disableButton=false;
@@ -166,18 +186,10 @@ export default {
       this.disableButton=true;
       let domain='clearcrimson';
 
-      var generatePassword = require("generate-password");
-      var password = generatePassword.generate({
-          length: 10,
-          numbers: true,
-          symbols:true,
-          uppercase:true
-      });
-
-      console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${password} 
+      console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${this.user.password} 
       ${this.user.sendUserNotification} ${this.user.role}`);
 
-      Meteor.call('addUserForDomain', domain, this.user.email, this.user.firstname, this.user.lastname, password, 
+      Meteor.call('addUserForDomain', domain, this.user.email, this.user.firstname, this.user.lastname, this.user.password, 
       this.user.sendUserNotification, this.user.role, (error, result)=>
       {
         this.disableButton=false;

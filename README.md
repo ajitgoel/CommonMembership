@@ -58,6 +58,9 @@ https://github.com/Meteor-Community-Packages/meteor-roles
 **Running meteor at scale:** https://www.freecodecamp.org/news/scaling-meteor-a-year-on-26ee37588e4b/
 **Meteor Roles Package:** https://github.com/Meteor-Community-Packages/meteor-roles/tree/v3
 **Faker.js:** https://github.com/marak/Faker.js/
+**Simple Schema:** https://github.com/aldeed/simple-schema-js
+**Meteor Collection2:** https://github.com/Meteor-Community-Packages/meteor-collection2
+**Font Awesome: **https://fontawesome.com/icons?d=gallery&q=eye&m=free
 
 **VueJs:** : **Vue Router:** : https://router.vuejs.org/guide/essentials/named-routes.html
 https://vuelidate.js.org/
@@ -110,13 +113,16 @@ b. if (variable==null)
 - [ ] Screens
 	- [x] Navigation Bar
 		- [x] ~~Register link should be changed to logout when the user has logged in.~~
-		- [x] ~~Afer the user has logged in, the link should be changed to logout. ~~
+		- [x] ~~After the user has logged in, the link should be changed to logout. ~~
 		- [ ] Afer the user clicks logout the link should be changed to register and he should be directed to the home page-Remove VueSSR 
 		- [x] ~~Logout functionality.~~
 		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast.~~
 	- [ ] a. User management
 		- [ ] 2. Add user
 			- [ ] Add custom fields
+			- [ ] clicking on "Show password" should show password, show hide, cancel buttons. 
+			- [ ] hide button should hide password. 
+			- [ ] cancel button should change "hide password" to "show password"
 		- [ ] 1. All users\Search users
 			- [ ] sort indicator does not show on grid column
 			- [ ] show tickets with detail link using "row details support": https://bootstrap-vue.js.org/docs/components/table
@@ -125,6 +131,7 @@ b. if (variable==null)
 			- [ ] Add edit, delete links below each row. 
 			- [ ] clicking on email should navigate user to user edit screen. 
 		- [ ] 3. Import users using CSV file
+			- [ ] use https://atmospherejs.com/edgee/slingshot
 		- [ ] 4. Export users to CSV file
 	- [ ] b. Register user screen
 		- [x] ~~disable button when submitting form.~~

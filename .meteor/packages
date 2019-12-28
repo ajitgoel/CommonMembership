@@ -19,7 +19,6 @@ static-html
 
 akryum:vue-component
 akryum:vue-less
-aldeed:simple-schema
 deanius:promise
 dynamic-import@0.5.1
 akryum:vue-stylus
@@ -45,3 +44,5 @@ meteorhacks:ssr
 montiapm:agent
 practicalmeteor:sinon
 ostrio:files
+edgee:slingshot
+aldeed:collection2@3.0.0
