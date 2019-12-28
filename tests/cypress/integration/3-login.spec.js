@@ -50,6 +50,9 @@ describe("login-user", () =>
 
     cy.visit('/login');
     cy.loginUser(email1, password1);
+    
+    cy.get("[data-cy=erroralert]").contains('Please select a valid domain.');
+
     cy.get("[data-cy=domain]").select(domain2);
     cy.get("[data-cy=loginuser]").click();
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain2.toLowerCase()}/`);
