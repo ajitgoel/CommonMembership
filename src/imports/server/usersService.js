@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { UserCollection,UserDomainCollection,DomainCollection, UserDetailCollection } from '../api/collections';
+import { MeteorErrors } from '../api/constants';
 
 export const userService = 
 {
@@ -29,7 +30,7 @@ export const userService =
     if(domainExistForOtherUsers)
     {
       logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
-      throw new Meteor.Error('domain-already-in-use');
+      throw new Meteor.Error(MeteorErrors.DomainAlreadyInUse);
     }
 
     var user=Accounts.findUserByEmail(email);
@@ -59,7 +60,7 @@ export const userService =
     if(domainsForUserId.length>0 && domainsForUserId.includes(domain))
     {
       logging.winston.log('info', `User already exists for the domain, Domain: ${domain} Email: ${email}`);
-      throw new Meteor.Error('user-exists-for-domain');
+      throw new Meteor.Error(MeteorErrors.UserExistsForDomain);
     }
     //#endregion
     //#region if "user exists but not for the domain", add domain role to user.
@@ -97,14 +98,14 @@ export const userService =
     
     if(user==null)
     {
-      throw new Meteor.Error('email-password-invalid');
+      throw new Meteor.Error(MeteorErrors.EmailPasswordInvalid);
     }
     
     //#region user exists
     var _checkPasswordReturn=Accounts._checkPassword(user, password);    
     if(_checkPasswordReturn == null || _checkPasswordReturn.error)
     {
-      throw new Meteor.Error('email-password-invalid');    
+      throw new Meteor.Error(MeteorErrors.EmailPasswordInvalid);    
     }
     let userId= _checkPasswordReturn.userId;
     //#region user trying to login with email, password
@@ -114,7 +115,7 @@ export const userService =
       if(domainsForUserId.length === 0)
       {
         logging.winston.log('info', `Email: ${email}, User ${userId} does not belong to domain ${domain}`);
-        throw new Meteor.Error('user-does-not-belong-to-domain');
+        throw new Meteor.Error(MeteorErrors.UserDoesNotBelongToDomain);
       }
 
       if(domainsForUserId && domainsForUserId.length ===1)
@@ -136,13 +137,13 @@ export const userService =
     if(domainsForUser.length===0)
     {
       logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
-      throw new Meteor.Error('not-authorized');
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
     }    
     let doesdomainBelongToUser=domainsForUser.includes(domain);
     if(doesdomainBelongToUser === false)
     {
       logging.winston.log('info', `Unauthorized Request, client passing Domain: ${domain} which does not belong to Email: ${email}`);
-      throw new Meteor.Error('not-authorized');
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
     }
     return {userId:user._id, domain:domain}; 
     //#endregion    
@@ -157,7 +158,7 @@ export const userService =
     if(user==null)
     {
       logging.winston.log('info', `Invalid email: ${email}`);
-      throw new Meteor.Error('email-invalid');
+      throw new Meteor.Error(MeteorErrors.EmailPasswordInvalid);
     }    
     //TODO: create a proper email template and email sending provider. 
     Accounts.sendResetPasswordEmail(user._id, email);   

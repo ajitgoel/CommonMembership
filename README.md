@@ -140,7 +140,7 @@ b. if (variable==null)
 	- [ ] b. Register user screen
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~use verify email template when sending emails.~~
-		- [ ] When the user registers, he should be logged in. to do this, the server side code needs to be broken down into 2 parts and each part needs to be called from the client one after another.
+		- [ ] When the user registers, he should be logged in. To do this, the server side code needs to be broken down into 2 parts and each part needs to be called from the client one after another.
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
 		- [ ] if there is a failure sending an email, then perhaps a different error message needs to be shown. 
 	- [ ] c. Verify Email

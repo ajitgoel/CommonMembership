@@ -117,6 +117,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
+import { MeteorErrors } from '../../api/constants';
 
 export default 
 {
@@ -182,7 +183,7 @@ export default
             this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
             return;  
           }
-          if(error1.error && error1.error==='email-password-invalid')
+          if(error1.error && error1.error===MeteorErrors.EmailPasswordInvalid)
           {
             this.user.emailpasswordInvalid=true;
             return;  

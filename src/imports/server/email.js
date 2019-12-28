@@ -1,6 +1,7 @@
 'use strict';
 import { check } from 'meteor/check';
 const AWS = require('aws-sdk');
+import { MeteorErrors } from '../api/constants';
 
 export const emailService = 
 {
@@ -39,7 +40,7 @@ export const emailService =
       catch(function(err) 
       {
         logging.winston.log('info', 'Error sending email from: '+ fromAddress + '. Error from Amazon SES: ' +  JSON.stringify(err));
-        throw new Meteor.Error('Error sending email', err);
+        throw new Meteor.Error(MeteorErrors.ServerError);
       });
   }
 }
