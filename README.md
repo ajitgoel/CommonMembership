@@ -140,7 +140,7 @@ b. if (variable==null)
 	- [ ] ++b. Register user screen++
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~use verify email template when sending emails.~~
-		- [x] ==When the user registers, he should be logged in.==
+		- [x] ~~When the user registers, he should be logged in.~~
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
 		- [ ] if there is a failure sending an email, then perhaps a different error message needs to be shown.
 	- [ ] ++c. Verify Email++

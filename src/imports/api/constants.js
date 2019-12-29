@@ -9,3 +9,9 @@ export const MeteorErrors =
   UserDoesNotBelongToDomain: 'user-does-not-belong-to-domain',
   ServerError: 'server-error',
 };
+
+export const StateVariables = 
+{
+  SelectedDomain: 'selected-domain',
+  NavigationMessage: 'navigation-message',
+};

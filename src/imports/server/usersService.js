@@ -87,7 +87,8 @@ export const userService =
 
     check(email, String);
     check(password, String);
-    
+    check(domain, String);
+
     domain=domain.toString().toLowerCase();
     email=email.toString().toLowerCase();      
 

@@ -53,6 +53,7 @@ export default
     {
       const router = this.$router; 
       Meteor.logout();
+      this.$root.clear();
       router.push({ name: 'home'});                   
     },
   },

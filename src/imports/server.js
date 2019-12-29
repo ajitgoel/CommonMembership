@@ -12,6 +12,7 @@ Meteor.publish('currentUserId', function ()
 
 Meteor.startup(() => 
 {
+  Accounts.config({loginExpirationInDays: 0.0006})
   process.env.MAIL_URL = 
     `${Meteor.settings.private.Mailgun.Protocol}://${Meteor.settings.private.Mailgun.Username}:${Meteor.settings.private.Mailgun.Password}@${Meteor.settings.private.Mailgun.SMTP_Hostname}:${Meteor.settings.private.Mailgun.Port}`;
 });

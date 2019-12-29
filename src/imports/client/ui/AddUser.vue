@@ -184,12 +184,13 @@ export default {
       }
 
       this.disableButton=true;
-      let domain='clearcrimson';
-
+      let domain= this.$root.getValue(StateVariables.SelectedDomain);
+      let email=this.user.email.toString().toLowerCase();
+      
       console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${this.user.password} 
       ${this.user.sendUserNotification} ${this.user.role}`);
 
-      Meteor.call('addUserForDomain', domain, this.user.email, this.user.firstname, this.user.lastname, this.user.password, 
+      Meteor.call('addUserForDomain', domain, email, this.user.firstname, this.user.lastname, this.user.password, 
         this.user.sendUserNotification, this.user.role, (error, result)=>
       {
         this.disableButton=false;
