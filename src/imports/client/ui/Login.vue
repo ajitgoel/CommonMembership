@@ -178,7 +178,7 @@ export default
         this.disableButton=false;
         if(error1) 
         {     
-          if(error1.error && error1.error==='not-authorized')
+          if(error1.error && error1.error===MeteorErrors.NotAuthorized)
           {
             this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
             return;  

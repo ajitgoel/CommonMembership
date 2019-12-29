@@ -16,7 +16,7 @@
             <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
           </li>
           <li class="nav-item d-xl-block" v-else>
-            <a class="nav-link" href='' v-on:click="Logout()">Log out</a>
+            <a class="nav-link" href='' data-cy="logout" v-on:click="Logout()">Log out</a>
           </li>
 
           <li class="nav-item mr-0">

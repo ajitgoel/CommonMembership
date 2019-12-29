@@ -59,3 +59,23 @@ Accounts.emailTemplates.verifyEmail.html = function (user, url)
   });
 };
 //#endregion
+
+/*Accounts.onCreateUser(function(options, user) 
+{
+  var logging = require('./logging.js');
+  const {userDomainsService} = require('./userDomainsService.js');
+  const {domainsService} = require('./domainsService.js');
+  let domain=options.domain;
+  let email=options.email;
+  let userid=user._id;
+
+  userDomainsService.addDomainForUserId(userid, domain);
+  logging.winston.log('info', `Added domain ${domain} to email ${email}`);
+  
+  domainsService.addDomain(domain);
+  logging.winston.log('info', `Added domain ${domain}`);
+
+  Accounts.sendEnrollmentEmail(userid, email);
+  logging.winston.log('info', `Send enrollment email to email ${email}`);
+  return user;
+});*/

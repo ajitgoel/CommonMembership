@@ -2,6 +2,7 @@ export const MeteorErrors =
 {
   NotAuthorized: 'not-authorized',
   NoDomainAssignedToUser: 'no-domain-assigned-to-user',
+  UserDoesNotExistDomainNotRegistered: 'user-does-not-exist-domain-not-registered',
   DomainAlreadyInUse: 'domain-already-in-use',
   UserExistsForDomain: 'user-exists-for-domain',
   EmailPasswordInvalid: 'email-password-invalid',
