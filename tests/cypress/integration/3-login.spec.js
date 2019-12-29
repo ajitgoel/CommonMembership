@@ -28,9 +28,10 @@ describe("login-user", () =>
   });
   it("should login the user with one domain", () => 
   {             
+    cy.contains("Register").click();
     cy.registerUser(email1, password1, domain1); 
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain1.toLowerCase()}/`);
-    cy.visit('/login');
+    cy.contains("Sign in").click();
     cy.loginUser(email1, password1);
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain1.toLowerCase()}/`);
     cy.get("[data-cy=logout]").should("have.text", 'Log out');
@@ -39,20 +40,20 @@ describe("login-user", () =>
 
   it("should not login invalid user", () => 
   {         
-    cy.visit('/login');
+    cy.contains("Sign in").click();
     cy.loginUser('SomeRandomEmail@gmail.com', 'SomeRandomPassword', '');
     cy.get("[data-cy=emailpasswordinvalid]").contains('The email or password that you entered is invalid. Please try again or');
   });
 
   it("should login the user with two domains", () => 
   {             
-    cy.visit('/register');
+    cy.contains("Register").click();
     cy.registerUser(email1, password1, domain2); 
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain2.toLowerCase()}/`);
     cy.get("[data-cy=logout]").should("have.text", 'Log out');
     cy.get("[data-cy=logout]").click();
 
-    cy.visit('/login');
+    cy.contains("Sign in").click();
     cy.loginUser(email1, password1);    
     cy.get("[data-cy=domain]").contains('Select domain');
     cy.get("[data-cy=domain]").select(domain2);

@@ -2,12 +2,12 @@ import { Meteor } from 'meteor/meteor';
 
 Meteor.methods(
 {
-  createUserForDomain(email, password, domain) 
+  createUserForNewDomain(email, password, domain) 
   {
     if(Meteor.isServer)
     {
       const { userService } = require('../server/usersService.js');
-      return userService.createUserForDomain(email, password, domain);
+      return userService.createUserForNewDomain(email, password, domain);
     }
   }, 
   loginUserForDomain(email, password, domain) 
@@ -44,12 +44,12 @@ Meteor.methods(
       return usersdetailService.getUsersDetailForDomain(domain);  
     }
   },
-  addUserForDomain(domain, email, firstname, lastname, password, sendUserNotification, role) 
+  addUserForExistingDomain(email, password, domain, firstname, lastname, sendUserNotification, role) 
   {
     if(Meteor.isServer)
     {
-      const { usersdetailService } = require('../server/usersdetailService.js');
-      return usersdetailService.addUserForDomain(domain, email, firstname, lastname, password, sendUserNotification, role);  
+      const { userService } = require('../server/usersService.js');
+      return userService.addUserForExistingDomain(email, password, domain, firstname, lastname, sendUserNotification, role);  
     }
   },
 })

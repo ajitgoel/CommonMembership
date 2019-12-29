@@ -5,7 +5,7 @@ import { UserCollection,UserDomainCollection,DomainCollection } from '../api/col
 
 export const domainsService = 
 {
-  doesDomainExistForOtherUsers(domain) 
+  doesDomainExist(domain) 
   {
     check(domain, String);    
     domain=domain.toString().toLowerCase(); 
@@ -15,6 +15,7 @@ export const domainsService =
   addDomain(domain) 
   {
     check(domain, String);    
+    domain=domain.toString().toLowerCase(); 
     DomainCollection.insert({domain :domain});
   }
 }

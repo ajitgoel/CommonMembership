@@ -135,7 +135,7 @@
             <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
 
             <div class="mt-4 text-center"><small>Already have an account?</small>
-                <router-link v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link>
+                <router-link data-cy="login" v-bind:to="{ name: 'login' }" class="small font-weight-bold">Sign in</router-link>
             </div>
             </div>
           </div>
@@ -212,11 +212,12 @@ export default {
       let root = this.$root;
 
       this.disableButton=true;
-      Meteor.call('createUserForDomain', email, password, domain, (error, result)=>
+      Meteor.call('createUserForNewDomain', email, password, domain, (error, result)=>
       {
         this.disableButton=false;
         if(error) 
         {     
+          console.log(`error: ${error}`);
           if(error.error && error.error===MeteorErrors.DomainAlreadyInUse)
           {
             this.user.domainExists=true;
@@ -237,7 +238,7 @@ export default {
           {
             if(error2)
             {
-              console.log(error2);
+              console.log(`error2: ${error2}`);
               this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
               return;
             } 

@@ -8,15 +8,65 @@ import { MeteorErrors } from '../api/constants';
 
 export const userService = 
 {
+  addUserForExistingDomain(email, password, domain, firstname, lastname, sendUserNotification, role) 
+  {
+    var logging = require('./logging.js');  
+    const {userDomainsService} = require('./userDomainsService.js');
+    check(domain, String);    
+    check(email, String);
+    check(firstname, String);    
+    check(lastname, String);    
+    check(password, String);    
+    check(sendUserNotification, Boolean);    
+    check(role, String);    
+
+    domain=domain.toString().toLowerCase();      
+    email=email.toString().toLowerCase();    
+
+    //check if user is authorized
+    //check if user is part of the domain
+    //insert user for the domain.
+    let userid=Meteor.userId();
+    if (!userid) 
+    {
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
+    }
+
+    let domainsForUserId = userDomainsService.getDomainsForUserId(userid);
+    if(domainsForUserId.length=== 0 || !domainsForUserId.includes(domain))
+    {
+      logging.winston.log('info', `User ${userid} does not belong to domain ${domain}`);
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
+    }
+    
+    let createuseroptions={username: email, email: email, password: password, domain:domain, firstname: firstname, 
+      lastname: lastname, sendUserNotification:sendUserNotification, role: role};
+    let userId= Accounts.createUser(createuseroptions);
+    logging.winston.log('info', `User created for email ${email} and domain ${domain}`);
+
+    if(sendUserNotification === true)
+    {
+      try
+      {
+        Accounts.sendVerificationEmail(userId, email);
+        logging.winston.log('info', `Send verification email to email ${email}`);
+      }
+      catch(error)
+      {
+        logging.winston.log('info', `Error sending verification email to userid: ${userId} email: ${email}. Error ${error}`);
+      }  
+    }
+
+    return {userId:userId}; 
+  },
+
   //if domain has been registered before, then return error
   //if domain has not been registered before then check that return error if the email, domain combination has been registered before. 
-  createUserForDomain(email, password, domain) 
+  createUserForNewDomain(email, password, domain) 
   {
     var logging = require('./logging.js');
-    var emailService = require('./email.js');
     const {userDomainsService} = require('./userDomainsService.js');
     const {domainsService} = require('./domainsService.js');
-    var domainOwner_RoleName='domainOwner';
       
     check(domain, String);
     check(email, String);
@@ -25,7 +75,7 @@ export const userService =
     domain=domain.toString().toLowerCase();
     email=email.toString().toLowerCase();      
 
-    var domainExistForOtherUsers= domainsService.doesDomainExistForOtherUsers(domain);
+    var domainExistForOtherUsers= domainsService.doesDomainExist(domain);
     if(domainExistForOtherUsers)
     {
       logging.winston.log('info', `Domain is already is use, Domain: ${domain} Email: ${email}`);
@@ -36,18 +86,20 @@ export const userService =
     //#region if user does not exist, then create user, add domain role to user, send enrollment email. 
     if(user == null)
     {
-      let userId= Accounts.createUser({username: email, email: email, password: password});
+      let createuseroptions={username: email, email: email, password: password, domain:domain};
+      let userid= Accounts.createUser(createuseroptions);
       logging.winston.log('info', `User created for email ${email} and domain ${domain}`);
       
-      userDomainsService.addDomainForUserId(userId, domain);
-      logging.winston.log('info', `Added domain ${domain} to email ${email}`);
-      
-      domainsService.addDomain(domain);
-      logging.winston.log('info', `Added domain ${domain}`);
-
-      //TODO: create a proper email template and email sending provider. 
-      Accounts.sendEnrollmentEmail(userId, email);
-      return {userId:userId, domain:domain}; 
+      try
+      {
+        Accounts.sendVerificationEmail(userid, email);
+        logging.winston.log('info', `Send verification email to email ${email}`);
+      }
+      catch(error)
+      {
+        logging.winston.log('info', `Error sending verification email to userid: ${userid} email: ${email}. Error ${error}`);
+      }  
+      return {userId:userid, domain:domain}; 
     }
     //#endregion
 
@@ -70,7 +122,15 @@ export const userService =
     logging.winston.log('info', `Added domain ${domain}`);
 
     //TODO: create a proper email template and email sending provider. 
-    Accounts.sendEnrollmentEmail(userId, email);
+    try
+    {
+      Accounts.sendVerificationEmail(userId, email);
+      logging.winston.log('info', `Send verification email to email ${email}`);
+    }
+    catch(error)
+    {
+      logging.winston.log('info', `Error sending verification email to userid: ${userId} email: ${email}. Error ${error}`);
+    } 
     return {userId:userId, domain:domain}; 
   //#endregion
     //#endregion
