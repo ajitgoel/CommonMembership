@@ -122,7 +122,8 @@ export default
           return;
       }
       let token=this.$route.params.token;
-
+      let root = this.$root;
+      let router=this.$router;
       this.disableButton=true;
       Accounts.resetPassword(token, this.user.password, (error)=>
       {
@@ -131,10 +132,13 @@ export default
         {     
           this.failureMessage='There was an error resetting your password. Our administrators have been notified of the issue and we will have a look.';
           return;
+        }
+        else
+        {
+          root.setNavigationMessage('Your password has been changed successfully. Please login to continue.');
+          router.push({ name: 'login'});                  
         }        
       });
-      this.$root.setNavigationMessage('Your password has been changed successfully. Please login to continue.');
-      this.$router.push({ name: 'login'});                  
     },
   },
 }

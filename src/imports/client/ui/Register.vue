@@ -149,8 +149,8 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { MeteorErrors } from '../../api/constants';
 import { Accounts } from 'meteor/accounts-base';
+import { MeteorErrors, StateVariables} from '../../api/constants';
 
 export default {
   name: "Register",
@@ -208,7 +208,9 @@ export default {
       let email=this.user.email.toString().toLowerCase();
       let password=this.user.password;
       let domain=this.user.domain.toString().toLowerCase();
-      const router = this.$router;
+      let router = this.$router;
+      let root = this.$root;
+
       this.disableButton=true;
       Meteor.call('createUserForDomain', email, password, domain, (error, result)=>
       {
@@ -241,6 +243,7 @@ export default {
             } 
             else
             {
+              root.setValue(StateVariables.SelectedDomain, result.domain);
               router.push({ name: 'dashboard', params: { domain: domain }});                  
               return;
             }

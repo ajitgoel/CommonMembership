@@ -33,6 +33,8 @@ describe("login-user", () =>
     cy.visit('/login');
     cy.loginUser(email1, password1);
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain1.toLowerCase()}/`);
+    cy.get("[data-cy=logout]").should("have.text", 'Log out');
+    cy.get("[data-cy=logout]").click();
   });
 
   it("should not login invalid user", () => 
@@ -47,6 +49,8 @@ describe("login-user", () =>
     cy.visit('/register');
     cy.registerUser(email1, password1, domain2); 
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain2.toLowerCase()}/`);
+    cy.get("[data-cy=logout]").should("have.text", 'Log out');
+    cy.get("[data-cy=logout]").click();
 
     cy.visit('/login');
     cy.loginUser(email1, password1);    
@@ -54,5 +58,7 @@ describe("login-user", () =>
     cy.get("[data-cy=domain]").select(domain2);
     cy.get("[data-cy=loginuser]").click();
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain2.toLowerCase()}/`);
+    cy.get("[data-cy=logout]").should("have.text", 'Log out');
+    cy.get("[data-cy=logout]").click();
   });
 });

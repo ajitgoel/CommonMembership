@@ -16,6 +16,7 @@ export default
     return {
       state: {
         NavigationMessage: '',
+        dictionary:{}
       }, 
     };
   },
@@ -26,6 +27,14 @@ export default
   },
   methods: 
   {
+    setValue(key,value) 
+    {
+      this.state.dictionary[key] = value;
+    },
+    clear() 
+    {
+      this.state.dictionary = {};
+    },
     //#region state managment
     setNavigationMessage(newValue) 
     {
@@ -46,6 +55,10 @@ export default
     NavigationMessage()
     {
       return this.state.NavigationMessage;
+    },
+    getValue(key)
+    {
+      return this.state.dictionary[key];
     },
   },
 }
