@@ -140,19 +140,9 @@ b. if (variable==null)
 	- [ ] ++b. Register user screen++
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~use verify email template when sending emails.~~
-		- [ ] ==When the user registers, he should be logged in. To do this, the server side code needs to be broken down into 2 parts and each part needs to be called from the client one after another.==
-			- [ ] check that user entered domain does not exist via server call, on client. If the user entered domain does not exist and the user account does not exist then
-				- [ ] create user account from client
-				- [ ] add domain to DomainCollection(if it does not exist), userid, domain to UserDomainCollection on server(using Accounts.onCreateUser event).
-				- [ ] Send enrollment email to user.
-			- [ ] If the user entered domain does not exist and the user account exists then
-				- [ ] navigate user to "add domain to user" screen.
-				- [ ] allow user to login with his emailid, password, allow him to enter domain from client
-				- [ ] add domain to DomainCollection(if it does not exist), userid, domain to UserDomainCollection on server(using Accounts.onCreateUser event).
-				- [ ] Send enrollment email to user.
-			- [ ] If the user entered domain exists then show an error to user
+		- [x] ==When the user registers, he should be logged in.==
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
-		- [ ] if there is a failure sending an email, then perhaps a different error message needs to be shown. 
+		- [ ] if there is a failure sending an email, then perhaps a different error message needs to be shown.
 	- [ ] ++c. Verify Email++
 		- [ ] when user clicks on verify email link, it should verify token, login user and navigate user to dashboard screen.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.

@@ -150,6 +150,7 @@ import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
 import { MeteorErrors } from '../../api/constants';
+import { Accounts } from 'meteor/accounts-base';
 
 export default {
   name: "Register",
@@ -189,7 +190,7 @@ export default {
     },
   },
   methods: 
-  {  
+  { 
     RegisterUser() 
     {
       this.disableButton=false;
@@ -204,8 +205,12 @@ export default {
           return;
       }
 
+      let email=this.user.email.toString().toLowerCase();
+      let password=this.user.password;
+      let domain=this.user.domain.toString().toLowerCase();
+      const router = this.$router;
       this.disableButton=true;
-      Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, (error, result)=>
+      Meteor.call('createUserForDomain', email, password, domain, (error, result)=>
       {
         this.disableButton=false;
         if(error) 
@@ -225,14 +230,26 @@ export default {
           return;
         } 
         if(result && result.userId && result.domain ) 
-      {
-          this.$router.push({ name: 'dashboard', params: { domain: result.domain }});                  
-          return;
+        {
+          Meteor.loginWithPassword(email, password, (error2)=>
+          {
+            if(error2)
+            {
+              console.log(error2);
+              this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+              return;
+            } 
+            else
+            {
+              router.push({ name: 'dashboard', params: { domain: domain }});                  
+              return;
+            }
+          });
         }
         this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
         return;
       });
-    },
+    }, 
     showPrivacyPolicyModal() 
     {
       let element = this.$refs.PrivacyPolicyModal.$el;

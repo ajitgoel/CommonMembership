@@ -27,15 +27,18 @@ describe("register-user", () =>
   {
     cy.registerUser(email1, password1, domain1);
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain1.toLowerCase()}/`);
-    
+    cy.get("[data-cy=logout]").should("have.text", 'Log out');
+    cy.get("[data-cy=logout]").click();
+
     cy.visit('/register');    
     cy.registerUser(email2, password2, domain1);
     cy.get("[data-cy=domainexists]").should("have.text", 'This domain already exists. Please select another one to continue.');
-
+    
     cy.visit('/register');    
     cy.registerUser(email1, password1, domain2);
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain2.toLowerCase()}/`);
-    
+    cy.get("[data-cy=logout]").should("have.text", 'Log out');
+    cy.get("[data-cy=logout]").click();
 
     /*cy.window().then(win => 
     {
