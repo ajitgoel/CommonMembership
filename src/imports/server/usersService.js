@@ -11,7 +11,7 @@ export const userService =
   //if domain has been registered before, then return error
   //if domain has not been registered before then check that return error if the email, domain combination has been registered before. 
   // 
-  createUserIfItDoesNotExist(email, password,domain) 
+  createUserForDomain(email, password, domain) 
   {
     var logging = require('./logging.js');
     var emailService = require('./email.js');
@@ -75,8 +75,6 @@ export const userService =
     return {userId:userId, domain:domain}; 
   //#endregion
     //#endregion
-
-    
   },
   //if domain is blank then use check if more than 1 domain exists. 
     //if yes, then return all the domains for user. 

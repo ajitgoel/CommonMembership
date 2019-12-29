@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import './accountEmailTemplates';
+import { Accounts } from 'meteor/accounts-base';
 
 const isDev = process.env.NODE_ENV !== 'production'
 
@@ -13,4 +14,10 @@ Meteor.startup(() =>
 {
   process.env.MAIL_URL = 
     `${Meteor.settings.private.Mailgun.Protocol}://${Meteor.settings.private.Mailgun.Username}:${Meteor.settings.private.Mailgun.Password}@${Meteor.settings.private.Mailgun.SMTP_Hostname}:${Meteor.settings.private.Mailgun.Port}`;
+});
+
+Accounts.onCreateUser(function(options, user) 
+{
+  user.profile['surname'] = options.surname;
+  return user;
 });

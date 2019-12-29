@@ -118,56 +118,67 @@ b. if (variable==null)
 		- [ ] Afer the user clicks logout the link should be changed to register and he should be directed to the home page-Remove VueSSR 
 		- [x] ~~Logout functionality.~~
 		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast.~~
-	- [ ] a. User management
-		- [ ] 2. Add user
+	- [ ] ++a. User management++
+		- [ ] ++2. Add user++
 			- [ ] Add custom fields
 			- [ ] clicking on "Show password" should show password, show hide, cancel buttons. 
 			- [ ] hide button should hide password. 
 			- [ ] cancel button should change "hide password" to "show password".
 			- [ ] Encrypt password in database.
 			- [ ] Send email to users when user needs to be notified of account. 
-		- [ ] 1. All users\Search users
+		- [ ] ++1. All users\Search users++
 			- [ ] sort indicator does not show on grid column
 			- [ ] show tickets with detail link using "row details support": https://bootstrap-vue.js.org/docs/components/table
 			- [ ] allow bulk operations
 			- [ ] add checkbox to the left of each row. 
 			- [ ] Add edit, delete links below each row. 
 			- [ ] clicking on email should navigate user to user edit screen. 
-			- [ ] Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv file. 
-		- [ ] 3. Import users using CSV file
+			- [ ] ==Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv file.== 
+		- [ ] ++3. Import users using CSV file++
 			- [ ] use https://atmospherejs.com/edgee/slingshot
-		- [ ] 4. Export users to CSV file
-	- [ ] b. Register user screen
+		- [ ] ++4. Export users to CSV file++
+	- [ ] ++b. Register user screen++
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~use verify email template when sending emails.~~
-		- [ ] When the user registers, he should be logged in. To do this, the server side code needs to be broken down into 2 parts and each part needs to be called from the client one after another.
+		- [ ] ==When the user registers, he should be logged in. To do this, the server side code needs to be broken down into 2 parts and each part needs to be called from the client one after another.==
+			- [ ] check that user entered domain does not exist via server call, on client. If the user entered domain does not exist and the user account does not exist then
+				- [ ] create user account from client
+				- [ ] add domain to DomainCollection(if it does not exist), userid, domain to UserDomainCollection on server(using Accounts.onCreateUser event).
+				- [ ] Send enrollment email to user.
+			- [ ] If the user entered domain does not exist and the user account exists then
+				- [ ] navigate user to "add domain to user" screen.
+				- [ ] allow user to login with his emailid, password, allow him to enter domain from client
+				- [ ] add domain to DomainCollection(if it does not exist), userid, domain to UserDomainCollection on server(using Accounts.onCreateUser event).
+				- [ ] Send enrollment email to user.
+			- [ ] If the user entered domain exists then show an error to user
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
 		- [ ] if there is a failure sending an email, then perhaps a different error message needs to be shown. 
-	- [ ] c. Verify Email
+	- [ ] ++c. Verify Email++
 		- [ ] when user clicks on verify email link, it should verify token, login user and navigate user to dashboard screen.
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
-	- [ ] d. Login user screen
+		- [ ] An email should be send when the email has been verified. 
+	- [ ] ++d. Login user screen++
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~login screen not working with roles package version 3~~
 		- [x] ~~Domain dropdown should be selected and an error shown when the user's login has multiple domains.~~
 		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
 		- [x] ~~logout functionality does not work after the user has logged in.~~
-	- [ ] e. Reset Password
+	- [ ] ++e. Reset Password++
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~Change reset password template~~
 		- [x] ~~when user clicks on reset password email link, it should navigate user to "change password" screen and allow user to reset the user's password.~~
 		- [x] ~~reset password email link=>change password screen=> reset the user's password=> show message on login screen.~~
 		- [ ] Check token expiration.
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
-	- [x] f. Change Password
+	- [x] ++f. Change Password++
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~set focus on password textbox when user first navigates to screen.~~
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
-	- [x] g. Contact us
+	- [x] ++g. Contact us++
 		- [x] ~~disable button when submitting form.~~
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
-	- [ ] g. End to end integration testing using Cypress
+	- [ ] ++g. End to end integration testing using Cypress++
 		- [ ] move all constant variables into a config file.
 		- [ ] use Cypress server, routes, wait to check if the system has navigated to a screen after a button is clicked. **Wait for application to load:** https://docs.cypress.io/faq/questions/using-cypress-faq.html#How-do-I-wait-for-my-application-to-load
 		- [ ] Add more checks to see that the correct error messages are showing up.

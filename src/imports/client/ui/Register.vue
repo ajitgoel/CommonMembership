@@ -16,6 +16,13 @@
                   <h6 class="h3">Create account</h6>
                   <p class="text-muted mb-0">Made with love by developers for developers.</p>
               </div>
+    
+              <div class="alert alert-outline-warning" role="alert">
+                This screen is used to <br/>
+                a. create account for a new domain or <br/>
+                b. add a domain to an already existing user account.
+              </div>
+
               <span class="clearfix"></span>
               <form role="form">
 
@@ -62,23 +69,6 @@
                       <span v-if="!$v.user.password.minLength">Password must be at least 6 characters</span>
                     </div>
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-control-label">Confirm password</label>
-                  <div class="input-group input-group-merge">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>                      
-                    <input type="password" data-cy="confirmPassword" class="form-control" placeholder="********"                         
-                    v-model="user.confirmPassword" id="confirmPassword" name="confirmPassword" 
-                    :class="{ 'is-invalid': submitted && $v.user.confirmPassword.$error }" 
-                    style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                    <div v-if="submitted && $v.user.confirmPassword.$error" class="invalid-feedback">
-                      <span v-if="!$v.user.confirmPassword.required">Confirm Password is required</span>
-                      <span v-else-if="!$v.user.confirmPassword.sameAsPassword">Passwords must match</span>
-                    </div>
-                  </div>                    
                 </div>
 
                 <div class="form-group">
@@ -173,7 +163,6 @@ export default {
         userExistsforDomain: false,
         email: "",
         password: "",
-        confirmPassword: "",
         termsAndConditions:false,
         privacyPolicy:false,
       },
@@ -189,7 +178,6 @@ export default {
       domain: { required },
       email: { required, email },
 	    password:  { required, minLength: minLength(6) },
-      confirmPassword:  { required, sameAsPassword: sameAs('password') },
       termsAndConditions: {checked(val)
       {
         return val;
@@ -234,7 +222,7 @@ export default {
             return;  
           }
           this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
-        return;
+          return;
         } 
         if(result && result.userId && result.domain ) 
       {
