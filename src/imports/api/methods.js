@@ -7,7 +7,7 @@ Meteor.methods(
     if(Meteor.isServer)
     {
       const { userService } = require('../server/usersService.js');
-      return userService.createUserIfItDoesNotExist(email, password, domain);
+      return userService.createUserForDomain(email, password, domain);
     }
   }, 
   loginUserForDomain(email, password, domain) 

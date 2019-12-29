@@ -45,6 +45,7 @@
 <script>
 import '../../api/methods.js';
 import { Meteor } from 'meteor/meteor';
+import { MeteorErrors } from '../../api/constants';
 
 export default 
 {  
@@ -94,7 +95,7 @@ export default
     {
       if(error) 
       {     
-        if(error.error && error.error==='not-authorized')
+        if(error.error && error.error===MeteorErrors.NotAuthorized)
         {
           this.failureMessage='There was an error getting all users information. Our administrators have been notified of the issue and we will have a look.';
           return;  

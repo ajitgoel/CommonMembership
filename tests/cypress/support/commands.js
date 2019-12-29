@@ -10,7 +10,6 @@ Cypress.Commands.add('registerUser', (email, password, domain) =>
   cy.contains("Register").click();
   cy.get("[data-cy=email]").type(email);
   cy.get("[data-cy=password]").type(password);
-  cy.get("[data-cy=confirmPassword]").type(password);
   cy.get("[data-cy=domain]").type(domain);
   cy.get("[data-cy=termsAndConditions]").check({force: true});  
   cy.get("[data-cy=privacyPolicy]").check({force: true});
