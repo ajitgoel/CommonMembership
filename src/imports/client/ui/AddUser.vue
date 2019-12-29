@@ -107,7 +107,7 @@
       </div>
 
       <div class="pt-2 mt-2 delimiter-top text-left">
-        <button data-cy="addnewuser" v-bind:disabled="this.disableButton" v-on:click="AddNewUser()" id="addnewuser" 
+        <button data-cy="adduser" v-bind:disabled="this.disableButton" v-on:click="AddNewUser()" id="addnewuser" 
         type="button" class="btn btn-sm btn-primary">Add New User</button>
       </div>
 
@@ -123,6 +123,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
+import { MeteorErrors, StateVariables} from '../../api/constants';
 
 export default {
   name: "AddUser",
@@ -189,8 +190,7 @@ export default {
       
       console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${this.user.password} 
       ${this.user.sendUserNotification} ${this.user.role}`);
-
-      Meteor.call('addUserForDomain', domain, email, this.user.firstname, this.user.lastname, this.user.password, 
+      Meteor.call('addUserForExistingDomain', email, this.user.password, domain, this.user.firstname, this.user.lastname, 
         this.user.sendUserNotification, this.user.role, (error, result)=>
       {
         this.disableButton=false;

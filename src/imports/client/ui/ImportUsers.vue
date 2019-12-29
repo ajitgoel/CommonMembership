@@ -114,7 +114,7 @@ export default {
       }
 
       this.disableButton=true;
-      Meteor.call('createUserForDomain', this.user.email, this.user.password, this.user.domain, (error, result)=>
+      Meteor.call('createUserForNewDomain', this.user.email, this.user.password, this.user.domain, (error, result)=>
       {
         this.disableButton=false;
         if(error) 

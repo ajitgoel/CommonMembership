@@ -24,6 +24,7 @@ describe("login-user", () =>
   });
   it("1. should show an error message-if the user does not exist, 2. should reset the user's password-if the user exists", () => 
   {             
+    cy.contains("Register").click();
     cy.registerUser(email, password, domain); 
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain.toLowerCase()}/`);
 

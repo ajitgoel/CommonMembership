@@ -60,22 +60,43 @@ Accounts.emailTemplates.verifyEmail.html = function (user, url)
 };
 //#endregion
 
-/*Accounts.onCreateUser(function(options, user) 
-{
-  var logging = require('./logging.js');
-  const {userDomainsService} = require('./userDomainsService.js');
-  const {domainsService} = require('./domainsService.js');
-  let domain=options.domain;
-  let email=options.email;
-  let userid=user._id;
+Accounts.onCreateUser(function(options, user) 
+{  
+  try
+  {
+    var logging = require('./logging.js');
+    const {userDomainsService} = require('./userDomainsService.js');
+    const {domainsService} = require('./domainsService.js');
+    let domain=options.domain;
+    let email=options.email;
+    let userid=user._id;
 
-  userDomainsService.addDomainForUserId(userid, domain);
-  logging.winston.log('info', `Added domain ${domain} to email ${email}`);
-  
-  domainsService.addDomain(domain);
-  logging.winston.log('info', `Added domain ${domain}`);
+    userDomainsService.addDomainForUserId(userid, domain);
+    logging.winston.log('info', `Added domain ${domain} to email ${email}`);
+    
+    domainsService.addDomain(domain);
+    logging.winston.log('info', `Added domain ${domain}`);
 
-  Accounts.sendEnrollmentEmail(userid, email);
-  logging.winston.log('info', `Send enrollment email to email ${email}`);
+    if(options.firstname!=null)
+    {
+      user.firstname=options.firstname;
+    }
+    if(options.lastname!=null)
+    {
+    user.lastname=options.lastname;
+    }
+    if(options.sendUserNotification!=null)
+    {
+      user.sendUserNotification=options.sendUserNotification;
+    }
+    if(options.role!=null)
+    {
+      user.role=options.role;
+    }
+  }
+  catch(error)
+  {
+    logging.winston.log('info', `Error on Accounts.onCreateUser. Error ${error}`);
+  }
   return user;
-});*/
+});
