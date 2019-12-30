@@ -132,8 +132,8 @@ b. if (variable==null)
 		- [ ] ++1. All users\Search users++
 			- [x] ~~sort indicator does not show on grid column~~
 			- [x] ~~Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv, excel, pdf file.~~
-			- [ ] allow user to specify which columns he wants to see
-			- [ ] first name, last name should show under name column.
+			- [x] ~~allow user to specify which columns he wants to see~~
+			- [ ] first name, last name should show under name column. https://ej2.syncfusion.com/vue/documentation/grid/columns/#valueaccessor
 			- [ ] show tickets with detail link using "row details support": https://bootstrap-vue.js.org/docs/components/table
 			- [ ] allow bulk(delete) operations
 			- [ ] add checkbox to the left of each row.

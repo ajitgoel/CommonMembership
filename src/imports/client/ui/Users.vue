@@ -13,7 +13,7 @@
 
     <ejs-grid ref='grid' id='Grid' :dataSource="data" :allowPaging="true" :allowSorting='true' :allowFiltering='true' 
     :pageSettings='pageSettings' :toolbar='toolbarOptions' :allowExcelExport='true' :allowPdfExport='true' 
-    :toolbarClick='toolbarClick'>
+    :toolbarClick='toolbarClick' :showColumnChooser='true'>
       <e-columns>
         <e-column field='email' headerText='Email'></e-column>
         <e-column field='name' headerText='Name'></e-column>
@@ -31,7 +31,7 @@ import '../../api/methods.js';
 import { Meteor } from 'meteor/meteor';
 import { MeteorErrors, StateVariables} from '../../api/constants';
 import Vue from "vue";
-import { GridPlugin, Page, Sort, Filter, Toolbar, ExcelExport, PdfExport } from "@syncfusion/ej2-vue-grids";
+import { GridPlugin, Page, Sort, Filter, Toolbar, ExcelExport, PdfExport, ColumnChooser} from "@syncfusion/ej2-vue-grids";
 
 export default {
   data() {
@@ -59,12 +59,13 @@ export default {
           { email: '10255@gmail.com', name: 'RICSU', membershipLevel: 148.33 },
           { email: '10256@gmail.com', name: 'WELLI', membershipLevel: 13.97 }
       ],      
-      toolbarOptions: ['CsvExport', 'ExcelExport', 'PdfExport'] ,
+      toolbarOptions: ['CsvExport', 'ExcelExport', 'PdfExport', 'ColumnChooser'] ,
       pageSettings: { pageSize: 10 },      
+      filterSettings: { type: "CheckBox" }
     };
   },
   provide: {
-    grid: [Page, Sort, Filter, Toolbar, ExcelExport, PdfExport]
+    grid: [Page, Sort, Filter, Toolbar, ExcelExport, PdfExport, ColumnChooser]
   },
   methods: 
   {
