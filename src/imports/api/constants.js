@@ -14,4 +14,6 @@ export const StateVariables =
 {
   SelectedDomain: 'selected-domain',
   NavigationMessage: 'navigation-message',
+  MinimumPasswordLength:6,
+  LoginExpirationInDays:0.0006,
 };

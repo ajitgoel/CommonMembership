@@ -49,3 +49,4 @@ aldeed:collection2@3.0.0
 mdg:validated-method
 audit-argument-checks
 aldeed:simple-schema
+cultofcoders:persistent-session

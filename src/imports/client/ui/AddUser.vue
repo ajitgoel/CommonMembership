@@ -52,26 +52,6 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="form-group">
-            <label class="form-control-label">Password</label><br/>
-            <input data-cy="password" v-if="showPassword" v-model="user.password" class="form-control" type="text">
-            <button data-cy="showpassword" v-if="!showPassword" v-on:click="ToggleShowPassword()" type="button" 
-            class="btn btn-sm btn-secondary">Show Password</button>
-            <!--<button data-cy="hidepassword" v-if="showPassword" v-on:click="HidePassword()" type="button" 
-            class="btn btn-sm btn-secondary">
-              <span class="btn-inner--icon">
-                <i v-bind:class="showPassword?'fas fa-eye': 'fas fa-eye-slash'"></i>
-              </span>
-              Hide
-            </button>-->
-            <button data-cy="showpasswordbutton" v-if="showPassword" v-on:click="ToggleShowPassword()" type="button" 
-            class="btn btn-sm btn-secondary">Cancel</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
           <div class="form-group">            
             <label class="form-control-label">Send User Notification</label>
             <div class="custom-control custom-checkbox">
@@ -135,7 +115,6 @@ export default {
         email: "",
         firstname: "",
         lastname: "",
-        password: "",
         hiddenpassword:'',
         sendUserNotification:false,
         role: "",
@@ -154,23 +133,12 @@ export default {
       email: { required, email },
     },
   },
-  mounted() 
-  {
-    var generatePassword = require("generate-password");
-    this.user.password = generatePassword.generate({length: 24, numbers: true, symbols:true, uppercase:true});      
-  },
   methods: 
   {  
     ToggleShowPassword()
     {
       this.showPassword=!this.showPassword;
     },
-    /*HidePassword()
-    {
-      let passwordlength=this.user.password.length;
-      this.user.hiddenpassword='*'.repeat(passwordlength);
-      console.log(this.user.hiddenpassword);
-    },*/
     AddNewUser() 
     {
       this.disableButton=false;
@@ -188,9 +156,8 @@ export default {
       let domain= this.$root.getValue(StateVariables.SelectedDomain);
       let email=this.user.email.toString().toLowerCase();
       
-      console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${this.user.password} 
-      ${this.user.sendUserNotification} ${this.user.role}`);
-      Meteor.call('addUserForExistingDomain', email, this.user.password, domain, this.user.firstname, this.user.lastname, 
+      console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${this.user.sendUserNotification} ${this.user.role}`);
+      Meteor.call('addUserForExistingDomain', email, domain, this.user.firstname, this.user.lastname, 
         this.user.sendUserNotification, this.user.role, (error, result)=>
       {
         this.disableButton=false;
@@ -205,10 +172,9 @@ export default {
           this.user.email='';
           this.user.firstname='';
           this.user.lastname=''; 
-          this.user.password='';
           this.user.sendUserNotification=false;
-          this.user.role='';
-
+          this.user.role='';          
+          this.$v.$reset();
           return;
         }
       });

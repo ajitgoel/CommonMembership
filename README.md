@@ -100,40 +100,45 @@ b. if (variable==null)
 - [x] ~~Configure BootstrapVue with application~~
 - [x] ~~Configure (and use) mailgun email provider to send emails.~~
 - [x] ~~migrate to alanning:roles version 3.~~
+- [x] ~~Remove vue-ssr package as it does not allow logoff to work~~
+- [x] ~~Move ui folder to client folder to make building application faster~~
+- [x] ~~Configure LHS dashboard menu with links to various screens~~
+	- [ ] LHS dashboard menu should be searchable
+- [x] ~~Store session variables in localstorage~~
 - [ ] ==User should be logged off if he has not used the application for predefined amount of time. ==
+- [ ] ==Add audit log when any event happens. Add UI for audit log.==
+- [ ]  ==Add try catch around all server side code blocks ==
 - [ ] remove all packages that are not being used.
 - [ ] Add server side validations using Collection2 and SimpleSchema.
 - [ ] Write unit tests for server side code.
 - [ ] Add Google SignIn Option.
 - [ ] Host application in Google Cloud VM.
 - [ ] create a proper email template and email sending provider.
-- [x] ~~Remove vue-ssr package as it does not allow logoff to work~~
-- [x] ~~Move ui folder to client folder to make building application faster~~
-- [x] ~~Configure LHS dashboard menu with links to various screens~~
-	- [ ] LHS dashboard menu should be searchable
 - [ ] Screens
 	- [x] Navigation Bar
 		- [x] ~~Register link should be changed to logout when the user has logged in.~~
 		- [x] ~~After the user has logged in, the link should be changed to logout. ~~
-		- [ ] Afer the user clicks logout the link should be changed to register and he should be directed to the home page-Remove VueSSR 
+		- [x] ~~Afer the user clicks logout the link should be changed to register and he should be directed to the home page-Remove VueSSR~~
 		- [x] ~~Logout functionality.~~
-		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast.~~
+		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast-Not required.~~
 	- [ ] ++a. User management++
 		- [ ] ++2. Add user++
 			- [ ] Add custom fields
-			- [ ] clicking on "Show password" should show password, show hide, cancel buttons. 
-			- [ ] hide button should hide password. 
-			- [ ] cancel button should change "hide password" to "show password".
-			- [ ] Encrypt password in database.
-			- [ ] Send email to users when user needs to be notified of account. 
+			- [ ] Send enrollment email to users to allow users to be verified.
+			- [x] ~~clicking on "Show password" should show password, show hide, cancel buttons.~~
+			- [x] ~~hide button should hide password.~~
+			- [x] ~~cancel button should change "hide password" to "show password".~~
+			- [x] ~~Encrypt password in database.~~
 		- [ ] ++1. All users\Search users++
-			- [ ] sort indicator does not show on grid column
+			- [x] ~~sort indicator does not show on grid column~~
+			- [x] ~~Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv, excel, pdf file.~~
+			- [ ] allow user to specify which columns he wants to see
+			- [ ] first name, last name should show under name column.
 			- [ ] show tickets with detail link using "row details support": https://bootstrap-vue.js.org/docs/components/table
-			- [ ] allow bulk operations
-			- [ ] add checkbox to the left of each row. 
-			- [ ] Add edit, delete links below each row. 
-			- [ ] clicking on email should navigate user to user edit screen. 
-			- [ ] ==Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv file.== 
+			- [ ] allow bulk(delete) operations
+			- [ ] add checkbox to the left of each row.
+			- [ ] Add edit, delete links below each row.
+			- [ ] clicking on email should navigate user to user edit screen.
 		- [ ] ++3. Import users using CSV file++
 			- [ ] use https://atmospherejs.com/edgee/slingshot
 		- [ ] ++4. Export users to CSV file++

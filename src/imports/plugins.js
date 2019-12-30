@@ -40,5 +40,5 @@ for (const key in filters) {
 import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
-import BootstrapVue from 'bootstrap-vue';
-Vue.use(BootstrapVue);
+import {GridPlugin, Page, Sort, Filter, Toolbar, ExcelExport, PdfExport} from '@syncfusion/ej2-vue-grids';
+Vue.use(GridPlugin);
