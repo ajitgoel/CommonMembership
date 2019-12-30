@@ -8,7 +8,7 @@ import { MeteorErrors } from '../api/constants';
 
 export const userService = 
 {
-  addUserForExistingDomain(email, password, domain, firstname, lastname, sendUserNotification, role) 
+  addUserForExistingDomain(email, domain, firstname, lastname, sendUserNotification, role) 
   {
     var logging = require('./logging.js');  
     const {userDomainsService} = require('./userDomainsService.js');
@@ -16,7 +16,6 @@ export const userService =
     check(email, String);
     check(firstname, String);    
     check(lastname, String);    
-    check(password, String);    
     check(sendUserNotification, Boolean);    
     check(role, String);    
 
@@ -39,7 +38,7 @@ export const userService =
       throw new Meteor.Error(MeteorErrors.NotAuthorized);
     }
     
-    let createuseroptions={username: email, email: email, password: password, domain:domain, firstname: firstname, 
+    let createuseroptions={username: email, email: email, domain:domain, firstname: firstname, 
       lastname: lastname, sendUserNotification:sendUserNotification, role: role};
     let userId= Accounts.createUser(createuseroptions);
     logging.winston.log('info', `User created for email ${email} and domain ${domain}`);
@@ -48,12 +47,12 @@ export const userService =
     {
       try
       {
-        Accounts.sendVerificationEmail(userId, email);
-        logging.winston.log('info', `Send verification email to email ${email}`);
+        Accounts.sendEnrollmentEmail(userId, email);
+        logging.winston.log('info', `Send enrollment email to email ${email}`);
       }
       catch(error)
       {
-        logging.winston.log('info', `Error sending verification email to userid: ${userId} email: ${email}. Error ${error}`);
+        logging.winston.log('info', `Error sending enrollment email to userid: ${userId} email: ${email}. Error ${error}`);
       }  
     }
 
@@ -86,7 +85,8 @@ export const userService =
     //#region if user does not exist, then create user, add domain role to user, send enrollment email. 
     if(user == null)
     {
-      let createuseroptions={username: email, email: email, password: password, domain:domain};
+      let createuseroptions={username: email, email: email, password: password, domain:domain, firstname:'', 
+        lastname: '', sendUserNotification:false, role: ''};
       let userid= Accounts.createUser(createuseroptions);
       logging.winston.log('info', `User created for email ${email} and domain ${domain}`);
       

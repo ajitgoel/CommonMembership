@@ -99,7 +99,8 @@
               </form>            
 
               <br/>
-              <SuccessAlert ref="successAlert" data-cy="successalert" v-bind:message='this.$root.NavigationMessage'/>
+              <SuccessAlert ref="successAlert" data-cy="successalert" 
+              v-bind:message='this.navigationMessage'/>
               <ErrorAlert ref="errorAlert" data-cy="erroralert" v-bind:message='this.failureMessage'/>
 
               <div class="mt-4 text-center"><small>Not registered?</small>
@@ -137,6 +138,7 @@ export default
       disableButton:false,      
       failureMessage:'',
       defaultDomain:'Select domain',
+      navigationMessage:'',
     };
   },
   validations: 
@@ -154,6 +156,10 @@ export default
         return true;
       }},    
     },    
+  },
+  mounted() 
+  {
+    this.navigationMessage=this.$root.getValue(StateVariables.NavigationMessage);
   },
   methods: 
   {     

@@ -19,8 +19,8 @@
     
               <div class="alert alert-outline-warning" role="alert">
                 This screen is used to <br/>
-                a. create account for a new domain or <br/>
-                b. add a domain to an already existing user account.
+                a. create user account for a new domain or <br/>
+                b. add a domain to an already existing user account. In this case, the user should login with thier login credendials.
               </div>
 
               <span class="clearfix"></span>
@@ -121,8 +121,8 @@
                 </div>
 
                 <div class="mt-4">
-                  <button type="button" id="registeruser" data-cy="registeruser" v-bind:disabled="this.disableButton" class="btn btn-block btn-primary" 
-                    v-on:click="RegisterUser()">
+                  <button type="button" id="registeruser" data-cy="registeruser" v-bind:disabled="this.disableButton" 
+                  class="btn btn-block btn-primary" v-on:click="RegisterUser()">
                     Create my account
                   </button>
                 </div>

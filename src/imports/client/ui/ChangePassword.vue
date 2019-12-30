@@ -82,6 +82,7 @@ import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { MeteorErrors, StateVariables} from '../../api/constants';
 
 export default 
 {
@@ -135,7 +136,7 @@ export default
         }
         else
         {
-          root.setNavigationMessage('Your password has been changed successfully. Please login to continue.');
+          root.setValue(StateVariables.NavigationMessage,'Your password has been changed successfully. Please login to continue.');
           router.push({ name: 'login'});                  
         }        
       });

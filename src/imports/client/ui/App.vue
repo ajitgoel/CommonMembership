@@ -8,16 +8,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
 export default 
 {
   data() 
   {
     return {
-      state: {
-        NavigationMessage: '',
-        dictionary:{}
-      }, 
     };
   },
   components: {
@@ -29,36 +26,26 @@ export default
   {
     setValue(key,value) 
     {
-      this.state.dictionary[key] = value;
+      Session.set(key, value);
     },
     clear() 
     {
-      this.state.dictionary = {};
+      Object.keys(Session.keys).forEach(function(key)
+      {
+        Session.set(key, undefined);
+      });
+      Session.keys = {};
     },
     getValue(key)
     {
-      return this.state.dictionary[key];
+      return Session.get(key);
     },
-    //#region state managment
-    setNavigationMessage(newValue) 
-    {
-      this.state.NavigationMessage = newValue;
-    },
-    clearMessageAction () 
-    {
-      this.state.NavigationMessage = '';
-    },
-    //#endregion
   },
   meteor: 
   {
     currentUserId()
     {
       return Meteor.userId();
-    },
-    NavigationMessage()
-    {
-      return this.state.NavigationMessage;
     },
   },
 }
