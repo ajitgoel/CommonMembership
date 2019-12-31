@@ -77,25 +77,25 @@ function createApp () {
 
   const router = new VueRouter({mode: 'history', routes,});
 
-  const supplyCache = {};
-  const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
-  const store = new Vuex.Store(suppliedStoreOptions);
+  //const supplyCache = {};
+  //const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
+  //const store = new Vuex.Store(suppliedStoreOptions);
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
-  sync(store, router);
+  //sync(store, router);
 
   return {
     app: new Vue({
       el: '#app',
       router,
-      store,
+      //store,
       //apolloProvider,
-      supplyCache,
+      //supplyCache,
       ...App,
     }),
     router,
-    store,
+    //store,
   }
 }
 
