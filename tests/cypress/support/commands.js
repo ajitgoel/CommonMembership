@@ -8,8 +8,6 @@ Cypress.Commands.add("resetDatabase", () =>
 Cypress.Commands.add('adduser', (email, password, domain, firstname, lastname, sendUserNotification, role) => 
 {
   cy.get("[data-cy=email]").clear().type(email);
-  cy.get("[data-cy=showpassword]").click();
-  cy.get("[data-cy=password]").clear().type(password);
   cy.get("[data-cy=firstname]").clear().type(firstname);
   cy.get("[data-cy=lastname]").clear().type(lastname);
   cy.get("[data-cy=sendusernotification]").check({force: sendUserNotification});
