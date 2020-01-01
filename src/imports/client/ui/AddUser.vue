@@ -103,7 +103,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { MeteorErrors, StateVariables} from '../../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes} from '../../api/constants';
 
 export default {
   name: "AddUser",

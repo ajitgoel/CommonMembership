@@ -18,6 +18,11 @@
                 <h6 class="h3">Login</h6>
                 <p class="text-muted mb-0">Sign in to your account to continue.</p>
               </div>
+
+              <div class="alert alert-outline-warning" role="alert">
+                For security reasons, if you refresh the browser after logging in then you will be asked to relogin into the system again. 
+              </div>
+
               <span class="clearfix"></span>
               <form role="form">
                 <div class="form-group">
@@ -118,7 +123,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { MeteorErrors, StateVariables} from '../../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes} from '../../api/constants';
 
 export default 
 {

@@ -56,6 +56,16 @@ describe("overall-integration-test", () =>
     cy.contains("Add user").click();
     cy.adduser(email2, password2, domain1, firstname2, lastname2, sendUserNotification2, role2);
     cy.get("[data-cy=successalert]").should("have.text", "Success User was added successfully.");
+
+    //refreshing the page should redirect user to the login screen
+    cy.reload();
+    cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/login`);
+
+    cy.loginUser(email1, password1);
+    cy.get("[data-cy=domain]").contains('Select domain');
+    cy.get("[data-cy=domain]").select(domain2.toLowerCase());
+    cy.get("[data-cy=loginuser]").click();
+    
     /*cy.window().then(win => 
     {
       // this allows accessing the window object within the browser
