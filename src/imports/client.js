@@ -6,5 +6,6 @@ import CreateApp from './app';
 
 Meteor.startup(() => 
 {
+  Meteor.subscribe('userData');
   CreateApp({});
 });

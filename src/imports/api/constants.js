@@ -17,3 +17,15 @@ export const StateVariables =
   MinimumPasswordLength:6,
   LoginExpirationInDays:0.0006,
 };
+export const SecureRoutes = 
+{
+  Dashboard: 'dashboard',
+  Users: 'users',
+  AddUser: 'add-user',
+  ImportUsers: 'import-users',
+  ExportUsers: 'export-users', 
+  AccountProfile: 'account-profile', 
+  Settings: 'settings', 
+  AccountBilling: 'account-billing', 
+  AccountNotifications: 'account-notifications'
+};

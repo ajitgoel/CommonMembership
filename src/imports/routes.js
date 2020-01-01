@@ -21,22 +21,24 @@ import PrivacyPolicy from './client/ui/PrivacyPolicy.vue';
 import PrivacyShieldNotice from './client/ui/PrivacyShieldNotice.vue';
 import TermsAndConditions from './client/ui/TermsAndConditions.vue';
 import Contact from './client/ui/Contact.vue';
+import { MeteorErrors, StateVariables, SecureRoutes} from './api/constants';
 
 export default [
   { path: '/', name: 'home', component: Home },
   { path: '/dashboard/:domain', component: Dashboard,
     children: 
     [
-      { path: '', name: 'dashboard', component: AccountProfile , props: true},
-      { path: 'users', name: 'users', component: Users, props: true },
-      { path: 'AddUser', name: 'add-user', component: AddUser, props: true },
-      { path: 'ImportUsers', name: 'import-users', component: ImportUsers, props: true },
-      { path: 'ExportUsers', name: 'export-users', component: ExportUsers, props: true },
+      { path: '', name: SecureRoutes.Dashboard, component: AccountProfile , props: true},
+      { path: 'users', name: SecureRoutes.Users, component: Users, props: true },
+      { path: 'AddUser', name: SecureRoutes.AddUser, component: AddUser, props: true },
+      { path: 'ImportUsers', name: SecureRoutes.ImportUsers, component: ImportUsers, props: true },
+      { path: 'ExportUsers', name: SecureRoutes.ExportUsers, component: ExportUsers, props: true },
 
-      { path: 'account-profile', name: 'account-profile', component: AccountProfile, props: true },
-      { path: 'settings', name: 'settings', component: Settings , props: true},
-      { path: 'account-billing', name: 'account-billing', component: AccountBilling , props: true},
-      { path: 'account-notifications', name: 'account-notifications', component: AccountNotifications , props: true}
+      { path: 'account-profile', name: SecureRoutes.AccountProfile, component: AccountProfile, props: true },
+      { path: 'settings', name: SecureRoutes.Settings, component: Settings , props: true},
+      { path: 'account-billing', name: SecureRoutes.AccountBilling, component: AccountBilling , props: true},
+      { path: 'account-notifications', name: SecureRoutes.AccountNotifications, 
+      component: AccountNotifications , props: true}
     ]
   },
   { path: '/register', name: 'register', component: Register },

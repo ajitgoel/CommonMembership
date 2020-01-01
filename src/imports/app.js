@@ -5,12 +5,9 @@ import './supply';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Vuex from 'vuex';
-import { sync } from 'vuex-router-sync';
-import { injectSupply } from 'vue-supply';
 import App from './client/ui/App.vue';
 import routes from './routes';
-import storeOptions from './store';
+import { MeteorErrors, StateVariables, SecureRoutes} from './api/constants';
 
 function createApp () {
   import AppHeader from './client/ui/components/AppHeader.vue';
@@ -76,26 +73,32 @@ function createApp () {
   Vue.component('ExportUsers',ExportUsers);
 
   const router = new VueRouter({mode: 'history', routes,});
-
-  //const supplyCache = {};
-  //const suppliedStoreOptions = injectSupply(storeOptions, supplyCache);
-  //const store = new Vuex.Store(suppliedStoreOptions);
-
-  // sync the router with the vuex store.
-  // this registers `store.state.route`
-  //sync(store, router);
+  //https://github.com/Meteor-Community-Packages/meteor-roles/issues/218
+  //https://github.com/meteor-vue/vue-meteor/issues/118
+  //You can use global navigation guards that will make the router wait for the user subscription to be ready.
+  router.beforeEach((to, from, next) => 
+  {
+    if (Meteor.userId() == null && (to.name ===SecureRoutes.Dashboard || to.name === SecureRoutes.Users || 
+      to.name ===SecureRoutes.AddUser || to.name ===SecureRoutes.ImportUsers || 
+      to.name ===SecureRoutes.ExportUsers || to.name ===SecureRoutes.AccountProfile ||  
+      to.name ===SecureRoutes.Settings || to.name ===SecureRoutes.AccountBilling||
+      to.name ===SecureRoutes.AccountNotifications))
+    {
+      next('/login');
+    }
+    else 
+    {
+      next();
+    }
+  });
 
   return {
     app: new Vue({
       el: '#app',
       router,
-      //store,
-      //apolloProvider,
-      //supplyCache,
       ...App,
     }),
     router,
-    //store,
   }
 }
 

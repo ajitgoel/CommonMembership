@@ -1,15 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import './server/accountsBase';
 import { Accounts } from 'meteor/accounts-base';
-import { MeteorErrors, StateVariables} from './api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes} from './api/constants';
+import './api/publications';
 
 const isDev = process.env.NODE_ENV !== 'production'
-
-Meteor.publish('currentUserId', function () 
-{
-  console.warn(`Meteor publish currentUserId called with ${this.userId}`);
-  return this.userId;
-});
 
 Meteor.startup(() => 
 {
