@@ -77,22 +77,19 @@ Accounts.onCreateUser(function(options, user)
     domainsService.addDomain(domain);
     logging.winston.log('info', `Added domain ${domain}`);
 
-    if(options.firstname!=null)
-    {
-      user.firstname=options.firstname;
-    }
-    if(options.lastname!=null)
-    {
+    options.firstname = options.firstname == null ? '' : options.firstname;
+    options.lastname = options.lastname == null ? '' : options.lastname;
+    options.sendUserNotification = options.sendUserNotification == null ? false : options.sendUserNotification;
+    options.role = options.role == null ? '' : options.role;
+    options.ticketorders = options.ticketorders == null ? 0 : options.ticketorders;
+    options.membershiplevel = options.membershiplevel == null ? '' : options.membershiplevel;
+
+    user.firstname=options.firstname;
     user.lastname=options.lastname;
-    }
-    if(options.sendUserNotification!=null)
-    {
-      user.sendUserNotification=options.sendUserNotification;
-    }
-    if(options.role!=null)
-    {
-      user.role=options.role;
-    }
+    user.sendUserNotification=options.sendUserNotification;
+    user.role=options.role;
+    user.ticketorders = options.ticketorders;
+    user.membershiplevel=options.membershiplevel;
   }
   catch(error)
   {

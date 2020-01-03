@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-9 order-lg-2">
+  <div>
     <div class="actions-toolbar py-2 mb-4">
       <h5 class="mb-1">Add New User</h5>
       <p class="text-sm text-muted mb-0">Create a brand new user and add them to this site.</p>
@@ -115,7 +115,6 @@ export default {
         email: "",
         firstname: "",
         lastname: "",
-        hiddenpassword:'',
         sendUserNotification:false,
         role: "",
       },
@@ -123,7 +122,6 @@ export default {
       disableButton:false,      
       failureMessage:'',
       successMessage:'',
-      showPassword:false
     };
   },
   validations: 
@@ -135,10 +133,6 @@ export default {
   },
   methods: 
   {  
-    ToggleShowPassword()
-    {
-      this.showPassword=!this.showPassword;
-    },
     AddNewUser() 
     {
       this.disableButton=false;

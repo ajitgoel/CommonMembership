@@ -125,6 +125,7 @@ b. if (variable==null)
 		- [ ] ++2. Add user++
 			- [ ] Add custom fields
 			- [ ] Send enrollment email to users to allow users to be verified.
+			- [ ] Duplicate email in a domain-validation. 
 			- [x] ~~clicking on "Show password" should show password, show hide, cancel buttons.~~
 			- [x] ~~hide button should hide password.~~
 			- [x] ~~cancel button should change "hide password" to "show password".~~
