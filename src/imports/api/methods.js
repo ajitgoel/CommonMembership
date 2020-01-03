@@ -40,8 +40,8 @@ Meteor.methods(
   {
     if(Meteor.isServer)
     {
-      const { usersdetailService } = require('../server/usersdetailService.js');
-      return usersdetailService.getUsersDetailForDomain(domain);  
+      const { userService } = require('../server/usersService.js');
+      return userService.getUsersDetailForDomain(domain);  
     }
   },
   addUserForExistingDomain(email, domain, firstname, lastname, sendUserNotification, role) 

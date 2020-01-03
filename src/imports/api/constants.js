@@ -1,6 +1,7 @@
 export const MeteorErrors = 
 {
   NotAuthorized: 'not-authorized',
+  NotAuthorizedFailureMessage: 'There was an error logging you in. Our administrators have been notified of the issue and we will have a look.',
   NoDomainAssignedToUser: 'no-domain-assigned-to-user',
   UserDoesNotExistDomainNotRegistered: 'user-does-not-exist-domain-not-registered',
   DomainAlreadyInUse: 'domain-already-in-use',
