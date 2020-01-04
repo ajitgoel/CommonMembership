@@ -178,3 +178,8 @@ b. if (variable==null)
 		- [ ] move all constant variables into a config file.
 		- [ ] use Cypress server, routes, wait to check if the system has navigated to a screen after a button is clicked. **Wait for application to load:** https://docs.cypress.io/faq/questions/using-cypress-faq.html#How-do-I-wait-for-my-application-to-load
 		- [ ] Add more checks to see that the correct error messages are showing up.
+
+**MUP Commands:**
+- [ ] mup.cmd setup --verbose
+- [ ] mup.cmd deploy --verbose
+- [ ] mup.cmd logs --verbose
