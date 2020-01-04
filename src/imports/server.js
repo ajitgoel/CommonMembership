@@ -9,6 +9,8 @@ const isDev = process.env.NODE_ENV !== 'production'
 Meteor.startup(() => 
 {
   Accounts.config({loginExpirationInDays: StateVariables.LoginExpirationInDays});
+  let username=encodeURIComponent(Meteor.settings.private.AmazonSES.Username);
+  let password=encodeURIComponent(Meteor.settings.private.AmazonSES.Password);
   process.env.MAIL_URL = 
-    `${Meteor.settings.private.Mailgun.Protocol}://${Meteor.settings.private.Mailgun.Username}:${Meteor.settings.private.Mailgun.Password}@${Meteor.settings.private.Mailgun.SMTP_Hostname}:${Meteor.settings.private.Mailgun.Port}`;
+    `${Meteor.settings.private.AmazonSES.Protocol}://${username}:${password}@${Meteor.settings.private.AmazonSES.Hostname}:${Meteor.settings.private.AmazonSES.Port3}`;
 });

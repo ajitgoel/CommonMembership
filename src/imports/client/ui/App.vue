@@ -16,6 +16,7 @@ export default
   {
     return {
       currentUserId: "",
+      loggingIn:false,
     };
   },
   components: {
@@ -26,6 +27,7 @@ export default
   mounted() 
   {    
     this.$autorun(() => this.currentUserId = Meteor.userId() );
+    this.$autorun(() => this.loggingIn = Meteor.loggingIn() );
   },
   methods: 
   {

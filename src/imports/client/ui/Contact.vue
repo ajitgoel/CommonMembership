@@ -108,7 +108,7 @@
           <h3 class=" mt-4">Send us a message</h3>
         </div>
         <div class="row justify-content-center">
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <form>
               <div class="row">
                 <div class="col-md-12">
@@ -195,7 +195,7 @@ export default {
   },
   methods: 
   {
-    async SendEmail() 
+    SendEmail() 
     {
       this.disableButton=false;
       this.submitted = true;
@@ -205,27 +205,27 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) 
       {
-          return;
+        return;
       }
 
       var nameWithEmailText="Email message from: "+ this.user.name + "\nEmail message: " + this.user.message;
       var subject="Email from contact us page in common membership website";
-      try
+      
+      this.disableButton=true;
+      Meteor.call('emailSend', this.user.email, subject, nameWithEmailText, (error, result)=>
       {
-        this.disableButton=true;
-        await Meteor.callPromise('emailSend', this.user.email, subject, nameWithEmailText);
         this.disableButton=false;
+        if(error) 
+        {     
+          this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
+          return;
+        } 
         this.user.name='';
         this.user.email='';
         this.user.message=''; 
         this.$v.$reset();
         this.successMessage='Your email was send successfully.';
-      }
-      catch(e)
-      {
-        this.failureMessage='There was an error sending email. Our administrators have been notified of the issue and we will have a look.';
-        return;
-      }
+      });
     }
   },
 }

@@ -32,8 +32,8 @@ Meteor.methods(
   {
     if(Meteor.isServer)
     {
-      const { emailService } = require('../server/email.js');
-      emailService.send(fromAddress, subject, emailText);  
+      const { emailService } = require('../server/emailService.js');
+      emailService.sendemail(fromAddress, subject, emailText);  
     }
   },
   getUsersDetailForDomain(domain) 
