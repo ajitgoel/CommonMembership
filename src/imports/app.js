@@ -75,10 +75,22 @@ function createApp () {
   const router = new VueRouter({mode: 'history', routes,});
   //https://github.com/Meteor-Community-Packages/meteor-roles/issues/218
   //https://github.com/meteor-vue/vue-meteor/issues/118
+  //https://forums.meteor.com/t/persistent-login-help/45437/4
+  /*export default withTracker(() => {
+	const systemValsHandle = Meteor.subscribe('systemValues'),
+			systemValsReady = systemValsHandle.ready(),
+			userHandle = Meteor.subscribe('userData'),
+			userReady = userHandle.ready(),
+			loggingIn = Meteor.loggingIn(),
+			userID = Meteor.userId();
+	return {authenticated: !loggingIn && !!Meteor.userId(), loggingIn, pageReady: systemValsReady && userReady,userID};
+})(App);
+  */
   //You can use global navigation guards that will make the router wait for the user subscription to be ready.
   router.beforeEach((to, from, next) => 
   {
-    if (Meteor.userId() == null && (to.name ===SecureRoutes.Dashboard || to.name === SecureRoutes.Users || 
+    if (Meteor.userId() == null && 
+      (to.name ===SecureRoutes.Dashboard || to.name === SecureRoutes.Users || 
       to.name ===SecureRoutes.AddUser || to.name ===SecureRoutes.ImportUsers || 
       to.name ===SecureRoutes.ExportUsers || to.name ===SecureRoutes.AccountProfile ||  
       to.name ===SecureRoutes.Settings || to.name ===SecureRoutes.AccountBilling||

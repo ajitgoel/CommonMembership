@@ -3,9 +3,9 @@ import { check } from 'meteor/check';
 const AWS = require('aws-sdk');
 import { MeteorErrors } from '../api/constants';
 
-export const emailService = 
+export const emailServiceAWS = 
 {
-  send(fromAddress, subject, emailText) 
+  sendemail(fromAddress, subject, emailText) 
   {
       check(fromAddress, String);
       check(subject, String);
