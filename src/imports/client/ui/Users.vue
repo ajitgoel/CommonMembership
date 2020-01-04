@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-9 order-lg-2">
+  <div class="order-lg-2">
     <div class="actions-toolbar py-2 mb-4">
       <h5 class="mb-1">Users</h5>
       <router-link v-bind:to="{ name: 'add-user', params: {domain:$route.params.domain} }" 
@@ -34,6 +34,8 @@ import { Meteor } from 'meteor/meteor';
 import { MeteorErrors, StateVariables, SecureRoutes} from '../../api/constants';
 import Vue from "vue";
 import { GridPlugin, Page, Sort, Filter, Resize, Toolbar, ExcelExport, PdfExport, ColumnChooser} from "@syncfusion/ej2-vue-grids";
+import routes from '../../routes';
+//import EditUserLink from './EditUserLink.vue';
 
 export default {
   data() {
@@ -44,7 +46,22 @@ export default {
       items: [],      
       toolbarOptions: ['CsvExport', 'ExcelExport', 'PdfExport', 'ColumnChooser'] ,
       pageSettings: { pageSize: 10 },      
-      filterSettings: { type: "CheckBox" }
+      filterSettings: { type: "CheckBox" },
+      editusertemplate: function () 
+      { 
+          return { template : Vue.component('columnTemplate',{ 
+             template: `<router-link v-bind:to="{ name: 'add-user', params: {domain:$route.params.domain} }" 
+             class="small font-weight-bold">Edit user</router-link>`, 
+                data: function() { 
+                    return { 
+                        data: {} 
+                    } 
+                }, 
+                method: { 
+ 
+                } 
+          })} 
+      } 
     };
   },
   provide: {
@@ -72,6 +89,10 @@ export default {
           this.$refs.grid.csvExport({fileName:`${filename}.csv`}); 
           break; 
       }
+    },
+    edituser() 
+    {
+      routes.push({name:SecureRoutes.AddUser,params: {domain:$route.params.domain} });
     }
   },
   mounted() 

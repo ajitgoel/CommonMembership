@@ -6,7 +6,9 @@ Accounts.emailTemplates.from = Meteor.settings.private.SourceEmailId;
 //#region EnrollAccount
 Accounts.emailTemplates.enrollAccount.html = function (user, url) 
 {
+  console.warn(url);
   let newUrl = url.replace("#/enroll-account", "verifyemail");
+  console.warn(newUrl);
   SSR.compileTemplate('enrollAccount', `<pre> ${Assets.getText('emailTemplates/email-verify/content.txt')} </pre>`);
   return SSR.render("enrollAccount", 
   { 
@@ -44,7 +46,9 @@ Accounts.emailTemplates.resetPassword.html = function (user, url)
 //#region VerifyEmail
 Accounts.emailTemplates.verifyEmail.html = function (user, url) 
 {
-  let newUrl = url.replace("#/enroll-account", "verifyemail");
+  console.warn(url);
+  let newUrl = url.replace("#/verify-email", "verifyemail");
+  console.warn(newUrl);
   SSR.compileTemplate('enrollAccount', `<pre> ${Assets.getText('emailTemplates/email-verify/content.txt')} </pre>`);
   return SSR.render("enrollAccount", 
   { 

@@ -210,7 +210,7 @@ export default {
       let domain=this.user.domain.toString().toLowerCase();
       let router = this.$router;
       let root = this.$root;
-
+      let errorMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
       this.disableButton=true;
       Meteor.call('createUserForNewDomain', email, password, domain, (error, result)=>
       {
@@ -229,7 +229,7 @@ export default {
             this.user.userExistsforDomain=true;
             return;  
           }
-          this.failureMessage='There was an error registering your domain and adding you as a user. Our administrators have been notified of the issue and we will have a look.';
+          this.failureMessage=errorMessage;
           return;
         } 
         if(result && result.userId && result.domain ) 
@@ -239,7 +239,7 @@ export default {
             if(error2)
             {
               console.log(`error2: ${error2}`);
-              this.failureMessage='There was an error logging you in. Our administrators have been notified of the issue and we will have a look.';
+              this.failureMessage=errorMessage;
               return;
             } 
             else
@@ -250,8 +250,6 @@ export default {
             }
           });
         }
-        this.failureMessage='There was an error registering your domain. Our administrators have been notified of the issue and we will have a look.';
-        return;
       });
     }, 
     showPrivacyPolicyModal() 

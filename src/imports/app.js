@@ -39,8 +39,7 @@ function createApp () {
   import Users from './client/ui/Users.vue';
   import AddUser from './client/ui/AddUser.vue';
   import ImportUsers from './client/ui/ImportUsers.vue';
-  import ExportUsers from './client/ui/ExportUsers.vue';
-
+  
   Vue.component('AppHeader', AppHeader);
   Vue.component('AppFooter', AppFooter);
   Vue.component('Contact', Contact);
@@ -70,8 +69,7 @@ function createApp () {
   Vue.component('Users', Users);
   Vue.component('AddUser',AddUser);
   Vue.component('ImportUsers',ImportUsers);
-  Vue.component('ExportUsers',ExportUsers);
-
+  
   const router = new VueRouter({mode: 'history', routes,});
   //https://github.com/Meteor-Community-Packages/meteor-roles/issues/218
   //https://github.com/meteor-vue/vue-meteor/issues/118
@@ -92,7 +90,7 @@ function createApp () {
     if (Meteor.userId() == null && 
       (to.name ===SecureRoutes.Dashboard || to.name === SecureRoutes.Users || 
       to.name ===SecureRoutes.AddUser || to.name ===SecureRoutes.ImportUsers || 
-      to.name ===SecureRoutes.ExportUsers || to.name ===SecureRoutes.AccountProfile ||  
+      to.name ===SecureRoutes.AccountProfile ||  
       to.name ===SecureRoutes.Settings || to.name ===SecureRoutes.AccountBilling||
       to.name ===SecureRoutes.AccountNotifications))
     {

@@ -112,7 +112,10 @@ b. if (variable==null)
 - [ ] Add server side validations using Collection2 and SimpleSchema.
 - [ ] Write unit tests for server side code.
 - [ ] Add Google SignIn Option.
-- [ ] Host application in Google Cloud VM.
+- [ ] Digital Ocean tasks
+	- [x] ~~Host application~~
+	- [ ] Application should have SSL certificate
+	- [ ] Application should have custom domain
 - [ ] create a proper email template and email sending provider.
 - [ ] Screens
 	- [x] Navigation Bar
@@ -125,7 +128,7 @@ b. if (variable==null)
 		- [ ] ++2. Add user++
 			- [ ] Add custom fields
 			- [ ] Send enrollment email to users to allow users to be verified.
-			- [ ] Duplicate email in a domain-validation. 
+			- [ ] Duplicate email in a domain-validation.
 			- [x] ~~clicking on "Show password" should show password, show hide, cancel buttons.~~
 			- [x] ~~hide button should hide password.~~
 			- [x] ~~cancel button should change "hide password" to "show password".~~
@@ -134,12 +137,12 @@ b. if (variable==null)
 			- [x] ~~sort indicator does not show on grid column~~
 			- [x] ~~Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv, excel, pdf file.~~
 			- [x] ~~allow user to specify which columns he wants to see~~
-			- [ ] first name, last name should show under name column. https://ej2.syncfusion.com/vue/documentation/grid/columns/#valueaccessor
+			- [x] ~~first name, last name should show under name column. https://ej2.syncfusion.com/vue/documentation/grid/columns/#valueaccessor~~
 			- [ ] show tickets with detail link using "row details support": https://bootstrap-vue.js.org/docs/components/table
 			- [ ] allow bulk(delete) operations
 			- [ ] add checkbox to the left of each row.
 			- [ ] Add edit, delete links below each row.
-			- [ ] clicking on email should navigate user to user edit screen.
+			- [ ] ===> clicking on email should navigate user to user edit screen.==
 		- [ ] ++3. Import users using CSV file++
 			- [ ] use https://atmospherejs.com/edgee/slingshot
 		- [ ] ++4. Export users to CSV file++
@@ -150,8 +153,8 @@ b. if (variable==null)
 		- [x] ~~Show successmessage, failuremessage in common alert components~~
 		- [ ] if there is a failure sending an email, then perhaps a different error message needs to be shown.
 	- [ ] ++c. Verify Email++
-		- [ ] when user clicks on verify email link, it should verify token, login user and navigate user to dashboard screen.
-		- [ ] Create screen with all domains for user, so he can select domain that he needs to navigate to.
+		- [x] ~~when user clicks on verify email link, it should verify token and navigate user to login screen with message.~~
+		- [x] ~~Not Required: Create screen with all domains for user, so he can select domain that he needs to navigate to.~~
 		- [ ] An email should be send when the email has been verified. 
 	- [ ] ++d. Login user screen++
 		- [x] ~~disable button when submitting form.~~
