@@ -11,12 +11,12 @@ import AccountNotifications from './client/ui/AccountNotifications.vue';
 import Users from './client/ui/Users.vue';
 import AddUser from './client/ui/AddUser.vue';
 import ImportUsers from './client/ui/ImportUsers.vue';
-import ExportUsers from './client/ui/ExportUsers.vue';
 
 import Register from './client/ui/Register.vue';
 import Login from './client/ui/Login.vue';
 import ResetPassword from './client/ui/ResetPassword.vue';
 import ChangePassword from './client/ui/ChangePassword.vue';
+import VerifyEmail from './client/ui/VerifyEmail.vue';
 import PrivacyPolicy from './client/ui/PrivacyPolicy.vue';
 import PrivacyShieldNotice from './client/ui/PrivacyShieldNotice.vue';
 import TermsAndConditions from './client/ui/TermsAndConditions.vue';
@@ -32,8 +32,7 @@ export default [
       { path: 'users', name: SecureRoutes.Users, component: Users, props: true },
       { path: 'AddUser', name: SecureRoutes.AddUser, component: AddUser, props: true },
       { path: 'ImportUsers', name: SecureRoutes.ImportUsers, component: ImportUsers, props: true },
-      { path: 'ExportUsers', name: SecureRoutes.ExportUsers, component: ExportUsers, props: true },
-
+      
       { path: 'account-profile', name: SecureRoutes.AccountProfile, component: AccountProfile, props: true },
       { path: 'settings', name: SecureRoutes.Settings, component: Settings , props: true},
       { path: 'account-billing', name: SecureRoutes.AccountBilling, component: AccountBilling , props: true},
@@ -45,24 +44,7 @@ export default [
   { path: '/login', name: 'login', component: Login },
   { path: '/resetpassword', name: 'resetpassword', component: ResetPassword },
   { path: '/changepassword/:token', name: 'changepassword', component: ChangePassword },
-  { path: '/verifyemail/:token', name: 'verifyemail', 
-    beforeEnter: (to, from, next) => 
-    {
-      Accounts.verifyEmail(to.params.token, (error) =>
-      {
-        if (error) 
-        {
-          //ToDo: show error with error.reason
-          console.warn('show error with error.reason');
-        } 
-        else 
-        {          
-          //ToDo: Check no of domains for user, if there are more than one domain then navigate to screen where the user can select domain.
-          router.push({ name: 'dashboard', params: { domain: 'clearcrimson' }});                   
-        }
-      });
-    } 
-  },
+  { path: '/verifyemail/:token', name: 'verifyemail', component: VerifyEmail, props: true} ,
   { path: '/privacypolicy', name: 'privacypolicy', component: PrivacyPolicy },
   { path: '/privacyshieldnotice', name: 'privacyshieldnotice', component: PrivacyShieldNotice },
   { path: '/termsandconditions', name: 'termsandconditions', component: TermsAndConditions },  

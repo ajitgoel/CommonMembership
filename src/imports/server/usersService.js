@@ -135,8 +135,12 @@ export const userService =
       
       try
       {
-        Accounts.sendVerificationEmail(userid, email);
-        logging.winston.log('info', `Send verification email to email ${email}`);
+        if(userid)
+        {
+          Accounts.sendVerificationEmail(userid, email);
+          logging.winston.log('info', `Send verification email to email ${email}`);
+          console.warn(`Send verification email to email ${email}`);
+        }
       }
       catch(error)
       {
@@ -165,15 +169,6 @@ export const userService =
     logging.winston.log('info', `Added domain ${domain}`);
 
     //TODO: create a proper email template and email sending provider. 
-    try
-    {
-      Accounts.sendVerificationEmail(userId, email);
-      logging.winston.log('info', `Send verification email to email ${email}`);
-    }
-    catch(error)
-    {
-      logging.winston.log('info', `Error sending verification email to userid: ${userId} email: ${email}. Error ${error}`);
-    } 
     return {userId:userId, domain:domain}; 
   //#endregion
     //#endregion

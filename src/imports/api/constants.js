@@ -24,7 +24,6 @@ export const SecureRoutes =
   Users: 'users',
   AddUser: 'add-user',
   ImportUsers: 'import-users',
-  ExportUsers: 'export-users', 
   AccountProfile: 'account-profile', 
   Settings: 'settings', 
   AccountBilling: 'account-billing', 

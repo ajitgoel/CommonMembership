@@ -8,7 +8,12 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 Meteor.startup(() => 
 {
-  Accounts.config({loginExpirationInDays: StateVariables.LoginExpirationInDays});
+  Accounts.config({
+    loginExpirationInDays: StateVariables.LoginExpirationInDays, 
+    sendVerificationEmail: true,
+    passwordResetTokenExpirationInDays:3,
+    passwordEnrollTokenExpirationInDays :30
+  });
   let username=encodeURIComponent(Meteor.settings.private.AmazonSES.Username);
   let password=encodeURIComponent(Meteor.settings.private.AmazonSES.Password);
   process.env.MAIL_URL = 
