@@ -36,6 +36,7 @@
     "marker-clusterer-plus": "^2.1.4",
     "meteor-node-stubs": "^1.0.0",
     "moment": "^2.24.0",
+    "papaparse": "^5.1.1",
     "pug": "^2.0.4",
     "quasar": "^1.4.5",
     "simpl-schema": "^1.5.6",
