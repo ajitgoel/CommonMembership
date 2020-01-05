@@ -1,3 +1,4 @@
-"user_login","user_email","user_pass","first_name","last_name","display_name","role","custom_usermeta_1","custom_usermeta_2"
-"johndoe","john.doe@localhost.localdomain",,"John","Doe","John Doe","administrator","Test","Test"
-"janedoe","jane.doe@localhost.localdomain.com","test","Jane","Doe","Jane Doe","contributor","0",
+"user_email","first_name","last_name","role","custom_usermeta_1","custom_usermeta_2"
+"john.doe@localhost.localdomain","John","Doe","administrator","Test","Test"
+"jane.doe@localhost.localdomain.com","Jane","Doe","contributor","0",
+
