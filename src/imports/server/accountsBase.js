@@ -8,7 +8,7 @@ Accounts.emailTemplates.from = Meteor.settings.private.SourceEmailId;
 Accounts.emailTemplates.enrollAccount.html = function (user, url) 
 {
   console.warn(url);
-  let newUrl = url.replace("#/enroll-account", "verifyemail");
+  let newUrl = url.replace("#/enroll-account", "changepassword");
   console.warn(newUrl);
   SSR.compileTemplate('enrollAccount', `<pre> ${Assets.getText('emailTemplates/email-verify/content.txt')} </pre>`);
   return SSR.render("enrollAccount", 

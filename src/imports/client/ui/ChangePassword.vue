@@ -26,7 +26,7 @@
                       <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
                     <input type="password" class="form-control" placeholder="********" 
-                    v-model="user.password" id="password" name="password" :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
+                    v-focus v-model="user.password" id="password" name="password" :class="{ 'is-invalid': submitted && $v.user.password.$error }"                                
                     style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
                     <div class="input-group-append">
                       <span class="input-group-text">
@@ -47,7 +47,7 @@
                       <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>                      
                     <input type="password" class="form-control" placeholder="********"                         
-                    v-focus v-model="user.confirmPassword" id="confirmPassword" name="confirmPassword" 
+                    v-model="user.confirmPassword" id="confirmPassword" name="confirmPassword" 
                     :class="{ 'is-invalid': submitted && $v.user.confirmPassword.$error }" 
                     style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
                     <div v-if="submitted && $v.user.confirmPassword.$error" class="invalid-feedback">
@@ -125,21 +125,25 @@ export default
       let token=this.$route.params.token;
       let root = this.$root;
       let router=this.$router;
+      let errorMessage='There was an error resetting your password. Our administrators have been notified of the issue and we will have a look.';
+      let that=this;
       this.disableButton=true;
-      Accounts.resetPassword(token, this.user.password, (error)=>
+      
+      Accounts.resetPassword(token, this.user.password, (error1)=>
       {
-        this.disableButton=false;
-        if(error) 
+        that.disableButton=false;
+        console.warn(error1);
+        if(error1) 
         {     
-          this.failureMessage='There was an error resetting your password. Our administrators have been notified of the issue and we will have a look.';
+          that.failureMessage=errorMessage;
           return;
         }
         else
         {
           root.setValue(StateVariables.NavigationMessage,'Your password has been changed successfully. Please login to continue.');
           router.push({ name: 'login'});                  
-        }        
-      });
+        }
+      });    
     },
   },
 }
