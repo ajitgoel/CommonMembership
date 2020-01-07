@@ -2,7 +2,7 @@
   "name": "vue-meteor-demo",
   "private": true,
   "scripts": {
-    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json --inspect",
+    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json",
     "@comment start-server": "cross-env MONGO_URL='mongodb://127.0.0.1:27017/commonmembership_test' meteor run --settings settings.json  --port 3052",
     "cypress:gui": "cypress open",
     "cypress:headless": "cypress run --headless --browser chrome",

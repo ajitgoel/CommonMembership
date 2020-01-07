@@ -125,14 +125,6 @@ b. if (variable==null)
 		- [x] ~~Logout functionality.~~
 		- [x] ~~If there is an failure in logging out, then a failure message should be shown in a toast-Not required.~~
 	- [ ] ++a. User management++
-		- [ ] ++2. Add user++
-			- [ ] Add custom fields
-			- [ ] Send enrollment email to users to allow users to be verified.
-			- [ ] Duplicate email in a domain-validation.
-			- [x] ~~clicking on "Show password" should show password, show hide, cancel buttons.~~
-			- [x] ~~hide button should hide password.~~
-			- [x] ~~cancel button should change "hide password" to "show password".~~
-			- [x] ~~Encrypt password in database.~~
 		- [ ] ++1. All users\Search users++
 			- [x] ~~sort indicator does not show on grid column~~
 			- [x] ~~Remove bootstrapVue and use SyncFusion grid which also allows user to download data in csv, excel, pdf file.~~
@@ -143,9 +135,21 @@ b. if (variable==null)
 			- [ ] add checkbox to the left of each row.
 			- [ ] Add edit, delete links below each row.
 			- [ ] ===> clicking on email should navigate user to user edit screen.==
+		- [ ] ++2. Add user++
+			- [ ] Add custom fields
+			- [x] ~~Send enrollment email to users to allow users to be verified.~~
+			- [ ] if email\emails exist for the domain then an warning should be returned back to the UI.
+			- [ ] if a email is added that is previously present for another domain then the domain list should be updated for the emailid.
+			- [x] ~~clicking on "Show password" should show password, show hide, cancel buttons.~~
+			- [x] ~~hide button should hide password.~~
+			- [x] ~~cancel button should change "hide password" to "show password".~~
+			- [x] ~~Encrypt password in database.~~
 		- [ ] ++3. Import users using CSV file++
-			- [ ] use https://atmospherejs.com/edgee/slingshot
-			- [ ] use https://github.com/julianasobreira/parse-csv/blob/9f45393e47cc523ffeb7bd23d8ee3cc95d251a99/src/components/Parse.vue
+			- [x] ~~use https://github.com/julianasobreira/parse-csv/blob/9f45393e47cc523ffeb7bd23d8ee3cc95d251a99/src/components/Parse.vue~~
+			- [ ] when file is selected, the label should specify the selected file name.
+			- [ ] if a email is added that is previously present for another domain then the domain list should be updated for the emailid.
+			- [ ] if email\emails exist for the domain then an warning should be returned back to the UI.
+			- [ ] success message with the number of users added, should be returned from the backend.
 		- [ ] ++4. Export users to CSV file++
 	- [ ] ++b. Register user screen++
 		- [x] ~~disable button when submitting form.~~
