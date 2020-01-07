@@ -39,9 +39,13 @@ export default
     {
       Object.keys(Session.keys).forEach(function(key)
       {
-        Session.set(key, undefined);
+        clearValue(key);
       });
       Session.keys = {};
+    },
+    clearValue(key) 
+    {
+      Session.set(key, undefined);
     },
     getValue(key)
     {

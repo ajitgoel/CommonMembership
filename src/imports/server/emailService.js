@@ -1,7 +1,7 @@
 'use strict';
 import { Email } from 'meteor/email';
-import { MeteorErrors } from '../api/constants';
 import { check } from 'meteor/check';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../api/constants';
 
 export const emailService = 
 {
@@ -10,7 +10,7 @@ export const emailService =
     var logging = require('./logging.js');        
     try
     {
-      check([fromAddress, subject, emailText], [String]);        
+      check([fromAddress, subject, emailText], [NonEmptyString]);        
       let to=Meteor.settings.private.ToEmailId;
       console.warn(to);
       Email.send({to:to, from:fromAddress, subject:subject, text:emailText});

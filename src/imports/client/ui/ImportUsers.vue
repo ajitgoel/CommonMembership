@@ -57,7 +57,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { MeteorErrors } from '../../api/constants';
+import {MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../../api/constants';
 import Papa from 'papaparse';
 
 export default {
@@ -82,29 +82,53 @@ export default {
     ImportUsers() 
     {
       const fileToLoad = this.$refs.fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = fileLoadedEvent => 
+      const fileReader = new FileReader();
+      
+      let domain= this.$root.getValue(StateVariables.SelectedDomain);
+      let errorMessage='There was an error importing the users. Our administrators have been notified of the issue and we will have a look.';
+      let that=this;
+      fileReader.onload = fileLoadedEvent => 
       {
         Papa.parse(fileLoadedEvent.target.result, 
         {
           header: true,
           skipEmptyLines: true, 
-          before: function(file, inputElem)
+          /*before: function(file, inputElem)
           {
-            //console.warn(`${file} ${inputElem}`);
-          },
+            console.warn(`${file} ${inputElem}`);
+          },*/
           complete(results) 
           {
-            console.warn(`${results.data}`);
-            console.warn(`${results.meta}`);
+            that.disableButton=true;
+            Meteor.call('addUsersForExistingDomain', domain, results.data, that.sendUserNotification, (error, result)=>
+            {
+              that.disableButton=false;
+              if(error) 
+              {     
+                if(error.error && error.error===MeteorErrors.NotAuthorized)
+                {
+                  that.failureMessage=MeteorErrors.NotAuthorizedFailureMessage;
+                  return;  
+                } 
+                that.failureMessage=errorMessage;
+                return;
+              } 
+              if(result) 
+              {
+                that.successMessage='Users were added successfully.';
+                that.sendUserNotification=false;
+                that.$v.$reset();
+                return;
+              }
+            });
           },
           error(errors) 
           {
-            console.warn(`${errors}`);
+            that.failureMessage=errorMessage;
           }
         });
       }
-      reader.readAsText(fileToLoad);
+      fileReader.readAsText(fileToLoad);
     },
   },
 }

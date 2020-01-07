@@ -1,15 +1,15 @@
 'use strict';
 import { check } from 'meteor/check';
 const AWS = require('aws-sdk');
-import { MeteorErrors } from '../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../api/constants';
 
 export const emailServiceAWS = 
 {
   sendemail(fromAddress, subject, emailText) 
   {
-      check(fromAddress, String);
-      check(subject, String);
-      check(emailText, String);
+      check(fromAddress, NonEmptyString);
+      check(subject, NonEmptyString);
+      check(emailText, NonEmptyString);
       var logging = require('./logging.js');
 
       AWS.config.update({      

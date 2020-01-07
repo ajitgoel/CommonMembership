@@ -31,7 +31,7 @@
 <script>
 import '../../api/methods.js';
 import { Meteor } from 'meteor/meteor';
-import { MeteorErrors, StateVariables, SecureRoutes} from '../../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../../api/constants';
 import Vue from "vue";
 import { GridPlugin, Page, Sort, Filter, Resize, Toolbar, ExcelExport, PdfExport, ColumnChooser} from "@syncfusion/ej2-vue-grids";
 import routes from '../../routes';

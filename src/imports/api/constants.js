@@ -1,3 +1,5 @@
+import { check } from 'meteor/check';
+
 export const MeteorErrors = 
 {
   NotAuthorized: 'not-authorized',
@@ -10,6 +12,10 @@ export const MeteorErrors =
   UserDoesNotBelongToDomain: 'user-does-not-belong-to-domain',
   ServerError: 'server-error',
 };
+export const NonEmptyString = Match.Where((x) => {
+  check(x, String);
+  return x.length > 0;
+});
 
 export const StateVariables = 
 {

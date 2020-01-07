@@ -7,7 +7,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './client/ui/App.vue';
 import routes from './routes';
-import { MeteorErrors, StateVariables, SecureRoutes} from './api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from './api/constants';
 
 function createApp () {
   import AppHeader from './client/ui/components/AppHeader.vue';

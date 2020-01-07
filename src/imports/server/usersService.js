@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { UserCollection,UserDomainCollection,DomainCollection } from '../api/collections';
-import { MeteorErrors } from '../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../api/constants';
 
 export const userService = 
 {
@@ -12,25 +12,15 @@ export const userService =
   {
     var logging = require('./logging.js');  
     const {userDomainsService} = require('./userDomainsService.js');
-    check(domain, String);    
+    check(domain, NonEmptyString);    
     domain=domain.toString().toLowerCase();      
 
-    //check if user is authorized
-    //check if user is part of the domain
+    if (!userDomainsService.isValidUserForDomain(domain)) 
+    {
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
+    }
+
     //find all userids for that domain, then return all users for those userids
-    let userid=Meteor.userId();
-    if (!userid) 
-    {
-      throw new Meteor.Error(MeteorErrors.NotAuthorized);
-    }
-
-    let domainsForUserId = userDomainsService.getDomainsForUserId(userid);
-    if(domainsForUserId.length=== 0 || !domainsForUserId.includes(domain))
-    {
-      logging.winston.log('info', `User ${userid} does not belong to domain ${domain}`);
-      throw new Meteor.Error(MeteorErrors.NotAuthorized);
-    }
-
     let userIdsForDomain = userDomainsService.getUserIdsForDomain(domain);
     if(userIdsForDomain.length === 0)
     {
@@ -51,36 +41,41 @@ export const userService =
     return result;
   },
 
-  addUserForExistingDomain(email, domain, firstname, lastname, sendUserNotification, role) 
+  addUserForExistingDomain(domain, email, firstname, lastname, sendUserNotification, role) 
   {
-    var logging = require('./logging.js');  
     const {userDomainsService} = require('./userDomainsService.js');
-    check(domain, String);    
-    check(email, String);
-    check(firstname, String);    
-    check(lastname, String);    
+    check(domain, NonEmptyString);    
+    check(email, NonEmptyString);
+    check(firstname, NonEmptyString);    
+    check(lastname, NonEmptyString);    
     check(sendUserNotification, Boolean);    
-    check(role, String);    
+    check(role, NonEmptyString);    
 
     domain=domain.toString().toLowerCase();      
     email=email.toString().toLowerCase();    
 
-    //check if user is authorized
-    //check if user is part of the domain
+    if (!userDomainsService.isValidUserForDomain(domain)) 
+    {
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
+    }    
     //insert user for the domain.
-    let userid=Meteor.userId();
-    if (!userid) 
-    {
-      throw new Meteor.Error(MeteorErrors.NotAuthorized);
-    }
+    return this.addUserForExistingDomain2(domain, email, firstname, lastname, sendUserNotification, role); 
+  },
 
-    let domainsForUserId = userDomainsService.getDomainsForUserId(userid);
-    if(domainsForUserId.length=== 0 || !domainsForUserId.includes(domain))
-    {
-      logging.winston.log('info', `User ${userid} does not belong to domain ${domain}`);
-      throw new Meteor.Error(MeteorErrors.NotAuthorized);
-    }
-    
+  addUserForExistingDomain2(domain, email, firstname, lastname, sendUserNotification, role) 
+  {
+    var logging = require('./logging.js');  
+    check(domain, NonEmptyString);    
+    check(email, NonEmptyString);
+    check(firstname, NonEmptyString);    
+    check(lastname, NonEmptyString);    
+    check(sendUserNotification, Boolean);    
+    check(role, NonEmptyString);    
+
+    domain=domain.toString().toLowerCase();      
+    email=email.toString().toLowerCase();    
+
+    //insert user for the domain.
     let createuseroptions={username: email, email: email, domain:domain, firstname: firstname, 
       lastname: lastname, sendUserNotification:sendUserNotification, role: role};
     let userId= Accounts.createUser(createuseroptions);
@@ -102,7 +97,44 @@ export const userService =
     return {userId:userId}; 
   },
 
-  //if domain has been registered before, then return error
+  addUsersForExistingDomain(domain, users, sendUserNotification)  
+  {
+    var logging = require('./logging.js');  
+    const {userDomainsService} = require('./userDomainsService.js');
+    check(domain, NonEmptyString);    
+    check(sendUserNotification, Boolean);  
+    check(users, Match.Where(function(users)
+    {
+      _.each(users, function (users) 
+      {
+        /* do your checks and return false if there is a problem */
+      });
+      return true;
+    }));  
+    
+    domain=domain.toString().toLowerCase();      
+    
+    if (!userDomainsService.isValidUserForDomain(domain)) 
+    {
+      throw new Meteor.Error(MeteorErrors.NotAuthorized);
+    }
+    
+    //insert users for the domain.
+    users.forEach(user => 
+    {
+      let email=user.email || user.Email || user.EMail;
+      email=email?email.toString().toLowerCase():'';
+      
+      let firstname=user.firstname || user.first_name || user.First_Name;
+      let lastname=user.lastname || user.last_name || user.Last_Name;
+      let role=user.role || user.Role;
+
+      this.addUserForExistingDomain2(domain, email, firstname, lastname, sendUserNotification, role);  
+    });
+    return true;
+  },
+
+  //if domain has been registered before, then return erroru9u9u9u9u9u
   //if domain has not been registered before then check that return error if the email, domain combination has been registered before. 
   createUserForNewDomain(email, password, domain) 
   {
@@ -110,9 +142,9 @@ export const userService =
     const {userDomainsService} = require('./userDomainsService.js');
     const {domainsService} = require('./domainsService.js');
       
-    check(domain, String);
-    check(email, String);
-    check(password, String);
+    check(domain, NonEmptyString);
+    check(email, NonEmptyString);
+    check(password, NonEmptyString);
     
     domain=domain.toString().toLowerCase();
     email=email.toString().toLowerCase();      
@@ -183,8 +215,8 @@ export const userService =
     var logging = require('./logging.js');      
     const {userDomainsService} = require('./userDomainsService.js');
 
-    check(email, String);
-    check(password, String);
+    check(email, NonEmptyString);
+    check(password, NonEmptyString);
     check(domain, String);
 
     domain=domain.toString().toLowerCase();
@@ -248,7 +280,7 @@ export const userService =
   resetUserPassword(email) 
   {
     var logging = require('./logging.js');      
-    check(email, String);    
+    check(email, NonEmptyString);    
     email=email.toString().toLowerCase();      
     var user=Accounts.findUserByEmail(email);    
     if(user==null)

@@ -123,7 +123,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { MeteorErrors, StateVariables, SecureRoutes} from '../../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../../api/constants';
 
 export default 
 {
@@ -164,7 +164,9 @@ export default
   },
   mounted() 
   {
-    this.navigationMessage=this.$root.getValue(StateVariables.NavigationMessage);
+    let navigationmessagefromlocalstorage=this.$root.getValue(StateVariables.NavigationMessage);
+    this.navigationMessage=navigationmessagefromlocalstorage;
+    this.$root.clearValue(StateVariables.NavigationMessage);
   },
   methods: 
   {     

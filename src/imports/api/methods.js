@@ -18,7 +18,6 @@ Meteor.methods(
       return userService.loginUserForDomain(email, password, domain);
     }
   }, 
-
   resetUserPassword(email) 
   {
     if(Meteor.isServer)
@@ -27,7 +26,6 @@ Meteor.methods(
       return userService.resetUserPassword(email);
     }
   }, 
-
   emailSend(fromAddress, subject, emailText) 
   {
     if(Meteor.isServer)
@@ -44,12 +42,20 @@ Meteor.methods(
       return userService.getUsersDetailForDomain(domain);  
     }
   },
-  addUserForExistingDomain(email, domain, firstname, lastname, sendUserNotification, role) 
+  addUserForExistingDomain(domain, email, firstname, lastname, sendUserNotification, role) 
   {
     if(Meteor.isServer)
     {
       const { userService } = require('../server/usersService.js');
-      return userService.addUserForExistingDomain(email, domain, firstname, lastname, sendUserNotification, role);  
+      return userService.addUserForExistingDomain(domain, email, firstname, lastname, sendUserNotification, role);  
+    }
+  },
+  addUsersForExistingDomain(domain, users, sendUserNotification) 
+  {
+    if(Meteor.isServer)
+    {
+      const { userService } = require('../server/usersService.js');
+      return userService.addUsersForExistingDomain(domain, users, sendUserNotification);  
     }
   },
 })

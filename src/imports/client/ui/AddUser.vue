@@ -103,7 +103,7 @@
 import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
-import { MeteorErrors, StateVariables, SecureRoutes} from '../../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../../api/constants';
 
 export default {
   name: "AddUser",
@@ -151,7 +151,7 @@ export default {
       let email=this.user.email.toString().toLowerCase();
       
       console.log(`${this.user.email} ${this.user.firstname} ${this.user.lastname} ${this.user.sendUserNotification} ${this.user.role}`);
-      Meteor.call('addUserForExistingDomain', email, domain, this.user.firstname, this.user.lastname, 
+      Meteor.call('addUserForExistingDomain', domain, email, this.user.firstname, this.user.lastname, 
         this.user.sendUserNotification, this.user.role, (error, result)=>
       {
         this.disableButton=false;

@@ -145,6 +145,7 @@ b. if (variable==null)
 			- [ ] ===> clicking on email should navigate user to user edit screen.==
 		- [ ] ++3. Import users using CSV file++
 			- [ ] use https://atmospherejs.com/edgee/slingshot
+			- [ ] use https://github.com/julianasobreira/parse-csv/blob/9f45393e47cc523ffeb7bd23d8ee3cc95d251a99/src/components/Parse.vue
 		- [ ] ++4. Export users to CSV file++
 	- [ ] ++b. Register user screen++
 		- [x] ~~disable button when submitting form.~~
