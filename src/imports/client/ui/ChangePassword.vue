@@ -82,7 +82,7 @@ import '../../api/methods.js';
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { MeteorErrors, StateVariables, SecureRoutes} from '../../api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../../api/constants';
 
 export default 
 {

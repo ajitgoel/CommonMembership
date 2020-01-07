@@ -2,7 +2,7 @@
   "name": "vue-meteor-demo",
   "private": true,
   "scripts": {
-    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json",
+    "start-server": "cross-env METEOR_LOCAL_DIR=.meteor/test meteor run --settings settings.json --inspect",
     "@comment start-server": "cross-env MONGO_URL='mongodb://127.0.0.1:27017/commonmembership_test' meteor run --settings settings.json  --port 3052",
     "cypress:gui": "cypress open",
     "cypress:headless": "cypress run --headless --browser chrome",
@@ -33,6 +33,7 @@
     "graphql-tag": "^2.10.1",
     "intersection-observer": "^0.6.0",
     "isomorphic-fetch": "^2.2.1",
+    "jest": "^24.9.0",
     "marker-clusterer-plus": "^2.1.4",
     "meteor-node-stubs": "^1.0.0",
     "moment": "^2.24.0",

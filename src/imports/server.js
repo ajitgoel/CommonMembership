@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import './server/accountsBase';
 import { Accounts } from 'meteor/accounts-base';
-import { MeteorErrors, StateVariables, SecureRoutes} from './api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from './api/constants';
 import './api/publications';
 
 const isDev = process.env.NODE_ENV !== 'production'

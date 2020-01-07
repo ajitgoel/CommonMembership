@@ -1,6 +1,7 @@
 'use strict';
 import {Loggly} from 'winston-loggly-bulk';
 import winston from 'winston';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from '../api/constants';
 
 winston.add(new Loggly({
   token: Meteor.settings.private.Loggly.token,

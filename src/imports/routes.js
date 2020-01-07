@@ -21,7 +21,7 @@ import PrivacyPolicy from './client/ui/PrivacyPolicy.vue';
 import PrivacyShieldNotice from './client/ui/PrivacyShieldNotice.vue';
 import TermsAndConditions from './client/ui/TermsAndConditions.vue';
 import Contact from './client/ui/Contact.vue';
-import { MeteorErrors, StateVariables, SecureRoutes} from './api/constants';
+import { MeteorErrors, StateVariables, SecureRoutes, NonEmptyString} from './api/constants';
 
 export default [
   { path: '/', name: 'home', component: Home },
