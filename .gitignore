@@ -3,5 +3,3 @@ node_modules/
 .cache
 /.meteor/test/
 /tests/cypress/screenshots
-.deploy/
-settings.json
