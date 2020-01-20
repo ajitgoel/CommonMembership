@@ -2,4 +2,7 @@ node_modules/
 /packages
 .cache
 /.meteor/test/
-/tests/cypress/screenshots"settings.json" 
+/tests/cypress/screenshots
+settings.json
+.deploy
+coverage

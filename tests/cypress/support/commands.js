@@ -5,7 +5,7 @@ Cypress.Commands.add("resetDatabase", () =>
   //cy.exec(`mongo mongodb://localhost:3001/meteor ${filePath}`)
 );
 
-Cypress.Commands.add('adduser', (email, password, domain, firstname, lastname, sendUserNotification, role) => 
+Cypress.Commands.add('adduser', (email, firstname, lastname, sendUserNotification, role) => 
 {
   cy.get("[data-cy=email]").clear().type(email);
   cy.get("[data-cy=firstname]").clear().type(firstname);

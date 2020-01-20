@@ -129,12 +129,12 @@ export const userService =
       let lastname=user.lastname || user.last_name || user.Last_Name;
       let role=user.role || user.Role;
 
-      this.addUserForExistingDomain2(domain, email, firstname, lastname, sendUserNotification, role);  
+      user.userId=this.addUserForExistingDomain2(domain, email, firstname, lastname, sendUserNotification, role);  
     });
-    return true;
+    return users;
   },
 
-  //if domain has been registered before, then return erroru9u9u9u9u9u
+  //if domain has been registered before, then return error
   //if domain has not been registered before then check that return error if the email, domain combination has been registered before. 
   createUserForNewDomain(email, password, domain) 
   {

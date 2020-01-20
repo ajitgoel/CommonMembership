@@ -54,9 +54,12 @@ describe("overall-integration-test", () =>
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/dashboard/${domain2.toLowerCase()}/`);
 
     cy.contains("Add user").click();
-    cy.adduser(email2, password2, domain1, firstname2, lastname2, sendUserNotification2, role2);
+    cy.adduser(email2, firstname2, lastname2, sendUserNotification2, role2);
     cy.get("[data-cy=successalert]").should("have.text", "Success User was added successfully.");
-
+    cy.contains("All users").click();    
+    cy.get("[id=username_filterBarcell]").clear().type(email2).type({enter});
+    //ToDo: check here to see that only one item is present.
+    
     //refreshing the page should redirect user to the login screen
     cy.reload();
     cy.url({timeout: 30000}).should("eq", `${Cypress.config().baseUrl}/login`);

@@ -115,7 +115,8 @@ export default {
               } 
               if(result) 
               {
-                that.successMessage='Users were added successfully.';
+                let length=result.filter(d => d.userId!=null).length;
+                that.successMessage=`${length} Users were added successfully.`;
                 that.sendUserNotification=false;
                 that.$v.$reset();
                 return;
