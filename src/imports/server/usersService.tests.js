@@ -17,6 +17,7 @@ if (Meteor.isServer)
 {
   describe('UsersService', function()
   {
+    this.timeout(15000);
     beforeEach(function()
     {
       resetDatabase();
@@ -31,7 +32,7 @@ if (Meteor.isServer)
       assert.fail('email-password-invalid');
       assert.equal(result.domain);
     });*/
-    it('add users for existing domain', function() 
+    it('add users for existing domain', function(done) 
     {
       sinon.stub(userDomainsService,'isValidUserForDomain').returns(true);
       sinon.stub(Accounts,'sendEnrollmentEmail');
@@ -40,6 +41,7 @@ if (Meteor.isServer)
       users.push({email:'meetha@goel.com', firstname:'meetha', lastname:'goel', role:'admin'});
       
       let result=userService.addUsersForExistingDomain('clearcrimson', users, true);
+      done();
       console.log(result);
       let length=result.filter(d => d.userId!=null).length;    
       assert.equal(length, 2);            
