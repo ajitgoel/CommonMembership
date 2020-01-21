@@ -1,0 +1,22 @@
+'use strict';
+jest.mock('meteor/meteor');
+jest.mock('meteor/check');
+
+import { __setUsersQueryResult } from 'meteor/meteor';
+import {check} from 'meteor/check';
+
+import domainsService from './domainsService';
+
+describe('domainsService', () => 
+{
+  test.only('doesDomainExist1', () => 
+  {
+    __setUsersQueryResult({domain: 'domain1',_id:1});
+    expect(domainsService.doesDomainExist("domain1")).toBe(true);
+  }); 
+  test('doesDomainExist2', () => 
+  {
+    __setUsersQueryResult({domain: 'domain1',_id:1});
+    expect(domainsService.doesDomainExist("domain2")).toBe(false);
+  }); 
+})

@@ -8,37 +8,40 @@ import { resetDatabase } from 'meteor/xolvio:cleaner';
 
 import { domainsService } from './domainsService.js';
 import { UserCollection,UserDomainCollection,DomainCollection } from '../api/collections';
-import { sinon } from 'meteor/practicalmeteor:sinon';
+import { sinon } from 'sinon';
 
-describe('DomainsService', () => 
-{
-  describe('methods', () => 
+if (Meteor.isServer) 
+{  
+  describe('DomainsService', function()
   {
-    beforeEach(() => 
-    {
-      resetDatabase();
-      //Factory.define('user', Meteor.users, {profile: {},});
-      //currentUser = Factory.create('user');
-      //sinon.stub(Meteor, 'user');
-      //Meteor.user.returns(currentUser);
-    });
+      beforeEach(function ()
+      {
+        resetDatabase();
+        //Factory.define('user', Meteor.users, {profile: {},});
+        //currentUser = Factory.create('user');
+        //sinon.stub(Meteor, 'user');
+        //Meteor.user.returns(currentUser);
+      });
 
-    it('can add domain', () => {
-      domainsService.addDomain('domain1');
-      assert.equal(DomainCollection.find().count(), 1);
-    });
+      it('can add domain', function()
+      {
+        DomainCollection.remove({});
+        domainsService.addDomain('domain1');
+        assert.equal(DomainCollection.find().count(), 1);
+      });
+      it('doesDomainExist1', function()
+      {
+        DomainCollection.insert({domain:'domain1'});
+        let returnValue=domainsService.doesDomainExist('domain1');
+        assert.equal(returnValue, true);
 
-    it('cannot add same domain twice', () => {
-      domainsService.addDomain('domain1');
-      domainsService.addDomain('domain1');
-      assert.equal(DomainCollection.find().count(), 1);
-    });
-
-    afterEach(() => 
-    {
-      //Meteor.user.restore();
-      resetDatabase();
-    });
-  
+        returnValue=domainsService.doesDomainExist('domain2');
+        assert.equal(returnValue, false);
+      });
+      afterEach(() => 
+      {
+        //Meteor.user.restore();
+        resetDatabase();
+      });
   });
-});
+}

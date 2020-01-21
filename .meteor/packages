@@ -42,7 +42,6 @@ autoupdate@1.6.0
 email@1.2.3
 meteorhacks:ssr
 montiapm:agent
-practicalmeteor:sinon
 aldeed:collection2@3.0.0
 mdg:validated-method
 audit-argument-checks@1.0.7

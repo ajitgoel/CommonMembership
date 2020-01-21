@@ -18,3 +18,8 @@ module.exports = {
     '/^node_modules/',
   ],
 };
+/*
+moduleNameMapper: {
+    '^meteor/(.*)': '<rootDir>/.meteorMocks/index.js',
+  },
+*/
